@@ -1,0 +1,41 @@
+prefix  skos:   <http://www.w3.org/2004/02/skos/core#>
+prefix  zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+# Counts the descritors attached to thsys branches on the first
+# and second level.
+#
+# Aggregates descriptors recursivly within the thsys hierarchy,
+# but regards only those directly narrower to a thsys category
+# (disregarding inter-descriptor narrower relationships).
+#
+select (str(?count) as ?descr) (str(?label) as ?category)
+where
+{
+  {
+    select (count(?s) as ?count) (?topLabel as ?label)
+    where {
+      <http://zbw.eu/stw> skos:hasTopConcept ?top .
+      ?top skos:prefLabel ?topLabel .
+      ?top skos:narrower* ?thsys .
+      ?thsys a zbwext:Thsys .
+      ?thsys skos:narrower ?s.
+      ?s a zbwext:Descriptor .
+    }
+    group by ?topLabel
+  } union {
+    select (count(?s) as ?count) (?secondLevelLabel as ?label)
+    where {
+      <http://zbw.eu/stw> skos:hasTopConcept ?top .
+      ?top skos:narrower ?second .
+      ?second a zbwext:Thsys .
+      ?second skos:prefLabel ?secondLevelLabel .
+      ?second skos:narrower* ?thsys .
+      ?thsys a zbwext:Thsys .
+      ?thsys skos:narrower ?s .
+      ?s a zbwext:Descriptor .
+    }
+    group BY ?secondLevelLabel
+  }
+  filter ( (lang(?label) = "en") )
+}
+order by ?label

@@ -15,3 +15,14 @@ Query | Description
 [class_overview](http://zbw.eu/beta/sparql-gui/?queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/class_overview.rq) | Count the occurences of RDF classes (in the default graph graph of a SPARQL service - uncomment graph statement and insert graph name for counting in a named graph)
 [property_overview](http://zbw.eu/beta/sparql-gui/?queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/property_overview.rq) | Count the occurences of RDF properties (in the default graph graph of a SPARQL service - uncomment graph statement and insert graph name for counting in a named graph)
 
+Dataset-specific queries
+------------------------
+
+### STW Thesaurus for economics
+
+Query | Description
+------|------------
+[count_descriptors_per_thsys](http://zbw.eu/beta/sparql-gui/?queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/stw/count_descriptors_per_thsys.rq) | Counts the descritors attached to thsys branches on the first and second level
+[count_subthes_intersect](http://zbw.eu/beta/sparql-gui/?queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/stw/count_subthes_intersect.rq) | Counts the descriptors which are part of two subthesauri of STW (e.g., Business Economics (b) and General Economics (v))
+
+

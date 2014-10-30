@@ -1,0 +1,29 @@
+prefix  skos:   <http://www.w3.org/2004/02/skos/core#>
+prefix  zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+# Show the number of descriptors which are part of two 
+# subthesauri of STW
+#
+select (str(count(?s)) as ?intersect) (max(?part1) as ?subthes1) (max(?part2) as ?subthes2)
+where
+{
+  bind (uri(concat("http://zbw.eu/stw/thsys/", ?part1)) as ?top1)
+  bind (uri(concat("http://zbw.eu/stw/thsys/", ?part2)) as ?top2)
+  ?s a zbwext:Descriptor .
+  {
+    ?s skos:broader ?thsys1 .
+    ?thsys1 a zbwext:Thsys .
+    ?thsys1 skos:broader* ?top1 .
+  }
+  {
+    ?s skos:broader ?thsys2 .
+    ?thsys2 a zbwext:Thsys .
+    ?thsys2 skos:broader* ?top2 .
+  }
+  # the two intersecting subthesauri
+  # (multiple sets are not interpreted here)
+  values (?part1 ?part2)
+  {
+    ( "b" "v" )
+  }
+}
