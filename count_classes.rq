@@ -1,0 +1,11 @@
+# Count the occurences of all RDF classes
+#
+select (str(count(?class)) as ?count) ?class
+where {
+  # query the default graph, or uncomment and insert graph name
+  ##graph <http://dummy.org/graph> {
+    ?x a ?class
+  ##}
+}
+group by ?class
+order by desc(?count)

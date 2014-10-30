@@ -1,0 +1,11 @@
+# Count the occurences of all RDF properties
+#
+select (str(count(?property)) as ?count) ?property
+where {
+  # query the default graph, or uncomment and insert graph name
+  ##graph <http://dummy.org/graph> {
+    ?x ?property []
+  ##}
+}
+group by ?property
+order by desc(count(?property))
