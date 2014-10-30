@@ -25,3 +25,7 @@ Query | Description
 [count_descriptors_per_thsys](http://zbw.eu/beta/sparql-gui/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/stw/count_descriptors_per_thsys.rq) | Counts the descriptors attached to the subthesauri and the second level thsys branches
 [count_subthes_intersect](http://zbw.eu/beta/sparql-gui/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/stw/count_subthes_intersect.rq) | Counts the descriptors which are part of two subthesauri of STW (e.g., Business Economics (b) and General Economics (v))
 
+Runtime environment
+-------------------
+
+The runtime environment for the queries is powered by [YASQE](http://yasque.yasgui.org) and [YASR](http://yasr.yasgui.org); the glue code is  [here](../../../sparql-gui-gh).
