@@ -1,0 +1,21 @@
+# Count distinct subjects per graph
+#
+SELECT (str(?count) as ?tripleCount) ?graphName
+WHERE {
+  {
+    # the default graph
+    SELECT (count(distinct ?s) as ?count)
+    WHERE {
+      ?s ?p ?o 
+    }
+  } UNION {
+    SELECT (count(distinct ?s) as ?count) ?graphName
+    WHERE {
+      GRAPH ?graphName {
+        ?s ?p ?o 
+      }
+    }
+    GROUP BY ?graphName
+    ORDER BY desc(?count)
+  }
+}
