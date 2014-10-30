@@ -1,25 +1,25 @@
 # Count triples and distinct subjects per graph
 #
-select (str(?tcount) as ?triplecount) (str(?scount) as ?distinctsubjectcount) (str(?ccount) as ?distinctclasscount) (str(?pcount) as ?distinctpropertycount) ?graphname
+select (str(?tCount) as ?tripleCount) (str(?sCount) as ?distinctSubjectCount) (str(?cCount) as ?distinctClassCount) (str(?pCount) as ?distinctPropertyCount) ?graphName
 where {
   {
     # the default graph
-    select (count(?s) as ?tcount) (count(distinct ?s) as ?scount) (count(distinct ?class) as ?ccount) (count(distinct ?p) as ?pcount)
+    select (count(*) as ?tCount) (count(distinct ?s) as ?sCount) (count(distinct ?class) as ?cCount) (count(distinct ?p) as ?pCount)
     where {
       ?s ?p ?o .
       ?s a ?class .
     }
   } union {
     # the named graphs
-    select (count(?s) as ?tcount) (count(distinct ?s) as ?scount) (count(distinct ?class) as ?ccount) (count(distinct ?p) as ?pcount) ?graphname
+    select (count(*) as ?tCount) (count(distinct ?s) as ?sCount) (count(distinct ?class) as ?cCount) (count(distinct ?p) as ?pCount) ?graphName
     where {
-      graph ?graphname {
+      graph ?graphName {
         ?s ?p ?o .
         ?s a ?class .
       }
     }
-    group by ?graphname
-    order by ?graphname
+    group by ?graphName
+    order by ?graphName
   }
 }
 
