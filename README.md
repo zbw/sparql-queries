@@ -22,6 +22,6 @@ Dataset-specific queries
 
 Query | Description
 ------|------------
-[count_descriptors_per_thsys](http://zbw.eu/beta/sparql-gui/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/stw/count_descriptors_per_thsys.rq) | Counts the descritors attached to thsys branches on the first and second level
+[count_descriptors_per_thsys](http://zbw.eu/beta/sparql-gui/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/stw/count_descriptors_per_thsys.rq) | Counts the descriptors attached to the subthesauri and the second level thsys branches
 [count_subthes_intersect](http://zbw.eu/beta/sparql-gui/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/stw/count_subthes_intersect.rq) | Counts the descriptors which are part of two subthesauri of STW (e.g., Business Economics (b) and General Economics (v))
 
