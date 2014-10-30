@@ -1,13 +1,13 @@
 sparql-queries
 ==============
 
-The queries in this repository has been tested against the ZBW Labs SPARQL endpoint, running on Fuseki. They can be executed via the links below. The default endpoint is http://zbw.eu/beta/sparql/stwv/query, holding different version of <a href="http://zbw.eu/stw">STW Thesaurus for Econocmis</a>. A different endpoint can be selected via URI (e.g., &amp;endpoint=http://data.nobelprize.org/sparql).
+The queries in this repository has been tested against the ZBW Labs SPARQL endpoint, running on Fuseki. They can be executed via the links below. The default endpoint is http://zbw.eu/beta/sparql/stwv/query, holding multiple versions of <a href="http://zbw.eu/stw">STW Thesaurus for Econocmis</a>. A different endpoint can be selected via URI (e.g., "&amp;endpoint=http://data.nobelprize.org/sparql").
 
 
 General queries for exploring a SPARQL endpoint
 -----------------------------------------------
 
-(Should work with all SPARQL 1.1 compliant services)
+(Should work with all SPARQL 1.1 compliant services, but particularly the first query may time out for large datasets.)
 
 Query | Description
 ------|------------

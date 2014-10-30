@@ -8,4 +8,4 @@ where {
   ##}
 }
 group by ?class
-order by desc(?count)
+order by desc(count(?class))
