@@ -34,6 +34,10 @@ Query | Description
 [count_mappings_by_relation](http://zbw.eu/beta/sparql-gui/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/stw/count_mappings_by_relation.rq) | Count mappings of STW descriptors by SKOS mapping relation
 [multi_mappings_concepts](http://zbw.eu/beta/sparql-gui/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/stw/multi_mappings_concepts.rq) | Select STW concepts with mappings to at least 4 other datasets
 
+#### STW version differences
+
+Queries working on multiple versions of STW are available within the [skos-history](https://github.com/jneubert/skos-history) project ([here](https://github.com/jneubert/skos-history/tree/master/sparql) and [here](https://github.com/jneubert/skos-history/tree/master/examples/stw/sparql))
+
 Runtime environment
 -------------------
 
@@ -42,4 +46,4 @@ The runtime environment for the queries is powered by [YASQE](http://yasqe.yasgu
 Contributing
 ------------
 
-Contributions to this vocabulary are highly welcome, particularly if they reveal more about the datasets described mentioned above. URIs to queries somewhere on GitHub and a short description are all what is needed. A pull request on a amended README.md file would be perfect. Please open an [issue](https://github.com/jneubert/sparql-queries/issues), if something does not work as expected.
+Contributions to this repository are highly welcome, particularly if they reveal more about the datasets mentioned above. URIs to queries somewhere on GitHub and a short description are all what is needed. A pull request on a amended README.md file would be perfect. Please open an [issue](https://github.com/jneubert/sparql-queries/issues), if something does not work as expected.
