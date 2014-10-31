@@ -38,3 +38,8 @@ Runtime environment
 -------------------
 
 The runtime environment for the queries is powered by [YASQE](http://yasqe.yasgui.org) and [YASR](http://yasr.yasgui.org); the glue code is  [here](../../../sparql-gui-gh).
+
+Contributing
+------------
+
+Contributions to this vocabulary are highly welcome, particularly if they reveal more about the datasets described mentioned above. URIs to queries somewhere on GitHub and a short description are all what is needed. A pull request on a amended README.md file would be perfect. Please open an [issue](https://github.com/jneubert/sparql-queries/issues), if something does not work as expected.
