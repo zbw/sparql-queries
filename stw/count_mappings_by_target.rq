@@ -1,0 +1,24 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX target: <http://zbw.eu/stw/mappings/target/>
+#
+# Count mappings to STW descriptors to other vocabularies by mapping target
+#
+SELECT (str(count(?o)) AS ?count) (?target AS ?mappingTarget)
+WHERE {
+  {
+    ?s skos:exactMatch ?o
+  } UNION {
+    ?s skos:closeMatch ?o
+  } UNION {
+    ?s skos:broadMatch ?o
+  } UNION {
+    ?s skos:narrowMatch ?o
+  } UNION {
+    ?s skos:relatedMatch ?o
+  } .
+  ?o dcterms:isPartOf ?target .
+  FILTER strstarts(str(?s),'http://zbw.eu/stw/descriptor/')
+}
+GROUP BY ?target
+ORDER BY desc(count(?target))

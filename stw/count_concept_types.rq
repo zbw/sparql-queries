@@ -1,0 +1,16 @@
+REFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+# Count concept types
+#
+select (str(count(*)) as ?count) ?type
+where {
+  ?desc skos:inScheme <http://zbw.eu/stw> .
+  ?desc a ?type .
+  filter not exists {
+    ?desc owl:deprecated true 
+  }
+}
+group by ?type
+order by ?type

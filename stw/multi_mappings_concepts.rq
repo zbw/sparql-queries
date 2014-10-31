@@ -1,0 +1,26 @@
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+#
+# find stw concepts with mappings to at least 4 other datasets
+#
+select distinct (str(?prefLabel) as ?stwPrefLabel) ?stwConcept
+where
+{
+  values ( ?language ) {
+    ( "en" )
+  }
+  {
+    ?stwConcept skos:exactMatch ?foreign
+  } union{
+    ?stwConcept skos:closeMatch ?foreign
+  } union {
+    ?stwConcept skos:broadMatch ?foreign
+  } union {
+    ?stwConcept skos:narrowMatch ?foreign
+  } .
+  ?foreign dcterms:isPartOf ?dataset .
+  ?stwConcept skos:prefLabel ?prefLabel .
+  filter (langmatches(lang(?prefLabel), ?language))
+}
+group by ?stwConcept ?prefLabel
+having (count(distinct ?dataset) >= 4)

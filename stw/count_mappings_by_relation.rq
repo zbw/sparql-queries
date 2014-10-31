@@ -1,0 +1,22 @@
+PREFIX  skos:   <http://www.w3.org/2004/02/skos/core#>
+#
+# Count mappings of STW descriptors by SKOS mapping relation
+#
+SELECT (str(count(?p)) AS ?count) (?p as ?mappingRelation)
+WHERE {
+  {
+    ?s skos:exactMatch ?o 
+  } UNION {
+    ?s skos:closeMatch ?o 
+  } UNION {
+    ?s skos:broadMatch ?o 
+  } UNION {
+    ?s skos:narrowMatch ?o 
+  } UNION {
+    ?s skos:relatedMatch ?o 
+  } .
+  ?s ?p ?o .
+  FILTER strstarts(str(?s),'http://zbw.eu/stw/descriptor/')
+}
+GROUP BY ?p
+ORDER BY desc(count(?p))
