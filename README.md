@@ -1,5 +1,7 @@
-SPARQL Lab - repository of SPARQL queries
+SPARQL Lab
 ==============
+A repository of SPARQL queries for ZBW datasets
+-----------------------------------------------
 
 The queries in this repository has been tested against the ZBW Labs SPARQL endpoint, running on Fuseki. They can be viewed, edited and executed via the links below. The default endpoint is `http://zbw.eu/beta/sparql/stwv/query`, holding multiple versions of <a href="http://zbw.eu/stw">STW Thesaurus for Econocmis</a>. A different endpoint can be selected via URI (e.g., `&endpoint=http://data.nobelprize.org/sparql`).
 
