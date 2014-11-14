@@ -37,7 +37,7 @@ Query | Description
 
 #### STW version differences
 
-Queries working on multiple versions of STW are available within the [skos-history](https://github.com/jneubert/skos-history) project ([here](https://github.com/jneubert/skos-history/tree/master/sparql) and [here](https://github.com/jneubert/skos-history/tree/master/examples/stw/sparql))
+Queries working on multiple versions of STW are available within the [skos-history](https://github.com/jneubert/skos-history) project ([here](https://github.com/jneubert/skos-history/tree/master/sparql) and [here](https://github.com/jneubert/skos-history/tree/master/sparql/stw))
 
 Runtime environment
 -------------------
