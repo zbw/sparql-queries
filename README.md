@@ -39,6 +39,11 @@ Query | Description
 
 Queries working on multiple versions of STW are available within the [skos-history](https://github.com/jneubert/skos-history) project ([here](https://github.com/jneubert/skos-history/tree/master/sparql) and [here](https://github.com/jneubert/skos-history/tree/master/sparql/stw))
 
+#### STW misc
+
+[thsys_tree_d3sparql](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/stw/thsys_tree_d3sparql.rq) | Creates output for the visualization of a STW sub-thesaurus tree with http://biohackathon.org/d3sparql/
+[categories_by_descriptors](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/stw/categories_by_descriptors.rq) | Returns for a set of stw descriptors, e.g. from one work, the according economics categories with their frequency
+
 Runtime environment
 -------------------
 

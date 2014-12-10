@@ -1,0 +1,36 @@
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+# Returns for a set of stw descriptors, e.g. from one work, 
+# the according economics categories with their frequency
+#
+# Uses second-level thsys
+#
+select ?secondLevelCategory (max(str(?secondLevelLabel)) AS ?secondLevelCategoryLabel) (str(count(*)) as ?count)
+where {
+  # example values from http://www.econbiz.de/Record/10003897888
+  values ( ?descriptor ?language ) {
+    ( <http://zbw.eu/stw/descriptor/19544-0> "en" )
+    ( <http://zbw.eu/stw/descriptor/21315-0> "en" )
+    ( <http://zbw.eu/stw/descriptor/12778-3> "en" )
+    ( <http://zbw.eu/stw/descriptor/20468-1> "en" )
+    ( <http://zbw.eu/stw/descriptor/18106-1> "en" )
+  }
+  ?descriptor skos:broader ?category .
+  ?category a zbwext:Thsys ;
+    skos:broader* ?topCategory .
+  ?scheme skos:hasTopConcept ?topCategory .
+  #
+  # only use "economics" sub-thesauri
+  ?topCategory skos:notation ?notation .
+  FILTER (?notation IN ("B", "P", "V", "W"))
+  #
+  # get the second level category and it's label
+  ?topCategory skos:narrower ?secondLevelCategory .
+  ?category skos:broader+ ?secondLevelCategory .
+  ?secondLevelCategory skos:prefLabel ?secondLevelLabel .
+  FILTER (lang(?secondLevelLabel) = ?language)
+}
+GROUP BY ?secondLevelCategory
+ORDER BY desc (?count) ?secondLevelCategoryLabel

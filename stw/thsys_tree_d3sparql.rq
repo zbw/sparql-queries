@@ -1,0 +1,22 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+# Creates output suited for http://biohackathon.org/d3sparql/ 
+# tree visualizations
+#
+SELECT ?root_name ?parent_name ?child_name
+WHERE
+{
+  VALUES ?root_name {"B  Business economics"@en} .
+  ?root skos:prefLabel ?root_name .
+  ?child skos:broader+ ?root .
+  ?child a zbwext:Thsys .
+  ?child skos:broader ?parent .
+  ?child skos:prefLabel ?child_name .
+  FILTER (lang(?child_name) = "en")
+  ?parent skos:prefLabel ?parent_name .
+  FILTER (lang(?parent_name) = "en")
+}
+ORDER BY ?child_name
