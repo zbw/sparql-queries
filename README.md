@@ -49,7 +49,7 @@ Query | Description
 Runtime environment
 -------------------
 
-The runtime environment for the queries is powered by [YASQE](http://yasqe.yasgui.org) and [YASR](http://yasr.yasgui.org); the glue code is  [here](../../../sparql-lab-gh).
+The runtime environment for the queries is powered by [YASQE](http://yasqe.yasgui.org) and [YASR](http://yasr.yasgui.org); the glue code is  [here](../../../sparql-gui-gh).
 
 Contributing
 ------------
