@@ -8,11 +8,11 @@ prefix  zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 # but regards only those directly narrower to a thsys category
 # (disregarding inter-descriptor narrower relationships).
 #
-select (str(?count) as ?descr) (str(?label) as ?category)
+select ?category (str(?label) as ?categoryLabel) (str(?total) as ?totalDescriptors)
 where
 {
   {
-    select (count(?s) as ?count) (?topLabel as ?label)
+    select (?top as ?category) (count(?s) as ?total) (max(?topLabel) as ?label)
     where {
       <http://zbw.eu/stw> skos:hasTopConcept ?top .
       ?top skos:prefLabel ?topLabel .
@@ -20,10 +20,11 @@ where
       ?thsys a zbwext:Thsys .
       ?thsys skos:narrower ?s.
       ?s a zbwext:Descriptor .
+      filter ( (lang(?topLabel) = "en") )
     }
-    group by ?topLabel
+    group by ?top
   } union {
-    select (count(?s) as ?count) (?secondLevelLabel as ?label)
+    select (?second as ?category) (count(?s) as ?total) (max(?secondLevelLabel) as ?label)
     where {
       <http://zbw.eu/stw> skos:hasTopConcept ?top .
       ?top skos:narrower ?second .
@@ -33,9 +34,10 @@ where
       ?thsys a zbwext:Thsys .
       ?thsys skos:narrower ?s .
       ?s a zbwext:Descriptor .
+      filter ( (lang(?secondLevelLabel) = "en") )
     }
-    group BY ?secondLevelLabel
+    group by ?second
   }
-  filter ( (lang(?label) = "en") )
 }
-order by ?label
+order by ?categoryLabel
+
