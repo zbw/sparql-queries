@@ -15,7 +15,9 @@ where {
     where {
       graph ?graphName {
         ?s ?p ?o .
-        ?s a ?class .
+        optional {
+          ?s a ?class .
+        }
       }
     }
     group by ?graphName
