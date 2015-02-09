@@ -7,7 +7,9 @@ where {
     select (count(*) as ?tCount) (count(distinct ?s) as ?sCount) (count(distinct ?class) as ?cCount) (count(distinct ?p) as ?pCount)
     where {
       ?s ?p ?o .
-      ?s a ?class .
+      optional {
+        ?s a ?class .
+      }
     }
   } union {
     # the named graphs
