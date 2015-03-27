@@ -1,0 +1,23 @@
+PREFIX :        <http://d-nb.info/gnd/>
+PREFIX gndo:    <http://d-nb.info/standards/elementset/gnd#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
+PREFIX text:    <http://jena.apache.org/text#>
+
+# Names of institutions which employ economists
+
+select distinct ?corp (str(?corpName) as ?corpLabel)
+where {
+  {
+    ?subjectHeading gndo:preferredNameForTheSubjectHeading "Wirtschaftswissenschaftler"
+  } union {
+    ?subjectHeading gndo:preferredNameForTheSubjectHeading "Wirtschaftswissenschaftlerin"
+  } .
+  ?person gndo:professionOrOccupation ?subjectHeading .
+  ?person gndo:affiliation ?corp .
+  ?corp gndo:preferredNameForTheCorporateBody ?corpName
+}
+order by ?corpName
+
