@@ -11,6 +11,9 @@ prefix  zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 select ?category (str(?label) as ?categoryLabel) (str(?total) as ?totalDescriptors)
 where
 {
+  values ( ?language ) { 
+    ( "en" )
+  }
   {
     select (?top as ?category) (count(?s) as ?total) (max(?topLabel) as ?label)
     where {
@@ -20,7 +23,6 @@ where
       ?thsys a zbwext:Thsys .
       ?thsys skos:narrower ?s.
       ?s a zbwext:Descriptor .
-      filter ( (lang(?topLabel) = "en") )
     }
     group by ?top
   } union {
@@ -34,10 +36,10 @@ where
       ?thsys a zbwext:Thsys .
       ?thsys skos:narrower ?s .
       ?s a zbwext:Descriptor .
-      filter ( (lang(?secondLevelLabel) = "en") )
     }
     group by ?second
   }
+  filter ( (lang(?label) = ?language) )
 }
 order by ?categoryLabel
 
