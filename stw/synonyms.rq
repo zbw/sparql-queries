@@ -33,5 +33,7 @@ WHERE {
     }
   }
   FILTER (lang(?label) = ?language)
+  # filter out labels which appear already as preferred labels
+  FILTER (lcase(?prefLabel) != lcase(?label))
 }
 ORDER BY ?prefLabel ?label
