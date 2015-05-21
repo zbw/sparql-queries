@@ -1,0 +1,12 @@
+PREFIX  text:   <http://jena.apache.org/text#>
+PREFIX  skos:   <http://www.w3.org/2004/02/skos/core#>
+
+# concepts related to 'market'
+
+SELECT  *
+WHERE
+  { ?s text:query 'market' .
+    ?s skos:prefLabel ?o
+  }
+LIMIT   10
+
