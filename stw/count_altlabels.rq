@@ -1,0 +1,12 @@
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+# Count alternative labels by language
+#
+select (str(count(?label)) as ?count) ?language
+where {
+  ?s a zbwext:Descriptor .
+  ?s skos:altLabel ?label .
+  bind (lang(?label) as ?language)
+}
+group by ?language
