@@ -56,6 +56,7 @@ Query | Description
 ------|------------
 [institutions_employing_economists](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/institutions_employing_economists.rq) | Institutions employing economists
 [persons_affiliated_to_institutions](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/persons_affiliated_to_institutions.rq) | Persons affiliated to institutions
+[economists_by_area](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/economists_by_area.rq) | Geographical distribution of economists in by GND
 
 The runtime environment for the queries is powered by [YASQE](http://yasqe.yasgui.org) and [YASR](http://yasr.yasgui.org); the glue code is  [here](../../../sparql-gui-gh).
 

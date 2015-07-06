@@ -1,0 +1,21 @@
+# Geographical distribution of economists in GND
+#
+PREFIX :        <http://d-nb.info/gnd/>
+PREFIX gndo:    <http://d-nb.info/standards/elementset/gnd#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix area: <http://d-nb.info/standards/vocab/gnd/geographic-area-code#>
+#
+select (count(?person) as ?count) ?area
+where {
+  {
+    ?subjectHeading gndo:preferredNameForTheSubjectHeading "Wirtschaftswissenschaftler"
+  } union {
+    ?subjectHeading gndo:preferredNameForTheSubjectHeading "Wirtschaftswissenschaftlerin"
+  } .
+  ?person gndo:professionOrOccupation ?subjectHeading .
+  ?person a gndo:DifferentiatedPerson .
+  ?person gndo:geographicAreaCode ?area
+}
+group by ?area
+order by desc(?count)
+
