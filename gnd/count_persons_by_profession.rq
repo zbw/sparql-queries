@@ -1,0 +1,15 @@
+# GND persons by profession
+#
+PREFIX :        <http://d-nb.info/gnd/>
+PREFIX gndo:    <http://d-nb.info/standards/elementset/gnd#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+#
+select (str(count(?person)) as ?count) ?profession
+where {
+  ?person a gndo:DifferentiatedPerson .
+  ?person gndo:professionOrOccupation ?profession .
+  ?profession gndo:preferredNameForTheSubjectHeading ?professionLabel. 
+}
+group by ?profession
+order by desc(count(?person))
+
