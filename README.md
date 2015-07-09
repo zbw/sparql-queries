@@ -20,7 +20,7 @@ Query | Description
 Dataset-specific queries
 ------------------------
 
-### [STW Thesaurus for Economics](stw/README.md)
+### [STW Thesaurus for Economics](stw)
 
 ### [German Integrated Autority File (GND)](gnd/README.md)
 
