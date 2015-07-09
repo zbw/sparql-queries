@@ -22,7 +22,7 @@ Dataset-specific queries
 
 ### [STW Thesaurus for Economics](stw)
 
-### [German Integrated Autority File (GND)](gnd/README.md)
+### [German Integrated Autority File (GND)](gnd)
 
 
 Contributing
