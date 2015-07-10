@@ -1,0 +1,19 @@
+# Mapping old to new GND IDs
+#
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+#
+select distinct ?old ?oldId ?id
+where {
+  ?s gndo:gndIdentifier ?id .
+  ?s gndo:oldAuthorityNumber ?old .
+  bind(if(contains($old, '8)'), 
+      strafter(?old, '8)'), 
+      if(contains(?old, '8a)'), 
+        strafter(?old, '8a)'),
+        if(contains(?old, '8b)'),
+          strafter(?old, '8b)'),
+          strafter(?old, '8c)')))
+    ) as ?oldId)
+  filter (?id != ?oldId)
+}
+limit 100
