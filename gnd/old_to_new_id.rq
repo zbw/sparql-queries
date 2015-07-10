@@ -1,4 +1,5 @@
 # Map old PND/GKD/SWD/GND IDs to valid GND IDs
+# (other ISILs, like 101c for Deutsches Musikarchiv, are mapped to type 'xxx')
 #
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
@@ -7,13 +8,13 @@ where {
   ?s gndo:gndIdentifier ?id .
   ?s gndo:oldAuthorityNumber ?old .
   bind(strafter(?old, ')') as ?oldId)
-  bind(if(contains($old, '8)'), 
-      'gnd', 
-      if(contains(?old, '8a)'), 
+  bind(if(contains($old, '558)'),
+      'gnd',
+      if(contains(?old, '588a)'),
         'pnd',
-        if(contains(?old, '8b)'),
+        if(contains(?old, '588b)'),
           'gkd',
-          if(contains(?old, '8c)'),
+          if(contains(?old, '588c)'),
             'swd',
             'xxx')))
     ) as ?type)
