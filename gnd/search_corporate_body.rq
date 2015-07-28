@@ -1,0 +1,13 @@
+# Text search for corporate bodies
+#
+# Uses diverse literal properties, brings the best match on top
+# of the list
+PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
+PREFIX  text:   <http://jena.apache.org/text#>
+#
+select *
+where 
+{
+  ?corp text:query 'Faculty of Economics and Business, KU Leuven' .
+  ?corp gndo:preferredNameForTheCorporateBody ?name .
+}
