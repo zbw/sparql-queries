@@ -1,0 +1,33 @@
+# Suggest STW descriptors which are related to JEL codes
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?label ?descriptor ?descriptorLabel ?thsys ?thsysLabel ?jel ?jelLabel
+where {
+  # Example taken from http://hdl.handle.net/10419/37275
+  values (?jelCode) {
+    ( "C91" )
+    ( "D12" )
+    ( "L11" ) 
+  }
+  # obtain matching STW subject categories
+  # (the mapping is currently very selective and highly experimental)
+  service <http://zbw.eu/beta/sparql/jel/query> {
+    bind(uri(concat('http://zbw.eu/beta/external_identifiers/jel#', ?jelCode)) as ?jel)
+    ?jel skos:narrowMatch ?thsys .
+    ?jel skos:prefLabel ?jelLabel .
+    filter(lang(?jelLabel) = 'en')
+  }
+  # get the related STW descriptors
+  ?thsys skos:prefLabel ?thsysLabel ;
+         skos:narrower ?descriptor .
+  # get all labels for the descriptors (including those from other mapped vocabularies)
+  ?descriptor a zbwext:Descriptor ;
+         skos:prefLabel ?descriptorLabel ;
+         skos:prefLabel | skos:altLabel | skos:exactMatch/skos:prefLabel | skos:exactMatch/skos:altlabel ?label .
+  filter(lang(?thsysLabel) = 'en' && lang(?descriptorLabel) = 'en' && lang(?label) = 'en')
+  
+}
+order by ?label
+
