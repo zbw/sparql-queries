@@ -1,3 +1,8 @@
+# Lookup wikidata URI by GND id
+#
+# Must use SPARQL GET request (wikidata does not support POST - 
+# see https://phabricator.wikimedia.org/T112151)
+#
 PREFIX wd: <http://www.wikidata.org/entity/> 
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX wikibase: <http://wikiba.se/ontology#>
@@ -5,4 +10,13 @@ PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX v: <http://www.wikidata.org/prop/statement/>
 PREFIX q: <http://www.wikidata.org/prop/qualifier/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
+#
+select ?s
+where {
+  # GND ID of John Maynard Keynes
+  values ( $gndId ) {
+    ( '118561804' ) 
+  }
+  
+  ?s wdt:P227 ?gndId .
+}
