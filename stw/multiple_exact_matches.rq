@@ -22,6 +22,6 @@ where {
        skos:prefLabel ?foreignLabel .
   ?stw a zbwext:Descriptor ;
        skos:prefLabel ?stwLabel .
-  filter(lang(?stwLabel) = 'de')
+  filter(lang(?stwLabel) = 'de' && lang(?foreignLabel) = 'de')
 }
 order by ?foreignLabel
