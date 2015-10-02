@@ -1,0 +1,41 @@
+# Search subjects by free text and list them with a label
+# (requieres an index named 'text' in Fuseki/Jena)
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX text: <http://jena.apache.org/text#>
+#
+select  distinct ?s (str(?label) as ?sLabel)
+where {
+  values ( ?query ?language ) {
+    ( 'market' 'en' )
+  }
+  ?s text:query ?query .
+  #
+  # get the most precise label in the selected langage
+  optional {
+    {
+      ?s skos:prefLabel ?prefLabel .
+    }
+  }
+  optional {
+    {
+      ?s dcterms:title ?dctermsTitle .
+    }
+  }
+  optional {
+    {
+      ?s dc:title ?dcTitle .
+    }
+  }
+  optional {
+    {
+      ?s rdfs:label ?rdfsLabel .
+    }
+  }
+  bind (coalesce(?prefLabel,?dctermsTitle, ?dcTitle, ?rdfsLabel, '[no label found]') as ?label)
+  filter (lang(?label) = ?language)
+}
+limit   10
