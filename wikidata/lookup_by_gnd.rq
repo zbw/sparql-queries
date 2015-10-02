@@ -11,12 +11,19 @@ PREFIX v: <http://www.wikidata.org/prop/statement/>
 PREFIX q: <http://www.wikidata.org/prop/qualifier/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-select ?s
+select *
 where {
-  # GND ID of John Maynard Keynes
+  # GND ID of John Maynard Keynes and of Currency union
   values ( $gndId ) {
     ( '118561804' ) 
+    ( '4188829-7' )
   }
-  
+  # look up information
   ?s wdt:P227 ?gndId .
+  ?s rdfs:label ?label .
+  filter (lang(?label) in ('en', 'de'))
+  #
+  # build page link from language tag, replacing blanks with underscores
+  # CAUTION: rdfs:label give the label of the wikidata point, not the page title!!!
+  bind(uri(concat('http://', lang(?label), '.wikipedia.org/wiki/', replace(str(?label), ' ', '_'))) as ?pagelink)
 }
