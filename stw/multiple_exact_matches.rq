@@ -1,29 +1,27 @@
-# GND concepts with multiple skos:exactMatch STW concepts
+# Mapped concepts with multiple exact matching STW concepts
 #
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 #
-select ?gnd ?gndLabel ?stw ?stwLabel
+select ?foreign ?foreignLabel ?target ?stw ?stwLabel
 where {
   {
-    select ?gnd (count (distinct ?stw) as ?count)
+    select ?foreign (count (distinct ?stw) as ?count) ?target
     where {
-      #    ?stw a zbwext:Deskriptor ;
-      #       skos:exactMatch ?gnd .
-      #    ?gnd dcterms:isPartOf <http://zbw.eu/stw/mapping/gnd/target> .
-      ?gnd skos:exactMatch ?stw ;
-           dcterms:isPartOf <http://zbw.eu/stw/mapping/gnd/target> .
+      ?foreign skos:exactMatch ?stw ;
+           dcterms:isPartOf ?target .
       ?stw a zbwext:Descriptor .
     }
-    group by ?gnd
+    group by ?foreign ?target
     having (?count > 1)
     order by desc(?count)
   }
-  ?gnd skos:exactMatch ?stw ;
-       skos:prefLabel ?gndLabel .
+  # add labels
+  ?foreign skos:exactMatch ?stw ;
+       skos:prefLabel ?foreignLabel .
   ?stw a zbwext:Descriptor ;
        skos:prefLabel ?stwLabel .
   filter(lang(?stwLabel) = 'de')
 }
-order by ?gndLabel
+order by ?foreignLabel
