@@ -1,0 +1,63 @@
+# Number of different (lowercased) synonymous terms from STW
+# with optional complementation from exact matching concepts
+# of other vocabularies
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?count ?label
+where {
+  {
+    select (str(count(distinct ?term)) as ?count) ("Terms from STW" as ?label)
+    where {
+      ?stw a zbwext:Descriptor ;
+           skos:prefLabel|skos:altLabel ?someLabel .
+      bind(lcase(str(?someLabel)) as ?term)
+    }
+  } union {
+    select (str(count(distinct ?term)) as ?count) ("Terms from exact matching concepts in other vocabularies" as ?label)
+    where {
+      ?stw a zbwext:Descriptor ;
+           skos:exactMatch/skos:prefLabel|skos:altLabel ?someLabel .
+      bind(lcase(str(?someLabel)) as ?term)
+    }
+  } union {
+    bind("Synonyms from STW alone" as ?label)
+    {
+      select (count(distinct ?term) as ?termCount) 
+      where {
+        ?stw a zbwext:Descriptor ;
+             skos:prefLabel|skos:altLabel ?someLabel .
+        bind(lcase(str(?someLabel)) as ?term)
+      }
+    }
+    {
+      select (count(distinct ?term) as ?prefLabelCount)
+      where {
+        ?stw a zbwext:Descriptor ;
+             skos:prefLabel ?someLabel .
+        bind(lcase(str(?someLabel)) as ?term)
+      }
+    } 
+    bind(str(?termCount - ?prefLabelCount) as ?count)
+  } union {
+    bind("Synonyms from STW enhanced by matching concepts" as ?label)
+    {
+      select (count(distinct ?term) as ?termCount) 
+      where {
+        ?stw a zbwext:Descriptor ;
+             skos:exactMatch?/skos:prefLabel|skos:altLabel ?someLabel .
+        bind(lcase(str(?someLabel)) as ?term)
+      }
+    }
+    {
+      select (count(distinct ?term) as ?prefLabelCount)
+      where {
+        ?stw a zbwext:Descriptor ;
+             skos:prefLabel ?someLabel .
+        bind(lcase(str(?someLabel)) as ?term)
+      }
+    } 
+    bind(str(?termCount - ?prefLabelCount) as ?count)
+  } 
+}
