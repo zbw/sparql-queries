@@ -1,0 +1,38 @@
+# Selection of geographich entities
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX wd: <http://www.wikidata.org/entity/> 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX v: <http://www.wikidata.org/prop/statement/>
+#
+SELECT ?s ?sLabel
+WHERE {
+  {
+    SELECT ?s ?sLabel WHERE {
+      # instances of ...
+      {
+        # state of Germany
+        ?s p:P31/v:P31 wd:Q1221156
+      } union {
+        # country
+        ?s p:P31/v:P31 wd:Q6256
+      } union {
+        # geographic region
+        ?s p:P31/v:P31 wd:Q82794
+      }
+      # 
+      SERVICE wikibase:label {
+        # returns German (preferred) or English label, or 
+        # entity name if neither exists
+        bd:serviceParam wikibase:language "de,en" .
+      }
+    }
+  }
+  # filter out entity names
+  filter(!strends(str(?s), ?sLabel))
+}
+order by ?sLabel
+
