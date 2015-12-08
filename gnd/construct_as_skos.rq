@@ -1,0 +1,67 @@
+# Extract core SWD as skos thesaurus
+#
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gndsc: <http://d-nb.info/standards/vocab/gnd/gnd-sc#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX gnd: <http://d-nb.info/gnd/>
+#
+construct {
+  ?concept a skos:Concept ;
+    dc:identifier ?id ;
+    skos:prefLabel ?prefLabel ;
+    skos:altLabel ?altLabel ;
+    skos:narrower ?narrowerConcept ;
+    skos:broader ?broaderConcept ;
+    skos:related ?relatedConcept ;
+    skos:exactMatch ?emConcept ;
+    skos:closeMatch ?cmConcept ;
+    skos:broadMatch ?bmConcept ;
+    skos:narrowMatch ?nmConcept ;
+    skos:relatedMatch ?rmConcept ;
+    skos:member ?subjectCategory ;
+    .
+}
+where {
+  values ( ?concept )
+  {
+    ( <http://d-nb.info/gnd/4026826-3> )
+    ##    ( undef )
+  }
+  ?concept a gndo:SubjectHeadingSensoStricto ;
+           gndo:preferredNameForTheSubjectHeading ?prefLabel ;
+           gndo:gndIdentifier ?id .
+  optional {
+    ?concept gndo:variantNameForTheSubjectHeading  ?altLabel 
+  }
+  optional {
+    ?concept gndo:broaderTerm|gndo:broaderTermGeneral|gndo:broaderTermGeneric|gndo:broaderTermInstantial|gndo:broaderTermPartitive ?broaderConcept 
+  }
+  optional {
+    ?concept gndo:narrowerTerm|gndo:narrowerTermGeneral|gndo:narrowerTermGeneric|gndo:narrowerTermInstantial|gndo:narrowerTermPartitive ?narrowerConcept 
+  }  optional {
+    ?concept gndo:relatedTerm ?relatedConcept 
+  }
+  optional {
+    ?concept skos:exactMatch ?emConcept 
+  }
+  optional {
+    ?concept skos:closeMatch ?cmConcept 
+  }
+  optional {
+    ?concept skos:relatedMatch ?rmConcept 
+  }
+  optional {
+    ?concept skos:broadMatch ?bmConcept 
+  }
+  optional {
+    ?concept skos:narrowMatch ?nmConcept 
+  }
+  optional {
+    ?concept gndo:gndSubjectCategory  ?subjectCategory
+  }
+  .
+}
+
