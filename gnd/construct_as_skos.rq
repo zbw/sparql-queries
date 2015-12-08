@@ -27,8 +27,8 @@ construct {
 where {
   values ( ?concept )
   {
-    ( <http://d-nb.info/gnd/4026826-3> )
-    ##    ( undef )
+    ## ( <http://d-nb.info/gnd/4026826-3> )
+    ( undef )
   }
   ?concept a gndo:SubjectHeadingSensoStricto ;
            gndo:preferredNameForTheSubjectHeading ?prefLabel ;
