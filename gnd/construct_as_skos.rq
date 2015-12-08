@@ -7,58 +7,86 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX gndsc: <http://d-nb.info/standards/vocab/gnd/gnd-sc#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX gnd: <http://d-nb.info/gnd/>
+PREFIX stw: <http://zbw.eu/stw/descriptor/>
+PREFIX ddc: <http://dewey.info/class/>
 #
 construct {
   ?concept a skos:Concept ;
     dc:identifier ?id ;
+
+    # labels
     skos:prefLabel ?prefLabel ;
     skos:altLabel ?altLabel ;
+
+    # existing relations
     skos:narrower ?narrowerConcept ;
     skos:broader ?broaderConcept ;
     skos:related ?relatedConcept ;
+
+    # matches to other vocabs
     skos:exactMatch ?emConcept ;
     skos:closeMatch ?cmConcept ;
     skos:broadMatch ?bmConcept ;
     skos:narrowMatch ?nmConcept ;
     skos:relatedMatch ?rmConcept ;
+
+    # subject categories
     skos:member ?subjectCategory ;
-    .
+  .
+
+  # missing reverse relations
+  ?broaderConcept skos:narrower ?concept .
+  ?relatedConcept skos:related ?concept .
 }
 where {
   values ( ?concept )
   {
-    ## ( <http://d-nb.info/gnd/4026826-3> )
-    ( undef )
+    ( <http://d-nb.info/gnd/4056366-2> )
+    ##( undef )
   }
   ?concept a gndo:SubjectHeadingSensoStricto ;
            gndo:preferredNameForTheSubjectHeading ?prefLabel ;
            gndo:gndIdentifier ?id .
   optional {
-    ?concept gndo:variantNameForTheSubjectHeading  ?altLabel 
+    ?concept gndo:variantNameForTheSubjectHeading  ?altLabel
+  }
+  # dump down different kinds of broader/narrower links
+  optional {
+    ?concept gndo:broaderTerm|gndo:broaderTermGeneral|gndo:broaderTermGeneric|gndo:broaderTermInstantial|gndo:broaderTermPartitive ?broaderConcept
   }
   optional {
-    ?concept gndo:broaderTerm|gndo:broaderTermGeneral|gndo:broaderTermGeneric|gndo:broaderTermInstantial|gndo:broaderTermPartitive ?broaderConcept 
-  }
-  optional {
-    ?concept gndo:narrowerTerm|gndo:narrowerTermGeneral|gndo:narrowerTermGeneric|gndo:narrowerTermInstantial|gndo:narrowerTermPartitive ?narrowerConcept 
+    ?concept gndo:narrowerTerm|gndo:narrowerTermGeneral|gndo:narrowerTermGeneric|gndo:narrowerTermInstantial|gndo:narrowerTermPartitive ?narrowerConcept
   }  optional {
-    ?concept gndo:relatedTerm ?relatedConcept 
+    ?concept gndo:relatedTerm ?relatedConcept
+  }
+
+  # matches to other vocabs
+  optional {
+    ?concept skos:exactMatch ?emConcept
   }
   optional {
-    ?concept skos:exactMatch ?emConcept 
+    ?concept skos:closeMatch ?cmConcept
   }
   optional {
-    ?concept skos:closeMatch ?cmConcept 
+    ?concept skos:relatedMatch ?rmConcept
   }
   optional {
-    ?concept skos:relatedMatch ?rmConcept 
+    ?concept skos:broadMatch ?bmConcept
   }
   optional {
-    ?concept skos:broadMatch ?bmConcept 
+    ?concept skos:narrowMatch ?nmConcept
   }
+
+  # ddc exact matches
   optional {
-    ?concept skos:narrowMatch ?nmConcept 
+    ?concept gndo:relatedDdcWithDegreeOfDeterminacy4 ?emConcept
   }
+
+  # dump down ddc close matches (skip very loose matching concepts)
+  optional {
+    ?concept gndo:relatedDdcWithDegreeOfDeterminacy3|gndo:relatedDdcWithDegreeOfDeterminacy2 ?emConcept
+  }
+
   optional {
     ?concept gndo:gndSubjectCategory  ?subjectCategory
   }
