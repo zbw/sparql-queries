@@ -37,6 +37,9 @@ construct {
   # missing reverse relations
   ?broaderConcept skos:narrower ?concept .
   ?relatedConcept skos:related ?concept .
+
+  # original relations
+  ?concept ?rel ?otherConcept .
 }
 where {
   values ( ?concept )
@@ -78,17 +81,21 @@ where {
   }
 
   # ddc exact matches
-  optional {
-    ?concept gndo:relatedDdcWithDegreeOfDeterminacy4 ?emConcept
-  }
+##  optional {
+##    ?concept gndo:relatedDdcWithDegreeOfDeterminacy4 ?emConcept
+##  }
 
   # dump down ddc close matches (skip very loose matching concepts)
-  optional {
-    ?concept gndo:relatedDdcWithDegreeOfDeterminacy3|gndo:relatedDdcWithDegreeOfDeterminacy2 ?emConcept
-  }
+##  optional {
+##    ?concept gndo:relatedDdcWithDegreeOfDeterminacy3|gndo:relatedDdcWithDegreeOfDeterminacy2 ?emConcept
+##  }
 
   optional {
     ?concept gndo:gndSubjectCategory  ?subjectCategory
+  }
+  optional {
+    ?otherConcept a gndo:SubjectHeadingSensoStricto .
+    ?concept ?rel ?otherConcept .
   }
   .
 }
