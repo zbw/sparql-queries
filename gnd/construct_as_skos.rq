@@ -39,7 +39,9 @@ construct {
   ?relatedConcept skos:related ?concept .
 
   # original relations
-  ?concept ?rel ?otherConcept .
+  ?concept ?originalRelation ?broaderConcept .
+  ?concept ?originalRelation ?narrowerConcept .
+  ?concept ?originalRelation ?relatedConcept .
 }
 where {
   values ( ?concept )
@@ -55,12 +57,16 @@ where {
   }
   # dump down different kinds of broader/narrower links
   optional {
-    ?concept gndo:broaderTerm|gndo:broaderTermGeneral|gndo:broaderTermGeneric|gndo:broaderTermInstantial|gndo:broaderTermPartitive ?broaderConcept
+    ?concept gndo:broaderTerm|gndo:broaderTermGeneral|gndo:broaderTermGeneric|gndo:broaderTermInstantial|gndo:broaderTermPartitive ?broaderConcept .
+    ?concept ?originalRelation ?broaderConcept .
   }
   optional {
-    ?concept gndo:narrowerTerm|gndo:narrowerTermGeneral|gndo:narrowerTermGeneric|gndo:narrowerTermInstantial|gndo:narrowerTermPartitive ?narrowerConcept
-  }  optional {
-    ?concept gndo:relatedTerm ?relatedConcept
+    ?concept gndo:narrowerTerm|gndo:narrowerTermGeneral|gndo:narrowerTermGeneric|gndo:narrowerTermInstantial|gndo:narrowerTermPartitive ?narrowerConcept .
+    ?concept ?originalRelation ?narrowerConcept .
+  }
+  optional {
+    ?concept gndo:relatedTerm ?relatedConcept .
+    ?concept ?originalRelation ?relatedConcept .
   }
 
   # matches to other vocabs
@@ -93,10 +99,5 @@ where {
   optional {
     ?concept gndo:gndSubjectCategory  ?subjectCategory
   }
-  optional {
-    ?otherConcept a gndo:SubjectHeadingSensoStricto .
-    ?concept ?rel ?otherConcept .
-  }
-  .
 }
 
