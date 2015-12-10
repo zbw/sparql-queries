@@ -1,0 +1,18 @@
+# Enhance GND subject categories by notation and explicit class
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX gndsc: <http://d-nb.info/standards/vocab/gnd/gnd-sc#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+#
+construct {
+  ?concept a gndsc:GndSubjectCategoryValue ;
+    skos:notation ?notation ;
+    .
+}
+where {
+  ?concept skos:inScheme <http://d-nb.info/standards/vocab/gnd/gnd-sc> .
+
+  # extract notation from URI
+  bind(strdt(strafter(str(?concept), "#"), xsd:string) as ?notation)
+}
+
