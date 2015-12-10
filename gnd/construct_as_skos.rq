@@ -11,17 +11,29 @@ PREFIX stw: <http://zbw.eu/stw/descriptor/>
 PREFIX ddc: <http://dewey.info/class/>
 #
 construct {
+  <http://zbw.eu/beta/swdskos> a skos:ConceptScheme ;
+    skos:prefLabel "GND/SWD als SKOS Thesaurus"@de, "GND/SWD as SKOS Thesaurus"@en .
+
   ?concept a skos:Concept ;
+    skos:inScheme <http://zbw.eu/beta/swdskos> ;
     dc:identifier ?id ;
 
     # labels
     skos:prefLabel ?prefLabel ;
     skos:altLabel ?altLabel ;
 
-    # existing relations
+    # defined skos relations
     skos:narrower ?narrowerConcept ;
     skos:broader ?broaderConcept ;
     skos:related ?relatedConcept ;
+
+    # original relations
+    ?originalRelation ?broaderConcept ;
+    ?originalRelation ?narrowerConcept ;
+    ?originalRelation ?relatedConcept ;
+
+    # subject categories
+    skos:broader ?subjectCategory ;
 
     # matches to other vocabs
     skos:exactMatch ?emConcept ;
@@ -29,19 +41,12 @@ construct {
     skos:broadMatch ?bmConcept ;
     skos:narrowMatch ?nmConcept ;
     skos:relatedMatch ?rmConcept ;
-
-    # subject categories
-    skos:member ?subjectCategory ;
   .
 
   # missing reverse relations
   ?broaderConcept skos:narrower ?concept .
   ?relatedConcept skos:related ?concept .
-
-  # original relations
-  ?concept ?originalRelation ?broaderConcept .
-  ?concept ?originalRelation ?narrowerConcept .
-  ?concept ?originalRelation ?relatedConcept .
+  ?subjectCategory skos:narrower ?concept .
 }
 where {
   values ( ?concept )
@@ -50,10 +55,15 @@ where {
     ##( undef )
   }
   ?concept a gndo:SubjectHeadingSensoStricto ;
-           gndo:preferredNameForTheSubjectHeading ?prefLabel ;
+           gndo:preferredNameForTheSubjectHeading ?prefPlain ;
            gndo:gndIdentifier ?id .
+
+  # add language tag
+  bind(strlang(?prefPlain, "de") as ?prefLabel)
+
   optional {
-    ?concept gndo:variantNameForTheSubjectHeading  ?altLabel
+    ?concept gndo:variantNameForTheSubjectHeading ?altPlain
+    bind(strlang(?altPlain, "de") as ?altLabel)
   }
   # dump down different kinds of broader/narrower links
   optional {
