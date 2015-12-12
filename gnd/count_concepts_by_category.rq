@@ -1,4 +1,5 @@
 # Count concepts by gnd subject category
+# (defaults to purely subjects headings)
 #
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX gndsc: <http://d-nb.info/standards/vocab/gnd/gnd-sc#>
@@ -7,10 +8,13 @@ PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
 select (str(max(?scNotation)) as ?notation) ?subjectCategory (str(max(?label)) as ?subjectCategoryLabel) (str(count(distinct ?concept)) as ?count)
 where {
-  ?concept gndo:gndSubjectCategory ?subjectCategory .
+  ?concept
+    # restrict to subject headings (comment out next line for all)
+    a gndo:SubjectHeadingSensoStricto ;
+    gndo:gndSubjectCategory ?subjectCategory .
   ?subjectCategory skos:prefLabel ?label .
   # extract notation from URI
   bind(strdt(strafter(str(?subjectCategory), "#"), xsd:string) as ?scNotation)
 }
 group by ?subjectCategory
-order by ?subjectCategoryLabel
+order by ?subjectCategory
