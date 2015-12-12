@@ -1,5 +1,6 @@
 # Extract core SWD as skos thesaurus
 #
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
@@ -9,14 +10,22 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX gnd: <http://d-nb.info/gnd/>
 PREFIX stw: <http://zbw.eu/stw/descriptor/>
 PREFIX ddc: <http://dewey.info/class/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
 construct {
-  <http://zbw.eu/beta/swdskos> a skos:ConceptScheme ;
-    skos:prefLabel "GND/SWD als SKOS Thesaurus"@de, "GND/SWD as SKOS Thesaurus"@en .
 
-  ?concept a skos:Concept ;
+  # define gnd class as subclass of skos:Concept
+  gndo:SubjectHeadingSensoStricto rdfs:subClassOf skos:Concept .
+
+  # introduce a concept scheme
+  <http://zbw.eu/beta/swdskos> a skos:ConceptScheme ;
+    skos:prefLabel "GND Sachbegriffe als SKOS Thesaurus"@de .
+
+  ?concept a skos:Concept, gndo:SubjectHeadingSensoStricto ;
     skos:inScheme <http://zbw.eu/beta/swdskos> ;
-    dc:identifier ?id ;
+
+    # include all original data
+    ?originalProperty ?originalObject ;
 
     # labels
     skos:prefLabel ?prefLabel ;
@@ -26,11 +35,6 @@ construct {
     skos:narrower ?narrowerConcept ;
     skos:broader ?broaderConcept ;
     skos:related ?relatedConcept ;
-
-    # original relations
-    ?originalRelation ?broaderConcept ;
-    ?originalRelation ?narrowerConcept ;
-    ?originalRelation ?relatedConcept ;
 
     # subject categories
     skos:broader ?subjectCategory ;
@@ -49,14 +53,15 @@ construct {
   ?subjectCategory skos:narrower ?concept .
 }
 where {
+  # restrict to example concept, or 'undef' for all
   values ( ?concept )
   {
     ( <http://d-nb.info/gnd/4056366-2> )
     ##( undef )
   }
   ?concept a gndo:SubjectHeadingSensoStricto ;
-           gndo:preferredNameForTheSubjectHeading ?prefPlain ;
-           gndo:gndIdentifier ?id .
+           ?originalProperty ?originalObject ;
+           gndo:preferredNameForTheSubjectHeading ?prefPlain .
 
   # add language tag
   bind(strlang(?prefPlain, "de") as ?prefLabel)
@@ -68,15 +73,12 @@ where {
   # dump down different kinds of broader/narrower links
   optional {
     ?concept gndo:broaderTerm|gndo:broaderTermGeneral|gndo:broaderTermGeneric|gndo:broaderTermInstantial|gndo:broaderTermPartitive ?broaderConcept .
-    ?concept ?originalRelation ?broaderConcept .
   }
   optional {
     ?concept gndo:narrowerTerm|gndo:narrowerTermGeneral|gndo:narrowerTermGeneric|gndo:narrowerTermInstantial|gndo:narrowerTermPartitive ?narrowerConcept .
-    ?concept ?originalRelation ?narrowerConcept .
   }
   optional {
     ?concept gndo:relatedTerm ?relatedConcept .
-    ?concept ?originalRelation ?relatedConcept .
   }
 
   # matches to other vocabs
