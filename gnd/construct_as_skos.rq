@@ -30,6 +30,7 @@ construct {
     # labels
     skos:prefLabel ?prefLabel ;
     skos:altLabel ?altLabel ;
+    skos:definition ?definition ;
 
     # defined skos relations
     skos:narrower ?narrowerConcept ;
@@ -70,6 +71,11 @@ where {
     ?concept gndo:variantNameForTheSubjectHeading ?altPlain
     bind(strlang(?altPlain, "de") as ?altLabel)
   }
+  optional {
+    ?concept gndo:definition ?defPlain
+    bind(strlang(?defPlain, "de") as ?definition)
+  }
+
   # dump down different kinds of broader/narrower links
   optional {
     ?concept gndo:broaderTerm|gndo:broaderTermGeneral|gndo:broaderTermGeneric|gndo:broaderTermInstantial|gndo:broaderTermPartitive ?broaderConcept .
