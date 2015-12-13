@@ -7,7 +7,7 @@ prefix zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 # Uses second-level thsys
 #
-select ?secondLevelCategory (max(str(?secondLevelLabel)) AS ?secondLevelCategoryLabel) (str(count(*)) as ?count)
+select ?secondLevelCategory (sample(str(?secondLevelLabel)) AS ?secondLevelCategoryLabel) (str(count(*)) as ?count)
 where {
   # example values from http://www.econbiz.de/Record/10003897888
   values ( ?descriptor ?language ) {

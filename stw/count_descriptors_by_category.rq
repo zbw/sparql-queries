@@ -15,7 +15,7 @@ where
     ( "en" )
   }
   {
-    select (?top as ?category) (count(?s) as ?total) (max(?topLabel) as ?label)
+    select (?top as ?category) (count(?s) as ?total) (sample(?topLabel) as ?label)
     where {
       <http://zbw.eu/stw> skos:hasTopConcept ?top .
       ?top skos:prefLabel ?topLabel .
@@ -26,7 +26,7 @@ where
     }
     group by ?top
   } union {
-    select (?second as ?category) (count(?s) as ?total) (max(?secondLevelLabel) as ?label)
+    select (?second as ?category) (count(?s) as ?total) (sample(?secondLevelLabel) as ?label)
     where {
       <http://zbw.eu/stw> skos:hasTopConcept ?top .
       ?top skos:narrower ?second .

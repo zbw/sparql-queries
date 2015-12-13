@@ -6,7 +6,7 @@ PREFIX gndsc: <http://d-nb.info/standards/vocab/gnd/gnd-sc#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
-select (str(max(?scNotation)) as ?notation) ?subjectCategory (str(max(?label)) as ?subjectCategoryLabel) (str(count(distinct ?concept)) as ?count)
+select (str(max(?scNotation)) as ?notation) ?subjectCategory (str(sample(?label)) as ?subjectCategoryLabel) (str(count(distinct ?concept)) as ?count)
 where {
   ?concept
     # restrict to subject headings (comment out next line for all)
