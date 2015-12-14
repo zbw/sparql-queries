@@ -5,7 +5,7 @@ PREFIX void: <http://rdfs.org/ns/void#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
-select ?s ?datasetClass ?version ?dateProperty ?date
+select distinct ?s ?datasetClass ?version ?dateProperty ?date
 where {
   values ( ?datasetClass ) {
     ( void:Dataset )
@@ -18,14 +18,23 @@ where {
     ( dcterms:issued )
     ( dcterms:modified )
   }
-  # try different strategies
+  # look for version
   {
-    # suppose that this property is only used once
-    ?s owl:versionInfo ?version .
-  } union {
-    # restrict to classes which typically occur once,
-    # because the date properties may be in use for multiple subjects
-    ?s a ?datasetClass ;
-      ?dateProperty ?date .
+    select ?s ?version
+    where {
+      # suppose that this property is only used once
+      ?s owl:versionInfo ?version .
+    }
+  }
+  
+  # look for dates
+  {
+    select ?s ?datasetClass ?dateProperty ?date 
+    where {
+      # restrict to classes which typically occur once,
+      # because the date properties may be in use for multiple subjects
+      ?s a ?datasetClass ;
+         ?dateProperty ?date .
+    }
   }
 }
