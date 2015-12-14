@@ -8,10 +8,10 @@ PREFIX text: <http://jena.apache.org/text#>
 #
 SELECT  ?concept ?prefLabel
 WHERE {
-  VALUES ( ?query ?language ) {
+  VALUES ( ?searchString ?language ) {
     ( "labour" "en" )
   }
-  ?concept text:query ?query ;
+  ?concept text:query ?searchString ;
     skos:prefLabel ?prefLabel .
   filter (lang(?prefLabel) = ?language)
 }

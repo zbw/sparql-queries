@@ -6,10 +6,10 @@ PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
 SELECT  ?concept ?prefName ?prefLabel
 WHERE {
-  VALUES ( ?query ) {
+  VALUES ( ?searchString ) {
     ( "snower" )
   }
-  ?concept text:query ?query ;
+  ?concept text:query ?searchString ;
     gndo:preferredNameForThePerson|gndo:preferredNameForTheCorporateBody ?prefName ;
     skos:prefLabel ?prefLabel .
 }
