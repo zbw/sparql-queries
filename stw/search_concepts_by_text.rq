@@ -1,18 +1,17 @@
-# Concepts related to 'market'
+# Search concepts by text (e.g., 'labour')
 #
 # Covers concepts from different (mapped) datasets,
 # and, from STW, different subclasses of skos:Concept
 #
-PREFIX  text:   <http://jena.apache.org/text#>
-PREFIX  skos:   <http://www.w3.org/2004/02/skos/core#>
-PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX text: <http://jena.apache.org/text#>
 #
 SELECT  ?concept ?prefLabel
 WHERE {
-  VALUES ( ?language ) {
-    ( "en" ) 
+  VALUES ( ?query ?language ) {
+    ( "labour" "en" )
   }
-  ?concept text:query 'market' ;
+  ?concept text:query ?query ;
     skos:prefLabel ?prefLabel .
   filter (lang(?prefLabel) = ?language)
 }
