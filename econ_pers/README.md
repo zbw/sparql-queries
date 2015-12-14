@@ -1,0 +1,6 @@
+## Queries for special subsets of the German Integrated Autority File (GND)
+
+Query | Description
+------|------------
+[search_concepts_by_text](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/econ_pers/search_concepts_by_text.rq) | Search a person (or corporate body, when applied to econ_corp) by text input
+

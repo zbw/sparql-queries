@@ -25,6 +25,7 @@ Dataset-specific queries
 
 ### [German Integrated Autority File (GND)](gnd)
 
+### [Economists subset of GND](econ_pers)
 
 Contributing
 ------------
