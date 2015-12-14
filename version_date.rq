@@ -1,0 +1,31 @@
+# Try to identify the version and/or date of a dataset
+#
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+select ?s ?datasetClass ?version ?dateProperty ?date
+where {
+  values ( ?datasetClass ) {
+    ( void:Dataset )
+    ( skos:ConceptScheme )
+  }
+  values ( ?dateProperty ) {
+    ( dc:date)
+    ( dcterms:date )
+    ( dcterms:created )
+    ( dcterms:issued )
+    ( dcterms:modified )
+  }
+  # try different strategies
+  {
+    # suppose that this property is only used once
+    ?s owl:versionInfo ?version .
+  } union {
+    # restrict to classes which typically occur once,
+    # because the date properties may be in use for multiple subjects
+    ?s a ?datasetClass ;
+      ?dateProperty ?date .
+  }
+}
