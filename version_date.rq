@@ -5,36 +5,37 @@ PREFIX void: <http://rdfs.org/ns/void#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
-select distinct ?s ?datasetClass ?version ?dateProperty ?date
+select distinct ?s ?datasetClass ?property ?value
 where {
-  values ( ?datasetClass ) {
-    ( void:Dataset )
-    ( skos:ConceptScheme )
-  }
-  values ( ?dateProperty ) {
-    ( dc:date)
-    ( dcterms:date )
-    ( dcterms:created )
-    ( dcterms:issued )
-    ( dcterms:modified )
-  }
-  # look for version
+  # try different strategies
   {
-    select ?s ?version
+    # look for version
+    # suppose that owl:versionInfo is only used once
+    select ?s ?datasetClass ?property ?value
     where {
-      # suppose that this property is only used once
-      ?s owl:versionInfo ?version .
+      bind(owl:versionInfo as ?property)
+      ?s ?property ?value .
     }
-  }
-  
-  # look for dates
-  {
-    select ?s ?datasetClass ?dateProperty ?date 
+  } union {
+    # look for dates
+    # restrict to classes which typically occur once,
+    # because the date properties may be in use for multiple subjects
+    select ?s ?datasetClass ?property ?value
     where {
-      # restrict to classes which typically occur once,
-      # because the date properties may be in use for multiple subjects
+      values ( ?datasetClass ) {
+        ( void:Dataset )
+        ( skos:ConceptScheme )
+      }
+      values ( ?property ) {
+        ( dc:date)
+        ( dcterms:date )
+        ( dcterms:created )
+        ( dcterms:issued )
+        ( dcterms:modified )
+      }
       ?s a ?datasetClass ;
-         ?dateProperty ?date .
+         ?property ?value .
     }
   }
 }
+
