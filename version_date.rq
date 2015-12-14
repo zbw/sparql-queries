@@ -5,6 +5,7 @@ PREFIX void: <http://rdfs.org/ns/void#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
+#
 select distinct ?s ?datasetClass ?property ?value
 where {
   # try different strategies
@@ -22,10 +23,6 @@ where {
     # because the date properties may be in use for multiple subjects
     select ?s ?datasetClass ?property ?value
     where {
-      values ( ?datasetClass ) {
-        ( void:Dataset )
-        ( skos:ConceptScheme )
-      }
       values ( ?property ) {
         ( dc:date)
         ( dcterms:date )
@@ -33,8 +30,12 @@ where {
         ( dcterms:issued )
         ( dcterms:modified )
       }
-      ?s a ?datasetClass ;
-         ?property ?value .
+      {
+        ?s a void:Dataset
+      } union {
+        ?s a skos:ConceptScheme
+      }
+      ?s ?property ?value .
     }
   }
 }
