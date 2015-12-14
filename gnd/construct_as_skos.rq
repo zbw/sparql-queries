@@ -41,11 +41,7 @@ construct {
     skos:broader ?subjectCategory ;
 
     # matches to other vocabs
-    skos:exactMatch ?emConcept ;
-    skos:closeMatch ?cmConcept ;
-    skos:broadMatch ?bmConcept ;
-    skos:narrowMatch ?nmConcept ;
-    skos:relatedMatch ?rmConcept ;
+    ?matchingProperty ?matchingConcept ;
   .
 
   # missing reverse relations
@@ -89,19 +85,8 @@ where {
 
   # matches to other vocabs
   optional {
-    ?concept skos:exactMatch ?emConcept
-  }
-  optional {
-    ?concept skos:closeMatch ?cmConcept
-  }
-  optional {
-    ?concept skos:relatedMatch ?rmConcept
-  }
-  optional {
-    ?concept skos:broadMatch ?bmConcept
-  }
-  optional {
-    ?concept skos:narrowMatch ?nmConcept
+    ?concept skos:exactMatch|skos:closeMatch|skos:relatedMatch|skos:broadMatch|skos:narrowMatch ?matchingConcept .
+    ?concept ?matchingProperty ?matchingConcept .
   }
 
   # ddc exact matches
