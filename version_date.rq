@@ -23,19 +23,19 @@ where {
     # because the date properties may be in use for multiple subjects
     select ?s ?datasetClass ?property ?value
     where {
-      values ( ?property ) {
-        ( dc:date)
-        ( dcterms:date )
-        ( dcterms:created )
-        ( dcterms:issued )
-        ( dcterms:modified )
-      }
       {
         ?s a void:Dataset
       } union {
         ?s a skos:ConceptScheme
       }
       ?s ?property ?value .
+    }
+    values ( ?property ) {
+      ( dc:date)
+      ( dcterms:date )
+      ( dcterms:created )
+      ( dcterms:issued )
+      ( dcterms:modified )
     }
   }
 }
