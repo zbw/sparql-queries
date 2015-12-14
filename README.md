@@ -1,4 +1,4 @@
-SPARQL Lab
+SPARQL Lab Queries
 ==============
 *A repository of SPARQL queries for ZBW and related datasets*
 

@@ -1,12 +1,18 @@
+# Concepts related to 'market'
+#
+# Covers concepts from different (mapped) datasets,
+# and, from STW, different subclasses of skos:Concept
+#
 PREFIX  text:   <http://jena.apache.org/text#>
 PREFIX  skos:   <http://www.w3.org/2004/02/skos/core#>
-
-# concepts related to 'market'
-
-SELECT  *
-WHERE
-  { ?s text:query 'market' .
-    ?s skos:prefLabel ?o
+PREFIX dcterms: <http://purl.org/dc/terms/>
+#
+SELECT  ?concept ?prefLabel
+WHERE {
+  VALUES ( ?language ) {
+    ( "en" ) 
   }
-LIMIT   10
-
+  ?concept text:query 'market' ;
+    skos:prefLabel ?prefLabel .
+  filter (lang(?prefLabel) = ?language)
+}

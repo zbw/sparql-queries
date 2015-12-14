@@ -1,39 +1,44 @@
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX zbwext:  <http://zbw.eu/namespaces/zbw-extensions/>
-#
 # List of synonyms (for use in RePEc/Ideas and maybe other applications)
 #
 # Uses STW descriptors as well as exact matching concepts from other thesauri
 #
-SELECT DISTINCT ?concept (str(?prefLabel) AS ?conceptLabel) (lcase(str(?label)) AS ?synonym)
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext:  <http://zbw.eu/namespaces/zbw-extensions/>
+#
+SELECT ?concept (str(sample(?prefLabel)) AS ?conceptLabel) (group_concat(?synonym;
+    separator = ' | ') AS ?synonyms)
 WHERE {
-  VALUES ( ?language ) {
-    ( "en" ) 
+  SELECT DISTINCT ?concept ?prefLabel (lcase(str(?label)) AS ?synonym)
+  WHERE {
+    VALUES ( ?language ) {
+      ( "en" )
+    }
+    ?concept a zbwext:Descriptor ;
+             skos:prefLabel ?prefLabel .
+    FILTER (lang(?prefLabel) = ?language)
+    {
+      # include all labels from STW
+      {
+        ?concept skos:prefLabel ?label
+      }
+      UNION
+      {
+        ?concept skos:altLabel ?label
+      }
+      # include labels from matching concepts in other thesauri
+      UNION
+      {
+        ?concept skos:exactMatch/skos:prefLabel ?label
+      }
+      UNION
+      {
+        ?concept skos:exactMatch/skos:altLabel ?label
+      }
+    }
+    # activate next line for synonyms in a single language
+    ##FILTER (lang(?label) = ?language)
   }
-  ?concept a zbwext:Descriptor ;
-    skos:prefLabel ?prefLabel .
-  FILTER (lang(?prefLabel) = ?language)
-  {
-    # include all labels from STW
-    {
-      ?concept skos:prefLabel ?label 
-    }
-    UNION
-    {
-      ?concept skos:altLabel ?label 
-    }
-    # include labels from matching concepts in other thesauri
-    UNION
-    {
-      ?concept skos:exactMatch/skos:prefLabel ?label 
-    }
-    UNION
-    {
-      ?concept skos:exactMatch/skos:altLabel ?label 
-    }
-  }
-  FILTER (lang(?label) = ?language)
-  # filter out labels which appear already as preferred labels
-  FILTER (lcase(?prefLabel) != lcase(?label))
 }
-ORDER BY ?prefLabel ?label
+GROUP BY ?concept
+ORDER BY ?conceptLabel
+
