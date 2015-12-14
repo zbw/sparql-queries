@@ -2,5 +2,5 @@
 
 Query | Description
 ------|------------
-[search_concepts_by_text](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/econ_pers/search_concepts_by_text.rq) | Search a person (or corporate body, when applied to econ_corp) by text input
+[search_concepts_by_text](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/econ_pers/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/econ_pers/search_concepts_by_text.rq) | Search a person (or corporate body, when applied to econ_corp) by text input
 
