@@ -28,6 +28,8 @@ Dataset-specific queries
 
 ### [Economists subset of GND](econ_pers)
 
+### [Wikidata](wikidata)
+
 Contributing
 ------------
 
