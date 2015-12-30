@@ -1,4 +1,4 @@
-# Lookup wikidata URI by GND id
+# Lookup wikidata URI, label and wikipedia site links by GND id
 #
 # Must use SPARQL GET request (wikidata does not support POST - 
 # see https://phabricator.wikimedia.org/T112151)
@@ -9,21 +9,24 @@ PREFIX wikibase: <http://wikiba.se/ontology#>
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX v: <http://www.wikidata.org/prop/statement/>
 PREFIX q: <http://www.wikidata.org/prop/qualifier/>
+PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-select *
+select ?gndId ?wd ?wdLabel ?sitelink
 where {
   # GND ID of John Maynard Keynes and of Currency union
   values ( ?gndId ) {
     ( '118561804' ) 
     ( '4188829-7' )
   }
-  # look up information
-  ?s wdt:P227 ?gndId .
-  ?s rdfs:label ?label .
-  filter (lang(?label) in ('en', 'de'))
+  # look up wikidata items and labels
+  ?wd wdt:P227 ?gndId ;
+      rdfs:label ?wdLabel .
   #
-  # build page link from language tag, replacing blanks with underscores
-  # CAUTION: rdfs:label give the label of the wikidata point, not the page title!!!
-  bind(uri(concat('http://', lang(?label), '.wikipedia.org/wiki/', replace(str(?label), ' ', '_'))) as ?pagelink)
+  # get site links (only from de/en wikipedia sites)
+  ?sitelink schema:about ?wd ;
+            schema:inLanguage ?language .
+  filter (contains(str(?sitelink), 'wikipedia'))
+  filter (lang(?wdLabel) = ?language && ?language in ('en', 'de'))
 }
+
