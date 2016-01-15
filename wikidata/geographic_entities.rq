@@ -7,6 +7,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX v: <http://www.wikidata.org/prop/statement/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
 #
 SELECT ?s ?sLabel
 WHERE {
@@ -31,8 +32,10 @@ WHERE {
       }
     }
   }
+  # autosuggest string to inject
+  filter(regex(str(?sLabel), "^ost", "i"))
   # filter out entity names
   filter(!strends(str(?s), ?sLabel))
 }
-order by ?sLabel
+order by str(?sLabel)
 
