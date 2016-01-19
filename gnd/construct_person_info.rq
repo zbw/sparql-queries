@@ -1,0 +1,26 @@
+# Information about persons
+#
+PREFIX :        <http://d-nb.info/gnd/>
+PREFIX gndo:    <http://d-nb.info/standards/elementset/gnd#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+construct {
+  ?person gndo:affiliation ?corp ;
+    skos:prefLabel ?personName ;
+    gndo:professionOrOccupationAsLiteral ?profession ;
+    gndo:dateOfBirth ?birthDate .
+  ?corp skos:prefLabel ?corpName .
+}
+where {
+  values ( ?person )
+  {
+    ( <http://d-nb.info/gnd/124825109> )  # Snower
+  }
+  ?person gndo:affiliation ?corp ;
+    gndo:preferredNameForThePerson ?personName ;
+    gndo:dateOfBirth ?birthDate ;
+    gndo:professionOrOccupation/gndo:preferredNameForTheSubjectHeading ?profession .
+  
+  ?corp gndo:preferredNameForTheCorporateBody ?corpName .
+}
+
+
