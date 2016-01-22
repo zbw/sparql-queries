@@ -14,9 +14,9 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
 select ?repecId ?wd ?wdLabel ?sitelink
 where {
-  # RePEc ID of Esther Duflo and Peter Nijkamp
+  # RePEc ID of Janet Currie and Peter Nijkamp
   values ( ?repecId ) {
-    ( 'pdu166' )
+    ( 'pcu13' )
     ( 'pni111' ) 
   }
   # look up wikidata items and labels
