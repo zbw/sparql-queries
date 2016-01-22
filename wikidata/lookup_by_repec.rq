@@ -1,4 +1,4 @@
-# Lookup wikidata URI, label and wikipedia site links by RePEc id
+# Lookup wikidata URI, label and en+de wikipedia site links by RePEc id
 #
 # Must use SPARQL GET request (wikidata does not support POST - 
 # see https://phabricator.wikimedia.org/T112151)
