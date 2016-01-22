@@ -6,81 +6,37 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 #
-select distinct ?id (sample(?foreign) as ?concept) (str(sample(?prefLabel)) AS ?conceptLabel) (group_concat(?synonym; separator = ' | ') AS ?synonyms) 
+select distinct ?id (sample(?foreign) as ?concept) (str(sample(?prefLabel)) as ?conceptLabel)
+    (group_concat(?synonym; separator = ' | ') as ?synonyms)
 where {
-  select distinct ?foreign ?id ?prefLabel (lcase(str(?label)) as ?synonym)
+  # nested select necessary for excluding duplicates _before_ concatenating
+  select distinct ?id ?foreign ?prefLabel (lcase(str(?label)) as ?synonym)
   where {
-    # remove messed up parts of prior "use combination" relations
-    values (?remove) {
-      (<http://d-nb.info/gnd/4002799-5>)
-      (<http://d-nb.info/gnd/4040629-5>)
-      (<http://d-nb.info/gnd/4003841-5>)
-      (<http://d-nb.info/gnd/4002733-8>)
-      (<http://d-nb.info/gnd/4017214-4>)
-      (<http://d-nb.info/gnd/4004436-1>)
-      (<http://d-nb.info/gnd/4063004-3>)
-      (<http://d-nb.info/gnd/4023796-5>)
-      (<http://d-nb.info/gnd/4048737-4>)
-      (<http://d-nb.info/gnd/4061963-1>)
-      (<http://d-nb.info/gnd/4055856-3>)
-      (<http://d-nb.info/gnd/4019889-3>)
-      (<http://d-nb.info/gnd/4056723-0>)
-      (<http://d-nb.info/gnd/4077832-0>)
-      (<http://d-nb.info/gnd/4050133-4>)
-      (<http://d-nb.info/gnd/4253140-8>)
-      (<http://d-nb.info/gnd/4758072-0>)
-      (<http://d-nb.info/gnd/4163495-0>)
-      (<http://d-nb.info/gnd/4019956-3>)
-      (<http://d-nb.info/gnd/4071013-0>)
-      (<http://d-nb.info/gnd/7547705-1>)
-      (<http://d-nb.info/gnd/4026779-9>)
-      (<http://d-nb.info/gnd/4056775-8>)
-      (<http://d-nb.info/gnd/4121764-0>)
-      (<http://d-nb.info/gnd/4007502-3>)
-      (<http://d-nb.info/gnd/4180912-9>)
-      (<http://d-nb.info/gnd/4125698-0>)
-      (<http://d-nb.info/gnd/4114333-4>)
-      (<http://d-nb.info/gnd/4132813-9>)
-      (<http://d-nb.info/gnd/4066410-7>)
-      (<http://d-nb.info/gnd/4003789-7>)
-      (<http://d-nb.info/gnd/4027208-4>)
-      (<http://d-nb.info/gnd/4470634-0>)
-      (<http://d-nb.info/gnd/4193271-7>)
-      (<http://d-nb.info/gnd/4023222-0>)
-      (<http://d-nb.info/gnd/4125020-5>)
-      (<http://d-nb.info/gnd/4062901-6>)
-      (<http://d-nb.info/gnd/4057399-0>)
-      (<http://d-nb.info/gnd/4034402-2>)
-      (<http://d-nb.info/gnd/4187847-4>)
-    }
-    values ( ?language ) { ( 'de' ) }
-    ?concept a zbwext:Descriptor ;
-            skos:exactMatch ?foreign .
-    filter(?foreign not in (?remove))
-    ?foreign dcterms:isPartOf <http://zbw.eu/stw/mapping/gnd/target>
-    bind(strafter(str(?foreign), 'gnd/') as ?id)
-    ?foreign skos:prefLabel ?prefLabel .
-    filter(lang(?prefLabel) = ?language)
+    # obtain gnd concepts via their mapping to STW
+    ?stw a zbwext:Descriptor ;
+         skos:exactMatch ?foreign .
+    ?foreign dcterms:isPartOf <http://zbw.eu/stw/mapping/gnd/target> ;
+             skos:prefLabel ?prefLabel .
     {
       # include all labels from STW
       {
-        ?concept skos:prefLabel ?label 
+        ?stw skos:prefLabel ?label
       }
       UNION
       {
-        ?concept skos:altLabel ?label 
+        ?stw skos:altLabel ?label
       }
       # include labels from matching concepts in other thesauri
       UNION
       {
-        ?foreign skos:prefLabel ?label 
+        ?stw skos:exactMatch/skos:prefLabel ?label
       }
       UNION
       {
-        ?foreign skos:altLabel ?label 
+        ?stw skos:exactMatch/skos:altLabel ?label
       }
     }
+    bind(strafter(str(?foreign), 'gnd/') as ?id)
   }
 }
 group by ?id
-
