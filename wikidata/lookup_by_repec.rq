@@ -20,7 +20,7 @@ where {
     ( 'pni111' ) 
   }
   # look up wikidata items and labels
-  ?wd wdt:P227 ?repecId ;
+  ?wd wdt:P2428 ?repecId ;
       rdfs:label ?wdLabel .
   #
   # get site links (only from de/en wikipedia sites)
