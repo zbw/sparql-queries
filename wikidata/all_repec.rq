@@ -1,0 +1,25 @@
+# Get all RePEc mappings (with labels in English language)
+#
+# Must use SPARQL GET request (wikidata does not support POST -
+# see https://phabricator.wikimedia.org/T112151)
+#
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX v: <http://www.wikidata.org/prop/statement/>
+PREFIX q: <http://www.wikidata.org/prop/qualifier/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select distinct ?gndId ?wd ?wdLabel #?sitelink
+where {
+  # get all wikidata items and labels linked to GND
+  ?wd wdt:P2428 ?gndId ;
+      rdfs:label ?wdLabel .
+  # get site links (only from en wikipedia sites)
+  ?sitelink schema:about ?wd ;
+            schema:inLanguage ?language .
+  filter (contains(str(?sitelink), 'wikipedia'))
+  filter (lang(?wdLabel) = ?language && ?language in ('en'))
+}
