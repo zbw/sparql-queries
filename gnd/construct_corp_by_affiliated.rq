@@ -1,0 +1,47 @@
+PREFIX gnd:     <http://d-nb.info/standards/elementset/gnd#>
+PREFIX :        <http://d-nb.info/gnd/>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX zbwext:  <http://zbw.eu/namespaces/zbw-extensions/>
+
+CONSTRUCT {
+  ?corp zbwext:affiliatedCount ?affiliatedCount .
+}
+WHERE {
+  SELECT ?corp (COUNT(DISTINCT ?pers) AS ?affiliatedCount)
+  WHERE {
+    ?profession gnd:preferredNameForTheSubjectHeading ?professionPrefLabel .
+    ?pers gnd:professionOrOccupation ?profession .
+    ?pers gnd:affiliation ?corp .
+  }
+  GROUP BY ?corp
+  VALUES ?professionPrefLabel {
+    "Wirtschaftswissenschaftler"
+    "Wirtschaftswissenschaftlerin"
+    "Volkswirt"
+    "Volkswirtin"
+    "Betriebswirt"
+    "Betriebswirtin"
+    "Finanzanalyst"
+    "Finanzanalystin"
+    "Demograph"
+    "Demographin"
+    "Diplombetriebswirt"
+    "Diplombetriebswirtin"
+    "Steuerberater"
+    "Steuerberaterin"
+    "Wirtschaftsprüfer"
+    "Wirtschaftsprüferin"
+    "Unternehmensberater"
+    "Unternehmensberaterin"
+
+    "Sozialwissenschaftler"
+    "Sozialwissenschaftlerin"
+    "Soziologe"
+    "Soziologin"
+
+    "Politologe"
+    "Politologin"
+  }
+}
