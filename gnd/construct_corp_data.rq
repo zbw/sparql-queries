@@ -1,0 +1,51 @@
+PREFIX gnd:     <http://d-nb.info/standards/elementset/gnd#>
+PREFIX :        <http://d-nb.info/gnd/>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX zbwext:  <http://zbw.eu/namespaces/zbw-extensions/>
+
+# Get all attributes for given URIs and get preferred names
+# for this attributes (if these are URIs)
+
+CONSTRUCT {
+  ?corp ?p ?o . 
+  ?o ?preferredNameProperty ?name .
+}
+WHERE {
+  SERVICE <http://localhost:8080/fuseki/econ_corp/query>
+  { SELECT DISTINCT ?corp
+    #WHERE { ?corp (zbwext:affiliatedCount | zbwext:econbizCount) ?x . }
+    WHERE { { 
+      ?corp <http://zbw.eu/namespaces/zbw-extensions/affiliatedCount> ?x .
+    } UNION {
+      ?corp <http://zbw.eu/namespaces/zbw-extensions/econbizCount> ?x .
+    } }
+  }
+  { 
+    BIND(gnd:CorporateBody AS ?corpClass) 
+  } UNION {
+    GRAPH <http://zbw.eu/beta/graphs/gnd-ontology> { 
+      ?corpClass rdfs:subClassOf gnd:CorporateBody 
+    }
+  }
+  ?corp a ?corpClass .
+  ?corp ?p ?o .
+  OPTIONAL {
+    FILTER(isURI(?o)) 
+#    as of 06/2012, gnd ontology does not include the subproperty relations
+#    GRAPH <http://zbw.eu/beta/graphs/gnd-ontology> { 
+#      ?preferredNameProperty rdfs:subPropertyOf gnd:preferredName 
+#    }
+    ?o ?preferredNameProperty ?name .
+    FILTER(?preferredNameProperty IN (
+        rdf:type,
+        gnd:preferredName, 
+        gnd:preferredNameForTheCorporateBody,
+        gnd:preferredNameForThePerson,
+        gnd:preferredNameForThePlaceOrGeographicName,
+        gnd:preferredNameForTheSubjectHeading,
+        gnd:preferredNameForTheWork
+    ))
+  }
+}
