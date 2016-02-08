@@ -13,3 +13,13 @@ Query | Description
 [construct_gndsc_suppl](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/construct_gndsc_suppl.rq) | Enhance [GND subject categories](http://d-nb.info/standards/vocab/gnd/gnd-sc#) by notation and explicit class
 [old_to_new_id](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/old_to_new_id.rq) | Map old PND/GKD/SWD/GND IDs to valid GND IDs _(without limit, this query may time out)_
 
+
+### Queries for building subject specific subsets for persons and corporate bodies
+
+Query | Description
+------|------------
+[construct_corp_by_affiliated_professions](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/construct_corp_by_affiliated_professions.rq) | Corporate bodies which employ people with a profession relevant to economics or social sciences
+[construct_corp_by_categories](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/construct_corp_by_categories.rq) | Corporate bodies by GND subject categories classification
+[construct_pers_by_categories](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/construct_pers_by_categories.rq) | Persons by GND subject categories classification
+[construct_corp_data](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/construct_corp_data.rq) | Get all attributes for URIs from econ_corp and get preferred names for this attributes (if these are URIs)
+

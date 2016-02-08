@@ -1,4 +1,4 @@
-# Corporate bodies by gnd subject categories classification
+# Persons by GND subject categories classification
 #
 PREFIX gndsc: <http://d-nb.info/standards/vocab/gnd/gnd-sc#>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
