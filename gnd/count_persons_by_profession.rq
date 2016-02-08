@@ -6,10 +6,13 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
 select (str(count(?person)) as ?count) ?profession (sample(?label) as ?professionLabel)
 where {
+  # restrict to economics persons (clause may be commented out for complete GND)
+  service <http://zbw.eu/beta/sparql/econ_pers/query> {
+    ?person gndo:preferredNameForThePerson [] .
+  }
   ?person a gndo:DifferentiatedPerson .
   ?person gndo:professionOrOccupation ?profession .
   ?profession gndo:preferredNameForTheSubjectHeading ?label .
 }
 group by ?profession
 order by desc(count(?person))
-
