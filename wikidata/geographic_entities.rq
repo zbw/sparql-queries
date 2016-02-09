@@ -23,6 +23,9 @@ WHERE {
       } union {
         # geographic region
         ?s p:P31/v:P31 wd:Q82794
+      } union {
+        # political union
+        ?s p:P31/v:P31 wd:Q1140229
       }
       # 
       SERVICE wikibase:label {
