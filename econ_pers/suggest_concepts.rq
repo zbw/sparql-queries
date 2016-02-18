@@ -3,10 +3,17 @@
 PREFIX gndo:   <http://d-nb.info/standards/elementset/gnd#>
 PREFIX text:   <http://jena.apache.org/text#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select *
+select distinct ?pers (?name as ?persLabel) ?pref
 where 
 {
-  ?sh text:query (skos:prefLabel "tersteegen,\\ g*") .
-  ?sh gndo:preferredNameForThePerson ?name .
+  # other search strings: "fischer,\\ peter*"
+  ?pers text:query (skos:prefLabel "peter,\\ c*") ;
+        gndo:preferredNameForThePerson ?name ;
+        skos:prefLabel ?pref ;
+        zbwext:econbizCount ?publicationCount
+  .
 }
+order by desc(?publicationCount)
+
