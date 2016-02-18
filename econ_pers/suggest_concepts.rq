@@ -1,0 +1,12 @@
+# Autosuggest query for persons using a phrase index
+#
+PREFIX gndo:   <http://d-nb.info/standards/elementset/gnd#>
+PREFIX text:   <http://jena.apache.org/text#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select *
+where 
+{
+  ?sh text:query (skos:prefLabel "tersteegen,\\ g*") .
+  ?sh gndo:preferredNameForThePerson ?name .
+}
