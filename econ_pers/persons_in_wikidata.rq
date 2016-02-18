@@ -8,13 +8,13 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 SELECT  ?pers (?prefName as ?persLabel) ?wd
 WHERE {
   ?pers gndo:preferredNameForThePerson ?prefName ;
-        zbwext:econbizCount ?count ;
+        zbwext:econbizCount ?publicationCount ;
         # restrict to authors with wd items
         # (which are currently the only ones with skos:exactMatch mappings)
         skos:exactMatch ?wd ;
       .
   # restrict to the more productive authors
-  filter(?count > 10)
+  filter(?publicationCount > 10)
 }
-order by desc(?count)
+order by desc(?publicationCount)
 
