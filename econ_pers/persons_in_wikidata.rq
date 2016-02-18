@@ -1,0 +1,20 @@
+# Persons with Wikidata items
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX text: <http://jena.apache.org/text#>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+SELECT  ?pers (?prefName as ?persLabel) ?wd
+WHERE {
+  ?pers gndo:preferredNameForThePerson ?prefName ;
+        zbwext:econbizCount ?count ;
+        # restrict to authors with wd items
+        # (which are currently the only ones with skos:exactMatch mappings)
+        skos:exactMatch ?wd ;
+      .
+  # restrict to the more productive authors
+  filter(?count > 10)
+}
+order by desc(?count)
+
