@@ -16,4 +16,5 @@ where
   .
 }
 order by desc(?publicationCount)
+limit 10
 
