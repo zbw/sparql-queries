@@ -10,7 +10,8 @@ select distinct ?id (sample(?foreign) as ?concept) (str(sample(?prefLabel)) as ?
     (group_concat(?synonym; separator = ' | ') as ?synonyms)
 where {
   # nested select necessary for excluding duplicates _before_ concatenating
-  select distinct ?id ?foreign ?prefLabel (lcase(str(?label)) as ?synonym)
+  # (for highlighting in EconBiz, labels should not be lowercased)
+  select distinct ?id ?foreign ?prefLabel (str(?label) as ?synonym)
   where {
     # obtain gnd concepts via their mapping to STW
     ?stw a zbwext:Descriptor ;
