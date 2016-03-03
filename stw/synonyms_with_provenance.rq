@@ -1,5 +1,8 @@
 # Synonyms of a search term, with provenance information
 #
+# For detailed information on concept level, comment out GROUP BY and
+# use alternate SELECT statement
+#
 PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
 PREFIX gnd:     <http://d-nb.info/standards/elementset/gnd#>
 PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -8,15 +11,17 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX zbwext:  <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX text:    <http://jena.apache.org/text#>
 #
-SELECT DISTINCT (lcase(str(?label)) AS ?synonym) ?prov ?concept
+SELECT DISTINCT ?synonym (group_concat(?prov; separator = ' | ') as ?datasets)
+#SELECT DISTINCT ?synonym ?prov ?concept
 WHERE {
+  # also: 'unemployment', 'skills', 'waste management'
   VALUES ?textQuery {
     'investment policy'
   }
   # find all concepts matching the query text and
   # restrict to exact matching terms
-  (?foundConcept ?score ?term) text:query (?textQuery 3) .
-  filter(lcase(str(?term)) = ?textQuery)
+  (?foundConcept ?score ?term) text:query (?textQuery) .
+  filter(lcase(str(?term)) = lcase(?textQuery))
   #
   # get the related STW concept
   {
@@ -26,7 +31,7 @@ WHERE {
     ?foundConcept skos:exactMatch ?stwConcept .
     ?stwConcept a zbwext:descriptor .
   }
-  # get all concepts in a exactMatch Cluster
+  # get all concepts in an exactMatch cluster
   {
     bind(?stwConcept as ?concept)
     bind('stw' as ?prov)
@@ -36,15 +41,9 @@ WHERE {
     bind(?matchingConcept as ?concept)
     bind(strbefore(strafter(str(?target), 'mapping/'), '/target') as ?prov)
   }
-  # get all labels for all concepts in the cluster
-  {
-    {
-      ?concept skos:prefLabel ?label
-    } UNION {
-      ?concept skos:altLabel ?label
-    } UNION {
-      ?concept skos:hiddenLabel ?label
-    }
-  }
+  # get all skos labels for all concepts in the cluster
+  ?concept skos:prefLabel|skos:altLabel|skos:hiddenLabel ?label
+  bind(lcase(str(?label)) AS ?synonym)
 }
+GROUP BY ?synonym
 
