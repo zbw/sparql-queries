@@ -11,8 +11,7 @@ WHERE {
   VALUES ( ?searchString ?language ) {
     ( "labour" "en" )
   }
-  # must reference an arbitrary property used for text index construction
-  ?concept text:query (skos:hiddenLabel ?searchString) ;
+  ?concept text:query ?searchString ;
     skos:prefLabel ?prefLabel .
   filter (lang(?prefLabel) = ?language)
 }
