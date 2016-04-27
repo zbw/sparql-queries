@@ -3,63 +3,52 @@
 # Search via text query (as used for the /combined1 econ-ws service)
 #
 PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
-PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX zbwext:  <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX text:    <http://jena.apache.org/text#>
 #
 CONSTRUCT {
-  ?concept skos:prefLabel ?prefLabel .
-  ?concept skos:hiddenLabel ?hiddenLabel .
-  ?concept skos:narrower ?narrower .
-  ?concept skos:related ?related .
+  ?concept skos:prefLabel ?prefLabel ;
+    skos:hiddenLabel ?hiddenLabel ;
+    skos:narrower ?narrower ;
+    skos:related ?related .
 }
 WHERE {
   VALUES (?q ?limit) {
-    ( 'telework bank' 2 ) 
-  }  
-  {
-    {
-      ?concept text:query ( ?q ?limit ) 
-    }
-    UNION
-    {
-      ?concept text:query ( ?q ?limit ) .
-      ?concept skos:narrower ?narrower
-    }
-    UNION
-    {
-      ?tmpConcept text:query ( ?q ?limit ) .
-      ?tmpConcept skos:narrower ?concept
-    }
-    UNION
-    {
-      ?concept text:query ( ?q ?limit ) .
-      ?concept skos:related ?related
-    }
-    UNION
-    {
-      ?tmpConcept text:query ( ?q ?limit ) .
-      ?tmpConcept skos:related ?concept
-    }
+    ( 'telework bank' 2 )
   }
-  ?concept rdf:type zbwext:Descriptor.
+  # retrieve concepts via text query
+  # (restrict to the ?limit highest scoring concepts,
+  # according to lucene search scores)
   {
-    {
-      ?concept skos:prefLabel ?prefLabel 
-    }
-    UNION
-    {
-      ?concept skos:prefLabel ?label 
-    }
-    UNION
-    {
-      ?concept skos:altLabel ?label 
-    }
-    UNION
-    {
-      ?concept skos:hiddenLabel ?label 
-    }
+    ?concept text:query ( ?q ?limit )
+  }
+  # complement with related and narrower concepts
+  UNION {
+    ?concept text:query ( ?q ?limit ) ;
+             skos:narrower ?narrower
+  } UNION {
+    ?tmpConcept text:query ( ?q ?limit ) ;
+                skos:narrower ?concept
+  } UNION {
+    ?concept text:query ( ?q ?limit ) ;
+             skos:related ?related
+  } UNION {
+    ?tmpConcept text:query ( ?q ?limit ) ;
+                skos:related ?concept
+  }
+  # restrict to STW descriptors
+  ?concept rdf:type zbwext:Descriptor.
+  #
+  # fetch all synonyms for all descriptors
+  {
+    ?concept skos:prefLabel ?prefLabel
+  } UNION {
+    ?concept skos:prefLabel ?label
+  } UNION {
+    ?concept skos:altLabel ?label
+  } UNION {
+    ?concept skos:hiddenLabel ?label
   }
   BIND (lcase(?label) AS ?hiddenLabel)
 }
-
