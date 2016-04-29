@@ -1,4 +1,4 @@
-# Lookup wikidata URI, label and en+de wikipedia site links by GND id
+# Lookup wikidata URI by GND id, show label, language-specific wikipedia site link and link to the SQUID browser
 #
 # Must use SPARQL GET request (wikidata does not support POST - 
 # see https://phabricator.wikimedia.org/T112151)
@@ -12,12 +12,15 @@ PREFIX q: <http://www.wikidata.org/prop/qualifier/>
 PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-select ?gndId ?wd ?wdLabel ?sitelink
+select ?gndId ?wd ?wdLabel ?squid (?wdLabel as ?squidLabel) ?sitelink
 where {
   # GND ID of John Maynard Keynes and of Currency union
   values ( ?gndId ) {
     ( '118561804' ) 
     ( '4188829-7' )
+  }
+  values ( ?language ) {
+    ( 'en' ) 
   }
   # look up wikidata items and labels
   ?wd wdt:P227 ?gndId ;
@@ -26,7 +29,13 @@ where {
   # get site links (only from de/en wikipedia sites)
   ?sitelink schema:about ?wd ;
             schema:inLanguage ?language .
+  #
+  # create link to squid-Browser
+  bind(uri(concat('http://tools.wmflabs.org/sqid/#/view?id=', strafter(str(?wd), '/entity/'), '&lang=de')) as ?squid)
   filter (contains(str(?sitelink), 'wikipedia'))
-  filter (lang(?wdLabel) = ?language && ?language in ('en', 'de'))
+  #
+  # restrict languages
+  # filter (lang(?wdLabel) = ?language && ?language in ('en', 'de'))
+  filter (lang(?wdLabel) = ?language)
 }
 
