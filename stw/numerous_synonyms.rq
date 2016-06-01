@@ -1,45 +1,54 @@
-# Descriptors with numerous synonyms
+# STW descriptors with numerous synonyms (possibly mapping to mulitple GND subject headings)
 #
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 #
-select ?stw (sample(?prefLabel) as ?stwLabel) (count(?synonym) as ?countSynonyms) (group_concat(?synonym;
-      separator = ' | ') as ?synonyms)
+# aggregation of GND subject headings
+select ?stw (sample(?stwLabel1) as ?stwLabel) (sample(?countSynonyms1) as ?countSynonyms) (count(?foreign) as ?countGnd) (sample(?synonyms1) as ?synonyms)
 where {
-  # nested select necessary for excluding duplicates _before_ concatenating
-  # (for highlighting in EconBiz, labels should not be lowercased)
-  select distinct ?stw ?prefLabel (str(?label) as ?synonym)
-  where {
-    # obtain gnd concepts via their mapping to STW
-    ?stw a zbwext:Descriptor ;
-         skos:prefLabel ?prefLabel .
-    filter(lang(?prefLabel) = 'de')
-    # restrict to concepts with GND mapping
-    ?stw     skos:exactMatch ?foreign .
-    ?foreign dcterms:isPartOf <http://zbw.eu/stw/mapping/gnd/target> .
-    {
-      # include all labels from STW
-      {
-        ?stw skos:prefLabel ?label
-      }
-      UNION
-      {
-        ?stw skos:altLabel ?label
-      }
-      # include labels from matching concepts in other thesauri
-      UNION
-      {
-        ?stw skos:exactMatch/skos:prefLabel ?label
-      }
-      UNION
-      {
-        ?stw skos:exactMatch/skos:altLabel ?label
+  # aggregation of synonyms
+  {
+    select ?stw (sample(?prefLabel) as ?stwLabel1) (count(?synonym) as ?countSynonyms1) (group_concat(?synonym;
+        separator = ' | ') as ?synonyms1)
+    where {
+      # nested select necessary for excluding duplicates _before_ concatenating
+      # (for highlighting in EconBiz, labels should not be lowercased)
+      select distinct ?stw ?prefLabel (str(?label) as ?synonym)
+      where {
+        # obtain gnd concepts via their mapping to STW
+        ?stw a zbwext:Descriptor ;
+             skos:prefLabel ?prefLabel .
+        filter(lang(?prefLabel) = 'de')
+        # restrict to concepts with GND mapping
+        ?stw     skos:exactMatch ?foreign .
+        ?foreign dcterms:isPartOf <http://zbw.eu/stw/mapping/gnd/target> .
+        {
+          # include all labels from STW
+          {
+            ?stw skos:prefLabel ?label
+          }
+          UNION
+          {
+            ?stw skos:altLabel ?label
+          }
+          # include labels from matching concepts in other thesauri
+          UNION
+          {
+            ?stw skos:exactMatch/skos:prefLabel ?label
+          }
+          UNION
+          {
+            ?stw skos:exactMatch/skos:altLabel ?label
+          }
+        }
       }
     }
+    group by ?stw
+    having (?countSynonyms1 > 15)
   }
+  ?stw skos:exactMatch ?foreign .
+  ?foreign dcterms:isPartOf <http://zbw.eu/stw/mapping/gnd/target> .
 }
 group by ?stw
-having (?countSynonyms > 15)
 order by desc(?countSynonyms)
-
