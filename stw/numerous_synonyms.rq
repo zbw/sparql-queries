@@ -5,7 +5,11 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 #
 # aggregation of GND subject headings
-select ?stw (sample(?stwLabel1) as ?stwLabel) (sample(?countSynonyms1) as ?countSynonyms) (count(?foreign) as ?countGnd) (sample(?synonyms1) as ?synonyms)
+select ?stw (sample(?stwLabel1) as ?stwLabel)
+  (sample(?id) as ?stwId)
+  (sample(?countSynonyms1) as ?countSynonyms)
+  (count(?foreign) as ?countGnd)
+  (sample(?synonyms1) as ?synonyms)
 where {
   # aggregation of synonyms
   {
@@ -49,6 +53,8 @@ where {
   }
   ?stw skos:exactMatch ?foreign .
   ?foreign dcterms:isPartOf <http://zbw.eu/stw/mapping/gnd/target> .
+  bind(strafter(str(?stw), 'stw/descriptor/') as ?id)
 }
 group by ?stw
 order by desc(?countSynonyms)
+
