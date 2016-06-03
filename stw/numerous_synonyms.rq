@@ -5,7 +5,8 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 #
 # aggregation of GND subject headings
-select ?stw (sample(?stwLabel1) as ?stwLabel)
+select
+  ?stw (sample(?stwLabel1) as ?stwLabel)
   (sample(?id) as ?stwId)
   (sample(?countSynonyms1) as ?countSynonyms)
   (count(?foreign) as ?countGnd)
@@ -56,5 +57,5 @@ where {
   bind(strafter(str(?stw), 'stw/descriptor/') as ?id)
 }
 group by ?stw
-order by desc(?countSynonyms)
+order by desc(sample(?countSynonyms1))
 
