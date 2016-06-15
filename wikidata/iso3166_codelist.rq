@@ -1,0 +1,38 @@
+# ISO 3166-1/2 code list for countries and German states
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX v: <http://www.wikidata.org/prop/statement/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+#
+SELECT distinct ?item ?itemLabel ?itemId ?iso1Code2 ?iso1Code3 ?iso2Code WHERE {
+  # 
+  {
+    # ISO 3166-1 alpha-2 code
+    ?item wdt:P297 ?iso1Code2 .
+    # ISO 3166-1 alpha-3 code
+    ?item wdt:P298 ?iso1Code3
+  } union {
+    # ISO 3166-2 code
+    ?item wdt:P300 ?iso2Code .
+    # restrict to states of Germany
+    ?item wdt:P31 wd:Q1221156 
+  }
+  # Wikdata item identifier
+  bind(strafter(str(?item), 'http://www.wikidata.org/entity/') as ?itemId)
+  # optionally supplement with GND identifier
+  optional {
+    ?item wdt:P227 ?gndId
+  }
+  #
+  SERVICE wikibase:label {
+    # returns German (preferred) or English label, or
+    # entity name if neither exists
+    bd:serviceParam wikibase:language "de,en" .
+  }
+}
+order by str(?itemLabel)
