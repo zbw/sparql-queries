@@ -16,16 +16,16 @@ WHERE {
       # instances of ...
       {
         # state of Germany
-        ?item p:P31/v:P31 wd:Q1221156
+        ?item wdt::P31 wd:Q1221156
       } union {
         # country
-        ?item p:P31/v:P31 wd:Q6256
+        ?item wdt::P31 wd:Q6256
       } union {
         # geographic region
-        ?item p:P31/v:P31 wd:Q82794
+        ?item wdt::P31 wd:Q82794
       } union {
         # political union
-        ?item p:P31/v:P31 wd:Q1140229
+        ?item wdt::P31 wd:Q1140229
 ##    # manually selected items
 ##    # (possibly as an alternative to the two clauses above)
 ##    } union {
