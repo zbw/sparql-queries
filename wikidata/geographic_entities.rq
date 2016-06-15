@@ -2,7 +2,7 @@
 #
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wikibase: <http://wikiba.se/ontology#>
-PREFIX wd: <http://www.wikidata.org/entity/> 
+PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX p: <http://www.wikidata.org/prop/>
@@ -26,10 +26,19 @@ WHERE {
       } union {
         # political union
         ?item p:P31/v:P31 wd:Q1140229
+##    # manually selected items
+##    # (possibly as an alternative to the two clauses above)
+##    } union {
+##      values (?itemID) {
+##        ('Q919721') # Eastern Germany
+##        ('Q458')    # EU
+##        ('Q181574') # NAFTA
+##        }
+##        bind(uri(concat('http://www.wikidata.org/entity/', ?itemID)) as ?item)
       }
-      # 
+      #
       SERVICE wikibase:label {
-        # returns German (preferred) or English label, or 
+        # returns German (preferred) or English label, or
         # entity name if neither exists
         bd:serviceParam wikibase:language "de,en" .
       }
