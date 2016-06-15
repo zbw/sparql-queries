@@ -9,23 +9,23 @@ PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX v: <http://www.wikidata.org/prop/statement/>
 PREFIX bd: <http://www.bigdata.com/rdf#>
 #
-SELECT ?s ?sLabel
+SELECT ?item ?itemLabel
 WHERE {
   {
-    SELECT ?s ?sLabel WHERE {
+    SELECT ?item ?itemLabel WHERE {
       # instances of ...
       {
         # state of Germany
-        ?s p:P31/v:P31 wd:Q1221156
+        ?item p:P31/v:P31 wd:Q1221156
       } union {
         # country
-        ?s p:P31/v:P31 wd:Q6256
+        ?item p:P31/v:P31 wd:Q6256
       } union {
         # geographic region
-        ?s p:P31/v:P31 wd:Q82794
+        ?item p:P31/v:P31 wd:Q82794
       } union {
         # political union
-        ?s p:P31/v:P31 wd:Q1140229
+        ?item p:P31/v:P31 wd:Q1140229
       }
       # 
       SERVICE wikibase:label {
@@ -36,9 +36,9 @@ WHERE {
     }
   }
   # autosuggest string to inject
-  filter(regex(str(?sLabel), "^ost", "i"))
+  filter(regex(str(?itemLabel), "^ost", "i"))
   # filter out entity names
-  filter(!strends(str(?s), ?sLabel))
+  filter(!strends(str(?item), ?itemLabel))
 }
-order by str(?sLabel)
+order by str(?itemLabel)
 
