@@ -1,0 +1,50 @@
+# Geographic entities code list (for import into SowiDataNet repository) 
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX v: <http://www.wikidata.org/prop/statement/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+#
+SELECT distinct ?itemId (str(?label_de) as ?de) (str(?label_en) as ?en) ?isoCode ?link ("Wikidata Link" as ?linkLabel)
+WHERE {
+  # 
+  {
+    # ISO 3166-1 alpha-2 code
+    ?item wdt:P297 ?isoCode .
+  } union {
+    # ISO 3166-2 code
+    ?item wdt:P300 ?iso2Code .
+    # restrict to states of Germany
+    ?item wdt:P31 wd:Q1221156 
+  } union {
+    # manually selected items
+    values (?itemID) {
+      ('Q919721') # Eastern Germany
+      ('Q458')    # EU
+      ('Q181574') # NAFTA
+    }
+    bind(uri(concat('http://www.wikidata.org/entity/', ?itemID)) as ?item)
+  }
+  # Wikdata item identifier
+  bind(strafter(str(?item), 'http://www.wikidata.org/entity/') as ?itemId)
+  # optionally supplement with GND identifier
+  optional {
+    ?item wdt:P227 ?gndId
+  }
+  #
+  bind(uri(concat("https://tools.wmflabs.org/sqid/#/view?id=", ?itemId)) as ?link)
+  optional {
+    ?item rdfs:label ?label_en
+    filter(lang(?label_en) = 'en')
+  }
+  optional {
+    ?item rdfs:label ?label_de
+    filter(lang(?label_de) = 'de')
+  }
+}
+order by str(?label_de)
+
