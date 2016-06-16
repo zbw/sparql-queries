@@ -11,7 +11,7 @@ PREFIX bd: <http://www.bigdata.com/rdf#>
 #
 SELECT distinct ?itemId (str(?label_de) as ?de) (str(?label_en) as ?en) ?isoCode ?link ("Wikidata Link" as ?linkLabel)
 WHERE {
-  # 
+  # select items by different criteria
   {
     # ISO 3166-1 alpha-2 code
     ?item wdt:P297 ?isoCode .
@@ -31,12 +31,7 @@ WHERE {
   }
   # Wikdata item identifier
   bind(strafter(str(?item), 'http://www.wikidata.org/entity/') as ?itemId)
-  # optionally supplement with GND identifier
-  optional {
-    ?item wdt:P227 ?gndId
-  }
-  #
-  bind(uri(concat("https://tools.wmflabs.org/sqid/#/view?id=", ?itemId)) as ?link)
+  # Labels
   optional {
     ?item rdfs:label ?label_en
     filter(lang(?label_en) = 'en')
@@ -45,6 +40,13 @@ WHERE {
     ?item rdfs:label ?label_de
     filter(lang(?label_de) = 'de')
   }
+  # Link to Sqid item page
+  bind(uri(concat("https://tools.wmflabs.org/sqid/#/view?id=", ?itemId)) as ?link)
+  #
+##  # optionally supplement with GND identifier
+##  optional {
+##    ?item wdt:P227 ?gndId
+##  }
 }
 order by str(?label_de)
 
