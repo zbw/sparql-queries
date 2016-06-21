@@ -8,6 +8,7 @@ PREFIX  text:   <http://jena.apache.org/text#>
 select *
 where 
 {
-  (?corp ?score ?literal) text:query 'Faculty of Economics and Business, KU Leuven' .
+  # limit number of results to 50
+  (?corp ?score ?literal) text:query ('Faculty of Economics and Business, KU Leuven' 50) .
   ?corp gndo:preferredNameForTheCorporateBody ?name .
 }
