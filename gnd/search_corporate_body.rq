@@ -1,13 +1,15 @@
 # Text search for corporate bodies
 #
 # Uses diverse literal properties, brings the best match on top
-# of the list
+# of the list.
+# This version of output reveals the inner working of the query,
+# matching word by word via the full text index against possibly
+# multiple literals connected to a subject.
 PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
 PREFIX  text:   <http://jena.apache.org/text#>
 #
 select *
-where 
-{
+where {
   # limit number of results to 50
   (?corp ?score ?literal) text:query ('Faculty of Economics and Business, KU Leuven' 50) .
   ?corp gndo:preferredNameForTheCorporateBody ?name .
