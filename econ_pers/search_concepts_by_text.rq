@@ -4,7 +4,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX text: <http://jena.apache.org/text#>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
-SELECT  ?concept ?prefName ?prefLabel
+SELECT DISTINCT ?concept ?prefName ?prefLabel
 WHERE {
   VALUES ( ?searchString ) {
     ( "snower" )
