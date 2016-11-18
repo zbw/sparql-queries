@@ -12,7 +12,7 @@ PREFIX q: <http://www.wikidata.org/prop/qualifier/>
 PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-select distinct ?repecId ?wd ?wdLabel ?sitelink
+select distinct ?repecId ?wd ?wdLabel ?sitelink ?gndId
 where {
   # get all wikidata items and labels linked to GND
   ?wd wdt:P2428 ?repecId ;
@@ -22,4 +22,7 @@ where {
             schema:inLanguage ?language .
   filter (contains(str(?sitelink), 'wikipedia'))
   filter (lang(?wdLabel) = ?language && ?language in ('en'))
+  optional {
+    ?wd wdt:P227 ?gndId
+  }
 }
