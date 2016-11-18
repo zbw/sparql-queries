@@ -1,4 +1,5 @@
-# Get all RePEc mappings (with labels in English language)
+# Get all RePEc mappings (with labels in English language),
+# supplemente with mapping to GND, if exists
 #
 # Must use SPARQL GET request (wikidata does not support POST -
 # see https://phabricator.wikimedia.org/T112151)
@@ -12,9 +13,9 @@ PREFIX q: <http://www.wikidata.org/prop/qualifier/>
 PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-select distinct ?repecId ?wd ?wdLabel ?sitelink ?gndId
+select distinct ?repec (?repecId as ?repecLabel) ?wd ?wdLabel ?sitelink ?gnd (?gndId as ?gndLabel)
 where {
-  # get all wikidata items and labels linked to GND
+  # get all wikidata items and labels linked to RePEC
   ?wd wdt:P2428 ?repecId ;
       rdfs:label ?wdLabel .
   # get site links (only from en wikipedia sites)
@@ -22,7 +23,10 @@ where {
             schema:inLanguage ?language .
   filter (contains(str(?sitelink), 'wikipedia'))
   filter (lang(?wdLabel) = ?language && ?language in ('en'))
+  # suplement with GND
   optional {
     ?wd wdt:P227 ?gndId
   }
+  bind(uri(concat('https://authors.repec.org/pro/', ?repecId)) as ?repec)
+  bind(uri(concat('http://d-nb.info/gnd/', ?gndId)) as ?gnd)
 }
