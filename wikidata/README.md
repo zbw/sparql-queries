@@ -16,6 +16,9 @@ Query | Description
 - https://www.mediawiki.org/wiki/Wikibase/Indexing/SPARQL_Query_Examples
 - https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format
 - https://www.wikidata.org/wiki/Wikidata:WikiProject_Authority_control
+- https://www.wikidata.org/wiki/User:TweetsFactsAndQueries/A_Guide_To_WDQS
 
+### Applications
 
+- https://tools.wmflabs.org/scholia
 
