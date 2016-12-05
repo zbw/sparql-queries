@@ -14,6 +14,7 @@ Query | Description
 ### Documentation
 
 - https://www.mediawiki.org/wiki/Wikibase/Indexing/SPARQL_Query_Examples
+- https://www.mediawiki.org/wiki/Wikidata_query_service/User_Manual
 - https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format
 - https://www.wikidata.org/wiki/Wikidata:WikiProject_Authority_control
 - https://www.wikidata.org/wiki/User:TweetsFactsAndQueries/A_Guide_To_WDQS
@@ -22,3 +23,6 @@ Query | Description
 
 - https://tools.wmflabs.org/scholia
 
+### Example queries from WD
+
+- [Interesting items near you](https://query.wikidata.org/#%23defaultView%3AMap%0ASELECT%20%3Fitem%20%3FitemLabel%20%3Fcoords%20%3FstatementCount%20WHERE%20%7B%0A%20%20BIND%28wd%3AQ6451%20AS%20%3Flocation%29.%20%23%20WMDE%20office%3B%20insert%20your%20location%20here%21%0A%20%20%3Flocation%20wdt%3AP625%20%3FlocationCoords.%0A%20%20SERVICE%20wikibase%3Aaround%20%7B%0A%20%20%20%20%3Fitem%20wdt%3AP625%20%3Fcoords.%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Acenter%20%3FlocationCoords%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wikibase%3Aradius%2050.%0A%20%20%7D%0A%20%20MINUS%20%7B%20%3Fitem%20wdt%3AP31%2Fwdt%3AP279%2a%20wd%3AQ1496967.%20%7D%20%23%20territorial%20entities%20%28cities%2C%20%E2%80%A6%29%20are%20boring%0A%20%20%3Fitem%20%5Eschema%3Aabout%3F%2Fwikibase%3Astatements%20%3FstatementCount.%0A%20%20FILTER%28%3FstatementCount%20%3E%3D%2015%29.%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%2C%20%22de%22.%20%7D%0A%7D)
