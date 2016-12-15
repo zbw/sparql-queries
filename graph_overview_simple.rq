@@ -1,0 +1,23 @@
+ount triples per graph
+#
+select (str(?tCount) as ?tripleCount) ?graphName
+where {
+  {
+    # the default graph
+    select (count(*) as ?tCount) 
+    where {
+      ?s ?p [] .
+    }
+  } union {
+    # the named graphs
+    select (count(*) as ?tCount) ?graphName
+    where {
+      graph ?graphName {
+        ?s ?p [] .
+      }
+    }
+    group by ?graphName
+    order by ?graphName
+  }
+}
+
