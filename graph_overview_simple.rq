@@ -1,4 +1,4 @@
-ount triples per graph
+# Count triples per graph
 #
 select (str(?tCount) as ?tripleCount) ?graphName
 where {
