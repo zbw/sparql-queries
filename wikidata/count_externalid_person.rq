@@ -1,0 +1,23 @@
+# Count items for person-related properties
+#
+PREFIX wd: <http://www.wikidata.org/entity/> 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select (str(?itemCount) as ?count) ?property (str(?label) as ?propertyLabel)
+where {
+  {
+    select (count(?item) as ?itemCount) ?property  (sample(?propEnt) as ?propEntity)
+    where {
+      # Wikidata property for authority control for people
+      ?propEnt wdt:P31 wd:Q19595382 .
+      bind(uri(concat('http://www.wikidata.org/prop/direct/', strafter(str(?propEnt), '/entity/'))) as ?property)
+      ?item ?property [] .
+    }
+    group by ?property
+  }
+  ?propEntity rdfs:label ?label
+  filter(lang(?label) = 'en')
+}
+order by desc(?itemCount)
+
