@@ -7,13 +7,13 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 select 
 (count(?pers) as ?econPersCount)  # all gnd in the econ_pers dataset
 (count(?wdPers) as ?econPersWdCount)  # of these, in Wikidata
-(round((?econPersWdCount/?econPersCount)*100) as ?econPersWdPercentage)
+((round((?econPersWdCount/?econPersCount)*1000)/10) as ?econPersWdPercentage)
 (sum(?ebPers) as ?ebPersCount)    # all gnd used in EconBiz
 (sum(?ebPersWd) as ?ebPersWdCount)    # of these, in Wikidata
-(round((?ebPersWdCount/?ebPersCount)*100) as ?ebPersWdPercentage)
+((round((?ebPersWdCount/?ebPersCount)*1000)/10) as ?ebPersWdPercentage)
 (sum(?freqEbPers) as ?freqEbPersCount)  # all gnd in EconBiz more than 10 times
 (sum(?freqEbPersWd) as ?freqEbPersWdCount)    # of these, in Wikidata
-(round((?freqEbPersWdCount/?freqEbPersCount)*100) as ?freqEbPersWdPercentage)
+((round((?freqEbPersWdCount/?freqEbPersCount)*1000)/10) as ?freqEbPersWdPercentage)
 where {
   service <http://zbw.eu/beta/sparql/econ_pers/query> {
     ?pers zbwext:econbizCount ?ebPublicationCount .
