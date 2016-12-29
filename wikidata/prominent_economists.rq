@@ -13,9 +13,11 @@ where {
   ?wd wdt:P106 ?occupation .
   bind(?wd as ?wd)
   ?sitelink schema:about ?wd .
-  ?wd rdfs:label ?wdLabelLang
-  filter(lang(?wdLabelLang) = 'en')
-  bind(str(?wdLabelLang) as ?wdLabel)
+  optional {
+    ?wd rdfs:label ?wdLabelLang
+    filter(lang(?wdLabelLang) = 'en')
+    bind(str(?wdLabelLang) as ?wdLabel)
+  }
 }
 group by ?wd ?wdLabel
 having (?siteCount > 1)
