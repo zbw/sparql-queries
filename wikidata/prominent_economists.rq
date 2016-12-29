@@ -1,11 +1,11 @@
 # Internationally prominent economists
-# (with entries in two or more Wikipedias)
+# (with entries in three or more Wikipedias)
 #
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-select ?wdLabel ?wd (count(?sitelink) as ?siteCount)
+select ?wdLabel ?wd (count(?sitelink) as ?siteCount) ?gndId
 where {
   values (?occupation) {
     (<http://www.wikidata.org/entity/Q188094>) # economist
@@ -23,8 +23,11 @@ where {
     filter(lang(?wdLabelLang) = 'en')
     bind(str(?wdLabelLang) as ?wdLabel)
   }
+  optional {
+    ?wd wdt:P227 ?gndId .
+  }
 }
-group by ?wd ?wdLabel
-having (?siteCount > 1)
+group by ?wd ?wdLabel ?gndId
+having (?siteCount >= 3)
 order by desc(?siteCount)
 
