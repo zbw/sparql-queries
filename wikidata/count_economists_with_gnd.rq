@@ -1,0 +1,42 @@
+# Count wikidata economists and those having gnd ids
+#
+# Can be restricted to the more prominent economists by increasing
+# the threshold of links to wikipedia sites in the "having" clause
+#
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select
+(count(distinct ?wd) as ?countEconomists) # wikidata items with occupation "economist"
+(count(distinct ?gndId) as ?countWithGnd) # of these, with gnd-id
+(concat(str(round(((?countEconomists-?countWithGnd)/?countEconomists)*1000)/10), ' %') as ?withoutGndPercentage)
+where {
+  {
+    select distinct ?wd ?wdLabel (count(?sitelink) as ?siteCount)
+    where {
+      values (?occupation) {
+        (<http://www.wikidata.org/entity/Q188094>) # economist
+      }
+      ?wd wdt:P106 ?occupation .
+      #
+      # get site links
+      optional {
+        ?sitelink schema:about ?wd .
+        # filter out wikicite/wikicommons etc. links
+        filter(contains(str(?sitelink), 'wikipedia.org/'))
+      }
+      # not all persons have labels in English
+      optional {
+        ?wd rdfs:label ?wdLabelLang
+        filter(lang(?wdLabelLang) = 'en')
+        bind(str(?wdLabelLang) as ?wdLabel)
+      }
+    }
+    group by ?wd ?wdLabel
+    having (?siteCount >= 0)
+  }
+  optional {
+    ?wd wdt:P227 ?gndId .
+  }
+}
