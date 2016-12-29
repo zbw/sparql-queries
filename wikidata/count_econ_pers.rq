@@ -11,14 +11,18 @@ select
 (sum(?ebPers) as ?ebPersCount)    # all gnd used in EconBiz
 (sum(?ebPersWd) as ?ebPersWdCount)    # of these, in Wikidata
 (concat(str(round((?ebPersWdCount/?ebPersCount)*1000)/10), ' %') as ?ebPersWdPct)
-(sum(?freqEbPers) as ?freqEbPersCount)  # all gnd in EconBiz more than 10 times
+(sum(?freqEbPers) as ?freqEbPersCount)  # gnd more than 10 times in EconBiz
 (sum(?freqEbPersWd) as ?freqEbPersWdCount)    # of these, in Wikidata
 (concat(str(round((?freqEbPersWdCount/?freqEbPersCount)*1000)/10), ' %') as ?freqEbPersWdPct)
+(sum(?topEbPers) as ?topEbPersCount)    # gnd more than 50 times in EconBiz
+(sum(?topEbPersWd) as ?topEbPersWdCount)      # of these, in Wikidata
+(concat(str(round((?topEbPersWdCount/?topEbPersCount)*1000)/10), ' %') as ?topEbPersWdPct)
 where {
   service <http://zbw.eu/beta/sparql/econ_pers/query> {
     ?pers zbwext:econbizCount ?ebPublicationCount .
     bind(if((?ebPublicationCount > 0), 1, 0) as ?ebPers) .
     bind(if((?ebPublicationCount > 10), 1, 0) as ?freqEbPers) .
+    bind(if((?ebPublicationCount > 50), 1, 0) as ?topEbPers) .
   }
   bind(strafter(str(?pers), '/gnd/') as ?gndId)
   optional {
@@ -26,4 +30,5 @@ where {
   }
   bind(if((?ebPers = 1 && bound(?wdPers)), 1, 0) as ?ebPersWd) .
   bind(if((?freqEbPers = 1 && bound(?wdPers)), 1, 0) as ?freqEbPersWd) .
+  bind(if((?topEbPers = 1 && bound(?wdPers)), 1, 0) as ?topEbPersWd) .
 }
