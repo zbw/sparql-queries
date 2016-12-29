@@ -1,4 +1,4 @@
-# Count items for person-related properties
+# Count persons with authorities
 #
 PREFIX wd: <http://www.wikidata.org/entity/> 
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
