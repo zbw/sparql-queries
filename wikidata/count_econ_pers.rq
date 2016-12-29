@@ -5,8 +5,8 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select 
-(count(?pers) as ?econPersCount)  # all gnd in the econ_pers dataset
-(count(?wdPers) as ?econPersWdCount)  # of these, in Wikidata
+(count(?econPers) as ?econPersCount)  # all gnd in the econ_pers dataset
+(count(?econPersWd) as ?econPersWdCount)  # of these, in Wikidata
 (concat(str(round((?econPersWdCount/?econPersCount)*1000)/10), ' %') as ?econPersWdPct)
 (sum(?ebPers) as ?ebPersCount)    # all gnd used in EconBiz
 (sum(?ebPersWd) as ?ebPersWdCount)    # of these, in Wikidata
@@ -19,16 +19,16 @@ select
 (concat(str(round((?topEbPersWdCount/?topEbPersCount)*1000)/10), ' %') as ?topEbPersWdPct)
 where {
   service <http://zbw.eu/beta/sparql/econ_pers/query> {
-    ?pers zbwext:econbizCount ?ebPublicationCount .
+    ?econPers zbwext:econbizCount ?ebPublicationCount .
     bind(if((?ebPublicationCount > 0), 1, 0) as ?ebPers) .
     bind(if((?ebPublicationCount > 10), 1, 0) as ?freqEbPers) .
     bind(if((?ebPublicationCount > 50), 1, 0) as ?topEbPers) .
   }
-  bind(strafter(str(?pers), '/gnd/') as ?gndId)
+  bind(strafter(str(?econPers), '/gnd/') as ?gndId)
   optional {
-    ?wdPers wdt:P227 ?gndId .
+    ?econPersWd wdt:P227 ?gndId .
   }
-  bind(if((?ebPers = 1 && bound(?wdPers)), 1, 0) as ?ebPersWd) .
-  bind(if((?freqEbPers = 1 && bound(?wdPers)), 1, 0) as ?freqEbPersWd) .
-  bind(if((?topEbPers = 1 && bound(?wdPers)), 1, 0) as ?topEbPersWd) .
+  bind(if((?ebPers = 1 && bound(?econPersWd)), 1, 0) as ?ebPersWd) .
+  bind(if((?freqEbPers = 1 && bound(?econPersWd)), 1, 0) as ?freqEbPersWd) .
+  bind(if((?topEbPers = 1 && bound(?econPersWd)), 1, 0) as ?topEbPersWd) .
 }
