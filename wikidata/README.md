@@ -1,6 +1,8 @@
 ## Queries for Wikidata
 
-Uses the Wikidata SPARQL endpoint at `https://query.wikidata.org/bigdata/namespace/wdq/sparql`. Due to its current limitations, queries can be sent via GET only.
+Uses the Wikidata SPARQL endpoint at
+`https://query.wikidata.org/bigdata/namespace/wdq/sparql`. Due to its current
+limitations, queries can be sent via GET only.
 
 Query | Description
 ------|------------
@@ -10,6 +12,17 @@ Query | Description
 [geographic_entities](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/geographic_entities.rq) | Autosuggest geographic entities
 [geographic_entities_codelist](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/geographic_entities_codelist.rq) | Geographic entities code list (for import into SowiDataNet repository) 
 [iso3166_codelist](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/iso3166_codelist.rq) | ISO 3166-1/2 code list for countries and German states
+
+
+### "Power queries"
+
+Due to limitations of the public Wikidata endpoint (in particular re. the
+"service" clause for federated queries), the following queries do not work
+there and require a "private" endpoint.
+
+[count_econ_pers](http://zbw.eu/beta/sparql-lab/?endpoint=http://172.16.10.102:3030/wikidata/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/count_econ_pers.rq) | Statistics about economics-related gnd persons (from econ_pers dataset) and how many of them are in wikidata
+
+
 
 ### Documentation
 

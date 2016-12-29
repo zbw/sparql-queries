@@ -1,0 +1,29 @@
+# Statistics about economics-related gnd persons (from econ_pers dataset)
+# and how many of them are in wikidata
+#
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select 
+(count(?pers) as ?econPersCount)  # all gnd in the econ_pers dataset
+(count(?wdPers) as ?econPersWdCount)  # of these, in Wikidata
+(round((?econPersWdCount/?econPersCount)*100) as ?econPersWdPercentage)
+(sum(?ebPers) as ?ebPersCount)    # all gnd used in EconBiz
+(sum(?ebPersWd) as ?ebPersWdCount)    # of these, in Wikidata
+(round((?ebPersWdCount/?ebPersCount)*100) as ?ebPersWdPercentage)
+(sum(?freqEbPers) as ?freqEbPersCount)  # all gnd in EconBiz more than 10 times
+(sum(?freqEbPersWd) as ?freqEbPersWdCount)    # of these, in Wikidata
+(round((?freqEbPersWdCount/?freqEbPersCount)*100) as ?freqEbPersWdPercentage)
+where {
+  service <http://zbw.eu/beta/sparql/econ_pers/query> {
+    ?pers zbwext:econbizCount ?ebPublicationCount .
+    bind(if((?ebPublicationCount > 0), 1, 0) as ?ebPers) .
+    bind(if((?ebPublicationCount > 10), 1, 0) as ?freqEbPers) .
+  }
+  bind(strafter(str(?pers), '/gnd/') as ?gndId)
+  optional {
+    ?wdPers wdt:P227 ?gndId .
+  }
+  bind(if((?ebPers = 1 && bound(?wdPers)), 1, 0) as ?ebPersWd) .
+  bind(if((?freqEbPers = 1 && bound(?wdPers)), 1, 0) as ?freqEbPersWd) .
+}
