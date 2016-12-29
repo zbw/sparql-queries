@@ -1,0 +1,28 @@
+# Occupations of economics-related gnd persons (from econ_pers dataset)
+#
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select (count(distinct ?econPersWd) as ?count) ?occupation ?occupationLabel
+where {
+  # get wikidata persons from econ_pers gnd subset
+  service <http://zbw.eu/beta/sparql/econ_pers/query> {
+    ?econPers zbwext:econbizCount ?ebPublicationCount .
+    # base on persons with more than 1 publication
+    filter( ?ebPublicationCount > 1)
+  }
+  # identify persons in wd
+  bind(strafter(str(?econPers), '/gnd/') as ?gndId)
+  ?econPersWd wdt:P227 ?gndId .
+  #
+  # get occupation and their labels
+  ?econPersWd wdt:P106 ?occupation .
+  ?occupation rdfs:label ?occupationLabelLang .
+  filter(lang( ?occupationLabelLang) = 'en')
+  bind(str(?occupationLabelLang) as ?occupationLabel)
+}
+group by ?occupation ?occupationLabel 
+having (?count >= 10)
+order by desc(?count)
+
