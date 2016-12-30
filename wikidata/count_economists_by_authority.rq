@@ -1,0 +1,34 @@
+# Count economists by properties used for authority control
+#
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select (count(distinct ?item) as ?economistCount) ?property ?propertyLabel
+where {
+  # get all properties for authority control
+  {
+    select distinct ?property (str(?label) as ?propertyLabel) ?propertyDirect
+    where {
+      values (?authPropType) {
+        # Wikidata property for authority control
+        (wd:Q18614948)
+      }
+      {
+        ?property wdt:P31 ?authPropType .
+      } union {
+        ?type wdt:P279 ?authPropType .
+        ?property wdt:P31 ?type .
+      }
+      ?property rdfs:label ?label
+      filter(lang(?label) = 'en')
+      bind(uri(concat('http://www.wikidata.org/prop/direct/', strafter(str(?property), '/entity/'))) as ?propertyDirect)
+    }
+  }
+  # items using those properties
+  ?item ?propertyDirect [] ;
+        # restrict to occupation economist
+        wdt:P106 wd:Q188094 .
+}
+group by ?property ?propertyLabel
+order by desc(?count)

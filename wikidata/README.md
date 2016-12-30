@@ -27,6 +27,7 @@ Query | Description
 [count_econ_pers](http://zbw.eu/beta/sparql-lab/?endpoint=http://172.16.10.102:3030/wikidata/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/count_econ_pers.rq) | Statistics about economics-related gnd persons (from econ_pers dataset) and how many of them are in wikidata
 [frequent_economist_occupations](http://zbw.eu/beta/sparql-lab/?endpoint=http://172.16.10.102:3030/wikidata/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/frequent_economist_occupations.rq) | Occupations of economics-related gnd persons (from econ_pers dataset)
 [count_externalid_person](http://zbw.eu/beta/sparql-lab/?endpoint=http://172.16.10.102:3030/wikidata/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/count_externalid_person.rq) | Count persons with authorities
+[count_economists_by_authority](http://zbw.eu/beta/sparql-lab/?endpoint=http://172.16.10.102:3030/wikidata/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/count_economists_by_authority.rq) | Count economists by properties used for authority control
 
 
 
