@@ -1,0 +1,41 @@
+# Statistics about economics-related gnd persons (from ebds)
+# and how many of them are in wikidata
+#
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>  
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+#
+select
+(count(?econPers) as ?econPersCount)  # all gnd in the econ_pers dataset
+(count(?econPersWd) as ?econPersWdCount)  # of these, in Wikidata
+(concat(str(round((?econPersWdCount/?econPersCount)*1000)/10), ' %') as ?econPersWdPct)
+(sum( ?isWdEconomist) as ?wdOccupationEconomistCount)   # econPersWd with occupation "economist"
+(concat(str(round((?wdOccupationEconomistCount/?econPersWdCount)*1000)/10), ' %') as ?wdOccupationEconomistPct)
+where {
+  service <http://172.16.10.102:3030/ebds/query> {
+    select ?econPers (count(distinct ?pub) as ?ebPublicationCount)
+    where {
+      graph <http://zbw.eu/beta/ebds/ng> {
+        values ( ?role) {
+          (dcterms:creator) (dcterms:contributor)
+        }
+        ?pub ?role ?econPers .
+      }
+      graph <http://zbw.eu/beta/ebds/gnd/ng> {
+        ?econPers a gndo:DifferentiatedPerson .
+      }
+    }
+    group by ?econPers
+  }
+  # which of these persons are in wikidata?
+  bind(strafter(str(?econPers), '/gnd/') as ?gndId)
+  optional {
+    ?econPersWd wdt:P227 ?gndId .
+  }
+  # is the wd occupation of this person "economist"?
+  bind(if(bound(?econPersWd) && exists {
+        ?econPersWd wdt:P106 wd:Q188094 
+      }, 1, 0) as ?isWdEconomist)
+}
