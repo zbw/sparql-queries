@@ -31,4 +31,4 @@ where {
         wdt:P106 wd:Q188094 .
 }
 group by ?property ?propertyLabel
-order by desc(?count)
+order by desc(?economistCount)
