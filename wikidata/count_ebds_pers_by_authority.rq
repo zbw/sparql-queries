@@ -1,0 +1,58 @@
+# Count economists by properties used for authority control
+#
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+#
+select (count(distinct ?item) as ?economistCount) ?property ?propertyLabel
+where {
+  # get all persons identified by gnd from ebds
+  service <http://172.16.10.102:3030/ebds/query> {
+    select distinct ?econPers ?gndId
+    where {
+      {
+        select distinct ?econPers
+        where {
+          graph <http://zbw.eu/beta/ebds/ng> {
+            values ( ?role) {
+              (dcterms:creator) (dcterms:contributor)
+            }
+            ?pub ?role ?econPers .
+          }
+        }
+      }
+      graph <http://zbw.eu/beta/ebds/gnd/ng> {
+        ?econPers a gndo:DifferentiatedPerson .
+      }
+      bind(strafter(str(?econPers), '/gnd/') as ?gndId)
+    }
+  }
+  # get the according wikidata items
+  ?item wdt:P227 ?gndId .
+  #
+  # get all properties for authority control
+  {
+    select distinct ?property (str(?label) as ?propertyLabel) ?propertyDirect
+    where {
+      values (?authPropType) {
+        # Wikidata property for authority control
+        (wd:Q18614948)
+      }
+      {
+        ?property wdt:P31 ?authPropType .
+      } union {
+        ?type wdt:P279 ?authPropType .
+        ?property wdt:P31 ?type .
+      }
+      ?property rdfs:label ?label
+      filter(lang(?label) = 'en')
+      bind(uri(concat('http://www.wikidata.org/prop/direct/', strafter(str(?property), '/entity/'))) as ?propertyDirect)
+    }
+  }
+  # items using those properties
+  ?item ?propertyDirect [] .
+}
+group by ?property ?propertyLabel
+order by desc(?economistCount)
