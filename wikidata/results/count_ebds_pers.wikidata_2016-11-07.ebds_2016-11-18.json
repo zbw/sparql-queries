@@ -1,0 +1,16 @@
+{
+  "head": {
+    "vars": [ "econPersCount" , "econPersWdCount" , "econPersWdPct" , "wdOccupationEconomistCount" , "wdOccupationEconomistPct" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "econPersCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "448611" } ,
+        "econPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "38117" } ,
+        "econPersWdPct": { "type": "literal" , "value": "8.5 %" } ,
+        "wdOccupationEconomistCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "4565" } ,
+        "wdOccupationEconomistPct": { "type": "literal" , "value": "12.0 %" }
+      }
+    ]
+  }
+}
