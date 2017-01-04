@@ -2,6 +2,8 @@
 #
 # Can be restricted to the more prominent economists by increasing
 # the threshold of links to wikipedia sites in the "having" clause
+# (a threshold of 3 should exclude russian/ukrainian and similar pairings,
+# a threshold of 25 is sometimes used in wikimedia for "famous")
 #
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
