@@ -1,4 +1,4 @@
-# Count wikidata economists and those having gnd ids
+# Count wikidata economists and those having gnd and/or viaf ids
 #
 # Can be restricted to the more prominent economists by increasing
 # the threshold of links to wikipedia sites in the "having" clause
@@ -11,6 +11,8 @@ select
 (count(distinct ?wd) as ?countEconomists) # wikidata items with occupation "economist"
 (count(distinct ?gndId) as ?countWithGnd) # of these, with gnd-id
 (concat(str(round(((?countEconomists-?countWithGnd)/?countEconomists)*1000)/10), ' %') as ?withoutGndPercentage)
+(count(distinct ?viafId) as ?countWithViaf) # of these, with viaf-id
+(concat(str(round(((?countEconomists-?countWithViaf)/?countEconomists)*1000)/10), ' %') as ?withoutViafPercentage)
 where {
   {
     select distinct ?wd ?wdLabel (count(?sitelink) as ?siteCount)
@@ -38,5 +40,8 @@ where {
   }
   optional {
     ?wd wdt:P227 ?gndId .
+  }
+  optional {
+    ?wd wdt:P214 ?viafId .
   }
 }
