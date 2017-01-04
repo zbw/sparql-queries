@@ -1,0 +1,924 @@
+{
+  "head": {
+    "vars": [ "count" , "occupation" , "occupationLabel" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10231" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1622272" } ,
+        "occupationLabel": { "type": "literal" , "value": "university teacher" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "4156" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q188094" } ,
+        "occupationLabel": { "type": "literal" , "value": "economist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "3382" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q82955" } ,
+        "occupationLabel": { "type": "literal" , "value": "politician" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "3300" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q36180" } ,
+        "occupationLabel": { "type": "literal" , "value": "writer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "2122" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q201788" } ,
+        "occupationLabel": { "type": "literal" , "value": "historian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1685" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1930187" } ,
+        "occupationLabel": { "type": "literal" , "value": "journalist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1331" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2306091" } ,
+        "occupationLabel": { "type": "literal" , "value": "sociologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1280" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q185351" } ,
+        "occupationLabel": { "type": "literal" , "value": "jurist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1055" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q4964182" } ,
+        "occupationLabel": { "type": "literal" , "value": "philosopher" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1037" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q482980" } ,
+        "occupationLabel": { "type": "literal" , "value": "author" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "669" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q40348" } ,
+        "occupationLabel": { "type": "literal" , "value": "lawyer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "640" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q121594" } ,
+        "occupationLabel": { "type": "literal" , "value": "professor" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "623" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q16533" } ,
+        "occupationLabel": { "type": "literal" , "value": "judge" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "593" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q193391" } ,
+        "occupationLabel": { "type": "literal" , "value": "diplomat" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "576" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1238570" } ,
+        "occupationLabel": { "type": "literal" , "value": "political scientist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "540" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q15980158" } ,
+        "occupationLabel": { "type": "literal" , "value": "non-fiction writer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "516" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q170790" } ,
+        "occupationLabel": { "type": "literal" , "value": "mathematician" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "508" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q212980" } ,
+        "occupationLabel": { "type": "literal" , "value": "psychologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "413" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q17489339" } ,
+        "occupationLabel": { "type": "literal" , "value": "historian of the modern age" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "364" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1234713" } ,
+        "occupationLabel": { "type": "literal" , "value": "theologian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "343" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1231865" } ,
+        "occupationLabel": { "type": "literal" , "value": "educationist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "340" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q4773904" } ,
+        "occupationLabel": { "type": "literal" , "value": "anthropologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "304" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q81096" } ,
+        "occupationLabel": { "type": "literal" , "value": "engineer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "277" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q333634" } ,
+        "occupationLabel": { "type": "literal" , "value": "translator" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "266" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q49757" } ,
+        "occupationLabel": { "type": "literal" , "value": "poet" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "262" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q14467526" } ,
+        "occupationLabel": { "type": "literal" , "value": "linguist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "255" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q806798" } ,
+        "occupationLabel": { "type": "literal" , "value": "banker" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "250" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q131524" } ,
+        "occupationLabel": { "type": "literal" , "value": "entrepreneur" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "248" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q901402" } ,
+        "occupationLabel": { "type": "literal" , "value": "geographer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "243" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q82594" } ,
+        "occupationLabel": { "type": "literal" , "value": "computer scientist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "225" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q169470" } ,
+        "occupationLabel": { "type": "literal" , "value": "physicist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "218" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q182436" } ,
+        "occupationLabel": { "type": "literal" , "value": "librarian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "202" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q6625963" } ,
+        "occupationLabel": { "type": "literal" , "value": "novelist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "200" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q4263842" } ,
+        "occupationLabel": { "type": "literal" , "value": "literary critic" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "181" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2732142" } ,
+        "occupationLabel": { "type": "literal" , "value": "statistician" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "174" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q17488363" } ,
+        "occupationLabel": { "type": "literal" , "value": "economic historian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "174" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q3332711" } ,
+        "occupationLabel": { "type": "literal" , "value": "medievalist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "161" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q28389" } ,
+        "occupationLabel": { "type": "literal" , "value": "screenwriter" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "159" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q16287483" } ,
+        "occupationLabel": { "type": "literal" , "value": "opinion journalist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "150" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q39631" } ,
+        "occupationLabel": { "type": "literal" , "value": "physician" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "149" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2516866" } ,
+        "occupationLabel": { "type": "literal" , "value": "publisher" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "148" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1792450" } ,
+        "occupationLabel": { "type": "literal" , "value": "art historian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "148" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q635734" } ,
+        "occupationLabel": { "type": "literal" , "value": "archivist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "144" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q11774202" } ,
+        "occupationLabel": { "type": "literal" , "value": "essayist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "144" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q593644" } ,
+        "occupationLabel": { "type": "literal" , "value": "chemist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "143" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q11900058" } ,
+        "occupationLabel": { "type": "literal" , "value": "explorer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "143" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q15627169" } ,
+        "occupationLabel": { "type": "literal" , "value": "trade unionist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "134" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q37226" } ,
+        "occupationLabel": { "type": "literal" , "value": "teacher" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "126" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2135538" } ,
+        "occupationLabel": { "type": "literal" , "value": "legal historian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "125" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2374149" } ,
+        "occupationLabel": { "type": "literal" , "value": "botanist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "123" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q3621491" } ,
+        "occupationLabel": { "type": "literal" , "value": "archaeologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "110" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q214917" } ,
+        "occupationLabel": { "type": "literal" , "value": "playwright" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "109" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q864380" } ,
+        "occupationLabel": { "type": "literal" , "value": "biographer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "108" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q42973" } ,
+        "occupationLabel": { "type": "literal" , "value": "architect" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "104" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q250867" } ,
+        "occupationLabel": { "type": "literal" , "value": "Catholic priest" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "101" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q189290" } ,
+        "occupationLabel": { "type": "literal" , "value": "officer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "99" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q18814623" } ,
+        "occupationLabel": { "type": "literal" , "value": "autobiographer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "93" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q520549" } ,
+        "occupationLabel": { "type": "literal" , "value": "geologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "91" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q13418253" } ,
+        "occupationLabel": { "type": "literal" , "value": "philologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "87" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q17488465" } ,
+        "occupationLabel": { "type": "literal" , "value": "regional historian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "85" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q13570226" } ,
+        "occupationLabel": { "type": "literal" , "value": "literary historian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "83" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1028181" } ,
+        "occupationLabel": { "type": "literal" , "value": "painter" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "83" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q43845" } ,
+        "occupationLabel": { "type": "literal" , "value": "businessperson" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "82" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q864503" } ,
+        "occupationLabel": { "type": "literal" , "value": "biologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "82" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q901" } ,
+        "occupationLabel": { "type": "literal" , "value": "scientist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "78" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q15319501" } ,
+        "occupationLabel": { "type": "literal" , "value": "social scientist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "76" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q47064" } ,
+        "occupationLabel": { "type": "literal" , "value": "military personnel" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "75" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q211346" } ,
+        "occupationLabel": { "type": "literal" , "value": "psychiatrist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "74" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1209498" } ,
+        "occupationLabel": { "type": "literal" , "value": "poet lawyer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "72" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2462658" } ,
+        "occupationLabel": { "type": "literal" , "value": "manager" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "70" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q350979" } ,
+        "occupationLabel": { "type": "literal" , "value": "zoologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "64" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q18844224" } ,
+        "occupationLabel": { "type": "literal" , "value": "science fiction writer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "63" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1371378" } ,
+        "occupationLabel": { "type": "literal" , "value": "ethnologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "62" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q131512" } ,
+        "occupationLabel": { "type": "literal" , "value": "farmer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "58" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1900167" } ,
+        "occupationLabel": { "type": "literal" , "value": "psychotherapist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "57" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q17504992" } ,
+        "occupationLabel": { "type": "literal" , "value": "social historian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "57" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q832136" } ,
+        "occupationLabel": { "type": "literal" , "value": "business manager" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "56" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q16631371" } ,
+        "occupationLabel": { "type": "literal" , "value": "academic" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "56" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2599593" } ,
+        "occupationLabel": { "type": "literal" , "value": "germanist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "53" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1493121" } ,
+        "occupationLabel": { "type": "literal" , "value": "military historian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "52" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q16267607" } ,
+        "occupationLabel": { "type": "literal" , "value": "classical philologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "51" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q947873" } ,
+        "occupationLabel": { "type": "literal" , "value": "television presenter" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "47" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q205375" } ,
+        "occupationLabel": { "type": "literal" , "value": "inventor" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "45" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1607826" } ,
+        "occupationLabel": { "type": "literal" , "value": "editor" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "44" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q14972848" } ,
+        "occupationLabel": { "type": "literal" , "value": "lexicographer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "44" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1731155" } ,
+        "occupationLabel": { "type": "literal" , "value": "orientalist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "44" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1743122" } ,
+        "occupationLabel": { "type": "literal" , "value": "church historian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "43" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q16830344" } ,
+        "occupationLabel": { "type": "literal" , "value": "feminist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "42" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q33231" } ,
+        "occupationLabel": { "type": "literal" , "value": "photographer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "41" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q16947320" } ,
+        "occupationLabel": { "type": "literal" , "value": "geopolitician" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "40" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q17167049" } ,
+        "occupationLabel": { "type": "literal" , "value": "specialist in literature" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "39" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q11063" } ,
+        "occupationLabel": { "type": "literal" , "value": "astronomer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "36" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q17486338" } ,
+        "occupationLabel": { "type": "literal" , "value": "historian of technology" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "36" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q8142883" } ,
+        "occupationLabel": { "type": "literal" , "value": "criminologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "35" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q14915627" } ,
+        "occupationLabel": { "type": "literal" , "value": "musicologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "35" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q16849727" } ,
+        "occupationLabel": { "type": "literal" , "value": "business consultant" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "34" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q33999" } ,
+        "occupationLabel": { "type": "literal" , "value": "actor" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "34" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q4853732" } ,
+        "occupationLabel": { "type": "literal" , "value": "children's writer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "33" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q15462162" } ,
+        "occupationLabel": { "type": "literal" , "value": "cultural historian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "33" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q3126128" } ,
+        "occupationLabel": { "type": "literal" , "value": "geneticist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "32" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1734662" } ,
+        "occupationLabel": { "type": "literal" , "value": "cartographer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "32" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q18805" } ,
+        "occupationLabel": { "type": "literal" , "value": "naturalist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "32" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q18939491" } ,
+        "occupationLabel": { "type": "literal" , "value": "diarist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "31" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q3055126" } ,
+        "occupationLabel": { "type": "literal" , "value": "entomologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "31" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q42603" } ,
+        "occupationLabel": { "type": "literal" , "value": "priest" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "31" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q860918" } ,
+        "occupationLabel": { "type": "literal" , "value": "Esperantist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "30" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2310145" } ,
+        "occupationLabel": { "type": "literal" , "value": "meteorologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "29" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q215536" } ,
+        "occupationLabel": { "type": "literal" , "value": "merchant" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "28" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1662561" } ,
+        "occupationLabel": { "type": "literal" , "value": "paleontologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "28" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q17488316" } ,
+        "occupationLabel": { "type": "literal" , "value": "prehistorian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "28" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q4991371" } ,
+        "occupationLabel": { "type": "literal" , "value": "soldier" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "27" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q15255771" } ,
+        "occupationLabel": { "type": "literal" , "value": "sinologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "27" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2526255" } ,
+        "occupationLabel": { "type": "literal" , "value": "film director" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "27" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q3242115" } ,
+        "occupationLabel": { "type": "literal" , "value": "revolutionary" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "26" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q17486321" } ,
+        "occupationLabel": { "type": "literal" , "value": "agrarian historian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "26" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q36834" } ,
+        "occupationLabel": { "type": "literal" , "value": "composer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "26" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q6386271" } ,
+        "occupationLabel": { "type": "literal" , "value": "media scholar" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "26" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q783906" } ,
+        "occupationLabel": { "type": "literal" , "value": "neurologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "25" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1225716" } ,
+        "occupationLabel": { "type": "literal" , "value": "ornithologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "25" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q17504989" } ,
+        "occupationLabel": { "type": "literal" , "value": "historian of Eastern Europe" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "24" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q212238" } ,
+        "occupationLabel": { "type": "literal" , "value": "civil servant" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "23" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q13416354" } ,
+        "occupationLabel": { "type": "literal" , "value": "mineralogist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "23" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q189010" } ,
+        "occupationLabel": { "type": "literal" , "value": "notary" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "23" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q688576" } ,
+        "occupationLabel": { "type": "literal" , "value": "tax advisor" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "22" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2504617" } ,
+        "occupationLabel": { "type": "literal" , "value": "romanist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "21" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q12360779" } ,
+        "occupationLabel": { "type": "literal" , "value": "demographer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "21" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1979607" } ,
+        "occupationLabel": { "type": "literal" , "value": "financier" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "21" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q483501" } ,
+        "occupationLabel": { "type": "literal" , "value": "artist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "20" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q13582652" } ,
+        "occupationLabel": { "type": "literal" , "value": "civil engineer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "20" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1569495" } ,
+        "occupationLabel": { "type": "literal" , "value": "lecturer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "20" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q16012028" } ,
+        "occupationLabel": { "type": "literal" , "value": "legal scholar" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "20" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q372436" } ,
+        "occupationLabel": { "type": "literal" , "value": "statesman" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "19" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2004963" } ,
+        "occupationLabel": { "type": "literal" , "value": "numismatist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "19" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2919046" } ,
+        "occupationLabel": { "type": "literal" , "value": "biochemist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "18" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q168559" } ,
+        "occupationLabel": { "type": "literal" , "value": "political commissar" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "18" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1906857" } ,
+        "occupationLabel": { "type": "literal" , "value": "mechanical engineer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "18" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q3282637" } ,
+        "occupationLabel": { "type": "literal" , "value": "film producer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "17" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1476215" } ,
+        "occupationLabel": { "type": "literal" , "value": "human rights activist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "17" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2135485" } ,
+        "occupationLabel": { "type": "literal" , "value": "law librarian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "17" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2516852" } ,
+        "occupationLabel": { "type": "literal" , "value": "literary editor" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "17" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q8246794" } ,
+        "occupationLabel": { "type": "literal" , "value": "blogger" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "16" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q18524037" } ,
+        "occupationLabel": { "type": "literal" , "value": "indologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "16" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2722764" } ,
+        "occupationLabel": { "type": "literal" , "value": "radio personality" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "16" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q627325" } ,
+        "occupationLabel": { "type": "literal" , "value": "graphic designer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "16" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q644687" } ,
+        "occupationLabel": { "type": "literal" , "value": "illustrator" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "15" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q15949613" } ,
+        "occupationLabel": { "type": "literal" , "value": "short story writer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "15" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q15985128" } ,
+        "occupationLabel": { "type": "literal" , "value": "medical historian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "15" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q17486330" } ,
+        "occupationLabel": { "type": "literal" , "value": "historian of mathematics" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "15" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q3410028" } ,
+        "occupationLabel": { "type": "literal" , "value": "psychoanalyst" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "14" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1086863" } ,
+        "occupationLabel": { "type": "literal" , "value": "columnist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "14" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1227195" } ,
+        "occupationLabel": { "type": "literal" , "value": "postgraduate business degree holder" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "14" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1281618" } ,
+        "occupationLabel": { "type": "literal" , "value": "sculptor" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "14" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q17488357" } ,
+        "occupationLabel": { "type": "literal" , "value": "historian of religion" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "14" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q20873384" } ,
+        "occupationLabel": { "type": "literal" , "value": "historian of classical antiquity" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "13" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q10732476" } ,
+        "occupationLabel": { "type": "literal" , "value": "art collector" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "13" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1350189" } ,
+        "occupationLabel": { "type": "literal" , "value": "egyptologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "13" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q16755977" } ,
+        "occupationLabel": { "type": "literal" , "value": "racial theorist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "13" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1781198" } ,
+        "occupationLabel": { "type": "literal" , "value": "agronomist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "13" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q462390" } ,
+        "occupationLabel": { "type": "literal" , "value": "docent" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "13" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q808967" } ,
+        "occupationLabel": { "type": "literal" , "value": "barrister" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "12" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q11513337" } ,
+        "occupationLabel": { "type": "literal" , "value": "athletics competitor" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "12" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q15994177" } ,
+        "occupationLabel": { "type": "literal" , "value": "political theorist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "12" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q17486326" } ,
+        "occupationLabel": { "type": "literal" , "value": "architectural historian" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "12" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q4002666" } ,
+        "occupationLabel": { "type": "literal" , "value": "military physician" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "12" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q414528" } ,
+        "occupationLabel": { "type": "literal" , "value": "academician" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "12" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q639669" } ,
+        "occupationLabel": { "type": "literal" , "value": "musician" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "12" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q774306" } ,
+        "occupationLabel": { "type": "literal" , "value": "surgeon" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "11" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q133485" } ,
+        "occupationLabel": { "type": "literal" , "value": "rabbi" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "11" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q16742096" } ,
+        "occupationLabel": { "type": "literal" , "value": "nuclear scientist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "11" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2259532" } ,
+        "occupationLabel": { "type": "literal" , "value": "cleric" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "11" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q24262584" } ,
+        "occupationLabel": { "type": "literal" , "value": "bible translator" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "11" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2664701" } ,
+        "occupationLabel": { "type": "literal" , "value": "jurist-consultant" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q10429346" } ,
+        "occupationLabel": { "type": "literal" , "value": "bibliographer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q13405496" } ,
+        "occupationLabel": { "type": "literal" , "value": "Diplom-Merchant" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q14565331" } ,
+        "occupationLabel": { "type": "literal" , "value": "logician" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q14946079" } ,
+        "occupationLabel": { "type": "literal" , "value": "physiologist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q15253558" } ,
+        "occupationLabel": { "type": "literal" , "value": "activist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q16031530" } ,
+        "occupationLabel": { "type": "literal" , "value": "music theorist" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1706722" } ,
+        "occupationLabel": { "type": "literal" , "value": "research fellow" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q24387326" } ,
+        "occupationLabel": { "type": "literal" , "value": "mythographer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q5322166" } ,
+        "occupationLabel": { "type": "literal" , "value": "designer" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q753110" } ,
+        "occupationLabel": { "type": "literal" , "value": "songwriter" }
+      } ,
+      {
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10" } ,
+        "occupation": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q8178443" } ,
+        "occupationLabel": { "type": "literal" , "value": "librettist" }
+      }
+    ]
+  }
+}

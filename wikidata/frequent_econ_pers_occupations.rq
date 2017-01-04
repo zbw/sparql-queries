@@ -8,9 +8,12 @@ select (count(distinct ?econPersWd) as ?count) ?occupation ?occupationLabel
 where {
   # get wikidata persons from econ_pers gnd subset
   service <http://zbw.eu/beta/sparql/econ_pers/query> {
-    ?econPers zbwext:econbizCount ?ebPublicationCount .
-    # base on persons with more than 1 publication
-    filter( ?ebPublicationCount > 1)
+    select ?econPers ?ebPublicationCount
+    where {
+      ?econPers zbwext:econbizCount ?ebPublicationCount .
+      # base on persons with more than 1 publication
+      filter( ?ebPublicationCount > 1)
+    }
   }
   # identify persons in wd
   bind(strafter(str(?econPers), '/gnd/') as ?gndId)
