@@ -1,0 +1,1869 @@
+{
+  "head": {
+    "vars": [ "count" , "property" , "propertyLabel" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "count": { "type": "literal" , "value": "449696" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P345" } ,
+        "propertyLabel": { "type": "literal" , "value": "IMDb ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "147202" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1006" } ,
+        "propertyLabel": { "type": "literal" , "value": "National Thesaurus for Author Names ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "132098" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P434" } ,
+        "propertyLabel": { "type": "literal" , "value": "MusicBrainz artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "97079" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2604" } ,
+        "propertyLabel": { "type": "literal" , "value": "Kinopoisk person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "94874" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1447" } ,
+        "propertyLabel": { "type": "literal" , "value": "Sports Reference ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "67820" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2019" } ,
+        "propertyLabel": { "type": "literal" , "value": "AllMovie artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "66234" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1953" } ,
+        "propertyLabel": { "type": "literal" , "value": "Discogs artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "66200" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1266" } ,
+        "propertyLabel": { "type": "literal" , "value": "AlloCiné person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "59742" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1415" } ,
+        "propertyLabel": { "type": "literal" , "value": "Oxford Biography Index Number" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "59336" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P245" } ,
+        "propertyLabel": { "type": "literal" , "value": "ULAN ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "58561" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2435" } ,
+        "propertyLabel": { "type": "literal" , "value": "PORT person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "54519" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2605" } ,
+        "propertyLabel": { "type": "literal" , "value": "ČSFD person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "51534" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2168" } ,
+        "propertyLabel": { "type": "literal" , "value": "SFDb person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "43907" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P650" } ,
+        "propertyLabel": { "type": "literal" , "value": "RKDartists ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "42843" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2639" } ,
+        "propertyLabel": { "type": "literal" , "value": "Filmportal ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "38264" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1315" } ,
+        "propertyLabel": { "type": "literal" , "value": "People Australia ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "36335" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2013" } ,
+        "propertyLabel": { "type": "literal" , "value": "Facebook ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "34490" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2387" } ,
+        "propertyLabel": { "type": "literal" , "value": "Elonet person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "33225" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2574" } ,
+        "propertyLabel": { "type": "literal" , "value": "National-Football-Teams.com player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "32042" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2369" } ,
+        "propertyLabel": { "type": "literal" , "value": "Soccerway player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "30350" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P535" } ,
+        "propertyLabel": { "type": "literal" , "value": "Find a Grave grave ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "30011" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2949" } ,
+        "propertyLabel": { "type": "literal" , "value": "WikiTree ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "27738" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2446" } ,
+        "propertyLabel": { "type": "literal" , "value": "Transfermarkt footballer ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "27350" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1816" } ,
+        "propertyLabel": { "type": "literal" , "value": "National Portrait Gallery (London) person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "26952" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P409" } ,
+        "propertyLabel": { "type": "literal" , "value": "NLA (Australia) ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "26264" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1728" } ,
+        "propertyLabel": { "type": "literal" , "value": "AllMusic artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "25929" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1273" } ,
+        "propertyLabel": { "type": "literal" , "value": "CANTIC-ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "25621" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P586" } ,
+        "propertyLabel": { "type": "literal" , "value": "IPNI author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "25420" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2020" } ,
+        "propertyLabel": { "type": "literal" , "value": "Worldfootball.net ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "22954" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P396" } ,
+        "propertyLabel": { "type": "literal" , "value": "SBN ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "22549" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1367" } ,
+        "propertyLabel": { "type": "literal" , "value": "Art UK artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "21219" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2626" } ,
+        "propertyLabel": { "type": "literal" , "value": "DNF person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "21037" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2843" } ,
+        "propertyLabel": { "type": "literal" , "value": "Benezit ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "20484" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1711" } ,
+        "propertyLabel": { "type": "literal" , "value": "British Museum person-institution" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "20459" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1263" } ,
+        "propertyLabel": { "type": "literal" , "value": "NNDB people ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "20437" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2519" } ,
+        "propertyLabel": { "type": "literal" , "value": "Scope.dk person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "19478" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1258" } ,
+        "propertyLabel": { "type": "literal" , "value": "Rotten Tomatoes ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "16974" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2602" } ,
+        "propertyLabel": { "type": "literal" , "value": "Hockeydb.com player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "16929" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1969" } ,
+        "propertyLabel": { "type": "literal" , "value": "MovieMeter director ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "16901" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P651" } ,
+        "propertyLabel": { "type": "literal" , "value": "Biografisch Portaal number" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "16763" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1047" } ,
+        "propertyLabel": { "type": "literal" , "value": "Catholic Hierarchy person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "16619" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1146" } ,
+        "propertyLabel": { "type": "literal" , "value": "IAAF ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "16412" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1825" } ,
+        "propertyLabel": { "type": "literal" , "value": "Baseball-Reference.com major league player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "16202" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1284" } ,
+        "propertyLabel": { "type": "literal" , "value": "Munzinger IBA" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "15663" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2481" } ,
+        "propertyLabel": { "type": "literal" , "value": "Elite Prospects player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "15426" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1045" } ,
+        "propertyLabel": { "type": "literal" , "value": "Sycomore ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "14665" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2015" } ,
+        "propertyLabel": { "type": "literal" , "value": "Hansard (1803\u20132005) ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "13721" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2943" } ,
+        "propertyLabel": { "type": "literal" , "value": "warheroes.ru ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "13201" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1469" } ,
+        "propertyLabel": { "type": "literal" , "value": "FIFA player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "12981" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1946" } ,
+        "propertyLabel": { "type": "literal" , "value": "National Library of Ireland authority" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "12932" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1826" } ,
+        "propertyLabel": { "type": "literal" , "value": "Baseball-Reference.com minor league player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "12788" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P906" } ,
+        "propertyLabel": { "type": "literal" , "value": "SELIBR" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "12672" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1907" } ,
+        "propertyLabel": { "type": "literal" , "value": "Australian Dictionary of Biography ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "12633" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1157" } ,
+        "propertyLabel": { "type": "literal" , "value": "US Congress Bio ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "12377" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1409" } ,
+        "propertyLabel": { "type": "literal" , "value": "Cycling Archives ID (cyclist)" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "11800" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2268" } ,
+        "propertyLabel": { "type": "literal" , "value": "Musée d'Orsay artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "11510" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2750" } ,
+        "propertyLabel": { "type": "literal" , "value": "Photographers' Identities Catalog ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "11485" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3284" } ,
+        "propertyLabel": { "type": "literal" , "value": "Yahoo! Japan Talent Database ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "11289" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1986" } ,
+        "propertyLabel": { "type": "literal" , "value": "Dizionario Biografico degli Italiani" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "11265" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1614" } ,
+        "propertyLabel": { "type": "literal" , "value": "History of Parliament ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "10584" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1440" } ,
+        "propertyLabel": { "type": "literal" , "value": "FIDE ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "10504" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P640" } ,
+        "propertyLabel": { "type": "literal" , "value": "Léonore ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "9817" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2638" } ,
+        "propertyLabel": { "type": "literal" , "value": "TV.com ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "9788" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1220" } ,
+        "propertyLabel": { "type": "literal" , "value": "Internet Broadway Database person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "9555" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3144" } ,
+        "propertyLabel": { "type": "literal" , "value": "elFilm person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "9508" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1938" } ,
+        "propertyLabel": { "type": "literal" , "value": "Project Gutenberg author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "9434" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2401" } ,
+        "propertyLabel": { "type": "literal" , "value": "Six Degrees of Francis Bacon ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "9316" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1819" } ,
+        "propertyLabel": { "type": "literal" , "value": "genealogics.org person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "8035" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1712" } ,
+        "propertyLabel": { "type": "literal" , "value": "Metacritic ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "7673" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1015" } ,
+        "propertyLabel": { "type": "literal" , "value": "BIBSYS ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "7569" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2342" } ,
+        "propertyLabel": { "type": "literal" , "value": "AGORHA person/institution ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "7260" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2697" } ,
+        "propertyLabel": { "type": "literal" , "value": "ESPNcricinfo player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "6680" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P271" } ,
+        "propertyLabel": { "type": "literal" , "value": "CiNii author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "6064" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2174" } ,
+        "propertyLabel": { "type": "literal" , "value": "MoMA artist id" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "6055" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2383" } ,
+        "propertyLabel": { "type": "literal" , "value": "CTHS person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "5996" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2091" } ,
+        "propertyLabel": { "type": "literal" , "value": "FISA ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "5926" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1599" } ,
+        "propertyLabel": { "type": "literal" , "value": "Cambridge Alumni Database ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "5857" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2601" } ,
+        "propertyLabel": { "type": "literal" , "value": "Eurohockey.com player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "5786" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2252" } ,
+        "propertyLabel": { "type": "literal" , "value": "NGA artist id" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "5759" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1977" } ,
+        "propertyLabel": { "type": "literal" , "value": "lesarchivesduspectacle ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "5620" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2042" } ,
+        "propertyLabel": { "type": "literal" , "value": "Artsy artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "5409" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P599" } ,
+        "propertyLabel": { "type": "literal" , "value": "ITF ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "5228" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1341" } ,
+        "propertyLabel": { "type": "literal" , "value": "Italian Chamber of Deputies ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "4991" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1967" } ,
+        "propertyLabel": { "type": "literal" , "value": "BoxRec ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "4882" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3136" } ,
+        "propertyLabel": { "type": "literal" , "value": "elCinema person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "4818" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1802" } ,
+        "propertyLabel": { "type": "literal" , "value": "EMLO person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "4687" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2180" } ,
+        "propertyLabel": { "type": "literal" , "value": "Kansallisbiografia ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "4676" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1808" } ,
+        "propertyLabel": { "type": "literal" , "value": "senat.fr ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "4488" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2538" } ,
+        "propertyLabel": { "type": "literal" , "value": "Nationalmuseum Sweden artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "4462" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3124" } ,
+        "propertyLabel": { "type": "literal" , "value": "Polish scientist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "4440" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1795" } ,
+        "propertyLabel": { "type": "literal" , "value": "Smithsonian American Art Museum: person/institution thesaurus id" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "4385" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2799" } ,
+        "propertyLabel": { "type": "literal" , "value": "BVMC person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "4237" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1648" } ,
+        "propertyLabel": { "type": "literal" , "value": "Dictionary of Welsh Biography ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "4237" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1649" } ,
+        "propertyLabel": { "type": "literal" , "value": "KMDb person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "4181" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P858" } ,
+        "propertyLabel": { "type": "literal" , "value": "ESPN SCRUM ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "4158" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3047" } ,
+        "propertyLabel": { "type": "literal" , "value": "footballzz ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3963" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2276" } ,
+        "propertyLabel": { "type": "literal" , "value": "UEFA player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3956" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1541" } ,
+        "propertyLabel": { "type": "literal" , "value": "Cycling Quotient ID (cyclist, man)" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3912" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1882" } ,
+        "propertyLabel": { "type": "literal" , "value": "Web Gallery of Art ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3749" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2685" } ,
+        "propertyLabel": { "type": "literal" , "value": "Basketball-Reference.com NBA player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3745" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1233" } ,
+        "propertyLabel": { "type": "literal" , "value": "ISFDB author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3744" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1899" } ,
+        "propertyLabel": { "type": "literal" , "value": "Librivox author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3742" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1663" } ,
+        "propertyLabel": { "type": "literal" , "value": "ProCyclingStats ID (cyclist)" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3622" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1556" } ,
+        "propertyLabel": { "type": "literal" , "value": "zbMATH author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3598" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1186" } ,
+        "propertyLabel": { "type": "literal" , "value": "MEP directory ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3487" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2018" } ,
+        "propertyLabel": { "type": "literal" , "value": "Teuchos ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3452" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2767" } ,
+        "propertyLabel": { "type": "literal" , "value": "JudoInside.com ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3372" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2349" } ,
+        "propertyLabel": { "type": "literal" , "value": "Stuttgart Database of Scientific Illustrators ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3250" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2448" } ,
+        "propertyLabel": { "type": "literal" , "value": "Turkish Football Federation player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3226" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2736" } ,
+        "propertyLabel": { "type": "literal" , "value": "Biographical Directory of Federal Judges ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3180" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2729" } ,
+        "propertyLabel": { "type": "literal" , "value": "Badminton World Federation ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3013" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3046" } ,
+        "propertyLabel": { "type": "literal" , "value": "Fora De Jogo player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2981" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2745" } ,
+        "propertyLabel": { "type": "literal" , "value": "Dictionary of New Zealand Biography" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2923" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1982" } ,
+        "propertyLabel": { "type": "literal" , "value": "Anime News Network person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2897" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2041" } ,
+        "propertyLabel": { "type": "literal" , "value": "National Gallery of Victoria artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2629" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1138" } ,
+        "propertyLabel": { "type": "literal" , "value": "Kunstindeks Danmark Artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2608" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P536" } ,
+        "propertyLabel": { "type": "literal" , "value": "ATP ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2574" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2698" } ,
+        "propertyLabel": { "type": "literal" , "value": "CricketArchive player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2498" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2741" } ,
+        "propertyLabel": { "type": "literal" , "value": "Tate artist identifier" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2444" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3314" } ,
+        "propertyLabel": { "type": "literal" , "value": "365chess player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2399" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2332" } ,
+        "propertyLabel": { "type": "literal" , "value": "Dictionary of Art Historians ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2388" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1563" } ,
+        "propertyLabel": { "type": "literal" , "value": "MacTutor id (biographies)" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2350" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P497" } ,
+        "propertyLabel": { "type": "literal" , "value": "CBDB ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2341" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2190" } ,
+        "propertyLabel": { "type": "literal" , "value": "C-SPAN person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2328" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2280" } ,
+        "propertyLabel": { "type": "literal" , "value": "Austrian Parliament ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2321" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1185" } ,
+        "propertyLabel": { "type": "literal" , "value": "Rodovid ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2306" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1254" } ,
+        "propertyLabel": { "type": "literal" , "value": "Slovenska biografija ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2282" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2694" } ,
+        "propertyLabel": { "type": "literal" , "value": "ISU figure skater ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2234" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2458" } ,
+        "propertyLabel": { "type": "literal" , "value": "Mackolik.com footballer ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2226" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P597" } ,
+        "propertyLabel": { "type": "literal" , "value": "WTA ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2203" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2772" } ,
+        "propertyLabel": { "type": "literal" , "value": "FIS alpine skier ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2188" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2459" } ,
+        "propertyLabel": { "type": "literal" , "value": "IBU biathlete ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2177" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2773" } ,
+        "propertyLabel": { "type": "literal" , "value": "FIS cross-country skier ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2157" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1713" } ,
+        "propertyLabel": { "type": "literal" , "value": "biography at the Bundestag of Germany" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2030" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2418" } ,
+        "propertyLabel": { "type": "literal" , "value": "Structurae person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1979" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3142" } ,
+        "propertyLabel": { "type": "literal" , "value": "EDb person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1952" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2080" } ,
+        "propertyLabel": { "type": "literal" , "value": "AcademiaNet" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1926" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1631" } ,
+        "propertyLabel": { "type": "literal" , "value": "China Vitae ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1880" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2775" } ,
+        "propertyLabel": { "type": "literal" , "value": "FIS ski jumper ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1861" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3269" } ,
+        "propertyLabel": { "type": "literal" , "value": "Fotografen.nl ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1860" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1842" } ,
+        "propertyLabel": { "type": "literal" , "value": "Global Anabaptist Mennonite Encyclopedia Online ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1859" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1331" } ,
+        "propertyLabel": { "type": "literal" , "value": "PACE member ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1853" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2611" } ,
+        "propertyLabel": { "type": "literal" , "value": "TED speaker ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1770" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2191" } ,
+        "propertyLabel": { "type": "literal" , "value": "NILF author id" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1765" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2181" } ,
+        "propertyLabel": { "type": "literal" , "value": "Finnish MP ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1754" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2188" } ,
+        "propertyLabel": { "type": "literal" , "value": "BiblioNet author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1737" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1996" } ,
+        "propertyLabel": { "type": "literal" , "value": "parliament.uk ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1731" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2818" } ,
+        "propertyLabel": { "type": "literal" , "value": "Sherdog ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1691" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2641" } ,
+        "propertyLabel": { "type": "literal" , "value": "Davis Cup player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1670" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3145" } ,
+        "propertyLabel": { "type": "literal" , "value": "YouTheater ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1656" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3053" } ,
+        "propertyLabel": { "type": "literal" , "value": "K League player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1610" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1607" } ,
+        "propertyLabel": { "type": "literal" , "value": "Dialnet author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1565" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3045" } ,
+        "propertyLabel": { "type": "literal" , "value": "HanCinema person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1551" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2533" } ,
+        "propertyLabel": { "type": "literal" , "value": "WomenWriters ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1544" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2287" } ,
+        "propertyLabel": { "type": "literal" , "value": "CRIStin ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1537" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1214" } ,
+        "propertyLabel": { "type": "literal" , "value": "Riksdagen person-id" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1531" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2987" } ,
+        "propertyLabel": { "type": "literal" , "value": "Taekwondo Data ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1525" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2558" } ,
+        "propertyLabel": { "type": "literal" , "value": "autores.uy database id" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1523" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2941" } ,
+        "propertyLabel": { "type": "literal" , "value": "Munk's Roll ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1519" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3192" } ,
+        "propertyLabel": { "type": "literal" , "value": "Last.fm music ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1476" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2696" } ,
+        "propertyLabel": { "type": "literal" , "value": "FIG gymnast ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1432" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1710" } ,
+        "propertyLabel": { "type": "literal" , "value": "Sächsische Biografie" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1426" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2640" } ,
+        "propertyLabel": { "type": "literal" , "value": "Swimrankings.net swimmer ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1418" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1238" } ,
+        "propertyLabel": { "type": "literal" , "value": "Swedish Football Association ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1390" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1788" } ,
+        "propertyLabel": { "type": "literal" , "value": "DVN ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1390" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P496" } ,
+        "propertyLabel": { "type": "literal" , "value": "ORCID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1324" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3055" } ,
+        "propertyLabel": { "type": "literal" , "value": "NAQ elected person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1320" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3072" } ,
+        "propertyLabel": { "type": "literal" , "value": "Storting person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1287" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2447" } ,
+        "propertyLabel": { "type": "literal" , "value": "Transfermarkt.com manager ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1277" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3258" } ,
+        "propertyLabel": { "type": "literal" , "value": "LiveJournal ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1273" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2194" } ,
+        "propertyLabel": { "type": "literal" , "value": "PSS-Archi architect id" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1264" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2350" } ,
+        "propertyLabel": { "type": "literal" , "value": "Speedskatingbase.eu ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1262" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2398" } ,
+        "propertyLabel": { "type": "literal" , "value": "MLSSoccer.com ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1200" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1959" } ,
+        "propertyLabel": { "type": "literal" , "value": "Dutch Senate person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1199" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2811" } ,
+        "propertyLabel": { "type": "literal" , "value": "PGA Tour ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1191" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2642" } ,
+        "propertyLabel": { "type": "literal" , "value": "Fed Cup player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1169" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1309" } ,
+        "propertyLabel": { "type": "literal" , "value": "EGAXA ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1167" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2727" } ,
+        "propertyLabel": { "type": "literal" , "value": "United World Wrestling ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1164" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3185" } ,
+        "propertyLabel": { "type": "literal" , "value": "VKontakte username" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1143" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3217" } ,
+        "propertyLabel": { "type": "literal" , "value": "Dictionary of Swedish National Biography" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1128" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2029" } ,
+        "propertyLabel": { "type": "literal" , "value": "Dictionary of Ulster Biography ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1117" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2915" } ,
+        "propertyLabel": { "type": "literal" , "value": "ECARTICO person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1113" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3056" } ,
+        "propertyLabel": { "type": "literal" , "value": "Turner Classic Movies person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1090" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P947" } ,
+        "propertyLabel": { "type": "literal" , "value": "RSL ID (person)" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1088" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2340" } ,
+        "propertyLabel": { "type": "literal" , "value": "CESAR person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1071" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2953" } ,
+        "propertyLabel": { "type": "literal" , "value": "Estonian Research Portal person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1065" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3054" } ,
+        "propertyLabel": { "type": "literal" , "value": "Ontario MPP ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1057" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2005" } ,
+        "propertyLabel": { "type": "literal" , "value": "Catalogus Professorum Halensis" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1045" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2580" } ,
+        "propertyLabel": { "type": "literal" , "value": "Baltisches Biographisches Lexikon digital ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "997" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1883" } ,
+        "propertyLabel": { "type": "literal" , "value": "Declarator.org ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "966" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2625" } ,
+        "propertyLabel": { "type": "literal" , "value": "PASE ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "958" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3048" } ,
+        "propertyLabel": { "type": "literal" , "value": "racing-reference driver ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "941" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2016" } ,
+        "propertyLabel": { "type": "literal" , "value": "Catalogus Professorum Academiae Groninganae id" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "937" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2800" } ,
+        "propertyLabel": { "type": "literal" , "value": "Beach Volleyball Database ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "919" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2266" } ,
+        "propertyLabel": { "type": "literal" , "value": "Fashion Model Directory model ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "919" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3297" } ,
+        "propertyLabel": { "type": "literal" , "value": "Flemish Parliament person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "911" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3188" } ,
+        "propertyLabel": { "type": "literal" , "value": "Nobel prize ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "857" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2273" } ,
+        "propertyLabel": { "type": "literal" , "value": "Heidelberg Academy for Sciences and Humanities member ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "854" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2940" } ,
+        "propertyLabel": { "type": "literal" , "value": "Catalogus Professorum Rostochiensium ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "851" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2861" } ,
+        "propertyLabel": { "type": "literal" , "value": "Leidse Hoogleraren ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "844" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2006" } ,
+        "propertyLabel": { "type": "literal" , "value": "ZooBank author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "807" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1707" } ,
+        "propertyLabel": { "type": "literal" , "value": "DAAO ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "807" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2423" } ,
+        "propertyLabel": { "type": "literal" , "value": "FIE ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "793" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1818" } ,
+        "propertyLabel": { "type": "literal" , "value": "Kaiserhof ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "792" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3050" } ,
+        "propertyLabel": { "type": "literal" , "value": "CMFS player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "769" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2774" } ,
+        "propertyLabel": { "type": "literal" , "value": "FIS freestyle skier ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "765" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2973" } ,
+        "propertyLabel": { "type": "literal" , "value": "Spenserians person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "752" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2380" } ,
+        "propertyLabel": { "type": "literal" , "value": "French Sculpture Census ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "744" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1287" } ,
+        "propertyLabel": { "type": "literal" , "value": "KDG Komponisten der Gegenwart" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "743" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2195" } ,
+        "propertyLabel": { "type": "literal" , "value": "Soccerbase manager ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "742" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2777" } ,
+        "propertyLabel": { "type": "literal" , "value": "FIS snowboarder ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "735" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2469" } ,
+        "propertyLabel": { "type": "literal" , "value": "Theatricalia person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "730" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2277" } ,
+        "propertyLabel": { "type": "literal" , "value": "Magdeburger Biographisches Lexikon" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "720" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2482" } ,
+        "propertyLabel": { "type": "literal" , "value": "SABR ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "718" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2730" } ,
+        "propertyLabel": { "type": "literal" , "value": "ISSF ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "716" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2432" } ,
+        "propertyLabel": { "type": "literal" , "value": "J. Paul Getty Museum artist id" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "712" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1935" } ,
+        "propertyLabel": { "type": "literal" , "value": "DBCS ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "698" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2471" } ,
+        "propertyLabel": { "type": "literal" , "value": "Models.com person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "688" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2801" } ,
+        "propertyLabel": { "type": "literal" , "value": "FIVB beach volleyball player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "686" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2944" } ,
+        "propertyLabel": { "type": "literal" , "value": "Plarr ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "686" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1307" } ,
+        "propertyLabel": { "type": "literal" , "value": "Swiss parliament ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "682" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1291" } ,
+        "propertyLabel": { "type": "literal" , "value": "Association Authors of Switzerland ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "681" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2862" } ,
+        "propertyLabel": { "type": "literal" , "value": "Catalogus Professorum Academiae Rheno-Traiectinae ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "644" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2498" } ,
+        "propertyLabel": { "type": "literal" , "value": "Catalan Biographical Dictionary of Women ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "637" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2823" } ,
+        "propertyLabel": { "type": "literal" , "value": "Belgian Football ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "620" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1960" } ,
+        "propertyLabel": { "type": "literal" , "value": "Google Scholar ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "613" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3286" } ,
+        "propertyLabel": { "type": "literal" , "value": "Squash Info ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "604" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1153" } ,
+        "propertyLabel": { "type": "literal" , "value": "Scopus Author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "600" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1229" } ,
+        "propertyLabel": { "type": "literal" , "value": "Openpolis ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "595" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3058" } ,
+        "propertyLabel": { "type": "literal" , "value": "Architectuurgids architect ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "594" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2778" } ,
+        "propertyLabel": { "type": "literal" , "value": "IAT triathlete ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "583" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3049" } ,
+        "propertyLabel": { "type": "literal" , "value": "Scottish FA player ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "581" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2709" } ,
+        "propertyLabel": { "type": "literal" , "value": "Cycling Quotient ID (cyclist, woman)" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "578" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2431" } ,
+        "propertyLabel": { "type": "literal" , "value": "Thyssen-Bornemisza artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "574" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2171" } ,
+        "propertyLabel": { "type": "literal" , "value": "They Work for You ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "573" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2593" } ,
+        "propertyLabel": { "type": "literal" , "value": "Latvian Olympic Committee athlete ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "568" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2070" } ,
+        "propertyLabel": { "type": "literal" , "value": "Fellow of the Royal Society" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "565" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3044" } ,
+        "propertyLabel": { "type": "literal" , "value": "College Football HoF ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "561" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2182" } ,
+        "propertyLabel": { "type": "literal" , "value": "Finnish Ministers database ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "558" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2011" } ,
+        "propertyLabel": { "type": "literal" , "value": "Cooper-Hewitt Person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "543" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2686" } ,
+        "propertyLabel": { "type": "literal" , "value": "Opensecrets Identifier" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "533" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2963" } ,
+        "propertyLabel": { "type": "literal" , "value": "Goodreads author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "506" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2805" } ,
+        "propertyLabel": { "type": "literal" , "value": "Goratings ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "505" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2728" } ,
+        "propertyLabel": { "type": "literal" , "value": "CageMatch worker ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "504" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2991" } ,
+        "propertyLabel": { "type": "literal" , "value": "IBSF ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "504" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2169" } ,
+        "propertyLabel": { "type": "literal" , "value": "PublicWhip ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "494" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2776" } ,
+        "propertyLabel": { "type": "literal" , "value": "FIS Nordic combined skier ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "485" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2886" } ,
+        "propertyLabel": { "type": "literal" , "value": "Shakeosphere person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "479" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2000" } ,
+        "propertyLabel": { "type": "literal" , "value": "CPDL ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "475" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3330" } ,
+        "propertyLabel": { "type": "literal" , "value": "Supermodels.nl ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "474" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1980" } ,
+        "propertyLabel": { "type": "literal" , "value": "PolSys ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "453" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3160" } ,
+        "propertyLabel": { "type": "literal" , "value": "Minnesota legislator ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "443" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2323" } ,
+        "propertyLabel": { "type": "literal" , "value": "Swedish Olympic Committee athlete ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "439" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1869" } ,
+        "propertyLabel": { "type": "literal" , "value": "Hall of Valor ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "431" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2089" } ,
+        "propertyLabel": { "type": "literal" , "value": "Library of Congress JukeBox ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "428" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1989" } ,
+        "propertyLabel": { "type": "literal" , "value": "Encyclopaedia Metallum artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "425" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1463" } ,
+        "propertyLabel": { "type": "literal" , "value": "PRDL Author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "409" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2779" } ,
+        "propertyLabel": { "type": "literal" , "value": "IAT weightlifter ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "398" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2373" } ,
+        "propertyLabel": { "type": "literal" , "value": "Genius artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "396" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2030" } ,
+        "propertyLabel": { "type": "literal" , "value": "NASA biographical ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "394" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P861" } ,
+        "propertyLabel": { "type": "literal" , "value": "PremiershipRugby.com ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "392" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2914" } ,
+        "propertyLabel": { "type": "literal" , "value": "MSBI person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "387" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3159" } ,
+        "propertyLabel": { "type": "literal" , "value": "UGentMemorialis ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "368" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2456" } ,
+        "propertyLabel": { "type": "literal" , "value": "DBLP pID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "363" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2449" } ,
+        "propertyLabel": { "type": "literal" , "value": "Turkish Football Federation manager ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "354" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2038" } ,
+        "propertyLabel": { "type": "literal" , "value": "ResearchGate person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "340" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2857" } ,
+        "propertyLabel": { "type": "literal" , "value": "WWE.com superstar ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "339" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1253" } ,
+        "propertyLabel": { "type": "literal" , "value": "BCU Ecrivainsvd" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "339" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2412" } ,
+        "propertyLabel": { "type": "literal" , "value": "Fashion Model Directory designer ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "336" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2990" } ,
+        "propertyLabel": { "type": "literal" , "value": "FIL ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "335" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2385" } ,
+        "propertyLabel": { "type": "literal" , "value": "French diocesan architects ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "333" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1053" } ,
+        "propertyLabel": { "type": "literal" , "value": "ResearcherID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "332" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3111" } ,
+        "propertyLabel": { "type": "literal" , "value": "FEI ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "327" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3298" } ,
+        "propertyLabel": { "type": "literal" , "value": "Belgian Senate person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "326" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3023" } ,
+        "propertyLabel": { "type": "literal" , "value": "Legacies of British Slave-ownership person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "323" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2173" } ,
+        "propertyLabel": { "type": "literal" , "value": "BBC News Democracy Live ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "319" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2810" } ,
+        "propertyLabel": { "type": "literal" , "value": "LPGA Tour ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "317" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1890" } ,
+        "propertyLabel": { "type": "literal" , "value": "BNC ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "304" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3204" } ,
+        "propertyLabel": { "type": "literal" , "value": "Ciné-Ressources person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "296" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2930" } ,
+        "propertyLabel": { "type": "literal" , "value": "INSPIRE-HEP author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "286" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2726" } ,
+        "propertyLabel": { "type": "literal" , "value": "UIPM ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "282" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2278" } ,
+        "propertyLabel": { "type": "literal" , "value": "Member of the Hellenic Parliament ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "279" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1473" } ,
+        "propertyLabel": { "type": "literal" , "value": "Nupill Literatura Digital - Author" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "272" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1847" } ,
+        "propertyLabel": { "type": "literal" , "value": "Nasjonalbiblioteket photographer ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "268" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2945" } ,
+        "propertyLabel": { "type": "literal" , "value": "British Book Trade Index ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "265" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2600" } ,
+        "propertyLabel": { "type": "literal" , "value": "Geni.com profile ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "262" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2170" } ,
+        "propertyLabel": { "type": "literal" , "value": "Hansard (2006\u2013March 2016) ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "260" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1553" } ,
+        "propertyLabel": { "type": "literal" , "value": "Yandex.Music artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "257" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P864" } ,
+        "propertyLabel": { "type": "literal" , "value": "ACM Digital Library author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "257" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2162" } ,
+        "propertyLabel": { "type": "literal" , "value": "Deutsche Ultramarathon-Vereinigung ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "254" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3172" } ,
+        "propertyLabel": { "type": "literal" , "value": "World Bridge Federation ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "252" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1714" } ,
+        "propertyLabel": { "type": "literal" , "value": "Journalisted ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "243" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2764" } ,
+        "propertyLabel": { "type": "literal" , "value": "Wrestlingdata person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "238" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1222" } ,
+        "propertyLabel": { "type": "literal" , "value": "(deprecated) NARA person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "238" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2829" } ,
+        "propertyLabel": { "type": "literal" , "value": "Internet Wrestling Database ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "236" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2830" } ,
+        "propertyLabel": { "type": "literal" , "value": "Online World of Wrestling ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "227" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2399" } ,
+        "propertyLabel": { "type": "literal" , "value": "British Council artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "219" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1364" } ,
+        "propertyLabel": { "type": "literal" , "value": "ITTF ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "217" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2338" } ,
+        "propertyLabel": { "type": "literal" , "value": "Musopen composer ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "214" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1688" } ,
+        "propertyLabel": { "type": "literal" , "value": "AniDB ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "196" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3280" } ,
+        "propertyLabel": { "type": "literal" , "value": "BanQ author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "196" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2732" } ,
+        "propertyLabel": { "type": "literal" , "value": "Persée author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "192" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2985" } ,
+        "propertyLabel": { "type": "literal" , "value": "DSBE ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "192" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3010" } ,
+        "propertyLabel": { "type": "literal" , "value": "World Archery ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "191" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2421" } ,
+        "propertyLabel": { "type": "literal" , "value": "Prosopographia Attica" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "182" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3277" } ,
+        "propertyLabel": { "type": "literal" , "value": "KANTL member ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "181" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P835" } ,
+        "propertyLabel": { "type": "literal" , "value": "author citation (zoology)" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "158" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2804" } ,
+        "propertyLabel": { "type": "literal" , "value": "World Sailing member ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "141" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1601" } ,
+        "propertyLabel": { "type": "literal" , "value": "Esperantist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "140" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3114" } ,
+        "propertyLabel": { "type": "literal" , "value": "ISzDb person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "135" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2734" } ,
+        "propertyLabel": { "type": "literal" , "value": "UNZ author identifier" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "128" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2472" } ,
+        "propertyLabel": { "type": "literal" , "value": "ACMA Radiocommunications Licence ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "128" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2688" } ,
+        "propertyLabel": { "type": "literal" , "value": "Box Office Mojo person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "124" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3162" } ,
+        "propertyLabel": { "type": "literal" , "value": "Rock Hall of Fame ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "122" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3154" } ,
+        "propertyLabel": { "type": "literal" , "value": "Runeberg author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "116" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3315" } ,
+        "propertyLabel": { "type": "literal" , "value": "chesstempo ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "100" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2780" } ,
+        "propertyLabel": { "type": "literal" , "value": "IAT diver ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "93" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2090" } ,
+        "propertyLabel": { "type": "literal" , "value": "Power of 10 athlete ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "87" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2460" } ,
+        "propertyLabel": { "type": "literal" , "value": "Persons of Ancient Athens" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "84" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2514" } ,
+        "propertyLabel": { "type": "literal" , "value": "Jamendo artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "82" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2722" } ,
+        "propertyLabel": { "type": "literal" , "value": "Deezer artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "81" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2592" } ,
+        "propertyLabel": { "type": "literal" , "value": "Québec cultural heritage directory people identifier" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "77" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1213" } ,
+        "propertyLabel": { "type": "literal" , "value": "NLC authorities" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "71" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3290" } ,
+        "propertyLabel": { "type": "literal" , "value": "biography at the Landtag of Mecklenburg-Vorpommern" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "70" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2850" } ,
+        "propertyLabel": { "type": "literal" , "value": "iTunes artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "63" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2087" } ,
+        "propertyLabel": { "type": "literal" , "value": "CrunchBase person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "57" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3299" } ,
+        "propertyLabel": { "type": "literal" , "value": "Student register of the University of Helsinki 1640\u20131852 ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "43" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2492" } ,
+        "propertyLabel": { "type": "literal" , "value": "MTMT author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "39" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1908" } ,
+        "propertyLabel": { "type": "literal" , "value": "CWGC person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "39" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3191" } ,
+        "propertyLabel": { "type": "literal" , "value": "IMIS person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "38" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2889" } ,
+        "propertyLabel": { "type": "literal" , "value": "FamilySearch ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "37" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1803" } ,
+        "propertyLabel": { "type": "literal" , "value": "Masaryk University person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "35" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2381" } ,
+        "propertyLabel": { "type": "literal" , "value": "Academic Tree ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "34" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1988" } ,
+        "propertyLabel": { "type": "literal" , "value": "Delarge ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "32" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2470" } ,
+        "propertyLabel": { "type": "literal" , "value": "Talouselämän vaikuttajat ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "30" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2172" } ,
+        "propertyLabel": { "type": "literal" , "value": "Parliamentary record identifier" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "28" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2164" } ,
+        "propertyLabel": { "type": "literal" , "value": "SIGIC author ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "27" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3207" } ,
+        "propertyLabel": { "type": "literal" , "value": "Vine user ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "26" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2071" } ,
+        "propertyLabel": { "type": "literal" , "value": "Mémoire des hommes ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "21" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2753" } ,
+        "propertyLabel": { "type": "literal" , "value": "Dictionary of Canadian Biography ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "19" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2428" } ,
+        "propertyLabel": { "type": "literal" , "value": "RePEc Short-ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "18" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2731" } ,
+        "propertyLabel": { "type": "literal" , "value": "Projeto Excelências ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "17" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1664" } ,
+        "propertyLabel": { "type": "literal" , "value": "Cycling Database ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "15" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3325" } ,
+        "propertyLabel": { "type": "literal" , "value": "Ylioppilasmatrikkeli 1853\u20131899 ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "14" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2485" } ,
+        "propertyLabel": { "type": "literal" , "value": "Fashion Model Directory photographer ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "13" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3140" } ,
+        "propertyLabel": { "type": "literal" , "value": "SourehCinema person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "12" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2549" } ,
+        "propertyLabel": { "type": "literal" , "value": "Italian Senate of the Republic ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "9" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3017" } ,
+        "propertyLabel": { "type": "literal" , "value": "Rolling Stone artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "9" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3229" } ,
+        "propertyLabel": { "type": "literal" , "value": "South Dakota legislator ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "8" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2255" } ,
+        "propertyLabel": { "type": "literal" , "value": "Debrett's People of Today ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "7" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3171" } ,
+        "propertyLabel": { "type": "literal" , "value": "Olympic.org ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "6" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1979" } ,
+        "propertyLabel": { "type": "literal" , "value": "Righteous Among The Nations ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "5" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3052" } ,
+        "propertyLabel": { "type": "literal" , "value": "Bloomberg person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "5" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3146" } ,
+        "propertyLabel": { "type": "literal" , "value": "CiNetMag person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "5" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2454" } ,
+        "propertyLabel": { "type": "literal" , "value": "KNAW past member ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "5" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2977" } ,
+        "propertyLabel": { "type": "literal" , "value": "LBT person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "5" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2798" } ,
+        "propertyLabel": { "type": "literal" , "value": "Loop ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "5" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2028" } ,
+        "propertyLabel": { "type": "literal" , "value": "United States Armed Forces service number" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "4" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3237" } ,
+        "propertyLabel": { "type": "literal" , "value": "KU Leuven person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2607" } ,
+        "propertyLabel": { "type": "literal" , "value": "BookBrainz creator ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1187" } ,
+        "propertyLabel": { "type": "literal" , "value": "Dharma Drum Buddhist College person ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2450" } ,
+        "propertyLabel": { "type": "literal" , "value": "Encyclopædia Britannica contributor ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2476" } ,
+        "propertyLabel": { "type": "literal" , "value": "HNI person/institution ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "3" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3187" } ,
+        "propertyLabel": { "type": "literal" , "value": "Marburger Professorenkatalog ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3276" } ,
+        "propertyLabel": { "type": "literal" , "value": "Angel List ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3316" } ,
+        "propertyLabel": { "type": "literal" , "value": "ICCF ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2972" } ,
+        "propertyLabel": { "type": "literal" , "value": "SNAP ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "2" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2909" } ,
+        "propertyLabel": { "type": "literal" , "value": "SecondHandSongs artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3126" } ,
+        "propertyLabel": { "type": "literal" , "value": "ALCUIN ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P1736" } ,
+        "propertyLabel": { "type": "literal" , "value": "Information Center for Israeli Art artist ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P2510" } ,
+        "propertyLabel": { "type": "literal" , "value": "National Discography of Italian Song ID" }
+      } ,
+      {
+        "count": { "type": "literal" , "value": "1" } ,
+        "property": { "type": "uri" , "value": "http://www.wikidata.org/prop/direct/P3233" } ,
+        "propertyLabel": { "type": "literal" , "value": "PhilPapers profile" }
+      }
+    ]
+  }
+}
