@@ -20,7 +20,8 @@ Query | Description
 
 Due to limitations of the public Wikidata endpoint (in particular re. the
 "service" clause for federated queries), the following queries do not work
-there and require a "private" endpoint.
+there and require a "private" endpoint. Therefore, links to __cached result
+files__ has been added.
 
 Query | Description
 ------|------------

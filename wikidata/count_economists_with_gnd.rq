@@ -8,6 +8,7 @@
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
 #
 select
 (count(distinct ?wd) as ?countEconomists) # wikidata items with occupation "economist"
@@ -20,7 +21,7 @@ where {
     select distinct ?wd ?wdLabel (count(?sitelink) as ?siteCount)
     where {
       values (?occupation) {
-        (<http://www.wikidata.org/entity/Q188094>) # economist
+        ( wd:Q188094 ) # economist
       }
       ?wd wdt:P106 ?occupation .
       #
@@ -40,6 +41,10 @@ where {
     group by ?wd ?wdLabel
     having (?siteCount >= 0)
   }
+  # restrict to a certain group of persions, e.g.:
+  # persons who have an nobel prize id
+  ##?wd wdt:P3188 [] .
+  #
   optional {
     ?wd wdt:P227 ?gndId .
   }
