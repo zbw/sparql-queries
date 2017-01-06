@@ -1,0 +1,29 @@
+{
+  "head": {
+    "vars": [ "lang" , "count" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "lang": { "type": "literal" , "value": "en" } ,
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1420215" }
+      } ,
+      {
+        "lang": { "type": "literal" , "value": "de" } ,
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "627739" }
+      } ,
+      {
+        "lang": { "type": "literal" , "value": "pt" } ,
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "190421" }
+      } ,
+      {
+        "lang": { "type": "literal" , "value": "tr" } ,
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "71029" }
+      } ,
+      {
+        "lang": { "type": "literal" , "value": "vi" } ,
+        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "26788" }
+      }
+    ]
+  }
+}

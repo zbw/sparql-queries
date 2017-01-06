@@ -1,0 +1,20 @@
+# Count wikipedia articles about persons in different languages
+#
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX schema: <http://schema.org/>
+#
+SELECT ?lang (count(distinct ?wd) as ?count)
+WHERE {
+  values (?lang) {
+    ('en') ('de') ('pt') ('tr') ('vi')
+  }
+  # person
+  ?wd wdt:P31 wd:Q5 .
+  ?article schema:about ?wd .
+  ?article schema:inLanguage ?lang .
+  bind(uri(concat('https://', ?lang, '.wikipedia.org/')) as ?site)
+  ?article schema:isPartOf ?site.
+}
+group by ?lang
+order by desc(?count)

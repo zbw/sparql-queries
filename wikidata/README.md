@@ -18,13 +18,14 @@ Query | Description
 
 ### "Power queries"
 
-Due to limitations of the public Wikidata endpoint (in particular re. the
-"service" clause for federated queries), the following queries do not work
-there and require a "private" endpoint. Therefore, links to __cached result
-files__ has been added.
+Due to limitations of the public Wikidata endpoint (in particular timeouts,
+and the preclusion of the "service" clause for federated queries), the
+following queries do not work there and require a "private" endpoint.
+Therefore, links to __cached result files__ has been added.
 
 Query | Description
 ------|------------
+[count_persons_by_wp_language](http://zbw.eu/beta/sparql-lab/?endpoint=http://172.16.10.102:3030/wikidata/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/count_persons_by_wp_language.rq) | Count wikipedia articles about persons in different languages ([result](http://zbw.eu/beta/sparql-lab/result?resultRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/results/count_persons_by_wp_language.wikidata_2016-11-07.json))
 [count_econ_pers](http://zbw.eu/beta/sparql-lab/?endpoint=http://172.16.10.102:3030/wikidata/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/count_econ_pers.rq) | Statistics about economics-related gnd persons (from econ_pers dataset) and how many of them are in wikidata ([result](http://zbw.eu/beta/sparql-lab/result?resultRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/results/count_econ_pers.wikidata_2016-11-07.econ_pers_2015-07.json))
 [count_ebds_pers_pers](http://zbw.eu/beta/sparql-lab/?endpoint=http://172.16.10.102:3030/wikidata/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/count_ebds_pers.rq) | Statistics about economics-related gnd persons (from a prototype of the econbiz research dataset) and how many of them are in wikidata ([result](http://zbw.eu/beta/sparql-lab/result?resultRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/results/count_ebds_pers.wikidata_2016-11-07.ebds_2016-11-18.json))
 [frequent_econ_pers_occupations](http://zbw.eu/beta/sparql-lab/?endpoint=http://172.16.10.102:3030/wikidata/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/frequent_econ_pers_occupations.rq) | Occupations of economics-related gnd persons (from econ_pers dataset) ([result](http://zbw.eu/beta/sparql-lab/result?resultRef=https://api.github.com/repos/jneubert/sparql-queries/contents/wikidata/results/frequent_econ_pers_occupations.wikidata_2016-11-07.econ_pers_2015-07.json))
