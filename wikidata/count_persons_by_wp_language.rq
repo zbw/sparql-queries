@@ -1,20 +1,29 @@
-# Count wikipedia articles about persons in different languages
+# Count wikipedia articles about persons and specifically economists in different languages
 #
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX schema: <http://schema.org/>
 #
-SELECT ?lang (count(distinct ?wd) as ?count)
+SELECT ?lang (count(distinct ?wd) as ?countPerson) (sum(?isWdEconomist) as ?isEconomist)
 WHERE {
   values (?lang) {
     ('en') ('de') ('pt') ('tr') ('vi')
   }
   # person
   ?wd wdt:P31 wd:Q5 .
-  ?article schema:about ?wd .
-  ?article schema:inLanguage ?lang .
+  #
+  # language of according articles
+  ?article schema:about ?wd ;
+    schema:inLanguage ?lang .
+  #
+  # restrict to wikipedias
   bind(uri(concat('https://', ?lang, '.wikipedia.org/')) as ?site)
   ?article schema:isPartOf ?site.
+  #
+  # occupation economist
+  bind(if(exists {
+        ?wd wdt:P106 wd:Q188094 
+      }, 1, 0) as ?isWdEconomist)
 }
 group by ?lang
-order by desc(?count)
+order by desc(?countPerson)

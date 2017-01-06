@@ -1,28 +1,33 @@
 {
   "head": {
-    "vars": [ "lang" , "count" ]
+    "vars": [ "lang" , "countPerson" , "isEconomist" ]
   } ,
   "results": {
     "bindings": [
       {
         "lang": { "type": "literal" , "value": "en" } ,
-        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1420215" }
+        "countPerson": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1420215" } ,
+        "isEconomist": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "8165" }
       } ,
       {
         "lang": { "type": "literal" , "value": "de" } ,
-        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "627739" }
+        "countPerson": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "627739" } ,
+        "isEconomist": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "5714" }
       } ,
       {
         "lang": { "type": "literal" , "value": "pt" } ,
-        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "190421" }
+        "countPerson": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "190421" } ,
+        "isEconomist": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1559" }
       } ,
       {
         "lang": { "type": "literal" , "value": "tr" } ,
-        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "71029" }
+        "countPerson": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "71029" } ,
+        "isEconomist": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "810" }
       } ,
       {
         "lang": { "type": "literal" , "value": "vi" } ,
-        "count": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "26788" }
+        "countPerson": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "26788" } ,
+        "isEconomist": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "386" }
       }
     ]
   }
