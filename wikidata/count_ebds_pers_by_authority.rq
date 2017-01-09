@@ -1,34 +1,19 @@
 # Count properties used for authority control for economics-related gnd persons
 # (from a prototype of the econbiz research dataset) 
 #
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select (count(distinct ?item) as ?economistCount) ?property ?propertyLabel
 where {
   # get all persons identified by gnd from ebds
-  service <http://172.16.10.102:3030/ebds/query> {
-    select distinct ?econPers ?gndId
-    where {
-      {
-        select distinct ?econPers
-        where {
-          graph <http://zbw.eu/beta/ebds/ng> {
-            values ( ?role) {
-              (dcterms:creator) (dcterms:contributor)
-            }
-            ?pub ?role ?econPers .
-          }
-        }
-      }
-      graph <http://zbw.eu/beta/ebds/gnd/ng> {
-        ?econPers a gndo:DifferentiatedPerson .
-      }
-      bind(strafter(str(?econPers), '/gnd/') as ?gndId)
-    }
+  graph <http://zbw.eu/beta/wikidata/ebCount/ng> {
+    ?econPers zbwext:econbizCount ?ebPubCount ;
+              dcterms:identifier ?gndId .
   }
   # get the according wikidata items
   ?item wdt:P227 ?gndId .
