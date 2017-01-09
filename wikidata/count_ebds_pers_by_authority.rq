@@ -1,4 +1,5 @@
-# Count economists by properties used for authority control
+# Count properties used for authority control for economics-related gnd persons
+# (from a prototype of the econbiz research dataset) 
 #
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX wd: <http://www.wikidata.org/entity/>
