@@ -1,15 +1,32 @@
 {
   "head": {
-    "vars": [ "econPersCount" , "econPersWdCount" , "econPersWdPct" , "wdOccupationEconomistCount" , "wdOccupationEconomistPct" ]
+    "vars": [ "publThreshold" , "econPersCount" , "econPersWdCount" , "econPersWdPct" , "wdOccupationEconomistCount" , "wdOccupationEconomistPct" ]
   } ,
   "results": {
     "bindings": [
       {
-        "econPersCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "448611" } ,
-        "econPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "38117" } ,
-        "econPersWdPct": { "type": "literal" , "value": "8.5 %" } ,
-        "wdOccupationEconomistCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "4565" } ,
-        "wdOccupationEconomistPct": { "type": "literal" , "value": "12.0 %" }
+        "publThreshold": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "0" } ,
+        "econPersCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "457244" } ,
+        "econPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "39778" } ,
+        "econPersWdPct": { "type": "literal" , "value": "8.7 %" } ,
+        "wdOccupationEconomistCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "4640" } ,
+        "wdOccupationEconomistPct": { "type": "literal" , "value": "11.7 %" }
+      } ,
+      {
+        "publThreshold": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10" } ,
+        "econPersCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "56443" } ,
+        "econPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "7398" } ,
+        "econPersWdPct": { "type": "literal" , "value": "13.1 %" } ,
+        "wdOccupationEconomistCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "3108" } ,
+        "wdOccupationEconomistPct": { "type": "literal" , "value": "42.0 %" }
+      } ,
+      {
+        "publThreshold": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "50" } ,
+        "econPersCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "8981" } ,
+        "econPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "2080" } ,
+        "econPersWdPct": { "type": "literal" , "value": "23.2 %" } ,
+        "wdOccupationEconomistCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1576" } ,
+        "wdOccupationEconomistPct": { "type": "literal" , "value": "75.8 %" }
       }
     ]
   }
