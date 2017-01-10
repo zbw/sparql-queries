@@ -6,7 +6,7 @@ PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 #
-select ?wd ?wdLabel ?wdDescription (count(?sitelink) as ?siteCount)
+select ?wd ?wdLabel ?wdDescription
 ?gndLookup ('look up in GND' as ?gndLookupLabel)
 where {
   # e.g., GND missing for TED speakers
@@ -39,10 +39,10 @@ where {
   bind(encode_for_uri(?wdLabel) as ?searchedName)
   bind(uri(concat(?gndSearchLink, ?searchedName)) as ?gndLookup)
   #
-  # get site links
+  # get site links (for sorting according to prominence)
   ?sitelink schema:about ?wd .
   # filter out wikicite/wikicommons etc. links
   filter(contains(str(?sitelink), 'wikipedia.org/'))
 }
-group by ?wd ?wdLabel ?wdDescription
-order by desc(count(?sitelink)
+group by ?wd ?wdLabel ?wdDescription ?gndLookup
+order by desc(count(?sitelink))
