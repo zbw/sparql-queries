@@ -1,0 +1,46 @@
+# Text search for persons, with additional data for identification
+#
+# Uses diverse literal properties, brings the best match on top
+# of the list
+#
+PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
+PREFIX  text:   <http://jena.apache.org/text#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+#
+select distinct ?gndId ?person ?personLabel ?life (str(?info) as ?biographicalInfo)
+(group_concat(distinct ?occupation ;
+    separator = "; ") as ?occupations)
+(group_concat(distinct ?affiliation ;
+    separator = "; ") as ?affiliations)
+where {
+  values ( ?query ) {
+    ( 'Enrique Peñalosa' )
+  }
+  # limit number of results to 50
+  (?person ?score) text:query (?query 50) .
+  ?person gndo:preferredNameForThePerson ?personLabel ;
+        gndo:gndIdentifier ?gndId .
+  #
+  # get additional information
+  optional {
+    ?person gndo:professionOrOccupation/gndo:preferredNameForTheSubjectHeading ?occupation .
+  }
+  optional {
+    ?person gndo:affiliation/gndo:preferredNameForTheCorporateBody ?affiliation .
+  }
+  optional {
+    ?person gndo:biographicalOrHistoricalInformation ?info .
+  }
+  optional {
+    ?person gndo:dateOfBirth ?birthDate .
+    bind(str(?birthDate) as ?birth)
+  }
+  optional {
+    ?person gndo:dateOfDeath ?deathDate .
+    bind(str(?deathDate) as ?death)
+  }
+  bind(concat(?birth, ' - ', ?death) as ?life)
+}
+group by ?person ?score ?personLabel ?gndId ?info ?life
+order by desc(?score)
+

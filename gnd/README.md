@@ -2,6 +2,7 @@
 
 Query | Description
 ------|------------
+[search_person](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_person.rq) | Text search for persons, with additional data for identification
 [search_corporate_body_pretty](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_corporate_body_pretty.rq) | Search a corporate body by text input (pretty output)
 [search_corporate_body](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_corporate_body.rq) | Search a corporate body by text input (debug output)
 [count_concepts_by_category](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/count_concepts_by_category.rq) | Count concepts by GND subject category _(only subject headings - without restriction, this query may time out)_
