@@ -1,5 +1,5 @@
 # Prominent economists, as indicated by a certain property,
-# missing another propery (e.g., TED speakers with a GND ID)
+# lacking another propery (e.g., TED speakers without a GND ID)
 #
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
