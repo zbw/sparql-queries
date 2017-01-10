@@ -21,8 +21,9 @@ where {
   }
   # limit number of results to 50
   (?person ?score) text:query (?name 50) .
-  ?person gndo:preferredNameForThePerson ?personLabel ;
-        gndo:gndIdentifier ?gndId .
+  ?person a gndo:DifferentiatedPerson ;
+          gndo:preferredNameForThePerson ?personLabel ;
+          gndo:gndIdentifier ?gndId .
   #
   # get additional information
   optional {
@@ -36,14 +37,13 @@ where {
   }
   optional {
     ?person gndo:dateOfBirth ?birthDate .
-    bind(str(?birthDate) as ?birth)
   }
   optional {
     ?person gndo:dateOfDeath ?deathDate .
-    bind(str(?deathDate) as ?death)
   }
+  bind(if(bound(?birthDate), str(?birthDate), '') as ?birth)
+  bind(if(bound(?deathDate), str(?deathDate), '')  as ?death)
   bind(concat(?birth, ' - ', ?death) as ?life)
 }
 group by ?person ?score ?personLabel ?gndId ?life
 order by desc(?score)
-
