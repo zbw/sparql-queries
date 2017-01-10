@@ -15,11 +15,12 @@ select distinct ?gndId ?person ?personLabel ?life
 (group_concat(distinct ?affiliation ;
     separator = "; ") as ?affiliations)
 where {
-  values ( ?query ) {
-    ( 'Enrique Peñalosa' )
+  # searched name
+  values ( ?name ) {
+    ( 'William K. Black' )
   }
   # limit number of results to 50
-  (?person ?score) text:query (?query 50) .
+  (?person ?score) text:query (?name 50) .
   ?person gndo:preferredNameForThePerson ?personLabel ;
         gndo:gndIdentifier ?gndId .
   #
