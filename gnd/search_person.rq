@@ -7,7 +7,9 @@ PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
 PREFIX  text:   <http://jena.apache.org/text#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
-select distinct ?gndId ?person ?personLabel ?life (str(?info) as ?biographicalInfo)
+select distinct ?gndId ?person ?personLabel ?life
+(group_concat(distinct str(?info) ;
+    separator = "; ") as ?biographicalInformation)
 (group_concat(distinct ?occupation ;
     separator = "; ") as ?occupations)
 (group_concat(distinct ?affiliation ;
@@ -41,6 +43,6 @@ where {
   }
   bind(concat(?birth, ' - ', ?death) as ?life)
 }
-group by ?person ?score ?personLabel ?gndId ?info ?life
+group by ?person ?score ?personLabel ?gndId ?life
 order by desc(?score)
 
