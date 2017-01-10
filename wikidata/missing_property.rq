@@ -24,11 +24,6 @@ where {
       ?wd ?missingProperty [] .
     })
   #
-  # get site links
-  ?sitelink schema:about ?wd .
-  # filter out wikicite/wikicommons etc. links
-  filter(contains(str(?sitelink), 'wikipedia.org/'))
-  #
   # not all items have labels in English
   optional {
     ?wd rdfs:label ?wdLabelLang
@@ -41,8 +36,13 @@ where {
     bind(str(?descriptionLang) as ?wdDescription)
   }
   bind('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_person.rq&name=' as ?gndSearchLink)
-  bind(encode_for_uri(?wdlabel) as ?searchedName)
+  bind(encode_for_uri(?wdLabel) as ?searchedName)
   bind(uri(concat(?gndSearchLink, ?searchedName)) as ?gndLookup)
+  #
+  # get site links
+  ?sitelink schema:about ?wd .
+  # filter out wikicite/wikicommons etc. links
+  filter(contains(str(?sitelink), 'wikipedia.org/'))
 }
 group by ?wd ?wdLabel ?wdDescription
-order by desc(?siteCount)
+order by desc(count(?sitelink)
