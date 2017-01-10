@@ -1,0 +1,41 @@
+# Prominent economists, as indicated by a certain property,
+# missing another propery (e.g., TED speakers with a GND ID)
+#
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+#
+select ?wdLabel ?wd (count(?sitelink) as ?siteCount) ?gndId
+where {
+  # e.g., GND missing for TED speakers
+  values ( ?missingProperty ?definingProperty) {
+    ( wdt:P227 wdt:P2611 )
+  }
+  # restrict the data to "occupation economist"      
+  ?wd wdt:P106 wd:Q188094 .
+  # 
+  # restrict to items with the property indicating relevance
+  ?wd ?definingProperty [] .
+  #
+  # restrict to items without the missing property
+  filter(not exists {
+      ?wd ?missingProperty [] .
+    })
+  #
+  # get site links
+  ?sitelink schema:about ?wd .
+  # filter out wikicite/wikicommons etc. links
+  filter(contains(str(?sitelink), 'wikipedia.org/'))
+  #
+  # not all items have labels in English
+  optional {
+    ?wd rdfs:label ?wdLabelLang
+    filter(lang(?wdLabelLang) = 'en')
+    bind(str(?wdLabelLang) as ?wdLabel)
+  }
+  # look up name in GND
+}
+group by ?wd ?wdLabel ?gndId
+having (?siteCount >= 3)
+order by desc(?siteCount)
