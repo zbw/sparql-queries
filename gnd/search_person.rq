@@ -17,7 +17,7 @@ select distinct ?gndId ?person ?personLabel ?life
 where {
   # searched name
   values ( ?name ) {
-    ( 'William K. Black' )
+    ( "William K. Black" )
   }
   # limit number of results to 50
   (?person ?score) text:query (?name 50) .
