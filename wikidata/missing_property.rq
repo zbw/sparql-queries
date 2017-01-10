@@ -6,15 +6,16 @@ PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 #
-select ?wdLabel ?wd (count(?sitelink) as ?siteCount) ?gndId
+select ?wd ?wdLabel ?wdDescription (count(?sitelink) as ?siteCount)
+?gndLookup ('look up in GND' as ?gndLookupLabel)
 where {
   # e.g., GND missing for TED speakers
   values ( ?missingProperty ?definingProperty) {
     ( wdt:P227 wdt:P2611 )
   }
-  # restrict the data to "occupation economist"      
+  # restrict the data to "occupation economist"
   ?wd wdt:P106 wd:Q188094 .
-  # 
+  #
   # restrict to items with the property indicating relevance
   ?wd ?definingProperty [] .
   #
@@ -34,8 +35,14 @@ where {
     filter(lang(?wdLabelLang) = 'en')
     bind(str(?wdLabelLang) as ?wdLabel)
   }
-  # look up name in GND
+  optional {
+    ?wd schema:description ?descriptionLang
+    filter(lang(?descriptionLang) = 'en')
+    bind(str(?descriptionLang) as ?wdDescription)
+  }
+  bind('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_person.rq&name=' as ?gndSearchLink)
+  bind(encode_for_uri(?wdlabel) as ?searchedName)
+  bind(uri(concat(?gndSearchLink, ?searchedName)) as ?gndLookup)
 }
-group by ?wd ?wdLabel ?gndId
-having (?siteCount >= 3)
+group by ?wd ?wdLabel ?wdDescription
 order by desc(?siteCount)
