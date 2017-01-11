@@ -7,6 +7,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 #
 select ?wd ?wdLabel ?wdDescription
+(group_concat(distinct str(?affiliation) ; separator = "; ") as ?affiliations)
 ?gndLookup ('look up in GND' as ?gndLookupLabel)
 where {
   # e.g., GND missing for TED speakers
@@ -35,6 +36,11 @@ where {
     filter(lang(?descriptionLang) = 'en')
     bind(str(?descriptionLang) as ?wdDescription)
   }
+  optional {
+    ?wd wdt:P108/rdfs:label ?affiliationLang .
+    filter(lang(?affiliationLang) = 'en')
+    bind(str(?affiliationLang) as ?affiliation)
+  }
   bind('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_person.rq&name=' as ?gndSearchLink)
   bind(encode_for_uri(?wdLabel) as ?searchedName)
   bind(uri(concat(?gndSearchLink, ?searchedName)) as ?gndLookup)
@@ -45,4 +51,5 @@ where {
   filter(contains(str(?sitelink), 'wikipedia.org/'))
 }
 group by ?wd ?wdLabel ?wdDescription ?gndLookup
-order by desc(count(?sitelink))
+order by desc(count(distinct ?sitelink))
+
