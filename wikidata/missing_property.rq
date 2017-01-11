@@ -6,8 +6,10 @@ PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 #
-select ?wd ?wdLabel ?wdDescription
-(group_concat(distinct str(?affiliation) ; separator = "; ") as ?affiliations)
+select ?wd ?wdLabel
+(group_concat(distinct str(?life) ; separator = "; ") as ?wdLife)
+?wdDescription
+(group_concat(distinct str(?affiliation) ; separator = "; ") as ?wdAffiliations)
 ?lookup ('look up in authority' as ?lookupLabel)
 where {
   # configuration of the query:
@@ -40,6 +42,14 @@ where {
   }
   # additional information for identifying the person
   optional {
+    ?wd wdt:P569 ?birthDate .
+  }
+  optional {
+    ?wd wdt:P570 ?deathDate .
+  }
+  bind(concat(coalesce(str(year(?birthDate)), ''), coalesce(concat(' - ', str(year(?deathDate))), '')) as ?life)
+  #
+  optional {
     ?wd schema:description ?descriptionLang
     filter(lang(?descriptionLang) = 'en')
     bind(str(?descriptionLang) as ?wdDescription)
@@ -49,6 +59,7 @@ where {
     filter(lang(?affiliationLang) = 'en')
     bind(str(?affiliationLang) as ?affiliation)
   }
+  # build lookup link
   bind(encode_for_uri(?wdLabel) as ?searchedName)
   bind(uri(concat(?lookupURL, ?searchedName)) as ?lookup)
   #
