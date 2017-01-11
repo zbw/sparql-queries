@@ -8,11 +8,18 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 #
 select ?wd ?wdLabel ?wdDescription
 (group_concat(distinct str(?affiliation) ; separator = "; ") as ?affiliations)
-?gndLookup ('look up in GND' as ?gndLookupLabel)
+?lookup ('look up in authority' as ?lookupLabel)
 where {
-  # e.g., GND missing for TED speakers
-  values ( ?missingProperty ?definingProperty) {
-    ( wdt:P227 wdt:P2611 )
+  # configuration of the query:
+  #   ?missingProperty - the wikidata authority property to add
+  #   ?definingPropterty - the wikidata authority property which indicates
+  #       relevance and defines the restricted list of items
+  #   ?lookupURL - a URL fragment which can be used to search names in
+  #       the authority file addressed by ?missingProperty
+  #       (this can address an arbitrary web application)
+  # e.g., GND missing for TED speakers, lookup in SPARQL Lab GND endpoint
+  values ( ?missingProperty ?definingProperty ?lookupURL ) {
+    ( wdt:P227 wdt:P2611 'http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_person.rq&name=' )
   }
   # restrict the data to "occupation economist"
   ?wd wdt:P106 wd:Q188094 .
@@ -31,6 +38,7 @@ where {
     filter(lang(?wdLabelLang) = 'en')
     bind(str(?wdLabelLang) as ?wdLabel)
   }
+  # additional information for identifying the person
   optional {
     ?wd schema:description ?descriptionLang
     filter(lang(?descriptionLang) = 'en')
@@ -41,15 +49,14 @@ where {
     filter(lang(?affiliationLang) = 'en')
     bind(str(?affiliationLang) as ?affiliation)
   }
-  bind('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_person.rq&name=' as ?gndSearchLink)
   bind(encode_for_uri(?wdLabel) as ?searchedName)
-  bind(uri(concat(?gndSearchLink, ?searchedName)) as ?gndLookup)
+  bind(uri(concat(?lookupURL, ?searchedName)) as ?lookup)
   #
   # get site links (for sorting according to prominence)
   ?sitelink schema:about ?wd .
   # filter out wikicite/wikicommons etc. links
   filter(contains(str(?sitelink), 'wikipedia.org/'))
 }
-group by ?wd ?wdLabel ?wdDescription ?gndLookup
+group by ?wd ?wdLabel ?wdDescription ?lookup
 order by desc(count(distinct ?sitelink))
 
