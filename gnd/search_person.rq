@@ -8,19 +8,20 @@ PREFIX  text:   <http://jena.apache.org/text#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
 select distinct ?gndId ?person ?personLabel ?life
-(group_concat(distinct str(?info) ;
-    separator = "; ") as ?biographicalInformation)
-(group_concat(distinct ?occupation ;
-    separator = "; ") as ?occupations)
+select distinct ?gndId ?person ?personLabel
+(concat(?life, coalesce(concat("; ", group_concat(distinct str(?occupation) ;
+          separator = "; ")), "")) as ?shortInfo)
 (group_concat(distinct ?affiliation ;
     separator = "; ") as ?affiliations)
+(group_concat(distinct ?info ;
+    separator = "; ") as ?biographicalInformation)
 where {
   # searched name
   values ( ?name ) {
     ( "William K. Black" )
   }
-  # limit number of results to 50
-  (?person ?score) text:query (?name 50) .
+  # limit number of results to 20
+  (?person ?score) text:query (?name 20) .
   ?person a gndo:DifferentiatedPerson ;
           gndo:preferredNameForThePerson ?personLabel ;
           gndo:gndIdentifier ?gndId .
