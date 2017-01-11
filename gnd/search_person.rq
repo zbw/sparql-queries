@@ -7,7 +7,6 @@ PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
 PREFIX  text:   <http://jena.apache.org/text#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
-select distinct ?gndId ?person ?personLabel ?life
 select distinct ?gndId ?person ?personLabel
 (concat(?life, coalesce(concat("; ", group_concat(distinct str(?occupation) ;
           separator = "; ")), "")) as ?shortInfo)
