@@ -1,0 +1,14 @@
+{
+  "head": {
+    "vars": [ "authorityPropertyCount" , "authorityLinkCount" , "personAuthorityLinkCount" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "authorityPropertyCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1023" } ,
+        "authorityLinkCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "14321681" } ,
+        "personAuthorityLinkCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "5751058" }
+      }
+    ]
+  }
+}
