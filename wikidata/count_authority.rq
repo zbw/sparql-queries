@@ -1,0 +1,38 @@
+# Count all properties used for authority control and the according links
+# for all wikidata items and for persons in particular
+#
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select (count(distinct ?propertyDirect) as ?authorityPropertyCount) 
+(count(?item) as ?authorityLinkCount) (sum(?isHuman) as ?personAuthorityLinkCount)
+where {
+  # get all properties for authority control
+  {
+    select distinct ?propertyDirect
+    where {
+      values (?authPropType) {
+        # Wikidata property for authority control
+        (wd:Q18614948)
+      }
+      {
+        ?property wdt:P31 ?authPropType .
+      } union {
+        ?type wdt:P279 ?authPropType .
+        ?property wdt:P31 ?type .
+      }
+      bind(uri(concat('http://www.wikidata.org/prop/direct/', strafter(str(?property), '/entity/'))) as ?propertyDirect)
+    }
+  }
+  # items using those properties
+  ?item ?propertyDirect [] .
+  #
+  # which of these items are persons?
+  bind(if(exists {
+    ?item wdt:P31 wd:Q5 .
+    }, 1, 0) as ?isHuman)
+}
