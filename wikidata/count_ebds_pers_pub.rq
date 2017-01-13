@@ -10,9 +10,11 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 select ?pubThreshold
 (count(?ebPers) as ?ebPersCount)  # all gnd in the ebds dataset
 (sum(?ebPubCount) as ?ebPersPubCount)
-(count(?ebPersWd) as ?ebPersWdCount)  # of these, in Wikidata
-(sum(?wdPubCount) as ?ebPersWdPubCount)
-(concat(str(round((?ebPersWdCount/?ebPersCount)*1000)/10), ' %') as ?ebPersWdPct)
+#(count(?ebPersWd) as ?ebPersWdCount)  # of these, in Wikidata
+#(sum(?wdPubCount) as ?ebPersWdPubCount)
+(concat(str(round((count(?ebPersWd)/?ebPersCount)*1000)/10), ' %') as ?ebPersWdPct)
+(?ebPersCount - count(?ebPersWd) as ?toDoPersons)
+(?ebPersPubCount - sum(?wdPubCount) as ?pubGained)
 where {
   values (?pubThreshold) {
     ( 0 ) ( 1 ) ( 2 ) ( 10 ) ( 30 ) ( 50 ) ( 100 ) ( 150 )
