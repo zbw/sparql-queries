@@ -9,13 +9,15 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 #
 select ?publThreshold
 (count(?econPers) as ?econPersCount)  # all gnd in the econ_pers dataset
+#(sum(?ebPubCount) as ?econPersPubCount)
 (count(?econPersWd) as ?econPersWdCount)  # of these, in Wikidata
+#(sum(?wdPubCount) as ?econPersWdPubCount) 
 (concat(str(round((?econPersWdCount/?econPersCount)*1000)/10), ' %') as ?econPersWdPct)
 (sum( ?isWdEconomist) as ?wdOccupationEconomistCount)   # econPersWd with occupation "economist"
 (concat(str(round((?wdOccupationEconomistCount/?econPersWdCount)*1000)/10), ' %') as ?wdOccupationEconomistPct)
 where {
   values (?publThreshold) {
-    ( 0 ) ( 10 ) ( 50 )
+    ( 0 ) ( 1 ) ( 2 ) ( 10 ) ( 30 ) ( 50 ) ( 150 )
   }
   graph <http://zbw.eu/beta/wikidata/ebCount/ng> {
     ?econPers zbwext:econbizCount ?ebPubCount ;
@@ -28,6 +30,9 @@ where {
   optional {
     ?econPersWd wdt:P227 ?gndId .
   }
+  # count publications of wd persons separately
+#  bind(if(bound(?econPersWd), ?ebPubCount, 0) as ?wdPubCount)
+  #
   # is the wd occupation of this person "economist"?
   bind(if(bound(?econPersWd) && exists {
         ?econPersWd wdt:P106 wd:Q188094
