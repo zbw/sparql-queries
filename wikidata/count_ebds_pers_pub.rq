@@ -1,0 +1,35 @@
+# Statistics about economics-related gnd persons (from ebds)
+# and how many of them are in wikidata
+#
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+#
+select ?pubThreshold
+(count(?ebPers) as ?ebPersCount)  # all gnd in the ebds dataset
+(sum(?ebPubCount) as ?ebPersPubCount)
+(count(?ebPersWd) as ?ebPersWdCount)  # of these, in Wikidata
+(sum(?wdPubCount) as ?ebPersWdPubCount)
+(concat(str(round((?ebPersWdCount/?ebPersCount)*1000)/10), ' %') as ?ebPersWdPct)
+where {
+  values (?pubThreshold) {
+    ( 0 ) ( 1 ) ( 2 ) ( 10 ) ( 30 ) ( 50 ) ( 100 ) ( 150 )
+  }
+  graph <http://zbw.eu/beta/wikidata/ebCount/ng> {
+    ?ebPers zbwext:econbizCount ?ebPubCount ;
+              dcterms:identifier ?gndId .
+  }
+  # increase pubThreshold to restrict to more relevant persons
+  filter(?ebPubCount > ?pubThreshold)
+  #
+  # which of these persons are in wikidata?
+  optional {
+    ?ebPersWd wdt:P227 ?gndId .
+  }
+  # count publications of wd persons separately
+  bind(if(bound(?ebPersWd), ?ebPubCount, 0) as ?wdPubCount)
+}
+group by ?pubThreshold
+order by asc(?pubThreshold)
