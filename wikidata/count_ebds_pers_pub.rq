@@ -1,5 +1,5 @@
-# Statistics about economics-related gnd persons (from ebds)
-# and how many of them are in wikidata
+# Statistics about how many EBDS persons are missing a GND link in Wikidata
+# and how many enriched publications could be gained by fixing this
 #
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
@@ -13,7 +13,7 @@ select ?pubThreshold
 #(count(?ebPersWd) as ?ebPersWdCount)  # of these, in Wikidata
 #(sum(?wdPubCount) as ?ebPersWdPubCount)
 (concat(str(round((count(?ebPersWd)/?ebPersCount)*1000)/10), ' %') as ?ebPersWdPct)
-(?ebPersCount - count(?ebPersWd) as ?toDoPersons)
+(?ebPersCount - count(?ebPersWd) as ?persToDo)
 (?ebPersPubCount - sum(?wdPubCount) as ?pubGained)
 where {
   values (?pubThreshold) {
