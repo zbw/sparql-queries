@@ -14,13 +14,9 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
 select distinct ?wd ?wdLabel
-#(concat(?life, coalesce(concat("; ", group_concat(distinct str(?occupation) ;
-#          separator = "; ")), "")) as ?shortInfo)
 ?life 
 (group_concat(distinct ?info ;
     separator = "; ") as ?description)
-#(group_concat(distinct ?occupation ;
-#    separator = "; ") as ?occupations)
 (group_concat(distinct ?affiliation ;
     separator = "; ") as ?affiliations)
 (sum(?score) as ?totalScore)
@@ -28,7 +24,8 @@ where {
   # get all name variantss for search
   service <http://zbw.eu/beta/sparql/gnd/query> {
     values ( ?gndId ?language ) {
-      ( "118578537" 'en' )
+      # defaults to economist Frankel, Jeffery A.
+      ( "124551858" 'en' )
     }
     ?gndPers gndo:gndIdentifier ?gndId .
     {
@@ -44,8 +41,9 @@ where {
   # 
   # restrict to class human
   ?wd wdt:P31 wd:Q5 ;
-    rdfs:label ?wdLabel .
-  filter(lang(?wdLabel) = ?language)
+    rdfs:label ?wdLabelLang .
+  filter(lang(?wdLabelLang) = ?language)
+  bind(str(?wdLabelLang) as ?wdLabel)
   #
   # get additional information
   optional {
