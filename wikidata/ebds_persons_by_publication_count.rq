@@ -1,4 +1,5 @@
-# repec authors by publication count
+# List the most frequent persons in EconBiz (by GND) and links
+# to Wikidata or to a search for all their names in Wikidata
 #
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -16,7 +17,7 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 select
 (uri(concat('http://www.econbiz.de/Search/Results?lookfor=pnd%3A', ?gndId)) as ?ebPublications)
 (str(?count) as ?ebPublicationsLabel)
-?gndPers ?gndPersLabel ?gndId
+?gndId ?gndPers ?gndPersLabel ?life
 ?wdLink ?wdLinkLabel
 where {
   service <http://172.16.10.102:3030/ebds/query> {
@@ -36,6 +37,15 @@ where {
     graph <http://zbw.eu/beta/ebds/gnd/ng> {
       ?gndPers a gndo:DifferentiatedPerson ;
         gndo:preferredNameForThePerson ?gndPersLabel .
+      optional {
+        ?gndPers gndo:dateOfBirth ?birthDate .
+      }
+      optional {
+        ?gndPers gndo:dateOfDeath ?deathDate .
+      }
+      bind(if(bound(?birthDate), str(?birthDate), '') as ?birth)
+      bind(if(bound(?deathDate), str(?deathDate), '')  as ?death)
+      bind(concat(?birth, ' - ', ?death) as ?life)
     }
   }
   bind(strafter(str(?gndPers), '/gnd/') as ?gndId)
