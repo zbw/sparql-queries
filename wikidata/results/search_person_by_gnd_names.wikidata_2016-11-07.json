@@ -1,0 +1,152 @@
+{
+  "head": {
+    "vars": [ "wd" , "wdLabel" , "life" , "description" , "affiliations" , "totalScore" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q9061" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Karl Marx" } ,
+        "life": { "type": "literal" , "value": "1818 - 1883" } ,
+        "description": { "type": "literal" , "value": "German philosopher, economist, journalist and revolutionary socialist" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "1281.9606" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q227030" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Mark Shuttleworth" } ,
+        "life": { "type": "literal" , "value": "1973 - " } ,
+        "description": { "type": "literal" , "value": "South African entrepreneur; second self-funded visitor to the International Space Station" } ,
+        "affiliations": { "type": "literal" , "value": "Canonical Ltd.; Thawte Consulting" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "384.48584" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q214986" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Heinrich Marx" } ,
+        "life": { "type": "literal" , "value": "1777 - 1838" } ,
+        "description": { "type": "literal" , "value": "Father of Karl Marx" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "245.79655" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q13816202" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Karl Friedrich Heinrich Marx" } ,
+        "life": { "type": "literal" , "value": "1796 - 1877" } ,
+        "description": { "type": "literal" , "value": "German physician" } ,
+        "affiliations": { "type": "literal" , "value": "University of Göttingen" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "142.8203" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q323467" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Marcus Miller" } ,
+        "life": { "type": "literal" , "value": "1959 - " } ,
+        "description": { "type": "literal" , "value": "Jazz musician" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "139.12183" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q882538" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Karl Marx" } ,
+        "life": { "type": "literal" , "value": "1897 - 1985" } ,
+        "description": { "type": "literal" , "value": "German composer" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "97.405945" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1732309" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Karl Marx" } ,
+        "life": { "type": "literal" , "value": "1929 - 2008" } ,
+        "description": { "type": "literal" , "value": "German painter" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "97.405945" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1622032" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Carl Michael Marx" } ,
+        "life": { "type": "literal" , "value": "1794 - 1864" } ,
+        "description": { "type": "literal" , "value": "German chemist and physicist" } ,
+        "affiliations": { "type": "literal" , "value": "Braunschweig University of Technology" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "92.34619" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1732312" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Karl Marx" } ,
+        "life": { "type": "literal" , "value": "1844 - 1914" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "73.05446" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q93284" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Marc Chagall" } ,
+        "life": { "type": "literal" , "value": "1887 - 1985" } ,
+        "description": { "type": "literal" , "value": "French artist and painter" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "68.05023" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1039687" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Carl Marx" } ,
+        "life": { "type": "literal" , "value": "1911 - 1991" } ,
+        "description": { "type": "literal" , "value": "German painter" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "67.22157" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q103846" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Groucho Marx" } ,
+        "life": { "type": "literal" , "value": "1890 - 1977" } ,
+        "description": { "type": "literal" , "value": "American comedian" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "63.466877" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q64839" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Max Wien" } ,
+        "life": { "type": "literal" , "value": "1866 - 1938" } ,
+        "description": { "type": "literal" , "value": "German physicist" } ,
+        "affiliations": { "type": "literal" , "value": "University of Jena" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "61.801125" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q6771380" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Marks" } ,
+        "life": { "type": "literal" , "value": " - " } ,
+        "description": { "type": "literal" , "value": "Finnish record producer" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "61.05658" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q310794" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Karl Pearson" } ,
+        "life": { "type": "literal" , "value": "1857 - 1936" } ,
+        "description": { "type": "literal" , "value": "English mathematician and biometrician" } ,
+        "affiliations": { "type": "literal" , "value": "University College London; King's College London; Gresham College" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "55.56995" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1732308" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Karl Marx" } ,
+        "life": { "type": "literal" , "value": "1897 - 1966" } ,
+        "description": { "type": "literal" , "value": "German journalist" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "48.702972" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q16062483" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Karl Marx" } ,
+        "life": { "type": "literal" , "value": "1857 - 1891" } ,
+        "description": { "type": "literal" , "value": "Medical missionary" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "48.702972" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1598270" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Heinrich Marx" } ,
+        "life": { "type": "literal" , "value": "1885 - 1971" } ,
+        "description": { "type": "literal" , "value": "German priest" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "44.690273" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q17521882" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Carl Marx" } ,
+        "life": { "type": "literal" , "value": "1861 - 1933" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "38.412327" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q77183" } ,
+        "wdLabel": { "type": "literal" , "xml:lang": "en" , "value": "Wilhelm Marx" } ,
+        "life": { "type": "literal" , "value": "1863 - 1946" } ,
+        "description": { "type": "literal" , "value": "German chancellor" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "36.57851" }
+      }
+    ]
+  }
+}
