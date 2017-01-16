@@ -39,7 +39,7 @@ where {
     }
   }
   bind(strafter(str(?gndPers), '/gnd/') as ?gndId)
-  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_person_by_gnd_names.rq&name=', $gndId)) as ?wdSearchLink)
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/gnd/search_person_by_gnd_names.rq&name=', $gndId)) as ?wdSearchLink)
   optional {
     ?wd wdt:P227 ?gndId ;
       rdfs:label ?wdLabelLang .
