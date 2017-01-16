@@ -13,36 +13,38 @@ PREFIX void: <http://rdfs.org/ns/void#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select (?count as ?ebPublicationsLabel)
+select
 (uri(concat('http://www.econbiz.de/Search/Results?lookfor=pnd%3A', ?gndId)) as ?ebPublications)
-?pers ?persLabel ?gndId
+(str(?count) as ?ebPublicationsLabel)
+?gndPers ?gndPersLabel ?gndId
 ?wdLink ?wdLinkLabel
 where {
   service <http://172.16.10.102:3030/ebds/query> {
     {
-      select (count(distinct ?pub) as ?count) ?pers 
+      select (count(distinct ?pub) as ?count) ?gndPers
       where {
         graph <http://zbw.eu/beta/ebds/ng> {
           values ( ?actor ) {
             ( dcterms:creator ) ( dcterms:contributor ) ( dcterms:subject )
           }
-          ?pub ?actor ?pers .
+          ?pub ?actor ?gndPers .
         }
       }
-      group by ?pers
+      group by ?gndPers
       having (?count > 150)
     }
     graph <http://zbw.eu/beta/ebds/gnd/ng> {
-      ?pers a gndo:DifferentiatedPerson ;
-        gndo:preferredNameForThePerson ?persLabel .
+      ?gndPers a gndo:DifferentiatedPerson ;
+        gndo:preferredNameForThePerson ?gndPersLabel .
     }
   }
-  bind(strafter(str(?pers), '/gnd/') as ?gndId)
-  bind(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_person_by_gnd_names.rq&name=', $gndId) as ?wdSearchLink)
+  bind(strafter(str(?gndPers), '/gnd/') as ?gndId)
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_person_by_gnd_names.rq&name=', $gndId)) as ?wdSearchLink)
   optional {
     ?wd wdt:P227 ?gndId ;
-      rdfs:label ?wdLabel .
-    filter(lang(?wdLabel) = 'en')
+      rdfs:label ?wdLabelLang .
+    filter(lang(?wdLabelLang) = 'en')
+    bind(str(?wdLabelLang) as ?wdLabel)
   }
   bind(if(bound(?wd), ?wd, ?wdSearchLink) as ?wdLink)
   bind(if(bound(?wd), ?wdLabel, 'Search in Wikidata') as ?wdLinkLabel)
