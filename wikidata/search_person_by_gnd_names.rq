@@ -26,7 +26,7 @@ select distinct ?wd ?wdLabel
 (sum(?score) as ?totalScore)
 where {
   # get all name variantss for search
-  service <http://zbw.eu/beta/sparql/gnd/query> {
+  service <http://172.16.10.102:3030/gnd/query> {
     values ( ?gndId ?language ) {
       ( "118578537" 'en' )
     }
