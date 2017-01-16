@@ -6,16 +6,17 @@ PREFIX ebds: <http://zbw.eu/beta/ebds/>
 PREFIX ebsrc: <http://zbw.eu/beta/ebds/source/>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?count ?pers ?persLabel ?gndId
-(uri(concat('http://www.econbiz.de/Search/Results?lookfor=pnd%3A', ?gndId)) as ?ebLink)
-('EconBiz publications' as ?ebLinkLabel)
-?wdSearchLink
-('Search in Wikidata' as ?wdSearchLinkLabel)
+select (?count as ?ebPublicationsLabel)
+(uri(concat('http://www.econbiz.de/Search/Results?lookfor=pnd%3A', ?gndId)) as ?ebPublications)
+?pers ?persLabel ?gndId
+?wdLink ?wdLinkLabel
 where {
   service <http://172.16.10.102:3030/ebds/query> {
     {
@@ -38,6 +39,14 @@ where {
   }
   bind(strafter(str(?pers), '/gnd/') as ?gndId)
   bind(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_person_by_gnd_names.rq&name=', $gndId) as ?wdSearchLink)
+  optional {
+    ?wd wdt:P227 ?gndId ;
+      rdfs:label ?wdLabel .
+    filter(lang(?wdLabel) = 'en')
+  }
+  bind(if(bound(?wd), ?wd, ?wdSearchLink) as ?wdLink)
+  bind(if(bound(?wd), ?wdLabel, 'Search in Wikidata') as ?wdLinkLabel)
+
 }
 order by desc(?count)
 
