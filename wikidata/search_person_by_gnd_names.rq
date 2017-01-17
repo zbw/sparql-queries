@@ -24,8 +24,8 @@ where {
   # get all name variantss for search
   service <http://zbw.eu/beta/sparql/gnd/query> {
     values ( ?gndId ?language ) {
-      # defaults to economist Frankel, Jeffery A.
-      ( "124551858" 'en' )
+      # defaults to economist Dunning, John H.
+      ( "119094665" "en" )
     }
     ?gndPers gndo:gndIdentifier ?gndId .
     {
