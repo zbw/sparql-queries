@@ -1,5 +1,5 @@
-# Statistics about economics-related gnd persons (from ebds)
-# and how many of them are in wikidata
+# Statistics about how many EBDS persons are missing a GND link in Wikidata
+# and how many enriched publications could be gained by fixing this
 #
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
@@ -9,12 +9,12 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 #
 select ?pubThreshold
 (count(?ebPers) as ?ebPersCount)  # all gnd in the ebds dataset
-#(sum(?ebPubCount) as ?ebPersPubCount)
-(count(?ebPersWd) as ?ebPersWdCount)  # of these, in Wikidata
+(sum(?ebPubCount) as ?ebPubLinkCount)
+#(count(?ebPersWd) as ?ebPersWdCount)  # of these, in Wikidata
 #(sum(?wdPubCount) as ?ebPersWdPubCount)
-(concat(str(round((?ebPersWdCount/?ebPersCount)*1000)/10), ' %') as ?ebPersWdPct)
-(sum( ?isWdEconomist) as ?wdOccupationEconomistCount)   # ebPersWd with occupation "economist"
-(concat(str(round((?wdOccupationEconomistCount/?ebPersWdCount)*1000)/10), ' %') as ?wdOccupationEconomistPct)
+(concat(str(round((count(?ebPersWd)/?ebPersCount)*1000)/10), ' %') as ?ebPersWdPct)
+(?ebPersCount - count(?ebPersWd) as ?persToDo)
+(?ebPubLinkCount - sum(?wdPubCount) as ?pubLinkEnhanced)
 where {
   values (?pubThreshold) {
     ( 0 ) ( 1 ) ( 2 ) ( 10 ) ( 30 ) ( 50 ) ( 100 ) ( 150 )
@@ -31,12 +31,7 @@ where {
     ?ebPersWd wdt:P227 ?gndId .
   }
   # count publications of wd persons separately
-#  bind(if(bound(?ebPersWd), ?ebPubCount, 0) as ?wdPubCount)
-  #
-  # is the wd occupation of this person "economist"?
-  bind(if(bound(?ebPersWd) && exists {
-        ?ebPersWd wdt:P106 wd:Q188094
-      }, 1, 0) as ?isWdEconomist)
+  bind(if(bound(?ebPersWd), ?ebPubCount, 0) as ?wdPubCount)
 }
 group by ?pubThreshold
-order by asc(?pubThreshold)
+order by desc(?pubThreshold)

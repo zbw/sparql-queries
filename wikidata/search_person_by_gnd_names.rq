@@ -1,0 +1,77 @@
+# Search a person by all preferred and variant names from gnd
+# (rank by calculated total score)
+#
+# Requires a full-text index, as provided by Jena
+# (WDQS currently does not support full text search, see
+# https://phabricator.wikimedia.org/T141813)
+#
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX text: <http://jena.apache.org/text#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+#
+select distinct ?wd ?wdLabel
+?life 
+(group_concat(distinct ?info ;
+    separator = "; ") as ?description)
+(group_concat(distinct ?affiliation ;
+    separator = "; ") as ?affiliations)
+(sum(?score) as ?totalScore)
+where {
+  # get all name variantss for search
+  service <http://zbw.eu/beta/sparql/gnd/query> {
+    values ( ?gndId ?language ) {
+      # defaults to economist Dunning, John H.
+      ( "119094665" "en" )
+    }
+    ?gndPers gndo:gndIdentifier ?gndId .
+    {
+      ?gndPers gndo:preferredNameForThePerson ?name .
+    } union {
+      ?gndPers gndo:variantNameForThePerson ?name .
+    }
+  }
+
+  # full text search, limit number of results to 20
+  # (query strings and index without language tags)
+  (?wd ?score) text:query (?name 20) .
+  # 
+  # restrict to class human
+  ?wd wdt:P31 wd:Q5 ;
+    rdfs:label ?wdLabelLang .
+  filter(lang(?wdLabelLang) = ?language)
+  bind(str(?wdLabelLang) as ?wdLabel)
+  #
+  # get additional information
+  optional {
+    ?wd wdt:P106/rdfs:label ?occupationLang .
+    filter(lang(?occupationLang) = ?language)
+    bind(str(?occupationLang) as ?occupation)
+  }
+  optional {
+    ?wd wdt:P108/rdfs:label ?affiliationLang .
+    filter(lang(?affiliationLang) = ?language)
+    bind(str(?affiliationLang) as ?affiliation)
+  }
+  optional {
+    ?wd schema:description ?infoLang .
+    filter(lang(?infoLang) = ?language)
+    bind(str(?infoLang) as ?info)
+  }
+  optional {
+    ?wd wdt:P569 ?birthDate .
+  }
+  optional {
+    ?wd wdt:P570 ?deathDate .
+  }
+  bind(if(bound(?birthDate), str(year(?birthDate)), '') as ?birth)
+  bind(if(bound(?deathDate), str(year(?deathDate)), '')  as ?death)
+  bind(concat(?birth, ' - ', ?death) as ?life)
+}
+group by ?wd ?wdLabel ?life
+order by desc(sum(?score))
+limit 20
+

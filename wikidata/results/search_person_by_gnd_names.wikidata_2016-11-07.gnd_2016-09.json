@@ -1,0 +1,78 @@
+{
+  "head": {
+    "vars": [ "wd" , "wdLabel" , "life" , "description" , "affiliations" , "totalScore" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1627461" } ,
+        "wdLabel": { "type": "literal" , "value": "John Dunning" } ,
+        "life": { "type": "literal" , "value": "1942 - " } ,
+        "description": { "type": "literal" , "value": "Novelist, radio historian, radio host" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "279.03064" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q176929" } ,
+        "wdLabel": { "type": "literal" , "value": "John Dunning" } ,
+        "life": { "type": "literal" , "value": "1916 - 1991" } ,
+        "description": { "type": "literal" , "value": "American film editor" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "93.01024" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q3181699" } ,
+        "wdLabel": { "type": "literal" , "value": "John Harry Dunning" } ,
+        "life": { "type": "literal" , "value": "1927 - 2009" } ,
+        "description": { "type": "literal" , "value": "British economist" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "73.6782" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q13410382" } ,
+        "wdLabel": { "type": "literal" , "value": "John Dunning" } ,
+        "life": { "type": "literal" , "value": "1927 - 2009" } ,
+        "description": { "type": "literal" , "value": "English snooker player" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "72.206215" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q15485610" } ,
+        "wdLabel": { "type": "literal" , "value": "John Dunning" } ,
+        "life": { "type": "literal" , "value": "1918 - 1990" } ,
+        "description": { "type": "literal" , "value": "American journalist" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "41.608047" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q5628512" } ,
+        "wdLabel": { "type": "literal" , "value": "H. Ray Dunning" } ,
+        "life": { "type": "literal" , "value": "1926 - " } ,
+        "description": { "type": "literal" , "value": "American theologian" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "19.485596" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q21498607" } ,
+        "wdLabel": { "type": "literal" , "value": "J. H." } ,
+        "life": { "type": "literal" , "value": " - " } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "19.006083" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q6230488" } ,
+        "wdLabel": { "type": "literal" , "value": "John Dunning, 1st Baron Ashburton" } ,
+        "life": { "type": "literal" , "value": "1731 - 1783" } ,
+        "description": { "type": "literal" , "value": "British politician" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "9.731527" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q27574563" } ,
+        "wdLabel": { "type": "literal" , "value": "H. J. H. Inglis" } ,
+        "life": { "type": "literal" , "value": " - " } ,
+        "description": { "type": "literal" , "value": "badminton player" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "7.4035015" }
+      } ,
+      {
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q15967572" } ,
+        "wdLabel": { "type": "literal" , "value": "J. H. H. Coombes" } ,
+        "life": { "type": "literal" , "value": "1906 - 1978" } ,
+        "description": { "type": "literal" , "value": "President of Cadet college Petaro" } ,
+        "totalScore": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#float" , "value": "3.7017508" }
+      }
+    ]
+  }
+}
