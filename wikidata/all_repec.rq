@@ -1,32 +1,34 @@
 # Get all RePEc mappings (with labels in English language),
-# supplemente with mapping to GND, if exists
+# supplemented with mapping to GND or ORCID, if exists
 #
 # Must use SPARQL GET request (wikidata does not support POST -
 # see https://phabricator.wikimedia.org/T112151)
 #
-PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX wikibase: <http://wikiba.se/ontology#>
-PREFIX p: <http://www.wikidata.org/prop/>
-PREFIX v: <http://www.wikidata.org/prop/statement/>
-PREFIX q: <http://www.wikidata.org/prop/qualifier/>
-PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 #
-select distinct ?repec (?repecId as ?repecLabel) ?wd ?wdLabel ?sitelink ?gnd (?gndId as ?gndLabel)
+select distinct ?repec (?repecId as ?repecLabel) ?wd ?wdLabel ?sitelink ?gnd (?gndId as ?gndLabel) ?orcid (?orcidId as ?orcidLabel)
 where {
   # get all wikidata items and labels linked to RePEC
   ?wd wdt:P2428 ?repecId ;
-      rdfs:label ?wdLabel .
+      rdfs:label ?label .
   # get site links (only from en wikipedia sites)
   ?sitelink schema:about ?wd ;
             schema:inLanguage ?language .
   filter (contains(str(?sitelink), 'wikipedia'))
-  filter (lang(?wdLabel) = ?language && ?language in ('en'))
+  filter (lang(?label) = ?language && ?language in ('en'))
+  bind(str(?label) as ?wdLabel)
   # suplement with GND
   optional {
     ?wd wdt:P227 ?gndId
   }
+  # supplement with ORCID
+  optional {
+    ?wd wdt:P496 ?orcidId
+  }
   bind(uri(concat('https://authors.repec.org/pro/', ?repecId)) as ?repec)
   bind(uri(concat('http://d-nb.info/gnd/', ?gndId)) as ?gnd)
+  bind(uri(concat("http://orcid.org/", ?orcidId)) as ?orcid)
 }
+order by ?repecId
