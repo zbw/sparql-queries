@@ -1,6 +1,3 @@
-prefix  skos:   <http://www.w3.org/2004/02/skos/core#>
-prefix  zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
-#
 # Counts the descritors attached to thsys branches on the first
 # and second level.
 #
@@ -8,25 +5,28 @@ prefix  zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 # but regards only those directly narrower to a thsys category
 # (disregarding inter-descriptor narrower relationships).
 #
+prefix  skos:   <http://www.w3.org/2004/02/skos/core#>
+prefix  zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
 select ?category (str(?label) as ?categoryLabel) (str(?total) as ?totalDescriptors)
 where
 {
-  values ( ?language ) { 
+  values ( ?language ) {
     ( "en" )
   }
   {
-    select (?top as ?category) (count(?s) as ?total) (sample(?topLabel) as ?label)
+    select (?top as ?category) (count(distinct ?s) as ?total) (?topLabel as ?label)
     where {
       <http://zbw.eu/stw> skos:hasTopConcept ?top .
       ?top skos:prefLabel ?topLabel .
       ?top skos:narrower* ?thsys .
       ?thsys a zbwext:Thsys .
-      ?thsys skos:narrower ?s.
+      ?thsys skos:narrower ?s .
       ?s a zbwext:Descriptor .
     }
-    group by ?top
+    group by ?top ?topLabel
   } union {
-    select (?second as ?category) (count(?s) as ?total) (sample(?secondLevelLabel) as ?label)
+    select (?second as ?category) (count(distinct ?s) as ?total) (?secondLevelLabel as ?label)
     where {
       <http://zbw.eu/stw> skos:hasTopConcept ?top .
       ?top skos:narrower ?second .
@@ -37,9 +37,8 @@ where
       ?thsys skos:narrower ?s .
       ?s a zbwext:Descriptor .
     }
-    group by ?second
+    group by ?second ?secondLevelLabel
   }
-  filter ( (lang(?label) = ?language) )
+  filter(lang(?label) = ?language)
 }
 order by ?categoryLabel
-
