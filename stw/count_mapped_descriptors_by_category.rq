@@ -1,0 +1,67 @@
+# Counts the descritors attached to thsys branches on the first
+# and second level, and their exactly matching counterparts in
+# a mapped vocabulary 
+#
+# Aggregates descriptors recursivly within the thsys hierarchy,
+# but regards only those directly narrower to a thsys category
+# (disregarding inter-descriptor narrower relationships).
+#
+prefix dcterms:  <http://purl.org/dc/terms/>
+prefix skos:     <http://www.w3.org/2004/02/skos/core#>
+prefix zbwext:   <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?category (str(?label) as ?categoryLabel) 
+(str(?total) as ?totalDescriptors)
+(str(?foreignTotal) as ?totalForeignDescriptors)
+where
+{
+  # definition of ?vocab in BOTH subselect clauses!!!
+  values ( ?language ) {
+    ( "en" )
+  }
+  {
+    select (?top as ?category) (count(distinct ?stw) as ?total) (count(distinct ?foreign) as ?foreignTotal)
+    where {
+      values ( ?vocab ) {
+        ( "gnd" )
+      }
+      bind(uri(concat("http://zbw.eu/stw/mapping/", ?vocab, "/target")) as ?target)
+      # categories from top level
+      <http://zbw.eu/stw> skos:hasTopConcept ?top .
+      # all subordinated descriptors
+      ?top skos:narrower* ?thsys .
+      ?thsys a zbwext:Thsys ;
+             skos:narrower ?stw .
+      ?stw a zbwext:Descriptor .
+      optional {
+        ?stw skos:exactMatch ?foreign .
+        ?foreign dcterms:isPartOf ?target .
+      }
+    }
+    group by ?top
+  } union {
+    select (?second as ?category) (count(distinct ?stw) as ?total) (count(distinct ?foreign) as ?foreignTotal)
+    where {
+      values ( ?vocab ) {
+        ( "gnd" )
+      }
+      bind(uri(concat("http://zbw.eu/stw/mapping/", ?vocab, "/target")) as ?target)
+      # categories from second level
+      <http://zbw.eu/stw> skos:hasTopConcept/skos:narrower ?second .
+      # all subordinated descriptors
+      ?second a zbwext:Thsys ;
+              skos:narrower* ?thsys .
+      ?thsys a zbwext:Thsys ;
+             skos:narrower ?stw .
+      ?stw a zbwext:Descriptor .
+      optional {
+        ?stw skos:exactMatch ?foreign .
+        ?foreign dcterms:isPartOf ?target .
+      }
+    }
+    group by ?second
+  }
+  ?category skos:prefLabel ?label .
+  filter(lang(?label) = ?language)
+}
+order by ?categoryLabel
