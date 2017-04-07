@@ -15,25 +15,28 @@ where
     ( "en" )
   }
   {
-    select (?top as ?category) (count(distinct ?s) as ?total)
+    select (?top as ?category) (count(distinct ?stw) as ?total)
     where {
+      # categories from level top
       <http://zbw.eu/stw> skos:hasTopConcept ?top .
+      # all subordinated descriptors
       ?top skos:narrower* ?thsys .
-      ?thsys a zbwext:Thsys .
-      ?thsys skos:narrower ?s .
-      ?s a zbwext:Descriptor .
+      ?thsys a zbwext:Thsys ;
+             skos:narrower ?stw .
+      ?stw a zbwext:Descriptor .
     }
     group by ?top
   } union {
-    select (?second as ?category) (count(distinct ?s) as ?total)
+    select (?second as ?category) (count(distinct ?stw) as ?total)
     where {
-      <http://zbw.eu/stw> skos:hasTopConcept ?top .
-      ?top skos:narrower ?second .
-      ?second a zbwext:Thsys .
-      ?second skos:narrower* ?thsys .
-      ?thsys a zbwext:Thsys .
-      ?thsys skos:narrower ?s .
-      ?s a zbwext:Descriptor .
+      # categories from level second
+      <http://zbw.eu/stw> skos:hasTopConcept/skos:narrower ?second .
+      # all subordinated descriptors
+      ?second a zbwext:Thsys ;
+              skos:narrower* ?thsys .
+      ?thsys a zbwext:Thsys ;
+             skos:narrower ?stw .
+      ?stw a zbwext:Descriptor .
     }
     group by ?second
   }
