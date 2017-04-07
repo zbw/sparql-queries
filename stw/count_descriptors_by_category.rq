@@ -15,30 +15,29 @@ where
     ( "en" )
   }
   {
-    select (?top as ?category) (count(distinct ?s) as ?total) (?topLabel as ?label)
+    select (?top as ?category) (count(distinct ?s) as ?total)
     where {
       <http://zbw.eu/stw> skos:hasTopConcept ?top .
-      ?top skos:prefLabel ?topLabel .
       ?top skos:narrower* ?thsys .
       ?thsys a zbwext:Thsys .
       ?thsys skos:narrower ?s .
       ?s a zbwext:Descriptor .
     }
-    group by ?top ?topLabel
+    group by ?top
   } union {
-    select (?second as ?category) (count(distinct ?s) as ?total) (?secondLevelLabel as ?label)
+    select (?second as ?category) (count(distinct ?s) as ?total)
     where {
       <http://zbw.eu/stw> skos:hasTopConcept ?top .
       ?top skos:narrower ?second .
       ?second a zbwext:Thsys .
-      ?second skos:prefLabel ?secondLevelLabel .
       ?second skos:narrower* ?thsys .
       ?thsys a zbwext:Thsys .
       ?thsys skos:narrower ?s .
       ?s a zbwext:Descriptor .
     }
-    group by ?second ?secondLevelLabel
+    group by ?second
   }
+  ?category skos:prefLabel ?label .
   filter(lang(?label) = ?language)
 }
 order by ?categoryLabel
