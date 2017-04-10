@@ -1,6 +1,6 @@
 # Counts the descritors attached to thsys branches on the first
 # and second level, and their exactly matching counterparts in
-# a mapped vocabulary 
+# a mapped vocabulary, and links to a per-category list
 #
 # Aggregates descriptors recursivly within the thsys hierarchy,
 # but regards only those directly narrower to a thsys category
@@ -11,19 +11,21 @@ prefix skos:     <http://www.w3.org/2004/02/skos/core#>
 prefix zbwext:   <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select ?category (str(?label) as ?categoryLabel) 
-(str(?total) as ?totalDescriptors)
-(str(?foreignTotal) as ?totalForeignDescriptors)
+(?detailsLink as ?totalDescriptors)
+(str(?total) as ?totalDescriptorsLabel)
+(?detailsLink as ?totalForeignDescriptors)
+(str(?foreignTotal) as ?totalForeignDescriptorsLabel)
 where
 {
-  # definition of ?vocab in BOTH subselect clauses!!!
-  values ( ?language ) {
-    ( "en" )
+  # identical setting of ?vocab REQUIRED also in BOTH subselect clauses!!!
+  values ( ?vocab ?language ) {
+    ( "thesoz" "en" )
   }
   {
     select (?top as ?category) (count(distinct ?stw) as ?total) (count(distinct ?foreign) as ?foreignTotal)
     where {
       values ( ?vocab ) {
-        ( "gnd" )
+        ( "thesoz" )
       }
       bind(uri(concat("http://zbw.eu/stw/mapping/", ?vocab, "/target")) as ?target)
       # categories from top level
@@ -43,7 +45,7 @@ where
     select (?second as ?category) (count(distinct ?stw) as ?total) (count(distinct ?foreign) as ?foreignTotal)
     where {
       values ( ?vocab ) {
-        ( "gnd" )
+        ( "thesoz" )
       }
       bind(uri(concat("http://zbw.eu/stw/mapping/", ?vocab, "/target")) as ?target)
       # categories from second level
@@ -61,7 +63,10 @@ where
     }
     group by ?second
   }
-  ?category skos:prefLabel ?label .
+  ?category skos:prefLabel ?label ;
+            skos:notation ?notation .
   filter(lang(?label) = ?language)
+  # create links to separate query
+  bind(uri(concat("http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/mapped_descriptors_for_a_category.rq&notation=", str(?notation), "&vocab=", ?vocab, "&language=", ?language)) as ?detailsLink)
 }
 order by ?categoryLabel
