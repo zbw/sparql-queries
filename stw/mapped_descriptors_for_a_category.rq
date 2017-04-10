@@ -5,11 +5,12 @@ prefix dcterms:  <http://purl.org/dc/terms/>
 prefix skos:     <http://www.w3.org/2004/02/skos/core#>
 prefix zbwext:   <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?stw ?stwLabel ?foreign ?foreignLabel
+select distinct ?stw (str(?stwLabelLang) as ?stwLabel)
+?foreign (str(?foreignLabelLang) as ?foreignLabel)
 where
 {
   values ( ?notation ?vocab ?language ) {
-    ( "N.06" "thesoz" "en" )
+    ( "B.01" "thesoz" "en" )
   }
   bind(uri(concat("http://zbw.eu/stw/mapping/", ?vocab, "/target")) as ?target)
   ?category skos:notation ?notation .
@@ -18,12 +19,13 @@ where
   ?thsys a zbwext:Thsys ;
          skos:narrower ?stw .
   ?stw a zbwext:Descriptor ;
-       skos:prefLabel ?stwLabel .
-  filter(lang(?stwLabel) = ?language)
+       skos:prefLabel ?stwLabelLang .
+  filter(lang(?stwLabelLang) = ?language)
   optional {
     ?stw skos:exactMatch ?foreign .
     ?foreign dcterms:isPartOf ?target ;
-             skos:prefLabel ?foreignLabel .
-    filter(lang(?foreignLabel) = ?language)
+             skos:prefLabel ?foreignLabelLang .
+    filter(lang(?foreignLabelLang) = ?language)
   }
 }
+order by ?stwLabel
