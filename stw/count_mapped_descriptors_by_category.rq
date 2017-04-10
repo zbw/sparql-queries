@@ -11,8 +11,8 @@ prefix skos:     <http://www.w3.org/2004/02/skos/core#>
 prefix zbwext:   <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select distinct ?category (str(?label) as ?categoryLabel)
-(?detailsLink as ?totalDescriptors)
-(str(?total) as ?totalDescriptorsLabel)
+(?detailsLink as ?totalStwDescriptors)
+(str(?stwTotal) as ?totalStwDescriptorsLabel)
 (?detailsLink as ?totalForeignDescriptors)
 (str(?foreignTotal) as ?totalForeignDescriptorsLabel)
 where
@@ -22,7 +22,7 @@ where
     ( "agrovoc" "en" )
   }
   {
-    select (?top as ?category) (count(distinct ?stw) as ?total) (count(distinct ?foreign) as ?foreignTotal)
+    select (?top as ?category) (count(distinct ?stw) as ?stwTotal) (count(distinct ?foreign) as ?foreignTotal)
     where {
       values ( ?vocab ) {
         ( "agrovoc" )
@@ -42,7 +42,7 @@ where
     }
     group by ?top
   } union {
-    select (?second as ?category) (count(distinct ?stw) as ?total) (count(distinct ?foreign) as ?foreignTotal)
+    select (?second as ?category) (count(distinct ?stw) as ?stwTotal) (count(distinct ?foreign) as ?foreignTotal)
     where {
       values ( ?vocab ) {
         ( "agrovoc" )
