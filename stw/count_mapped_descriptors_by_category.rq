@@ -10,7 +10,7 @@ prefix dcterms:  <http://purl.org/dc/terms/>
 prefix skos:     <http://www.w3.org/2004/02/skos/core#>
 prefix zbwext:   <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?category (str(?label) as ?categoryLabel) 
+select distinct ?category (str(?label) as ?categoryLabel)
 (?detailsLink as ?totalDescriptors)
 (str(?total) as ?totalDescriptorsLabel)
 (?detailsLink as ?totalForeignDescriptors)
@@ -66,7 +66,8 @@ where
   ?category skos:prefLabel ?label ;
             skos:notation ?notation .
   filter(lang(?label) = ?language)
-  # create links to separate query
+  # create a link to a separate query for a certain category
+  # (for the given vocabulary and language)
   bind(uri(concat("http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/mapped_descriptors_for_a_category.rq&notation=", str(?notation), "&vocab=", ?vocab, "&language=", ?language)) as ?detailsLink)
 }
 order by ?categoryLabel
