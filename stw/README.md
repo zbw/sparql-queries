@@ -20,6 +20,7 @@ Query | Description
 [count_mapped_descriptors_by_category](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/count_mapped_descriptors_by_category.rq) | Count the descriptors attached to the subthesauri and the second level thsys branches
 [multi_mappings_concepts](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/multi_mappings_concepts.rq) | Select STW concepts with mappings to at least 4 other datasets
 [multi_exact_matches](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/multi_exact_matches.rq) | Mapped concepts with multiple exact matching STW concepts
+[mapped_descriptors_for_a_category](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/mapped_descriptors_for_a_category.rq) | Show all descriptors for a certain category, plus the exactly mapped ones in another vocabulary
 
 ### STW version differences
 

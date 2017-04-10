@@ -1,0 +1,29 @@
+# Show all descriptors for a certain category, plus the exactly
+# mapped ones in another vocabulary
+#
+prefix dcterms:  <http://purl.org/dc/terms/>
+prefix skos:     <http://www.w3.org/2004/02/skos/core#>
+prefix zbwext:   <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?stw ?stwLabel ?foreign ?foreignLabel
+where
+{
+  values ( ?notation ?vocab ?language ) {
+    ( "N.06" "thesoz" "en" )
+  }
+  bind(uri(concat("http://zbw.eu/stw/mapping/", ?vocab, "/target")) as ?target)
+  ?category skos:notation ?notation .
+  # all subordinated descriptors
+  ?category skos:narrower* ?thsys .
+  ?thsys a zbwext:Thsys ;
+         skos:narrower ?stw .
+  ?stw a zbwext:Descriptor ;
+       skos:prefLabel ?stwLabel .
+  filter(lang(?stwLabel) = ?language)
+  optional {
+    ?stw skos:exactMatch ?foreign .
+    ?foreign dcterms:isPartOf ?target ;
+             skos:prefLabel ?foreignLabel .
+    filter(lang(?foreignLabel) = ?language)
+  }
+}
