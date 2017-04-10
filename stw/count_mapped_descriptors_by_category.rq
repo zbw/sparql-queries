@@ -19,13 +19,13 @@ where
 {
   # identical setting of ?vocab REQUIRED also in BOTH subselect clauses!!!
   values ( ?vocab ?language ) {
-    ( "thesoz" "en" )
+    ( "agrovoc" "en" )
   }
   {
     select (?top as ?category) (count(distinct ?stw) as ?total) (count(distinct ?foreign) as ?foreignTotal)
     where {
       values ( ?vocab ) {
-        ( "thesoz" )
+        ( "agrovoc" )
       }
       bind(uri(concat("http://zbw.eu/stw/mapping/", ?vocab, "/target")) as ?target)
       # categories from top level
@@ -45,7 +45,7 @@ where
     select (?second as ?category) (count(distinct ?stw) as ?total) (count(distinct ?foreign) as ?foreignTotal)
     where {
       values ( ?vocab ) {
-        ( "thesoz" )
+        ( "agrovoc" )
       }
       bind(uri(concat("http://zbw.eu/stw/mapping/", ?vocab, "/target")) as ?target)
       # categories from second level
