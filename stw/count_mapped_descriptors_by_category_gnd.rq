@@ -1,0 +1,75 @@
+# COPY OF count_mapped_descriptors_by_category.rq, parameterized for GND
+
+# Counts the descritors attached to thsys branches on the first
+# and second level, and their exactly matching counterparts in
+# a mapped vocabulary, and links to a per-category list
+#
+# Aggregates descriptors recursivly within the thsys hierarchy,
+# but regards only those directly narrower to a thsys category
+# (disregarding inter-descriptor narrower relationships).
+#
+prefix dcterms:  <http://purl.org/dc/terms/>
+prefix skos:     <http://www.w3.org/2004/02/skos/core#>
+prefix zbwext:   <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct ?category (str(?label) as ?categoryLabel)
+(?detailsLink as ?totalStwDescriptors)
+(str(?stwTotal) as ?totalStwDescriptorsLabel)
+(?detailsLink as ?totalForeignDescriptors)
+(str(?foreignTotal) as ?totalForeignDescriptorsLabel)
+where
+{
+  # identical setting of ?vocab REQUIRED also in BOTH subselect clauses!!!
+  values ( ?vocab ?language ) {
+    ( "gnd" "de" )
+  }
+  {
+    select (?top as ?category) (count(distinct ?stw) as ?stwTotal) (count(distinct ?foreign) as ?foreignTotal)
+    where {
+      values ( ?vocab ) {
+        ( "gnd" )
+      }
+      bind(uri(concat("http://zbw.eu/stw/mapping/", ?vocab, "/target")) as ?target)
+      # categories from top level
+      <http://zbw.eu/stw> skos:hasTopConcept ?top .
+      # all subordinated descriptors
+      ?top skos:narrower* ?thsys .
+      ?thsys a zbwext:Thsys ;
+             skos:narrower ?stw .
+      ?stw a zbwext:Descriptor .
+      optional {
+        ?stw skos:exactMatch ?foreign .
+        ?foreign dcterms:isPartOf ?target .
+      }
+    }
+    group by ?top
+  } union {
+    select (?second as ?category) (count(distinct ?stw) as ?stwTotal) (count(distinct ?foreign) as ?foreignTotal)
+    where {
+      values ( ?vocab ) {
+        ( "gnd" )
+      }
+      bind(uri(concat("http://zbw.eu/stw/mapping/", ?vocab, "/target")) as ?target)
+      # categories from second level
+      <http://zbw.eu/stw> skos:hasTopConcept/skos:narrower ?second .
+      # all subordinated descriptors
+      ?second a zbwext:Thsys ;
+              skos:narrower* ?thsys .
+      ?thsys a zbwext:Thsys ;
+             skos:narrower ?stw .
+      ?stw a zbwext:Descriptor .
+      optional {
+        ?stw skos:exactMatch ?foreign .
+        ?foreign dcterms:isPartOf ?target .
+      }
+    }
+    group by ?second
+  }
+  ?category skos:prefLabel ?label ;
+            skos:notation ?notation .
+  filter(lang(?label) = ?language)
+  # create a link to a separate query for a certain category
+  # (for the given vocabulary and language)
+  bind(uri(concat("http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/mapped_descriptors_for_a_category.rq&notation=", str(?notation), "&vocab=", ?vocab, "&language=", ?language)) as ?detailsLink)
+}
+order by ?categoryLabel
