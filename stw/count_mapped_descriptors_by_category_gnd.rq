@@ -13,10 +13,10 @@ prefix skos:     <http://www.w3.org/2004/02/skos/core#>
 prefix zbwext:   <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select distinct ?category (str(?label) as ?categoryLabel)
-(?detailsLink as ?totalStwDescriptors)
-(str(?stwTotal) as ?totalStwDescriptorsLabel)
-(?detailsLink as ?totalForeignDescriptors)
-(str(?foreignTotal) as ?totalForeignDescriptorsLabel)
+(str(?stwTotal) as ?totalStwDescriptors)
+(str(?foreignTotal) as ?totalForeignDescriptors)
+?detailsLink
+("details" as ?detailsLinkLabel)
 where
 {
   # identical setting of ?vocab REQUIRED also in BOTH subselect clauses!!!
