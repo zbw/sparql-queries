@@ -16,6 +16,10 @@ where {
     filter(not exists {
         ?wd wdt:P31 wd:Q5
       })
+    # filter out already existing mappings
+    filter(not exists {
+        ?wd wdt:P3911 [] .
+      })
     optional {
       ?wd rdfs:label ?label .
       filter(lang(?label) = 'de')
