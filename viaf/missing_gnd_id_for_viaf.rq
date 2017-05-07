@@ -3,23 +3,29 @@
 #
 # against viaf endpoint
 #
-select ?wdId ?gndId
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+#
+select distinct ?wdId ?gndId
+#select *
 where {
   # all wikidata items with viaf id, which have no gnd id
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
     ?wd wdt:P31 wd:Q5 ;
-      wdt:P213 [] .
+        wdt:P214 ?viafId .
     filter(not exists {
-      ?wd wdt:P227 [] .
-    }
+        ?wd wdt:P227 [] .
+      })
   }
-  bind(uri(concat("http://d-nb.info/gnd/", ?gndId)) as ?gnd)
-  
+  bind(strafter(str(?wd), "http://www.wikidata.org/entity/") as ?wdId)
+  bind(uri(concat("http://viaf.org/viaf/", $viafId)) as ?viaf)
+  #
   # of these, all which have gnd ids in viaf
-  ?viaf owl:sameAs ?gnd
-  filter(contains(str(?gnd), '/gnd/'))
-  
+  ?viaf schema:sameAs ?gnd
+  filter(contains(str(?gnd), "http://d-nb.info/gnd/"))
+  bind(strafter(str(?gnd), "http://d-nb.info/gnd/") as ?gndId)
+  #
   # optionally, restrict to economists
-  
-  
 }
