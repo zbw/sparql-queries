@@ -1,0 +1,25 @@
+# Get GND ids for Wikidata pages without GND id, but having VIAF id,
+# making use of VIAF sameAs data
+#
+# against viaf endpoint
+#
+select ?wdId ?gndId
+where {
+  # all wikidata items with viaf id, which have no gnd id
+  service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
+    ?wd wdt:P31 wd:Q5 ;
+      wdt:P213 [] .
+    filter(not exists {
+      ?wd wdt:P227 [] .
+    }
+  }
+  bind(uri(concat("http://d-nb.info/gnd/", ?gndId)) as ?gnd)
+  
+  # of these, all which have gnd ids in viaf
+  ?viaf owl:sameAs ?gnd
+  filter(contains(str(?gnd), '/gnd/'))
+  
+  # optionally, restrict to economists
+  
+  
+}
