@@ -15,6 +15,8 @@ where {
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
     ?wd wdt:P31 wd:Q5 ;
         wdt:P214 ?viafId .
+    # filter out blnak nodes (= "unknown value")
+    filter(!isBlank(?viafId))
     filter(not exists {
         ?wd wdt:P227 [] .
       })
