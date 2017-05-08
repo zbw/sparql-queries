@@ -3,10 +3,10 @@
 #
 # against viaf endpoint
 #
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX schema: <http://schema.org/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select distinct ?wdId ?gndId
 #select *
@@ -29,5 +29,8 @@ where {
   filter(contains(str(?gnd), "http://d-nb.info/gnd/"))
   bind(strafter(str(?gnd), "http://d-nb.info/gnd/") as ?gndId)
   #
-  # optionally, restrict to economists
+  # optionally, restrict to economists (gnd present in EconBiz)
+  graph <http://zbw.eu/beta/ebCount/ng> {
+    ?gnd zbwext:econbizCount [] .
+  }
 }

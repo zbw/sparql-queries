@@ -31,6 +31,8 @@ Dataset-specific queries
 
 ### [Wikidata](wikidata)
 
+### [VIAF](viaf)
+
 Contributing
 ------------
 
