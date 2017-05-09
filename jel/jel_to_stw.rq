@@ -2,7 +2,8 @@
 #
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
-select ?target ?targetLabel ?mappingRelation ?stw ?stwLabel 
+#
+select distinct ?target ?targetLabel ?mappingRelation ?stw ?stwLabel 
 where {
   graph <http://zbw.eu/beta/jel/ng> {
     ?target skos:prefLabel ?targetPref .

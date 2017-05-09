@@ -1,0 +1,32 @@
+# Complete mapping, with empty cells and aggregated target, from JEL to STW
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct ?target ?targetLabel ?mappingRelation (group_concat(?stwNotation) as ?stwNotations)
+where {
+  select distinct ?target ?targetLabel ?mappingRelation ?stwNotation
+  where {
+    graph <http://zbw.eu/beta/jel/ng> {
+      ?target skos:prefLabel ?targetPref .
+      filter(lang(?targetPref) = 'en')
+      bind(str(?targetPref) as ?targetLabel)
+    }
+    optional {
+      graph <http://zbw.eu/beta/stwJel/ng> {
+        values (?mappingRelation) {
+          (skos:exactMatch) (skos:closeMatch) (skos:relatedMatch) (skos:broadMatch) (skos:narrowMatch)
+        }
+        ?stw ?mappingRelation ?target .
+      }
+      graph <http://zbw.eu/beta/ebds/stw/ng> {
+        ?stw a zbwext:Thsys ;
+             skos:notation ?stwNta .
+        bind(str(?stwNta) as ?stwNotation)
+      }
+    }
+  }
+  order by ?targetLabel ?mappingRelation
+}
+group by ?target ?targetLabel ?mappingRelation
+order by ?targetLabel ?mappingRelation
