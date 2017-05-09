@@ -1,0 +1,27 @@
+# Complete mapping, with empty cells, from JEL to STW
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+select ?target ?targetLabel ?mappingRelation ?stw ?stwLabel 
+where {
+  graph <http://zbw.eu/beta/jel/ng> {
+    ?target skos:prefLabel ?targetPref .
+    filter(lang(?targetPref) = 'en')
+    bind(str(?targetPref) as ?targetLabel)
+  }
+  optional {
+    graph <http://zbw.eu/beta/stwJel/ng> {
+      values (?mappingRelation) {
+        (skos:exactMatch) (skos:closeMatch) (skos:relatedMatch) (skos:broadMatch) (skos:narrowMatch)
+      }
+      ?stw ?mappingRelation ?target .
+    }
+    graph <http://zbw.eu/beta/ebds/stw/ng> {
+      ?stw a zbwext:Thsys ;
+           skos:prefLabel ?stwPref .
+      filter(lang(?stwPref) = 'en')
+      bind(str(?stwPref) as ?stwLabel)
+    }
+  }
+}
+order by ?targetLabel ?mappingRelation ?stwLabel
