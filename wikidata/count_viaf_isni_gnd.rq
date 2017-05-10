@@ -1,0 +1,37 @@
+# Count identifiers for persons in Wikidata
+#
+# TODO: Take care of multiple ocurrences
+#
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+#
+select (count(distinct ?wd) as ?wdCount)
+(count(distinct ?viafId) as ?viafCount)
+(count(distinct ?isniId) as ?isniCount)
+(count(distinct ?gndId) as ?gndCount)
+(sum(?viafIsniIds) as ?viafIsniCount)
+(sum(?viafGndIds) as ?viafGndCount)
+(sum(?isniGndIds) as ?isniGndCount)
+(sum(?viafGndIsniIds) as ?viafGndIsniCount)
+where {
+#  service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
+    ?wd wdt:P31 wd:Q5 .
+    optional {
+      ?wd wdt:P214 ?viafId .
+      filter(isLiteral(?viafId))
+    }
+    optional {
+      ?wd wdt:P213 ?isniId .
+      filter(isLiteral(?isniId))
+    }
+    optional {
+      ?wd wdt:P227 ?gndId .
+      filter(isLiteral(?gndId))
+    }
+    bind(if(bound(?viafId) && bound(?isniId), 1, 0) as ?viafIsniIds)
+    bind(if(bound(?viafId) && bound(?gndId), 1, 0) as ?viafGndIds)
+    bind(if(bound(?isniId) && bound(?gndId), 1, 0) as ?isniGndIds)
+    bind(if(bound(?viafId) && bound(?gndId) && bound(?isniId), 1, 0) as ?viafGndIsniIds)
+#  }
+}
+

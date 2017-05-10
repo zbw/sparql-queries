@@ -1,0 +1,19 @@
+{
+  "head": {
+    "vars": [ "wdCount" , "viafCount" , "isniCount" , "gndCount" , "viafIsniCount" , "viafGndCount" , "isniGndCount" , "viafGndIsniCount" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "wdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "3296519" } ,
+        "viafCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "856324" } ,
+        "isniCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "297511" } ,
+        "gndCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "358148" } ,
+        "viafIsniCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "303083" } ,
+        "viafGndCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "365045" } ,
+        "isniGndCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "199047" } ,
+        "viafGndIsniCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "198920" }
+      }
+    ]
+  }
+}
