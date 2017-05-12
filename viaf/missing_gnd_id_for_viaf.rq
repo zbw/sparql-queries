@@ -8,8 +8,9 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select distinct ?wdId (?viafId as ?sourceId) (?gndId as ?targetId)
-#select *
+# make sure that only one result per ?wdId is produced, ignore items with
+# multiple ?viafIds or ?gndIds
+select ?wdId (count(*) as ?count) (max(?viafId) as ?sourceId) (max(?gndId) as ?targetId)
 where {
   # all wikidata items with viaf id, which have no gnd id
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
@@ -34,4 +35,6 @@ where {
     ?gnd zbwext:econbizCount [] .
   }
 }
+group by ?wdId
+having (?count = 1)
 limit 10
