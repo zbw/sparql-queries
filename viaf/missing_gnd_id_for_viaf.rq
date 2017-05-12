@@ -8,7 +8,7 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select distinct ?wdId ?gndId
+select distinct ?wdId (?viafId as ?sourceId) (?gndId as ?targetId)
 #select *
 where {
   # all wikidata items with viaf id, which have no gnd id
@@ -34,3 +34,4 @@ where {
     ?gnd zbwext:econbizCount [] .
   }
 }
+limit 10
