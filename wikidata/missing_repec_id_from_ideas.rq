@@ -1,0 +1,24 @@
+# Get RePEc author ids for Wikidata pages without oen,  but having IDEAS id
+#
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+# make sure that only one result per ?wdId is produced, ignore items with
+# multiple ?viafIds or ?gndIds
+select ?wdId (count(*) as ?count) (max(?ideasId) as ?sourceId) (max(?rasId) as ?targetId)
+where {
+  ?wd wdt:P31 wd:Q5 ;
+      wdt:P3649 ?ideasId .
+  # filter out blnak nodes (= "unknown value")
+  filter(isLiteral(?ideasId))
+  filter(not exists {
+      ?wd wdt:P2428 [] .
+    })
+  bind(strafter(str(?wd), "http://www.wikidata.org/entity/") as ?wdId)
+  bind(strafter(?ideasId, "/") as ?rasId)
+  filter(bound(?rasId))
+}
+group by ?wdId
+having (?count = 1)
+limit 100
+
