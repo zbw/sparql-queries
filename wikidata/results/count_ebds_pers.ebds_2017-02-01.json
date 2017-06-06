@@ -7,50 +7,50 @@
       {
         "pubThreshold": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "0" } ,
         "ebPersCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "463299" } ,
-        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "55683" } ,
-        "ebPersWdPct": { "type": "literal" , "value": "12.0 %" }
+        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "56531" } ,
+        "ebPersWdPct": { "type": "literal" , "value": "12.2 %" }
       } ,
       {
         "pubThreshold": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1" } ,
         "ebPersCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "245644" } ,
-        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "34538" } ,
-        "ebPersWdPct": { "type": "literal" , "value": "14.1 %" }
+        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "35373" } ,
+        "ebPersWdPct": { "type": "literal" , "value": "14.4 %" }
       } ,
       {
         "pubThreshold": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "2" } ,
         "ebPersCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "175176" } ,
-        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "26891" } ,
-        "ebPersWdPct": { "type": "literal" , "value": "15.4 %" }
+        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "27721" } ,
+        "ebPersWdPct": { "type": "literal" , "value": "15.8 %" }
       } ,
       {
         "pubThreshold": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10" } ,
         "ebPersCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "57109" } ,
-        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "12073" } ,
-        "ebPersWdPct": { "type": "literal" , "value": "21.1 %" }
+        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "12892" } ,
+        "ebPersWdPct": { "type": "literal" , "value": "22.6 %" }
       } ,
       {
         "pubThreshold": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "30" } ,
         "ebPersCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "18246" } ,
-        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "6634" } ,
-        "ebPersWdPct": { "type": "literal" , "value": "36.4 %" }
+        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "7335" } ,
+        "ebPersWdPct": { "type": "literal" , "value": "40.2 %" }
       } ,
       {
         "pubThreshold": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "50" } ,
         "ebPersCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "9127" } ,
-        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "4628" } ,
-        "ebPersWdPct": { "type": "literal" , "value": "50.7 %" }
+        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "5006" } ,
+        "ebPersWdPct": { "type": "literal" , "value": "54.8 %" }
       } ,
       {
         "pubThreshold": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "100" } ,
         "ebPersCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "2845" } ,
-        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "2077" } ,
-        "ebPersWdPct": { "type": "literal" , "value": "73.0 %" }
+        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "2134" } ,
+        "ebPersWdPct": { "type": "literal" , "value": "75.0 %" }
       } ,
       {
         "pubThreshold": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "150" } ,
         "ebPersCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1258" } ,
-        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1073" } ,
-        "ebPersWdPct": { "type": "literal" , "value": "85.3 %" }
+        "ebPersWdCount": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1082" } ,
+        "ebPersWdPct": { "type": "literal" , "value": "86.0 %" }
       }
     ]
   }
