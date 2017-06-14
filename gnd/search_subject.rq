@@ -1,0 +1,27 @@
+# Text search for subject headings
+#
+# Uses diverse literal properties, brings the best match on top
+# of the list
+#
+PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
+PREFIX  text:   <http://jena.apache.org/text#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+#
+select distinct ?gndId ?subject ?subjectLabel ?score
+where {
+  # searched names
+  values ( ?names ) {
+    # all preferred and alt labels for http://zbw.eu/stw/descriptor/29879-5
+    ( "CGE model, CGE-Modell, ORANI model, MONASH model, Dynamic CGE model, Computable general equilibrium model, CGE analysis, Applied general equilibrium model" )
+  }
+  # full text search - limit number of results to 20
+  # (case and punctuation in the search string are ignored)
+  (?subject ?score) text:query (?names 20) .
+  #
+  # add information for display
+  ?subject a gndo:SubjectHeadingSensoStricto ;
+          gndo:preferredNameForTheSubjectHeading ?subjectLabel ;
+          gndo:gndIdentifier ?gndId .
+}
+order by desc(?score)
+
