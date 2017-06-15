@@ -5,10 +5,14 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-select distinct ?stw ?stwLabel ?stwId ?wd (str(?wdLabelLang) as ?wdLabel)
+select distinct ?stw (str(?stwLabelLang) as ?stwLabel) ?wd (str(?wdLabelLang) as ?wdLabel)
 ?gnd (?gndId as ?gndLabel)
+?unesco (?unescoId as ?unescoLabel)
+?aat (?aatId as ?aatLabel)
 ?viaf (?viafId as ?viafLabel)
+?ndl (?ndlId as ?ndlLabel)
 ?lcAuth (?lcAuthId as ?lcAuthLabel)
+?jstorTopic ( ?jstorTopicId as ?jstorTopicLabel)
 where {
   # get all wikidata entries for humans with ras
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
@@ -24,18 +28,35 @@ where {
       ?wd wdt:P227 ?gndId
     }
     optional {
+      ?wd wdt:P3916 ?unescoId
+    }
+    optional {
       ?wd wdt:P214 ?viafId
+    }
+    optional {
+      ?wd wdt:P1014 ?aatId
+    }
+    optional {
+      ?wd wdt:P349 ?ndlId
     }
     optional {
       ?wd wdt:P244 ?lcAuthId
     }
+    optional {
+      ?wd wdt:P3827 ?jstorTopicId
+    }
   }
   bind(uri(concat("http://zbw.eu/stw/descriptor/", $stwId)) as ?stw)
   bind(uri(concat("http://d-nb.info/gnd/", $gndId)) as ?gnd)
+  bind(uri(concat("http://vocabularies.unesco.org/thesaurus/", ?unescoId)) as ?unesco)
+  bind(uri(concat("http://vocab.getty.edu/page/aat/", ?aatId)) as ?aat)
+  bind(uri(concat("https://id.ndl.go.jp/auth/ndlna/", ?ndlId)) as ?ndl)
   bind(uri(concat("https://viaf.org/viaf/", ?viafId)) as ?viaf)
   bind(uri(concat("http://id.loc.gov/authorities/", ?lcAuthId)) as ?lcAuth)
+  bind(uri(concat("https://www.jstor.org/topic/", ?jstorTopicId)) as ?jstorTopic)
   #
   ?stw skos:prefLabel ?stwLabelLang .
   filter(lang(?stwLabelLang) = 'en')
 }
 order by asc(?stwLabel)
+
