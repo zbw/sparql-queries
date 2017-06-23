@@ -11,18 +11,20 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 select distinct ?stw ?stwLabel ?gnd ?gndLabel ?wd ?wdLabel ?wikipedia ?wikipediaLabel
 ##select distinct ?stwId
 where {
+  # get all wikidata items and labels linked with GND (exclude persons)
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
-    # get all wikidata items and labels linked with GND (exclude persons)
+    # with GND id
     ?wd wdt:P227 ?gndId .
     filter(isLiteral(?gndId))
     # filter out persons
     filter(not exists {
         ?wd wdt:P31 wd:Q5
       })
-    # filter out already existing mappings
+    # filter out items with already existing mappings to STW
     filter(not exists {
         ?wd wdt:P3911 [] .
       })
+    # get labels for the wd item, if exists
     optional {
       ?wd rdfs:label ?label .
       filter(lang(?label) = 'de')
@@ -46,6 +48,17 @@ where {
   filter(lang(?stwLabelLang) = 'de')
   bind(str(?stwLabelLang) as ?stwLabel)
   bind(strafter(str(?stw), 'descriptor/') as ?stwId)
+  #
+  # randomly selected Ids from the the result for use as test set
+  values ( ?randomStwIds ) {
+    ("12065-5") ("13818-5") ("15740-6") ("19699-6") ("19682-2") ("15664-3") ("11650-6") ("10555-5") ("12963-1") ("13840-5")
+    ("18233-1") ("13957-5") ("19485-4") ("11932-3") ("20341-4") ("19715-6") ("16782-6") ("13155-6") ("14640-1") ("11365-5")
+    ("12570-6") ("13516-0") ("16001-4") ("19022-2") ("15734-1") ("13209-2") ("13745-6") ("16515-1") ("30072-6") ("19659-4")
+    ("12782-5") ("12670-2") ("13998-5") ("13713-5") ("19748-5") ("12313-5") ("29860-5") ("11540-6") ("15717-1") ("14442-5")
+    ("14223-3") ("14408-5") ("15764-6") ("15935-5") ("13446-2") ("11373-6") ("11087-0") ("13660-0") ("18142-4") ("29650-2")
+  }
+  # restrict to test set (optionally)
+  filter($stwId in ($randomStwIds))
   #
   # look up GND labels
   ?gnd skos:prefLabel ?gndLabelLang .

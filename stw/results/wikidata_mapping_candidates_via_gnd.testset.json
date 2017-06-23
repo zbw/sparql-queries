@@ -1,0 +1,416 @@
+{
+  "head": {
+    "vars": [ "stw" , "stwLabel" , "gnd" , "gndLabel" , "wd" , "wdLabel" , "wikipedia" , "wikipediaLabel" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/19748-5" } ,
+        "stwLabel": { "type": "literal" , "value": "Adel" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4000464-8" } ,
+        "gndLabel": { "type": "literal" , "value": "Adel" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q134737" } ,
+        "wdLabel": { "type": "literal" , "value": "Adel" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/13446-2" } ,
+        "stwLabel": { "type": "literal" , "value": "Agrarwissenschaft" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4068473-8" } ,
+        "gndLabel": { "type": "literal" , "value": "Agrarwissenschaft" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q3606845" } ,
+        "wdLabel": { "type": "literal" , "value": "Agrarwissenschaften" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/13713-5" } ,
+        "stwLabel": { "type": "literal" , "value": "Aktienmarkt" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4130931-5" } ,
+        "gndLabel": { "type": "literal" , "value": "Aktienmarkt" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q475000" } ,
+        "wdLabel": { "type": "literal" , "value": "Aktienmarkt" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/13957-5" } ,
+        "stwLabel": { "type": "literal" , "value": "Architekten" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4002844-6" } ,
+        "gndLabel": { "type": "literal" , "value": "Architekt" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q42973" } ,
+        "wdLabel": { "type": "literal" , "value": "Architekt" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/14223-3" } ,
+        "stwLabel": { "type": "literal" , "value": "Asbest" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4003178-0" } ,
+        "gndLabel": { "type": "literal" , "value": "Asbest" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q104085" } ,
+        "wdLabel": { "type": "literal" , "value": "Asbest" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/16001-4" } ,
+        "stwLabel": { "type": "literal" , "value": "Atomrecht" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4068925-6" } ,
+        "gndLabel": { "type": "literal" , "value": "Atomrecht" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q757641" } ,
+        "wdLabel": { "type": "literal" , "value": "Atomrecht" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/11365-5" } ,
+        "stwLabel": { "type": "literal" , "value": "Betriebliche Ausbildung" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4227654-8" } ,
+        "gndLabel": { "type": "literal" , "value": "Duales System" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q697304" } ,
+        "wdLabel": { "type": "literal" , "value": "Duale Ausbildung" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/12963-1" } ,
+        "stwLabel": { "type": "literal" , "value": "Binnenfischerei" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4006757-9" } ,
+        "gndLabel": { "type": "literal" , "value": "Binnenfischerei" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q863904" } ,
+        "wdLabel": { "type": "literal" , "value": "Binnenfischerei" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/19485-4" } ,
+        "stwLabel": { "type": "literal" , "value": "Brand" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4133754-2" } ,
+        "gndLabel": { "type": "literal" , "value": "Brand" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q168983" } ,
+        "wdLabel": { "type": "literal" , "value": "Brand" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/20341-4" } ,
+        "stwLabel": { "type": "literal" , "value": "Content Management" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4673954-3" } ,
+        "gndLabel": { "type": "literal" , "value": "Content Management" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q131093" } ,
+        "wdLabel": { "type": "literal" , "value": "Content-Management-System" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/16782-6" } ,
+        "stwLabel": { "type": "literal" , "value": "Dokumentation" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4012656-0" } ,
+        "gndLabel": { "type": "literal" , "value": "Dokumentation" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q788790" } ,
+        "wdLabel": { "type": "literal" , "value": "Dokumentation" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/11650-6" } ,
+        "stwLabel": { "type": "literal" , "value": "Einkommensteuer" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4013895-1" } ,
+        "gndLabel": { "type": "literal" , "value": "Einkommensteuer" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1308187" } ,
+        "wdLabel": { "type": "literal" , "value": "Einkommensteuer (Deutschland)" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/10555-5" } ,
+        "stwLabel": { "type": "literal" , "value": "Entwicklungshilfe" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4014948-1" } ,
+        "gndLabel": { "type": "literal" , "value": "Entwicklungshilfe" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q2827815" } ,
+        "wdLabel": { "type": "literal" , "value": "Entwicklungszusammenarbeit" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/13155-6" } ,
+        "stwLabel": { "type": "literal" , "value": "Fleischwirtschaft" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4129884-6" } ,
+        "gndLabel": { "type": "literal" , "value": "Fleischwirtschaft" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q17540744" } ,
+        "wdLabel": { "type": "literal" , "value": "Fleischindustrie" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/13516-0" } ,
+        "stwLabel": { "type": "literal" , "value": "Flughafen" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4154752-4" } ,
+        "gndLabel": { "type": "literal" , "value": "Flughafen" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1248784" } ,
+        "wdLabel": { "type": "literal" , "value": "Flughafen" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/12782-5" } ,
+        "stwLabel": { "type": "literal" , "value": "Franchising" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4018062-1" } ,
+        "gndLabel": { "type": "literal" , "value": "Franchising" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q171947" } ,
+        "wdLabel": { "type": "literal" , "value": "Franchising" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/18142-4" } ,
+        "stwLabel": { "type": "literal" , "value": "Frauenpolitik" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4113623-8" } ,
+        "gndLabel": { "type": "literal" , "value": "Frauenpolitik" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1451840" } ,
+        "wdLabel": { "type": "literal" , "value": "Frauenpolitik" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/12570-6" } ,
+        "stwLabel": { "type": "literal" , "value": "Führungskräfteauswahl" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4138224-9" } ,
+        "gndLabel": { "type": "literal" , "value": "Assessment-Center" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q265558" } ,
+        "wdLabel": { "type": "literal" , "value": "Assessment-Center" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/15734-1" } ,
+        "stwLabel": { "type": "literal" , "value": "Gewässerschutz" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4020830-8" } ,
+        "gndLabel": { "type": "literal" , "value": "Gewässerschutz" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1462136" } ,
+        "wdLabel": { "type": "literal" , "value": "Gewässerschutz" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/13209-2" } ,
+        "stwLabel": { "type": "literal" , "value": "Großhandel" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4022201-9" } ,
+        "gndLabel": { "type": "literal" , "value": "Großhandel" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q220695" } ,
+        "wdLabel": { "type": "literal" , "value": "Großhandel" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/18233-1" } ,
+        "stwLabel": { "type": "literal" , "value": "Grundwasser" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4022369-3" } ,
+        "gndLabel": { "type": "literal" , "value": "Grundwasser" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q161598" } ,
+        "wdLabel": { "type": "literal" , "value": "Grundwasser" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/11373-6" } ,
+        "stwLabel": { "type": "literal" , "value": "Hochschule" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4072560-1" } ,
+        "gndLabel": { "type": "literal" , "value": "Hochschule" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q21028957" } ,
+        "wdLabel": { "type": "literal" , "value": "Hochschule" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/12313-5" } ,
+        "stwLabel": { "type": "literal" , "value": "IFRS" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4699643-6" } ,
+        "gndLabel": { "type": "literal" , "value": "International Financial Reporting Standards" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q176831" } ,
+        "wdLabel": { "type": "literal" , "value": "International Financial Reporting Standards" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/19659-4" } ,
+        "stwLabel": { "type": "literal" , "value": "Interkulturelle Beziehungen" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4033569-0" } ,
+        "gndLabel": { "type": "literal" , "value": "Kulturkontakt" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1094542" } ,
+        "wdLabel": { "type": "literal" , "value": "Interkulturelle Kommunikation" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/30072-6" } ,
+        "stwLabel": { "type": "literal" , "value": "Internet der Dinge" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/7713781-4" } ,
+        "gndLabel": { "type": "literal" , "value": "Internet der Dinge" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q251212" } ,
+        "wdLabel": { "type": "literal" , "value": "Internet der Dinge" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/29650-2" } ,
+        "stwLabel": { "type": "literal" , "value": "Kameralistik" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4163148-1" } ,
+        "gndLabel": { "type": "literal" , "value": "Kameralistik" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1363492" } ,
+        "wdLabel": { "type": "literal" , "value": "Kameralistik" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/11087-0" } ,
+        "stwLabel": { "type": "literal" , "value": "Klassenkampf" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4130866-9" } ,
+        "gndLabel": { "type": "literal" , "value": "Klassenkampf" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1744607" } ,
+        "wdLabel": { "type": "literal" , "value": "Klassenkampf" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/16515-1" } ,
+        "stwLabel": { "type": "literal" , "value": "Kulturpolitik" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4033581-1" } ,
+        "gndLabel": { "type": "literal" , "value": "Kulturpolitik" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1711347" } ,
+        "wdLabel": { "type": "literal" , "value": "Kulturpolitik" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/12670-2" } ,
+        "stwLabel": { "type": "literal" , "value": "Logistik" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4036210-3" } ,
+        "gndLabel": { "type": "literal" , "value": "Logistik" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q177777" } ,
+        "wdLabel": { "type": "literal" , "value": "Logistik" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/12670-2" } ,
+        "stwLabel": { "type": "literal" , "value": "Logistik" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4254827-5" } ,
+        "gndLabel": { "type": "literal" , "value": "Beschaffungslogistik" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q829484" } ,
+        "wdLabel": { "type": "literal" , "value": "Beschaffungslogistik" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/15740-6" } ,
+        "stwLabel": { "type": "literal" , "value": "Lärmschutz" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4034054-5" } ,
+        "gndLabel": { "type": "literal" , "value": "Lärmschutz" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1879301" } ,
+        "wdLabel": { "type": "literal" , "value": "Lärmschutz" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/19715-6" } ,
+        "stwLabel": { "type": "literal" , "value": "Mediation" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4191538-0" } ,
+        "gndLabel": { "type": "literal" , "value": "Mediation" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q223871" } ,
+        "wdLabel": { "type": "literal" , "value": "Mediation" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/13660-0" } ,
+        "stwLabel": { "type": "literal" , "value": "Medienrecht" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4074661-6" } ,
+        "gndLabel": { "type": "literal" , "value": "Medienrecht" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1066867" } ,
+        "wdLabel": { "type": "literal" , "value": "Medienrecht" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/15664-3" } ,
+        "stwLabel": { "type": "literal" , "value": "Naturwissenschaft" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4041421-8" } ,
+        "gndLabel": { "type": "literal" , "value": "Naturwissenschaften" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q7991" } ,
+        "wdLabel": { "type": "literal" , "value": "Naturwissenschaft" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/19682-2" } ,
+        "stwLabel": { "type": "literal" , "value": "Oligarchie" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4172548-7" } ,
+        "gndLabel": { "type": "literal" , "value": "Oligarchie" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q79751" } ,
+        "wdLabel": { "type": "literal" , "value": "Oligarchie" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/19699-6" } ,
+        "stwLabel": { "type": "literal" , "value": "Politikfinanzierung" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4044747-9" } ,
+        "gndLabel": { "type": "literal" , "value": "Parteienfinanzierung" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1352232" } ,
+        "wdLabel": { "type": "literal" , "value": "Parteienfinanzierung" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/12065-5" } ,
+        "stwLabel": { "type": "literal" , "value": "Produktion" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4047347-8" } ,
+        "gndLabel": { "type": "literal" , "value": "Produktion" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q739302" } ,
+        "wdLabel": { "type": "literal" , "value": "Produktion" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/15935-5" } ,
+        "stwLabel": { "type": "literal" , "value": "Roma-Bevölkerung" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4050473-6" } ,
+        "gndLabel": { "type": "literal" , "value": "Roma <Volk>" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q8060" } ,
+        "wdLabel": { "type": "literal" , "value": "Roma" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/13998-5" } ,
+        "stwLabel": { "type": "literal" , "value": "Soldaten" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4055409-0" } ,
+        "gndLabel": { "type": "literal" , "value": "Soldat" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q4991371" } ,
+        "wdLabel": { "type": "literal" , "value": "Soldat" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/15717-1" } ,
+        "stwLabel": { "type": "literal" , "value": "Soziale Schicht" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4077574-4" } ,
+        "gndLabel": { "type": "literal" , "value": "Soziale Schichtung" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q841628" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/11932-3" } ,
+        "stwLabel": { "type": "literal" , "value": "Standorttheorie" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4121720-2" } ,
+        "gndLabel": { "type": "literal" , "value": "Standorttheorie" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q570579" } ,
+        "wdLabel": { "type": "literal" , "value": "Standorttheorie" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/29860-5" } ,
+        "stwLabel": { "type": "literal" , "value": "Säugetiere" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4051253-8" } ,
+        "gndLabel": { "type": "literal" , "value": "Säugetiere" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q7377" } ,
+        "wdLabel": { "type": "literal" , "value": "Säugetiere" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/14640-1" } ,
+        "stwLabel": { "type": "literal" , "value": "Treibhausgas-Emissionen" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4164538-8" } ,
+        "gndLabel": { "type": "literal" , "value": "Kohlenstoff" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q623" } ,
+        "wdLabel": { "type": "literal" , "value": "Kohlenstoff" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/15764-6" } ,
+        "stwLabel": { "type": "literal" , "value": "Umweltbewusstsein" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4078517-8" } ,
+        "gndLabel": { "type": "literal" , "value": "Umweltbewusstsein" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1515382" } ,
+        "wdLabel": { "type": "literal" , "value": "Umweltbewusstsein" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/13818-5" } ,
+        "stwLabel": { "type": "literal" , "value": "Versicherungsaufsicht" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4063177-1" } ,
+        "gndLabel": { "type": "literal" , "value": "Versicherungsaufsicht" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1793546" } ,
+        "wdLabel": { "type": "literal" , "value": "Versicherungsaufsicht" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/19022-2" } ,
+        "stwLabel": { "type": "literal" , "value": "Vögel" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4063673-2" } ,
+        "gndLabel": { "type": "literal" , "value": "Vögel" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q5113" } ,
+        "wdLabel": { "type": "literal" , "value": "Vögel" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/13840-5" } ,
+        "stwLabel": { "type": "literal" , "value": "Wohneigentum" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4117670-4" } ,
+        "gndLabel": { "type": "literal" , "value": "Wohneigentum" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q4993251" } ,
+        "wdLabel": { "type": "literal" , "value": "Wohneigentum" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/14442-5" } ,
+        "stwLabel": { "type": "literal" , "value": "Wohnmobil" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4066762-5" } ,
+        "gndLabel": { "type": "literal" , "value": "Wohnmobil" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q746448" } ,
+        "wdLabel": { "type": "literal" , "value": "Wohnmobil" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/14408-5" } ,
+        "stwLabel": { "type": "literal" , "value": "Wärmepumpe" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4064195-8" } ,
+        "gndLabel": { "type": "literal" , "value": "Wärmepumpe" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q131313" } ,
+        "wdLabel": { "type": "literal" , "value": "Wärmepumpe" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/13745-6" } ,
+        "stwLabel": { "type": "literal" , "value": "Zero-Bond" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4121945-4" } ,
+        "gndLabel": { "type": "literal" , "value": "Zerobond" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q507494" } ,
+        "wdLabel": { "type": "literal" , "value": "Nullkuponanleihe" }
+      } ,
+      {
+        "stw": { "type": "uri" , "value": "http://zbw.eu/stw/descriptor/11540-6" } ,
+        "stwLabel": { "type": "literal" , "value": "Öffentliche Finanzen" } ,
+        "gnd": { "type": "uri" , "value": "http://d-nb.info/gnd/4017214-4" } ,
+        "gndLabel": { "type": "literal" , "value": "Finanzwirtschaft" } ,
+        "wd": { "type": "uri" , "value": "http://www.wikidata.org/entity/Q1268199" } ,
+        "wdLabel": { "type": "literal" , "value": "Finanzwirtschaft" }
+      }
+    ]
+  }
+}
