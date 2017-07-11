@@ -1,0 +1,36 @@
+# Cardinalities of a mapping
+#
+# does not include 0 relations
+# (no necessity to restrict to either Thsys or Descriptor, because
+# mapping target datasets do not overlap)
+#
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select (str(count(distinct ?stwConcept)) as ?stwConceptCount) (str(?cardinality) as ?numberOfRelations) 
+where {
+  select distinct ?stwConcept (count(?foreignConcept) as ?cardinality)
+  where
+  {
+    values ( ?dataset ) {
+      ( "gnd" )
+    }
+    bind(uri(concat('http://zbw.eu/stw/mapping/', $dataset, '/target')) as ?foreignDataset)
+    {
+      ?stwConcept skos:exactMatch ?foreignConcept
+    } union{
+      ?stwConcept skos:closeMatch ?foreignConcept
+    } union {
+      ?stwConcept skos:broadMatch ?foreignConcept
+    } union {
+      ?stwConcept skos:narrowMatch ?foreignConcept
+    } union {
+      ?stwConcept skos:relatedMatch ?foreignConcept
+    } .
+    ?foreignConcept dcterms:isPartOf ?foreignDataset .
+  }
+  group by ?stwConcept
+}
+group by ?cardinality
+order by asc(?cardinality)
+
