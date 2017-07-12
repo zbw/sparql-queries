@@ -1,36 +1,38 @@
 # Cardinalities of a mapping
 #
-# does not include 0 relations
-# (no necessity to restrict to either Thsys or Descriptor, because
-# mapping target datasets do not overlap)
-#
-prefix dcterms: <http://purl.org/dc/terms/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select (str(count(distinct ?stwConcept)) as ?stwConceptCount) (str(?cardinality) as ?numberOfRelations) 
+select
+(str(?cardinality) as ?numberOfRelations)
+(str(count(distinct ?stwConcept)) as ?stwConceptCount)
 where {
-  select distinct ?stwConcept (count(?foreignConcept) as ?cardinality)
+  select distinct ?stwConcept (sum(?hasRelations) as ?cardinality)
   where
   {
-    values ( ?dataset ) {
-      ( "gnd" )
+    values ( ?conceptType ?foreignDatasetName ) {
+#      ( zbwext:Descriptor "wkdarbr" )
+      ( zbwext:Thsys "sdmx" )
     }
-    bind(uri(concat('http://zbw.eu/stw/mapping/', $dataset, '/target')) as ?foreignDataset)
-    {
-      ?stwConcept skos:exactMatch ?foreignConcept
-    } union{
-      ?stwConcept skos:closeMatch ?foreignConcept
-    } union {
-      ?stwConcept skos:broadMatch ?foreignConcept
-    } union {
-      ?stwConcept skos:narrowMatch ?foreignConcept
-    } union {
-      ?stwConcept skos:relatedMatch ?foreignConcept
-    } .
-    ?foreignConcept dcterms:isPartOf ?foreignDataset .
+    bind(uri(concat('http://zbw.eu/stw/mapping/', $foreignDatasetName, '/target')) as ?foreignDataset)
+    #
+    # all stw concepts of a certain type
+    ?stwConcept a ?conceptType .
+    # exclude deprecated concepts
+    filter(not exists {
+        ?stwConcept owl:deprecated true .
+      }
+    )
+    # any existing relations to a certain dataset
+    optional {
+      ?stwConcept (skos:exactMatch|skos:closeMatch|skos:broadMatch|skos:narrowMatch|skos:relatedMatch) ?foreignConcept .
+      ?foreignConcept dcterms:isPartOf ?foreignDataset .
+    }
+    bind(if(bound(?foreignConcept), 1, 0) as ?hasRelations)
   }
   group by ?stwConcept
 }
 group by ?cardinality
 order by asc(?cardinality)
-
