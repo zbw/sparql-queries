@@ -1,0 +1,46 @@
+# Concepts with a certain number of mapping relations
+# to another dataset
+#
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?stwConcept ?stwConceptLabel ?cardinality
+where {
+  values ( ?cardinalityValue ?language ) {
+    ( 0 "en" )
+  }
+  # subquery to aggregate relations
+  {
+    select distinct ?stwConcept (sum(?hasRelations) as ?cardinality)
+    where
+    {
+      values ( ?conceptType ?foreignDatasetName ) {
+#        ( zbwext:Descriptor "wkdarbr" )
+        ( zbwext:Thsys "sdmx" )
+      }
+      bind(uri(concat('http://zbw.eu/stw/mapping/', $foreignDatasetName, '/target')) as ?foreignDataset)
+      #
+      # all stw concepts of a certain type
+      ?stwConcept a ?conceptType .
+      # exclude deprecated concepts
+      filter(not exists {
+          ?stwConcept owl:deprecated true .
+        }
+      )
+      # any existing relations to a certain dataset
+      optional {
+        ?stwConcept (skos:exactMatch|skos:closeMatch|skos:broadMatch|skos:narrowMatch|skos:relatedMatch) ?foreignConcept .
+        ?foreignConcept dcterms:isPartOf ?foreignDataset .
+      }
+      bind(if(bound(?foreignConcept), 1, 0) as ?hasRelations)
+    }
+    group by ?stwConcept
+  }
+  filter(?cardinality = ?cardinalityValue)
+  ?stwConcept skos:prefLabel ?label .
+  filter(lang(?label) = ?language)
+  bind(str(?label) as ?stwConceptLabel)
+}
+order by ?stwConceptLabel
