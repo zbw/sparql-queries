@@ -9,10 +9,9 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 insert {
-  ?concept rdfs:label ?label
+  ?subject rdfs:label ?label
 }
 WHERE {
-  ?concept a skos:Concept ;
-           skos:prefLabel|skos:altLabel|skos:hiddenLabel ?label .
+  ?subject skos:prefLabel|skos:altLabel|skos:hiddenLabel ?label .
 }
 
