@@ -10,6 +10,14 @@ Query | Description
 [count_subthes_intersect](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/count_subthes_intersect.rq) | Count the descriptors which are part of two subthesauri of STW (e.g., Business Economics (b) and General Economics (v))
 [count_categories_per_descriptor](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/count_categories_per_descriptor.rq) | Number of descriptors by number of categories they are attached to
 
+### STW mapping to Wikidata
+
+Query | Description
+------|------------
+[wikidata_mapped](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/wikidata_mapped.rq) | Get all mappings from wikidata (with labels in English language) to STW, supplemented with Wikipedia site links and GND properties, if exist
+[wikidata_mapping_candidates_via_gnd](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/wikidata_mapping_candidates_via_gnd.rq) | Get all mapping candidates from wikidata (with labels in German language) to STW, derived from existing GND (P227) properties and the STW-GND mapping, supplemented with Wikipedia site links ([result](http://zbw.eu/beta/sparql-lab/result?resultRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/results/wikidata_mapping_candidates_via_gnd.json), [test set](http://zbw.eu/beta/sparql-lab/result?resultRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/results/wikidata_mapping_candidates_via_gnd.testset.json))
+[stw_wikidata_authorities](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/stw_wikidata_authorities.rq) | All STW descriptors mapped to Wikidata, with selected authorities
+
 ### STW mappings to other vocabularies
 
 Query | Description
@@ -24,9 +32,6 @@ Query | Description
 [multi_exact_matches](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/multi_exact_matches.rq) | Mapped concepts with multiple exact matching STW concepts
 [mapping_cardinalities](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/mapping_cardinalities.rq) | Cardinalities of a mapping
 [mapping_cardinality_concepts](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/mapping_cardinality_concepts.rq) | Concepts with a certain number of mapping relations to another dataset (default 0)
-[wikidata_mapped](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/wikidata_mapped.rq) | Get all mappings from wikidata (with labels in English language) to STW, supplemented with Wikipedia site links and GND properties, if exist
-[wikidata_mapping_candidates_via_gnd](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/wikidata_mapping_candidates_via_gnd.rq) | Get all mapping candidates from wikidata (with labels in German language) to STW, derived from existing GND (P227) properties and the STW-GND mapping, supplemented with Wikipedia site links ([result](http://zbw.eu/beta/sparql-lab/result?resultRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/results/wikidata_mapping_candidates_via_gnd.json), [test set](http://zbw.eu/beta/sparql-lab/result?resultRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/results/wikidata_mapping_candidates_via_gnd.testset.json))
-[stw_wikidata_authorities](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/stw_wikidata_authorities.rq) | All STW descriptors mapped to Wikidata, with selected authorities
 
 ### STW version differences
 
