@@ -1,0 +1,62 @@
+# Search a concept by all preferred and alternate labels
+# from stw and other linked concepts
+# (rank by calculated total score)
+#
+# Requires a full-text index, as provided by Jena
+# (WDQS currently does not support full text search, see
+# https://phabricator.wikimedia.org/T141813)
+#
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX text: <http://jena.apache.org/text#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select distinct ?qs2Input ?wd ?wdLabel ?classId (str(sum(?score)) as ?totalScore)
+where {
+  # get all name variantss for search
+  service <http://zbw.eu/beta/sparql/stw/query> {
+    values ( ?stwId ) {
+      # defaults to "Management control"
+      ( "12884-4" )
+    }
+    bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw) .
+    {
+      ?stw skos:prefLabel|skos:altLabel|skos:hiddenLabel ?labelLang
+    } union {
+      ?stw skos:exactMatch/(skos:prefLabel|skos:altLabel|skos:hiddenLabel) ?labelLang
+    }
+    bind(str(?labelLang) as ?label)
+  }
+  # full text search, limit number of results to 20
+  # (query strings and index without language tags)
+  (?wd ?score) text:query (?label 20) .
+  bind(strafter(str(?wd), str(wd:)) as ?wdId)
+  #
+  # exclude certain classes
+  ?wd wdt:P31 ?class .
+  bind(strafter(str(?class), str(wd:)) as ?classId)
+  filter(?classId not in (
+      "Q4167410", # disambiguation page
+      "Q4830453", # business enterprise
+      "Q7725634", # literary work
+      "Q732577",  # publication
+      "Q571",     # book
+      "Q23927052",# conference paper
+      "Q5633421", # scientific journal
+      "Q13442814" # scientific article
+    ))
+  # add wd label
+  ?wd rdfs:label ?wdLabelLang .
+  filter(lang(?wdLabelLang) = 'en')
+  bind(str(?wdLabelLang) as ?wdLabel)
+  #
+  # create input statement for QuickStatements2
+  bind(concat(?wdId, '|P3911|', ?stwId) as ?qs2Input)
+}
+group by ?wd ?wdId ?wdLabel ?qs2Input ?classId
+order by desc(sum(?score))
+limit 20
