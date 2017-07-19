@@ -1,12 +1,11 @@
-# Get all mappings from wikidata (with labels in English language) to STW,
-# supplemented with Wikipedia site links and GND properties, if exist
+# All STW descriptors mapped to Wikidata, with Wikipedia pages
 #
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <http://schema.org/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select distinct ?stw ?stwLabel ?wd ?wdLabel ?wikipedia ?wikipediaLabel ?gnd (?gndId as ?gndLabel)
+select distinct ?stw ?stwLabel ?wd ?wdLabel ?wpEn ?wpEnLabel ?wpDe ?wpDeLabel
 where {
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
     # VALUES clause with language does not work as expected
@@ -20,21 +19,22 @@ where {
     }
     optional {
       # get site links (only from en wikipedia sites)
-      ?sitelink schema:about ?wd ;
-                schema:name ?wikipediaLabelLang ;
+      ?wpEn schema:about ?wd ;
+                schema:name ?wikipediaLabelEn;
                 schema:inLanguage 'en' .
-      filter (contains(str(?sitelink), 'wikipedia'))
-      bind(?sitelink as ?wikipedia)
-      bind(str(?wikipediaLabelLang) as ?wikipediaLabel)
+      filter (contains(str(?wpEn), 'wikipedia'))
+      bind(str(?wikipediaLabelEn) as ?wpEnLabel)
     }
-    #
-    # suplement with GND
     optional {
-      ?wd wdt:P227 ?gndId
+      # get site links (only from de wikipedia sites)
+      ?wpDe schema:about ?wd ;
+                schema:name ?wikipediaLabelDe ;
+                schema:inLanguage 'de' .
+      filter (contains(str(?wpDe), 'wikipedia'))
+      bind(str(?wikipediaLabelDe) as ?wpDeLabel)
     }
   }
   bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw)
-  bind(uri(concat('http://d-nb.info/gnd/', ?gndId)) as ?gnd)
   #
   # look up STW labels
   ?stw skos:prefLabel ?stwLabelLang .
@@ -42,3 +42,4 @@ where {
   bind(str(?stwLabelLang) as ?stwLabel)
 }
 order by ?stwLabelLang
+
