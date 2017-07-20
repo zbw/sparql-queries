@@ -24,6 +24,8 @@ and the preclusion of the "service" clause for federated queries), the
 following queries do not work there and require a "private" endpoint.
 Therefore, links to __cached result files__ has been added.
 
+#### re. persons/economists
+
 Query | Description
 ------|------------
 [count_persons_by_wp_language](http://zbw.eu/beta/sparql-lab/?endpoint=http://172.16.10.102:3030/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/count_persons_by_wp_language.rq) | Count wikipedia articles about persons and specifically economists in different languages ([result](http://zbw.eu/beta/sparql-lab/result?resultRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/results/count_persons_by_wp_language.wikidata_2016-11-07.json))
@@ -38,20 +40,16 @@ Query | Description
 [count_economists_by_authority](http://zbw.eu/beta/sparql-lab/?endpoint=http://172.16.10.102:3030/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/count_economists_by_authority.rq) | Count economists by properties used for authority control ([result](http://zbw.eu/beta/sparql-lab/result?resultRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/results/count_economists_by_authority.wikidata_2016-11-07.json))
 [count_by_authority_for_persons](http://zbw.eu/beta/sparql-lab/?endpoint=http://172.16.10.102:3030/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/count_by_authority_for_persons.rq) |Count persons with authority control properties for people ([result](http://zbw.eu/beta/sparql-lab/result?resultRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/results/count_by_authority_for_persons.wikidata_2016-11-07.json))
 
+#### re. concepts
+
+see also [STW mapping to Wikidata](../stw#stw-mapping-to-wikidata)
+
+Query | Description
+------|------------
+[search_concept_by_stw_labels](http://zbw.eu/beta/sparql-lab/?endpoint=http://172.16.10.102:3030/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_concept_by_stw_labels.rq) | Search a concept by all preferred and alternate labels from stw and other linked concepts (rank by calculated total score)
 
 
 ### Documentation
 
-- https://www.mediawiki.org/wiki/Wikibase/Indexing/SPARQL_Query_Examples
-- https://www.mediawiki.org/wiki/Wikidata_query_service/User_Manual
-- https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format
-- https://www.wikidata.org/wiki/Wikidata:WikiProject_Authority_control
-- https://www.wikidata.org/wiki/User:TweetsFactsAndQueries/A_Guide_To_WDQS
+see [Wikidata Links](https://github.com/jneubert/doc/wiki/Wikidata-Links)
 
-### Applications
-
-- https://tools.wmflabs.org/scholia
-
-### Example queries from WD
-
-- [Interesting items near you](https://query.wikidata.org/#%23defaultView%3AMap%0ASELECT%20%3Fitem%20%3FitemLabel%20%3Fcoords%20%3FstatementCount%20WHERE%20%7B%0A%20%20BIND%28wd%3AQ6451%20AS%20%3Flocation%29.%20%23%20WMDE%20office%3B%20insert%20your%20location%20here%21%0A%20%20%3Flocation%20wdt%3AP625%20%3FlocationCoords.%0A%20%20SERVICE%20wikibase%3Aaround%20%7B%0A%20%20%20%20%3Fitem%20wdt%3AP625%20%3Fcoords.%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Acenter%20%3FlocationCoords%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wikibase%3Aradius%2050.%0A%20%20%7D%0A%20%20MINUS%20%7B%20%3Fitem%20wdt%3AP31%2Fwdt%3AP279%2a%20wd%3AQ1496967.%20%7D%20%23%20territorial%20entities%20%28cities%2C%20%E2%80%A6%29%20are%20boring%0A%20%20%3Fitem%20%5Eschema%3Aabout%3F%2Fwikibase%3Astatements%20%3FstatementCount.%0A%20%20FILTER%28%3FstatementCount%20%3E%3D%2015%29.%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%2C%20%22de%22.%20%7D%0A%7D)
