@@ -26,7 +26,7 @@ Therefore, links to __cached result files__ has been added.
 
 #### re. persons/economists
 
-see also [Economists in Wikidata](zbw.eu/labs/economists-in-wikidata-opportunities-of-authority-linking)
+see also [Economists in Wikidata](http://zbw.eu/labs/economists-in-wikidata-opportunities-of-authority-linking)
 
 Query | Description
 ------|------------
