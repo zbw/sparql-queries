@@ -1,0 +1,34 @@
+# Create input for Wikidata Mix'n'match for STW descriptors
+#
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select ?id ?name ?description
+where {
+  ?stw a zbwext:Descriptor ;
+       skos:broader ?thsys ;
+       skos:prefLabel ?prefLang .
+  ?thsys a zbwext:Thsys ;
+         skos:notation ?nta .
+  filter(lang(?prefLang) = 'de')
+  #
+  # selection by notation
+  filter(strstarts(?nta, 'G.'))
+  # build description
+  {
+    select ?stw ( group_concat(str(?label);
+        separator = ' | ') as ?description)
+    where {
+      {
+        ?stw skos:prefLabel ?label .
+        filter(lang(?label) = 'en')
+      } union {
+        ?stw skos:prefLabel ?label .
+      }
+    }
+    group by ?stw
+  }
+  bind(strafter(str(?stw), 'http://zbw.eu/stw/descriptor/') as ?id)
+  bind(str(?prefLang) as ?name)
+}
+order by ?name
