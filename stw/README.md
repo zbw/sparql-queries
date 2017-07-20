@@ -12,6 +12,8 @@ Query | Description
 
 ### STW mapping to Wikidata
 
+see also [Queries on Wikidata](../wikidata#re-concepts)
+
 Query | Description
 ------|------------
 [stw_wikidata_authorities](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/stw_wikidata_authorities.rq) | All STW descriptors mapped to Wikidata, with selected authorities
