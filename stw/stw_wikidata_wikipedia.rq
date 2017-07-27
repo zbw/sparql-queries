@@ -5,34 +5,43 @@ PREFIX schema: <http://schema.org/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select distinct ?stw ?stwLabel ?wd ?wdLabel ?wpEn ?wpEnLabel ?wpDe ?wpDeLabel
+select distinct ?stw ?stwLabel ?wd ?wdLabel ?wikipediaEn ?wikipediaEnLabel ?wikipediaDe ?wikipediaDeLabel ?langTags
 where {
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
-    # VALUES clause with language does not work as expected
-    #
-    # get all wikidata items and labels linked to STW
-    ?wd wdt:P3911 ?stwId .
-    optional {
-      ?wd rdfs:label ?label .
-      filter(lang(?label) = 'en')
-      bind(str(?label) as ?wdLabel)
+    # aggregate all language tags
+    select ?stwId ?wd ?wdLabel
+    (uri(max(?wpEn)) as ?wikipediaEn) (str(max(?wpEnName)) as ?wikipediaEnLabel)
+    (uri(max(?wpDe)) as ?wikipediaDe) (str(max(?wpDeName)) as ?wikipediaDeLabel)
+    (group_concat(distinct ?langTag;
+        separator = ' ') as ?langTags)
+    where {
+      select ?stwId ?wd ?wdLabel ?wpEn ?wpEnName ?wpDe ?wpDeName ?langTag
+      where {
+        # VALUES clause with language does not work as expected
+        #
+        # get all wikidata items and labels linked to STW
+        ?wd wdt:P3911 ?stwId .
+        optional {
+          ?wd rdfs:label ?label .
+          filter(lang(?label) = 'en')
+          bind(str(?label) as ?wdLabel)
+        }
+        # get all wikipedia site links
+        optional {
+          ?wpPage schema:about ?wd ;
+                  schema:name ?pageName ;
+                  schema:inLanguage ?langTag .
+          filter (contains(str(?wpPage), 'wikipedia'))
+        }
+        # expose English and German Wikipedia pages
+        bind(if(?langTag = 'de', str(?wpPage), '') as ?wpDe)
+        bind(if(?langTag = 'de', ?pageName, '') as ?wpDeName)
+        bind(if(?langTag = 'en', str(?wpPage), '') as ?wpEn)
+        bind(if(?langTag = 'en', ?pageName, '') as ?wpEnName)
+      }
+      order by ?stwId ?langTag
     }
-    optional {
-      # get site links (only from en wikipedia sites)
-      ?wpEn schema:about ?wd ;
-                schema:name ?wikipediaLabelEn;
-                schema:inLanguage 'en' .
-      filter (contains(str(?wpEn), 'wikipedia'))
-      bind(str(?wikipediaLabelEn) as ?wpEnLabel)
-    }
-    optional {
-      # get site links (only from de wikipedia sites)
-      ?wpDe schema:about ?wd ;
-                schema:name ?wikipediaLabelDe ;
-                schema:inLanguage 'de' .
-      filter (contains(str(?wpDe), 'wikipedia'))
-      bind(str(?wikipediaLabelDe) as ?wpDeLabel)
-    }
+    group by ?stwId ?wd ?wdLabel
   }
   bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw)
   #
@@ -42,4 +51,3 @@ where {
   bind(str(?stwLabelLang) as ?stwLabel)
 }
 order by ?stwLabelLang
-
