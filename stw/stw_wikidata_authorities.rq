@@ -9,6 +9,8 @@ select distinct ?stw (str(?stwLabelLang) as ?stwLabel) ?wd (str(?wdLabelLang) as
 ?gnd (?gndId as ?gndLabel)
 ?unesco (?unescoId as ?unescoLabel)
 ?aat (?aatId as ?aatLabel)
+?tgn (?tgnId as ?tgnLabel)
+?geonames (?geonamesId as ?geonamesLabel)
 ?viaf (?viafId as ?viafLabel)
 ?ndl (?ndlId as ?ndlLabel)
 ?lcAuth (?lcAuthId as ?lcAuthLabel)
@@ -31,6 +33,12 @@ where {
       ?wd wdt:P3916 ?unescoId
     }
     optional {
+      ?wd wdt:P1667 ?tgnId
+    }
+    optional {
+      ?wd wdt:P1566 ?geonamesId
+    }
+    optional {
       ?wd wdt:P214 ?viafId
     }
     optional {
@@ -50,6 +58,8 @@ where {
   bind(uri(concat("http://d-nb.info/gnd/", $gndId)) as ?gnd)
   bind(uri(concat("http://vocabularies.unesco.org/thesaurus/", ?unescoId)) as ?unesco)
   bind(uri(concat("http://vocab.getty.edu/page/aat/", ?aatId)) as ?aat)
+  bind(uri(concat("http://vocab.getty.edu/page/tgn/", ?tgnId)) as ?tgn)
+  bind(uri(concat("http://sws.geonames.org/", ?geonamesId)) as ?geonames)
   bind(uri(concat("https://id.ndl.go.jp/auth/ndlna/", ?ndlId)) as ?ndl)
   bind(uri(concat("https://viaf.org/viaf/", ?viafId)) as ?viaf)
   bind(uri(concat("http://id.loc.gov/authorities/", ?lcAuthId)) as ?lcAuth)
@@ -59,4 +69,3 @@ where {
   filter(lang(?stwLabelLang) = 'en')
 }
 order by asc(?stwLabel)
-
