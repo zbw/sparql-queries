@@ -1,0 +1,13 @@
+# All GND persons linked to ORCID
+#
+PREFIX gndo:   <http://d-nb.info/standards/elementset/gnd#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+#
+select *
+where {
+  ?person a gndo:DifferentiatedPerson ;
+          owl:sameAs ?orcid .
+  filter(strstarts(str(?orcid), 'http://orcid.org/'))
+  ?person gndo:preferredNameForThePerson ?personLabel .
+}
+order by ?personLabel
