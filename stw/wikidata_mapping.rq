@@ -31,8 +31,5 @@ where {
   ?stw skos:prefLabel ?stwLabelLang .
   filter(lang(?stwLabelLang) = 'de')
   bind(str(?stwLabelLang) as ?stwLabel)
-  bind(strafter(str(?stw), 'descriptor/') as ?stwId)
-  #
-  # randomly selected Ids from the the result for use as test set
 }
 order by ?stwLabelLang
