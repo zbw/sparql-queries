@@ -1,0 +1,41 @@
+# Get all mapping candidates from wikidata (with labels in German language)
+# to STW, derived from existing GND (P227) properties and the STW-GND mapping,
+# supplemented with Wikipedia site links
+#
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+#
+select distinct ?stw ?stwLabel ?gnd ?gndLabel ?wd ?wdLabel
+##select distinct ?stwId
+where {
+  # get all wikidata items and labels linked with GND (exclude persons)
+  service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
+    # with GND id
+    ?wd wdt:P227 ?gndId .
+    filter(isLiteral(?gndId))
+
+    # get labels for the wd item, if exists
+    optional {
+      ?wd rdfs:label ?label .
+      filter(lang(?label) = 'de')
+      bind(str(?label) as ?wdLabel)
+    }
+
+
+
+  }
+  bind(uri(concat('http://d-nb.info/gnd/', ?gndId)) as ?gnd)
+  #
+  # look up STW descriptors and labels
+  ?stw skos:exactMatch ?gnd ;
+       skos:prefLabel ?stwLabelLang .
+  filter(lang(?stwLabelLang) = 'de')
+  bind(str(?stwLabelLang) as ?stwLabel)
+  bind(strafter(str(?stw), 'descriptor/') as ?stwId)
+  #
+  # randomly selected Ids from the the result for use as test set
+}
+order by ?stwLabelLang
