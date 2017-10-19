@@ -1,4 +1,4 @@
-# Get all mappings to STW from from Wikidata (with labels in German language)
+# Get all mappings from Wikidata to STW (with labels in German language)
 #
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
@@ -8,11 +8,11 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 #
 select distinct ?stw ?relation ?relationLabel ?stwLabel ?wd ?wdLabel
 where {
-  # get all wikidata items linked with STW with labels and mapping relation
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
-    # has STW ID
+    # wd items with STW ID
     ?wd wdt:P3911 ?stwId .
     filter(isLiteral(?stwId))
+    #
     # mapping relation
     optional {
       ?wd p:P3911/pq:P4390 ?relation .
@@ -20,7 +20,7 @@ where {
       filter(lang(?relationLabelLang) = 'en')
       bind(str(?relationLabelLang) as ?relationLabel)
     }
-    # get labels for the wd item, if exists
+    # get label for the wd item, if exists
     optional {
       ?wd rdfs:label ?label .
       filter(lang(?label) = 'de')
