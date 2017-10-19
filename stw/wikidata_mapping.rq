@@ -1,35 +1,35 @@
 # Get all mappings to STW from from Wikidata (with labels in German language)
 #
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX schema: <http://schema.org/>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 #
-select distinct ?stw ?stwLabel ?wd ?wdLabel
-##select distinct ?stwId
+select distinct ?stw ?relation ?relationLabel ?stwLabel ?wd ?wdLabel
 where {
-  # get all wikidata items and labels linked with GND (exclude persons)
+  # get all wikidata items linked with STW with labels and mapping relation
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
-    # with GND id
+    # has STW ID
     ?wd wdt:P3911 ?stwId .
     filter(isLiteral(?stwId))
-
+    # mapping relation
+    optional {
+      ?wd p:P3911/pq:P4390 ?relation .
+      ?relation rdfs:label ?relationLabelLang .
+      filter(lang(?relationLabelLang) = 'en')
+      bind(str(?relationLabelLang) as ?relationLabel)
+    }
     # get labels for the wd item, if exists
     optional {
       ?wd rdfs:label ?label .
       filter(lang(?label) = 'de')
       bind(str(?label) as ?wdLabel)
     }
-
-
-
   }
-  bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw)
-  #
   # look up STW descriptors and labels
+  bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw)
   ?stw skos:prefLabel ?stwLabelLang .
   filter(lang(?stwLabelLang) = 'de')
   bind(str(?stwLabelLang) as ?stwLabel)
 }
-order by ?stwLabelLang
