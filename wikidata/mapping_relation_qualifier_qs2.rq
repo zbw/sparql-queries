@@ -1,0 +1,34 @@
+# Generate QS2 statements for adding a default mapping relation qualifier
+# to external identifiers
+#
+PREFIX wd: <http://www.wikidata.org/entity/> 
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX q: <http://www.wikidata.org/prop/qualifier/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select ?wd ?wdLabel ?value ?qs2
+where {
+  values ( ?propName ?defaultType ) {
+    #  STW-ID  exactMatch
+    ( 'P3911' 'Q39893449' )
+  }
+  bind(uri(concat( str(p:), ?propName )) as ?property)
+  bind(uri(concat( str(ps:), ?propName)) as ?ps)
+  #
+  # get all unqualified properties
+  ?wd ?property ?statement .
+  ?statement ?ps ?value .
+  filter(not exists {
+      ?statement q:P4390 ?relation .
+    }
+  )
+  # get label for the wd item, if exists
+  optional {
+    ?wd rdfs:label ?label .
+    filter(lang(?label) = 'en')
+    bind(str(?label) as ?wdLabel)
+  }
+  # create QS2 statements
+  bind(concat(strafter(str(?wd), str(wd:)), '|', ?propName, '|"', ?value, '"|P4390|', ?defaultType) as ?qs2)
+}
