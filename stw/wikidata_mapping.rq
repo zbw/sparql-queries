@@ -1,5 +1,8 @@
 # Get all mappings from Wikidata to STW (with labels in German language)
 #
+# needs to run from an endpoint holding the vocabulary of the external-id
+# in order to get the labels
+#
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -33,3 +36,4 @@ where {
   filter(lang(?stwLabelLang) = 'de')
   bind(str(?stwLabelLang) as ?stwLabel)
 }
+order by ?relationLabel ?stwLabel
