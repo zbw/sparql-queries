@@ -1,5 +1,5 @@
 # Prominent economists, as indicated by a certain property,
-# lacking another propery (e.g., TED speakers without a GND ID)
+# lacking another propery (e.g., RePEc authors without a GND ID)
 #
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
@@ -21,10 +21,10 @@ where {
   #       (this can address an arbitrary web application)
   # e.g., GND missing for TED speakers, lookup in SPARQL Lab GND endpoint
   values ( ?missingProperty ?definingProperty ?lookupURL ) {
-    ( wdt:P227 wdt:P2611 'http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_person.rq&name=' )
+    ( wdt:P227 wdt:P2428 'http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_person.rq&name=' )
   }
   # restrict the data to "occupation economist"
-  ?wd wdt:P106 wd:Q188094 .
+  ##?wd wdt:P106 wd:Q188094 .
   #
   # restrict to items with the property indicating relevance
   ?wd ?definingProperty [] .
