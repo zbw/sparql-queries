@@ -21,7 +21,7 @@ select distinct ?person ?personLabel
 where {
   # searched name, Wikidata ID to link
   values ( ?name ?wdId ) {
-    ( "William K. Black" 'Q3568755' )
+    ( "William K. Black" "Q3568755" )
   }
   # limit number of results to 20
   (?person ?score) text:query (?name 20) .

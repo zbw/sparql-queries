@@ -21,7 +21,7 @@ where {
   #       (this can address an arbitrary web application)
   # e.g., GND missing for TED speakers, lookup in SPARQL Lab GND endpoint
   values ( ?missingProperty ?definingProperty ?lookupURL ) {
-    ( wdt:P227 wdt:P2428 'http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_person.rq&name=' )
+    ( wdt:P227 wdt:P2428 'http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_n_link_person.rq&name=' )
   }
   # restrict the data to "occupation economist"
   ##?wd wdt:P106 wd:Q188094 .
@@ -61,7 +61,8 @@ where {
   }
   # build lookup link
   bind(encode_for_uri(?wdLabel) as ?searchedName)
-  bind(uri(concat(?lookupURL, ?searchedName)) as ?lookup)
+  bind(strafter(str(?wd), str(wd:)) as ?wdId)
+  bind(uri(concat(?lookupURL, ?searchedName, '&wdId=', ?wdId)) as ?lookup)
   #
   # get site links (for sorting according to prominence)
   ?sitelink schema:about ?wd .
