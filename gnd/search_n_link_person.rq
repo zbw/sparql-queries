@@ -1,5 +1,5 @@
 # Text search for persons, with additional data for identification
-# and link to add a GND ID to Wikidata via QS2 link
+# and link to add a GND ID to an Wikidata item via QuickStatements2 link
 #
 # Uses diverse literal properties, brings the best match on top
 # of the list
@@ -8,13 +8,16 @@ PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
 PREFIX  text:   <http://jena.apache.org/text#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
-select distinct ?gndId ?person ?personLabel
+select distinct ?person ?personLabel
 (concat(?life, coalesce(concat("; ", group_concat(distinct str(?occupation) ;
           separator = "; ")), "")) as ?shortInfo)
 (group_concat(distinct ?affiliation ;
     separator = "; ") as ?affiliations)
 (group_concat(distinct ?info ;
     separator = "; ") as ?biographicalInformation)
+(uri(concat('http://wikidata.org/entity/', max(?wdId))) as ?wd) (max(?wdId) as ?wdLabel)
+(uri(concat('https://tools.wmflabs.org/quickstatements/#v1=', max(?wdId), '|P227|"', ?gndId, '"')) as ?addGnd)
+(concat('add GND ', ?gndId) as ?addGndLabel)
 where {
   # searched name, Wikidata ID to link
   values ( ?name ?wdId ) {
