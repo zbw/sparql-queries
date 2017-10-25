@@ -1,0 +1,50 @@
+# Text search for persons, with additional data for identification
+# and link to add a GND ID to Wikidata via QS2 link
+#
+# Uses diverse literal properties, brings the best match on top
+# of the list
+#
+PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
+PREFIX  text:   <http://jena.apache.org/text#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+#
+select distinct ?gndId ?person ?personLabel
+(concat(?life, coalesce(concat("; ", group_concat(distinct str(?occupation) ;
+          separator = "; ")), "")) as ?shortInfo)
+(group_concat(distinct ?affiliation ;
+    separator = "; ") as ?affiliations)
+(group_concat(distinct ?info ;
+    separator = "; ") as ?biographicalInformation)
+where {
+  # searched name, Wikidata ID to link
+  values ( ?name ?wdId ) {
+    ( "William K. Black" 'Q3568755' )
+  }
+  # limit number of results to 20
+  (?person ?score) text:query (?name 20) .
+  ?person a gndo:DifferentiatedPerson ;
+          gndo:preferredNameForThePerson ?personLabel ;
+          gndo:gndIdentifier ?gndId .
+  #
+  # get additional information
+  optional {
+    ?person gndo:professionOrOccupation/gndo:preferredNameForTheSubjectHeading ?occupation .
+  }
+  optional {
+    ?person gndo:affiliation/gndo:preferredNameForTheCorporateBody ?affiliation .
+  }
+  optional {
+    ?person gndo:biographicalOrHistoricalInformation ?info .
+  }
+  optional {
+    ?person gndo:dateOfBirth ?birthDate .
+  }
+  optional {
+    ?person gndo:dateOfDeath ?deathDate .
+  }
+  bind(if(bound(?birthDate), str(?birthDate), '') as ?birth)
+  bind(if(bound(?deathDate), str(?deathDate), '')  as ?death)
+  bind(concat(?birth, ' - ', ?death) as ?life)
+}
+group by ?person ?score ?personLabel ?gndId ?life
+order by desc(?score)
