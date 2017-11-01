@@ -36,4 +36,4 @@ where {
   filter(lang(?stwLabelLang) = 'de')
   bind(str(?stwLabelLang) as ?stwLabel)
 }
-order by ?relationLabel ?stwLabel
+order by ?relationLabel ?wdLabel
