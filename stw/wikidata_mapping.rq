@@ -9,7 +9,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 #
-select distinct ?stw ?relation ?relationLabel ?stwLabel ?wd ?wdLabel
+select distinct ?wd ?wdLabel ?relation ?relationLabel ?stw ?stwLabel ?wd
 where {
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
     # wd items with STW ID
