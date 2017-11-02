@@ -8,7 +8,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 #
-select distinct ?stw ?relation ?relationLabel ?stwLabel ?wd ?wdLabel ?searchLink ('Search in Wikidata' as ?searchLinkLabel)
+select distinct ?wd ?wdLabel ?relation ?relationLabel ?stw ?stwLabel ?searchLink ('Search in Wikidata' as ?searchLinkLabel)
 where {
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
     # wd items with STW ID
@@ -27,7 +27,7 @@ where {
     # get label for the wd item, if exists
     optional {
       ?wd rdfs:label ?label .
-      filter(lang(?label) = 'de')
+      filter(lang(?label) = 'en')
       bind(str(?label) as ?wdLabel)
     }
   }
@@ -40,4 +40,4 @@ where {
   # create search link
   bind (uri(concat('https://www.wikidata.org/w/index.php?title=Special:Search&fulltext=1&search=', ?stwLabel)) as ?searchLink)
 }
-order by desc(?relation)
+order by desc(?relation) ?wdLabel
