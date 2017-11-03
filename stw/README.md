@@ -24,6 +24,7 @@ Query | Description
 [single_exact_violations](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/single_exact_violations.rq) | Single value constraint violations (multiple exact matches from an item)
 [distinct_exact_violations](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/distinct_exact_violations.rq) | Distinct values constraint violations (multiple exact matches to different items)
 [multiple_id_values](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/multiple_id_values.rq) | Multiple ID values per item
+[same_id_value](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/same_id_value.rq) | Same ID value in different items
 [stw_mix_n_match](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/stw_mix_n_match.rq) | Create input for Wikidata Mix'n'match for STW descriptors
 
 ### STW mappings to other vocabularies
