@@ -22,6 +22,7 @@ Query | Description
 [wikidata_mapping](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/wikidata_mapping.rq) | Get all mappings from Wikidata to STW (with labels in German language)
 [inexact_wikidata_mapping](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/inexact_wikidata_mapping.rq) | Get all in-exact mappings from Wikidata to STW (with link for search in Wikidata)
 [single_exact_violations](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/single_exact_violations.rq) | Single value constraint violations (multiple exact matches from an item)
+[multiple_id_values](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/multiple_id_values.rq) | Multiple ID values per item
 [stw_mix_n_match](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/stw_mix_n_match.rq) | Create input for Wikidata Mix'n'match for STW descriptors
 
 ### STW mappings to other vocabularies
