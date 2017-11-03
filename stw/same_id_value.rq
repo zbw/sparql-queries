@@ -17,8 +17,13 @@ where {
       {
         select distinct  ?stwId (count(?wd) as ?wdCount)
         where {
+          # items to exclude (with reasons)
+          values ( ?excludeList ) {
+            ( wd:Q4115189 )  # Wikidata Sandbox item
+          }
           # statements on property STW ID
           ?wd p:P3911 ?statement .
+          filter(?wd not in (?excludeList))
           # mapping relation exact match
           ?statement pq:P4390 [] ;
                      ps:P3911 ?stwId .
