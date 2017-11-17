@@ -1,6 +1,6 @@
-# All RePEc authors mapped to Wikidata, with Wikipedia pages
+# All GND authors mapped to Wikidata, with Wikipedia pages
 #
-# (to be executed against Wikidata endpoint)
+# (to be executed against econ_corp endpoint)
 #
 PREFIX bd: <http://www.bigdata.com/rdf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -8,28 +8,39 @@ PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX wd: <http://www.wikidata.org/entity/>
 #
-select distinct ?ras (?rasId as ?rasLabel) ?wd ?wdLabel
+select distinct ?gnd (?gndId as ?gndLabel) ?wd ?wdLabel
 ?wikipediaEn ?wikipediaEnLabel ?wikipediaDe ?wikipediaDeLabel ?allLanguages
 where {
   {
-    select ?rasId ?wd ?wdLabel
+    select distinct ?gndId
+    where {
+      ?gnd skos:prefLabel [] .
+      bind(strafter(str(?gnd), 'http://d-nb.info/gnd/') as ?gndId)
+    }
+  }
+  #
+  service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
+    select ?gndId ?wd ?wdLabel
     (max(?wpEnStr) as ?wpEnUrl) (str(max(?wpEnName)) as ?wikipediaEnLabel)
     (max(?wpDeStr) as ?wpDeUrl) (str(max(?wpDeName)) as ?wikipediaDeLabel)
     ?allLanguages
     where {
       # aggregate all language tags
       {
-        select ?rasId ?wd ?wdLabel
+        select ?gndId ?wd ?wdLabel
         (concat('[', group_concat(distinct ?langTag;
               separator = '] ['), ']') as ?allLanguages)
         where {
-          select ?rasId ?wd ?langTag
+          select ?gndId ?wd ?langTag
           where {
             # VALUES clause with language does not work as expected
             #
-            # get all wikidata items and labels linked to ras
-            ?wd wdt:P2428 ?rasId .
+            # get all wikidata items and labels linked to gnd
+            ?wd wdt:P227 ?gndId ;
+                wdt:P31 wd:Q5 .
             # get all wikipedia site links
             optional {
               ?wpPage schema:about ?wd ;
@@ -38,9 +49,9 @@ where {
               filter (contains(str(?wpPage), 'wikipedia'))
             }
           }
-          order by ?rasId ?langTag
+          order by ?gndId ?langTag
         }
-        group by ?rasId ?wd ?wdLabel
+        group by ?gndId ?wd ?wdLabel
       }
       # get some label
       service wikibase:label {
@@ -61,10 +72,10 @@ where {
       bind(if(?langTag = 'en', str(?wpPage), '') as ?wpEnStr)
       bind(if(?langTag = 'en', ?pageName, '') as ?wpEnName)
     }
-    group by ?rasId ?wd ?wdLabel ?allLanguages
+    group by ?gndId ?wd ?wdLabel ?allLanguages
   }
   bind(uri(?wpEnUrl) as ?wikipediaEn)
   bind(uri(?wpDeUrl) as ?wikipediaDe)
-  bind(uri(concat("http://authors.repec.org/pro/", $rasId)) as ?ras)
+  bind(uri(concat('http://d-nb.info/gnd/', $gndId)) as ?gnd)
 }
-order by ?rasLabel
+order by ?gndLabel
