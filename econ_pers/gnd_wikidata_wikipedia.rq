@@ -1,0 +1,70 @@
+# All RePEc authors mapped to Wikidata, with Wikipedia pages
+#
+# (to be executed against Wikidata endpoint)
+#
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+#
+select distinct ?ras (?rasId as ?rasLabel) ?wd ?wdLabel
+?wikipediaEn ?wikipediaEnLabel ?wikipediaDe ?wikipediaDeLabel ?allLanguages
+where {
+  {
+    select ?rasId ?wd ?wdLabel
+    (max(?wpEnStr) as ?wpEnUrl) (str(max(?wpEnName)) as ?wikipediaEnLabel)
+    (max(?wpDeStr) as ?wpDeUrl) (str(max(?wpDeName)) as ?wikipediaDeLabel)
+    ?allLanguages
+    where {
+      # aggregate all language tags
+      {
+        select ?rasId ?wd ?wdLabel
+        (concat('[', group_concat(distinct ?langTag;
+              separator = '] ['), ']') as ?allLanguages)
+        where {
+          select ?rasId ?wd ?langTag
+          where {
+            # VALUES clause with language does not work as expected
+            #
+            # get all wikidata items and labels linked to ras
+            ?wd wdt:P2428 ?rasId .
+            # get all wikipedia site links
+            optional {
+              ?wpPage schema:about ?wd ;
+                      schema:name ?pageName ;
+                      schema:inLanguage ?langTag .
+              filter (contains(str(?wpPage), 'wikipedia'))
+            }
+          }
+          order by ?rasId ?langTag
+        }
+        group by ?rasId ?wd ?wdLabel
+      }
+      # get some label
+      service wikibase:label {
+        bd:serviceParam wikibase:language 'en, de, fr, pt, nb, cs, ja' .
+      }
+      #
+      # expose English and German Wikipedia pages
+      # (url as string, for the max() function
+      optional {
+        ?wpPage schema:about ?wd ;
+                schema:name ?pageName ;
+                schema:inLanguage ?langTag .
+        filter (contains(str(?wpPage), 'wikipedia'))
+        filter(?langTag in ('de', 'en'))
+      }
+      bind(if(?langTag = 'de', str(?wpPage), '') as ?wpDeStr)
+      bind(if(?langTag = 'de', ?pageName, '') as ?wpDeName)
+      bind(if(?langTag = 'en', str(?wpPage), '') as ?wpEnStr)
+      bind(if(?langTag = 'en', ?pageName, '') as ?wpEnName)
+    }
+    group by ?rasId ?wd ?wdLabel ?allLanguages
+  }
+  bind(uri(?wpEnUrl) as ?wikipediaEn)
+  bind(uri(?wpDeUrl) as ?wikipediaDe)
+  bind(uri(concat("http://authors.repec.org/pro/", $rasId)) as ?ras)
+}
+order by ?rasLabel
