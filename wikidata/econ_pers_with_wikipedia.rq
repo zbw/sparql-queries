@@ -1,0 +1,37 @@
+# Wikipedia pages for EconBiz authors
+#
+# (uses the econ_pers dataset derived from EconBiz, as of 2015-07)
+#
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX schema: <http://schema.org/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+#
+select ?page ?wd ?gndId
+where {
+  # runs forever when the optimizer is active
+  hint:Query hint:optimizer "None" .
+  #
+  # change here for German or other Wikipedia
+  values ( ?wikipedia ) {
+    ( <https://en.wikipedia.org/> )
+  }
+  # get all GND IDs from econ_corp dataset
+  service <http://zbw.eu/beta/sparql/econ_pers/query> {
+    select ?gndId ?cnt
+    where {
+      ?gnd zbwext:econbizCount ?cnt .
+      filter(?cnt > 0)
+      bind(strafter(str(?gnd), 'http://d-nb.info/gnd/') as ?gndId)
+    }
+  }
+  # join to wikidata and restrict to humans
+  ?wd wdt:P227 ?gndId ;
+      wdt:P31 wd:Q5 .
+  #
+  # get Wikipedia pages
+  ?page schema:about ?wd ;
+        schema:isPartOf ?wikipedia .
+}
+order by desc(?cnt)
