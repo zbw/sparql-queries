@@ -1,17 +1,24 @@
 # Internationally prominent economists
 # (with entries in three or more Wikipedias)
 #
+PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
-select ?wdLabel ?wd ?desc (str(count(?sitelink)) as ?siteCount) ?gndId
+select ?wd ?wdLabel ?desc (str(count(?sitelink)) as ?siteCount) ?gnd ?gndLabel
 where {
   values (?occupation) {
     (<http://www.wikidata.org/entity/Q188094>) # economist
   }
+  # restrict to occupation
   ?wd wdt:P106 ?occupation .
+  #
+##  # filter out politicans
+##  filter not exists {
+##    ?wd wdt:P106 wd:Q82955 .
+##  }
   #
   # get site links
   ?sitelink schema:about ?wd .
@@ -20,10 +27,19 @@ where {
   #
   # not all items have labels in English
   optional {
-    ?wd rdfs:label ?wdLabelLang
-    filter(lang(?wdLabelLang) = 'en')
-    bind(str(?wdLabelLang) as ?wdLabel)
+    ?wd rdfs:label ?wdLabelEn
+    filter(lang(?wdLabelEn) = 'en')
   }
+  optional {
+    ?wd rdfs:label ?wdLabelDe
+    filter(lang(?wdLabelDe) = 'de')
+  }
+  optional {
+    ?wd rdfs:label ?wdLabelRu
+    filter(lang(?wdLabelRu) = 'ru')
+  }
+  bind(coalesce(str(?wdLabelEn), str(?wdLabelDe), str(?wdLabelRu)) as ?wdLabel)
+  #
   optional {
     ?wd schema:description ?descEn
     filter(lang(?descEn) = "en")
@@ -31,9 +47,17 @@ where {
   }
   optional {
     ?wd wdt:P227 ?gndId .
+    filter(isLiteral(?gndId))
   }
+  #
+  bind(strafter(str(?wd), str(wd:)) as ?wdId)
+  bind(if(bound(?gndId),
+      uri(concat("http://d-nb.info/gnd/", $gndId)),
+      uri(concat("http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_n_link_person.rq&name=",
+          encode_for_uri(?wdLabel), "&wdId=", ?wdId))) as ?gnd)
+  bind(if(bound(?gndId), ?gndId, "Look up in GND") as ?gndLabel)
 }
-group by ?wd ?wdLabel ?gndId ?desc
+group by ?wd ?wdLabel ?desc ?gnd ?gndLabel
 having (count(?sitelink) >= 3)
-order by desc(xsd:integer(?siteCount))
+order by desc(count(?sitelink))
 
