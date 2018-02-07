@@ -4,8 +4,9 @@
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
-select ?wdLabel ?wd (count(?sitelink) as ?siteCount) ?gndId
+select ?wdLabel ?wd ?desc (str(count(?sitelink)) as ?siteCount) ?gndId
 where {
   values (?occupation) {
     (<http://www.wikidata.org/entity/Q188094>) # economist
@@ -24,10 +25,15 @@ where {
     bind(str(?wdLabelLang) as ?wdLabel)
   }
   optional {
+    ?wd schema:description ?descEn
+    filter(lang(?descEn) = "en")
+    bind(str(?descEn) as ?desc)
+  }
+  optional {
     ?wd wdt:P227 ?gndId .
   }
 }
 group by ?wd ?wdLabel ?gndId
 having (?siteCount >= 3)
-order by desc(?siteCount)
+order by desc(xsd:integer(?siteCount))
 
