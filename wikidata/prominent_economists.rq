@@ -34,6 +34,6 @@ where {
   }
 }
 group by ?wd ?wdLabel ?gndId ?desc
-having (count(?sitellink) >= 3)
+having (count(?sitelink) >= 3)
 order by desc(xsd:integer(?siteCount))
 
