@@ -33,7 +33,7 @@ where {
     ?wd wdt:P227 ?gndId .
   }
 }
-group by ?wd ?wdLabel ?gndId
-having (?siteCount >= 3)
+group by ?wd ?wdLabel ?gndId ?desc
+having (count(?sitellink) >= 3)
 order by desc(xsd:integer(?siteCount))
 
