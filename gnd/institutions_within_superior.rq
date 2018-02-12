@@ -6,8 +6,12 @@ select *
 where {
   # restrict to institutions relevant to economics
   service <http://zbw.eu/beta/sparql/econ_corp/query> {
-    ?gnd gndo:preferredName ?gndLabel
+    select ?gnd
+    where {
+      ?gnd gndo:preferredName [] .
+    }
   }
+  ?gnd gndo:preferredNameForTheCorporateBody ?gndLabel .
   ?gnd gndo:hierarchicalSuperiorOfTheCorporateBody ?supGnd .
   ?supGnd gndo:preferredNameForTheCorporateBody ?supGndLabel .
 }
