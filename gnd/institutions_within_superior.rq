@@ -1,0 +1,14 @@
+# Economics institutions within superior institutions
+#
+PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
+#
+select *
+where {
+  # restrict to institutions relevant to economics
+  service <http://zbw.eu/beta/sparql/econ_corp/query> {
+    ?gnd gndo:preferredName ?gndLabel
+  }
+  ?gnd gndo:hierarchicalSuperiorOfTheCorporateBody ?supGnd .
+  ?supGnd gndo:preferredNameForTheCorporateBody ?supGndLabel .
+}
+limit 100
