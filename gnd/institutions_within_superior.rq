@@ -14,5 +14,12 @@ where {
   ?gnd gndo:preferredNameForTheCorporateBody ?gndLabel .
   ?gnd gndo:hierarchicalSuperiorOfTheCorporateBody ?supGnd .
   ?supGnd gndo:preferredNameForTheCorporateBody ?supGndLabel .
+  #
+  # exclude institutions with have succiding institutions
+  # (but for now keep superior institutions which have successors)
+  filter(not exists {
+      ?gnd gndo:succeedingCorporateBody [] .
+    }
+  )
 }
 limit 100
