@@ -1,0 +1,32 @@
+# "Overlay" Wikidata with STW skos:brodaer hierarchy
+#
+# ignores for now mapping relation type qualifier P4390!
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX stw: <http://zbw.eu/stw/descriptor/>
+#
+select ?wd ?wdLabel ?stw ?stwBroader ?wdBroader ?wdBroaderLabel
+where {
+  {
+    service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
+      ?wd wdt:P3911 ?stwId .
+      ?wd rdfs:label ?wdLabel .
+      filter(lang(?wdLabel) = 'en')
+      bind (uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw)
+    }
+  }
+  {
+    service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
+      ?wdBroader wdt:P3911 ?stwBroaderId .
+      ?wdBroader rdfs:label ?wdBroaderLabel .
+      filter(lang(?wdBroaderLabel) = 'en')
+      bind (uri(concat('http://zbw.eu/stw/descriptor/', ?stwBroaderId)) as ?stwBroader)
+    }
+  }
+  ?stw skos:broader ?stwBroader .
+  filter(?stw != ?stwBroader)
+}
+order by asc(?wdLabel)
