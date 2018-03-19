@@ -2,6 +2,7 @@
 #
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
 select distinct ?gndoClass (str(count(distinct ?gnd)) as ?gndCount)
 (str(sum(?inWd)) as ?wdCount)
