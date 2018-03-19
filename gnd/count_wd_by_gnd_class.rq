@@ -1,0 +1,25 @@
+# Count Wikidata items linked to GND by GND class
+#
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+select distinct ?gndoClass (count(distinct ?gnd) as ?gndCount) (sum(?inWd) as ?wdCount)
+(concat(str(round((?wdCount/?gndCount)*1000)/10), ' %') as ?percentage)
+where {
+  {
+    service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
+      ?wd wdt:P227 ?gndId .
+      filter (isLiteral(?gndId))
+    }
+    bind (uri(concat('http://d-nb.info/gnd/', ?gndId)) as ?gnd)
+    ?gnd a ?gndoClass .
+    bind(1 as ?inWd)
+  } union {
+    ?gnd a ?gndoClass .
+    filter(strstarts(str(?gndoClass), str(gndo:)))
+    bind(0 as ?inWd)
+  }
+}
+group by ?gndoClass
+order by desc(?gndCount)
+
