@@ -6,7 +6,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
 select distinct ?gndoClass (str(count(distinct ?gnd)) as ?gndCount)
 (str(sum(?inWd)) as ?wdCount)
-(concat(str(round((?wdCount/?gndCount)*1000)/10), ' %') as ?percentage)
+(concat(str(round((sum(?inWd)/count(distinct ?gnd))*1000)/10), ' %') as ?percentage)
 where {
   {
     service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
@@ -23,5 +23,5 @@ where {
   }
 }
 group by ?gndoClass
-order by desc(xsd:integer(?gndCount))
+order by desc(count(distinct ?gnd))
 
