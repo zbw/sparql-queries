@@ -3,27 +3,37 @@
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select ?id ?name ?description
+select distinct ?id ?name (concat(descrElem, ' [', group_concat(str(?prefSysLang);
+      separator = '; '), '] ') as ?description)
 where {
   ?stw a zbwext:Descriptor ;
        skos:broader ?thsys ;
        skos:prefLabel ?prefLang .
   ?thsys a zbwext:Thsys ;
-         skos:notation ?nta .
+         skos:notation ?nta ;
+         skos:prefLabel ?prefSysLang .
   filter(lang(?prefLang) = 'de')
+  filter(lang(?prefSysLang) = 'de')
   #
-  # selection by notation
-  filter(strstarts(?nta, 'G.'))
-  # build description
+  # selection by notation (G already covered by m-n-m #507)
+  filter(!strstarts(?nta, 'G.'))
+
+  # build descriptor part of the description
   {
     select ?stw ( group_concat(str(?label);
-        separator = ' | ') as ?description)
+        separator = ' | ') as descrElem)
     where {
       {
         ?stw skos:prefLabel ?label .
         filter(lang(?label) = 'en')
       } union {
-        ?stw skos:prefLabel ?label .
+        ?stw skos:altLabel ?label .
+      } union {
+        ?stw skos:scopeNote ?label
+      } union {
+        ?stw skos:historyNote ?label
+      } union {
+        ?stw skos:editorialNote ?label
       }
     }
     group by ?stw
@@ -31,4 +41,5 @@ where {
   bind(strafter(str(?stw), 'http://zbw.eu/stw/descriptor/') as ?id)
   bind(str(?prefLang) as ?name)
 }
+group by ?id ?name descrElem
 order by ?name
