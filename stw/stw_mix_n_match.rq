@@ -16,8 +16,7 @@ where {
   filter(lang(?prefSysLang) = 'de')
   #
   # selection by notation (G already covered by m-n-m #507)
-  filter(!strstarts(?nta, 'G.'))
-
+  filter(strstarts(?nta, 'W.'))
   # build descriptor part of the description
   {
     select ?stw ( group_concat(str(?label);
@@ -42,4 +41,4 @@ where {
   bind(str(?prefLang) as ?name)
 }
 group by ?id ?name ?descrElem
-order by ?name
+order by min(?nta) ?name
