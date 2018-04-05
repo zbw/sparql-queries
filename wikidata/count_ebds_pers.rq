@@ -21,7 +21,7 @@ where {
     select ?gndId (max(?ebCount) as ?ebPubCount) (max(?inWd) as ?persInWd) (max(?inEb) as ?persInEb)
     where {
       {
-        graph <http://zbw.eu/beta/ebCount/ng> {
+        graph <http://zbw.eu/beta/ebCountActor/ng> {
           ?ebPers a gndo:DifferentiatedPerson ;
             zbwext:econbizCount ?ebCount .
         }
