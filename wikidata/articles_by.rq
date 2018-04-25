@@ -1,0 +1,27 @@
+# Articles by an author (from newspaper and the like)
+# adapted from https://github.com/fnielsen/scholia/blob/master/scholia/wikipedia.py
+#
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select distinct (?url as ?titleLink) (str(?title) as ?titleLinkLabel) (str(?pubLang) as ?publication) (min(?date) as ?issued)
+where {
+  values ( ?author ?language ) {
+    # Kim Wall
+    ( wd:Q36519983 "en" )
+  }
+  ?work wdt:P50 ?author .
+  ?work wdt:P1476 ?title .
+  ?work wdt:P953 ?url .
+  ?work wdt:P1433 ?pub .
+  ?pub rdfs:label ?pubLang .
+  filter(lang(?pubLang) = ?language)
+  ?work wdt:P577 ?dateTime .
+  bind(substr(str(?dateTime), 0, 11) as ?date)
+}
+group by ?url ?title ?pubLang
+order by desc(?date)
+
+
