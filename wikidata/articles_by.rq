@@ -8,8 +8,8 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
 select distinct (?url as ?titleLink) (str(?title) as ?titleLinkLabel) (str(?pubLang) as ?publication) (min(?date) as ?issued)
 where {
+  # by Kim Wall
   values ( ?author ?language ) {
-    # Kim Wall
     ( wd:Q36519983 "en" )
   }
   ?work wdt:P50 ?author .
