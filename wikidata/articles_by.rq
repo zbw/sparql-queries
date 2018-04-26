@@ -22,5 +22,5 @@ where {
   bind(substr(str(?dateTime), 0, 11) as ?date)
 }
 group by ?url ?title ?pubLang
-order by desc(?date)
+order by desc(?issued)
 
