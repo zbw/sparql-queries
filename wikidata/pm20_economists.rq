@@ -1,13 +1,11 @@
 # Show pm20 folders for persons of a certain occupation
 #
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
 PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX wikibase: <http://wikiba.se/ontology#>
-PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 #
-select distinct ?wd ?wdLabel ?country ?countryLabel ?pm20Id ?viewer ?viewerLabel
+select distinct ?wd ?wdLabel ?country ?countryLabel ?pm20 ?pm20Label ?viewer ?viewerLabel
 where {
   values (?occupation) {
     ( wd:Q188094 ) # economist
@@ -25,6 +23,10 @@ where {
     filter(lang(?countryLabelLang) = 'en')
     bind(str(?countryLabelLang) as ?countryLabel)
   }
+  # pm20 entry
+  bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
+  bind(?pm20Id as ?pm20Label)
+  #
   # viewer link
   bind(substr(?pm20Id, 4, 4) as ?numStub)
   bind(substr(?pm20Id, 4, 6) as ?num)
