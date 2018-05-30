@@ -1,0 +1,33 @@
+# Show pm20 folders for persons of a certain occupation
+#
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+#
+select distinct ?wd ?wdLabel ?country ?countryLabel ?pm20Id ?viewer ?viewerLabel
+where {
+  values (?occupation) {
+    ( wd:Q188094 ) # economist
+  }
+  ?wd wdt:P106 ?occupation ;
+      wdt:P4293 ?pm20Id ;
+      rdfs:label ?labelLang .
+  filter(lang(?labelLang) = 'en')
+  bind(str(?labelLang) as ?wdLabel)
+  #
+  # country
+  optional {
+    ?wd wdt:P27 ?country .
+    ?country rdfs:label ?countryLabelLang .
+    filter(lang(?countryLabelLang) = 'en')
+    bind(str(?countryLabelLang) as ?countryLabel)
+  }
+  # viewer link
+  bind(substr(?pm20Id, 4, 4) as ?numStub)
+  bind(substr(?pm20Id, 4, 6) as ?num)
+  bind(uri(concat('http://dfg-viewer.de/show/?tx_dlf[id]=http://zbw.eu/beta/pm20mets/pe/', ?numStub, 'xx/', ?num, '.xml')) as ?viewer)
+  bind('view' as ?viewerLabel)
+}
