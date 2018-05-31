@@ -32,4 +32,14 @@ where {
   bind(substr(?pm20Id, 4, 6) as ?num)
   bind(uri(concat('http://dfg-viewer.de/show/?tx_dlf[id]=http://zbw.eu/beta/pm20mets/pe/', ?numStub, 'xx/', ?num, '.xml')) as ?viewer)
   bind('view' as ?viewerLabel)
+  #
+  # year of birth and death
+  optional {
+    ?wd wdt:P569 ?birthDate .
+  }
+  optional {
+    ?wd wdt:P570 ?deathDate .
+  }
+  bind(if(bound(?birthDate), str(year(?birthDate)), '') as ?birth)
+  bind(if(bound(?deathDate), str(year(?deathDate)), '')  as ?death)
 }
