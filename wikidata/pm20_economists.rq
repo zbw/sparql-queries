@@ -7,23 +7,27 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 select distinct ?wd ?wdLabel ?birth ?death ?country ?countryLabel ?pm20 ?pm20Label ?viewer ?viewerLabel
 where {
   {
-    select ?wd ?wdLabel (sample(?birthYear) as ?birth) (sample(?deathYear) as ?death) (sample(?countryM) as ?country) (sample(?countryMLabel) as ?countryLabel) ?pm20Id
+    select ?wd ?wdLabel (sample(?birthYear) as ?birth) (sample(?deathYear) as ?death) (sample(?countryLabel) as ?country) ?pm20Id
     where {
       values (?occupation) {
         ( wd:Q188094 ) # economist
       }
       ?wd wdt:P106 ?occupation ;
-          wdt:P4293 ?pm20Id ;
-          rdfs:label ?labelLang .
-      filter(lang(?labelLang) = 'en')
-      bind(str(?labelLang) as ?wdLabel)
+          wdt:P4293 ?pm20Id .
+      #
+      # label
+      optional {
+        ?wd rdfs:label ?labelLang .
+        filter(lang(?labelLang) = 'en')
+        bind(str(?labelLang) as ?wdLabel)
+      }
       #
       # country
       optional {
         ?wd wdt:P27 ?countryM .
-        ?countryM rdfs:label ?countryMLabelLang .
-        filter(lang(?countryMLabelLang) = 'en')
-        bind(str(?countryMLabelLang) as ?countryMLabel)
+        ?countryM rdfs:label ?countryLabelLang .
+        filter(lang(?countryLabelLang) = 'en')
+        bind(str(?countryLabelLang) as ?countryLabel)
       }
       # year of birth and death
       optional {
