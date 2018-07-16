@@ -1,0 +1,54 @@
+# Show pm20 folders for persons of a certain occupation
+#
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+select distinct ?wd ?wdLabel ?birth ?death ?country ?countryLabel ?pm20 ?pm20Label ?viewer ?viewerLabel
+where {
+  {
+    select ?wd ?wdLabel (sample(?birthYear) as ?birth) (sample(?deathYear) as ?death) (sample(?countryLabel) as ?country) ?pm20Id
+    where {
+      values (?occupation) {
+        ( wd:Q188094 ) # economist
+      }
+      ?wd wdt:P106 ?occupation ;
+          wdt:P4293 ?pm20Id .
+      #
+      # label
+      optional {
+        ?wd rdfs:label ?labelLang .
+        filter(lang(?labelLang) = 'en')
+        bind(str(?labelLang) as ?wdLabel)
+      }
+      #
+      # country
+      optional {
+        ?wd wdt:P27 ?countryM .
+        ?countryM rdfs:label ?countryLabelLang .
+        filter(lang(?countryLabelLang) = 'en')
+        bind(str(?countryLabelLang) as ?countryLabel)
+      }
+      # year of birth and death
+      optional {
+        ?wd wdt:P569 ?birthDate .
+      }
+      optional {
+        ?wd wdt:P570 ?deathDate .
+      }
+      bind(if(bound(?birthDate), str(year(?birthDate)), '') as ?birthYear)
+      bind(if(bound(?deathDate), str(year(?deathDate)), '')  as ?deathYear)
+    }
+    group by ?wd ?wdLabel ?pm20Id
+  }
+  # pm20 entry
+  bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
+  bind(?pm20Id as ?pm20Label)
+  #
+  # viewer link
+  bind(substr(?pm20Id, 4, 4) as ?numStub)
+  bind(substr(?pm20Id, 4, 6) as ?num)
+  bind(uri(concat('http://dfg-viewer.de/show/?tx_dlf[id]=http://zbw.eu/beta/pm20mets/pe/', ?numStub, 'xx/', ?num, '.xml')) as ?viewer)
+  bind('view' as ?viewerLabel)
+}
+order by ?birth

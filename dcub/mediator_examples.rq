@@ -1,0 +1,7 @@
+PREFIX dct: <http://purl.org/dc/terms/>
+
+select * 
+where {
+  ?s dct:mediator ?o
+}
+limit 100
