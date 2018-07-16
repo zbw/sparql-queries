@@ -33,6 +33,8 @@ Dataset-specific queries
 
 ### [VIAF](viaf)
 
+### [lobid](lobid)
+
 Contributing
 ------------
 

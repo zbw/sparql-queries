@@ -1,0 +1,20 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix v: <http://www.w3.org/2006/vcard/ns#>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix hcterms: <http://purl.org/uF/hCard/terms/>
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+prefix frbr: <http://purl.org/vocab/frbr/core#>
+  
+SELECT ?lib  ( ( (50.9341-xsd:float(?lat))*(50.9341-xsd:float(?lat)) + (6.93549-xsd:float(?lon))*(6.93549-xsd:float(?lon))*(0.831939969105-(0.00853595*xsd:float(?lat))) ) AS ?d2brgrad)
+WHERE {
+      <http://lobid.org/resource/HT000543651> frbr:exemplar ?ex .
+      ?ex frbr:owner ?lib .
+      ?lib geo:location ?loc .
+      ?loc geo:lat  ?lat .
+      ?loc geo:long ?lon .
+      ?uri foaf:name ?nam .
+      FILTER( (50.9341-xsd:float(?lat))*(50.9341-xsd:float(?lat)) + (6.93549-xsd:float(?lon))*(6.93549-xsd:float(?lon))*(0.831939969105-(0.00853595*xsd:float(?lat))) < 0.0020219493461806057363177376485694 ) .
+} LIMIT 10
