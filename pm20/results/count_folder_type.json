@@ -1,0 +1,44 @@
+{
+  "head" : {
+    "vars" : [ "idCount", "type" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "type" : {
+        "type" : "literal",
+        "value" : "co"
+      },
+      "idCount" : {
+        "type" : "literal",
+        "value" : "1232"
+      }
+    }, {
+      "type" : {
+        "type" : "literal",
+        "value" : "pe"
+      },
+      "idCount" : {
+        "type" : "literal",
+        "value" : "7632"
+      }
+    }, {
+      "type" : {
+        "type" : "literal",
+        "value" : "sh"
+      },
+      "idCount" : {
+        "type" : "literal",
+        "value" : "32"
+      }
+    }, {
+      "type" : {
+        "type" : "literal",
+        "value" : "wa"
+      },
+      "idCount" : {
+        "type" : "literal",
+        "value" : "2"
+      }
+    } ]
+  }
+}
