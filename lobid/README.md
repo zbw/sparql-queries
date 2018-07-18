@@ -1,6 +1,6 @@
 ## Queries for lobid.org
 
-Public endpoint of [lobid](http://lobid.org) - data infrastructure for libraries ([hbz](https://www.hbz-nrw.de/)
+Public endpoint of [lobid](http://lobid.org) - data infrastructure for libraries ([hbz](https://www.hbz-nrw.de/))
 
 Query | Description
 ------|------------
