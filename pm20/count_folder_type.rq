@@ -1,0 +1,12 @@
+# Count pm20 ids in Wikidata by folder type
+#
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+select (str(count(distinct ?pm20Id)) as ?idCount) ?type
+where {
+  ?wd wdt:P4293 ?pm20Id .
+  bind(substr(?pm20Id, 0, 3) as ?type)
+}
+group by ?type
+order by ?type
+
