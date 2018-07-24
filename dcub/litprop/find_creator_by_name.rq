@@ -3,13 +3,19 @@
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
-select (count(distinct ?pub) as ?count) ?actor
+select (str(count(distinct ?pubCount)) as ?count) ?actor ?life ?info
 where {
   service <http://zbw.eu/beta/sparql/gnd/query> {
     ?actor gndo:preferredNameForThePerson "Fischer, Peter" .
+    optional {
+      ?actor gndo:dateOfBirth ?birth .
+      bind(str(year(?birth)) as ?life)
+    }
+    optional {
+      ?actor gndo:biographicalOrHistoricalInformation ?info .
+    }
   }
   ?pub dcterms:creator ?actor .
 }
-group by ?actor
-order by desc(?count)
-
+group by ?actor ?life ?info
+order by desc(count(distinct ?pub))
