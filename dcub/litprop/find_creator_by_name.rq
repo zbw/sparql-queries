@@ -1,0 +1,15 @@
+# all individual authors named "Fischer, Peter"
+#
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+#
+select (count(distinct ?pub) as ?count) ?actor
+where {
+  service <http://zbw.eu/beta/sparql/gnd/query> {
+    ?actor gndo:preferredNameForThePerson "Fischer, Peter" .
+  }
+  ?pub dcterms:creator ?actor .
+}
+group by ?actor
+order by desc(?count)
+
