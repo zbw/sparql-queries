@@ -1,6 +1,6 @@
 # all individual authors named "Fischer, Peter"
 #
-PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
 select (str(count(distinct ?pubCount)) as ?count) ?actor ?life ?info
@@ -15,7 +15,7 @@ where {
       ?actor gndo:biographicalOrHistoricalInformation ?info .
     }
   }
-  ?pub dcterms:creator ?actor .
+  ?pub dct:creator ?actor .
 }
 group by ?actor ?life ?info
 order by desc(count(distinct ?pub))
