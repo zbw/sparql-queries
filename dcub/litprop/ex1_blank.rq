@@ -1,5 +1,5 @@
-# all publications by an identified person "Fischer, Peter"
-# plus all publications by unindentified authors named "Fischer, Peter"
+# all publications by an identified person with a certain name
+# plus all publications by unindentified authors with that name
 #
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dct: <http://purl.org/dc/terms/>
@@ -7,10 +7,10 @@ PREFIX dct: <http://purl.org/dc/terms/>
 select distinct ?pub ?actor 
 where {
   {
-    # the one particular Peter Fischer
-    bind(<http://d-nb.info/gnd/12973022X> as ?actor)
+    # the one particular Christian Lambertz
+    bind(<http://d-nb.info/gnd/1059126265> as ?actor)
     ?pub dct:creator  ?actor.
   } union {
-    ?pub dct:creator [ rdfs:label "Fischer, Peter" ] .
+    ?pub dct:creator [ rdfs:label "Lambertz, Christian" ] .
   }
 }
