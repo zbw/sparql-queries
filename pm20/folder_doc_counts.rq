@@ -1,0 +1,27 @@
+# Document counts (free and total) for folders connected to WD items
+#
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select ?wd (str(?label) as ?wdLabel) ?pm20 (?pm20Id as ?pm20Label) ?numberWorks ?accessibleOnline
+where {
+  service <http://query.wikidata.org/sparql> {
+    ?wd wdt:P4293 ?pm20Id ;
+        rdfs:label ?label .
+    filter(lang(?label) = 'en')
+  }
+  bind(uri(concat('http://purl.org/pressemappe20/folder/', $pm20Id)) as ?pm20)
+  optional {
+    ?pm20 zbwext:totalDocCount ?total .
+  }
+  optional {
+    ?pm20 zbwext:freeDocCount ?free .
+  }
+  # If a person folder was created after 1948, no content at all is online.
+  # Therefore we can conclude that the number of accessible documents is 0.
+  # We don't know how many documents exist on paper or microfilm,
+  # so the total number of documents is unknown.
+  bind(if(bound(?free), str(?free), '0') as ?accessibleOnline)
+  bind(if(bound(?total), str(?total), 'unknown') as ?numberWorks)
+}
