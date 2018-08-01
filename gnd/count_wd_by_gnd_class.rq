@@ -4,7 +4,8 @@ PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
-select distinct ?gndoClass (str(count(distinct ?gnd)) as ?gndCount)
+select distinct ?gndoClass ?gndoClassLabel
+(str(count(distinct ?gnd)) as ?gndCount)
 (str(sum(?inWd)) as ?wdCount)
 (concat(str(round((sum(?inWd)/count(distinct ?gnd))*1000)/10), ' %') as ?percentage)
 where {
@@ -21,6 +22,7 @@ where {
     filter(strstarts(str(?gndoClass), str(gndo:)))
     bind(0 as ?inWd)
   }
+  bind(strafter(?gndClass), gndo:) as ?gndoClassLabel)
 }
 group by ?gndoClass
 order by desc(count(distinct ?gnd))
