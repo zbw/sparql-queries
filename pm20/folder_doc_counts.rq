@@ -3,15 +3,29 @@
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
 #
-select ?wd (str(?label) as ?wdLabel) ?pm20 (?pm20Id as ?pm20Label) ?numberWorks ?accessibleOnline
+select ?wd (str(?label) as ?wdLabel) ?pm20 (?pm20Id as ?pm20Label) ?numberWorks ?accessibleOnline ?qsStatement
 where {
   service <http://query.wikidata.org/sparql> {
-    ?wd wdt:P4293 ?pm20Id ;
-        rdfs:label ?label .
+    #    bind( wd:Q80596 as ?wd)
+    ?wd p:P4293 ?statement .
+    ?statement ps:P4293 ?pm20Id .
+    filter(isLiteral(?pm20Id))
+    #
+    # skip all items where one of the counts already exists
+    filter(not exists {
+        ?statement (pq:P3740 | pq:5592) [] .
+      })
+    ?wd rdfs:label ?label .
     filter(lang(?label) = 'en')
   }
   bind(uri(concat('http://purl.org/pressemappe20/folder/', $pm20Id)) as ?pm20)
+  #
+  # get the document counts if available, set if not
   optional {
     ?pm20 zbwext:totalDocCount ?total .
   }
@@ -24,4 +38,11 @@ where {
   # so the total number of documents is unknown.
   bind(if(bound(?free), str(?free), '0') as ?accessibleOnline)
   bind(if(bound(?total), str(?total), 'unknown') as ?numberWorks)
+  #
+  # restrict to items with more than 0 documents online
+  filter( ?accessibleOnline > '0')
+  #
+  # QS statement
+  bind(concat(strafter(str(?wd), str(wd:)),'|P4293|"', ?pm20Id,
+      '"|P3740|', ?numberWorks, '|P5592|', ?accessibleOnline) as ?qsStatement)
 }
