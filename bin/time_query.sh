@@ -9,6 +9,32 @@ RUNS=$2 || 1
 QUERY_DIR="../dcub/litprop"
 OPTIONS="plain blank mixed"
 
+
+time_query()
+{
+  local query=$1
+  local endpoint=$2
+  if [ ! -f $query ]; then
+    echo "$query does not exist"
+    exit 1
+  fi
+  ## does not work due to https://issues.apache.org/jira/browse/JENA-1589
+  ##curl --silent -X POST -H "Content-Type: application/sparql-query" --data @$query $endpoint > /dev/null
+
+  # fetches real execution time, see
+  # https://serverfault.com/questions/175376/redirect-output-of-time-command-in-unix-into-a-variable-in-bash
+  exec 3>&1 4>&2
+  time=$(TIMEFORMAT="%R"; { time curl --silent -X POST -H "Content-Type: application/sparql-query" --data-binary @$query $endpoint 1>&3 > /dev/null 2>&4; } 2>&1)
+  exec 3>&- 4>&-
+
+  # does not work
+  ##local status=$?
+  ##if [ $status -ne 0 ]; then
+  ##  echo "\nPOST for query file $query failed with status $status"
+  ##  exit $status
+  ##fi
+}
+
 for i in `seq 1 $RUNS`; do
 
   echo restart fuseki and clear OS caches
@@ -16,7 +42,7 @@ for i in `seq 1 $RUNS`; do
   sleep 20
 
   # query an unrelated endpoint to be sure fuseki is ready
-  curl --silent -X POST --data "query=`cat ../stw/search_concepts_by_text.rq`" --output /dev/null http://localhost:3030/stw/query
+  time_query ../stw/search_concepts_by_text.rq http://localhost:3030/stw/query
   sleep 5
 
   for option in $OPTIONS ; do
@@ -24,13 +50,21 @@ for i in `seq 1 $RUNS`; do
     endpoint=http://localhost:3030/eb$option/query
 
     echo -e "\nQuery ${QUERY}_$option  on dataset eb$option (COLD)"
-    /usr/bin/time  -f "%e" curl --silent -X POST --data "query=`cat $query`" --output /dev/null $endpoint 
+    time_query $query $endpoint
+    echo $time
+#    (( sum_${option}_cold += "$time" ))
 
     echo -e "\nQuery ${QUERY}_$option on dataset eb$option (WARM)"
-    /usr/bin/time -f "%e" curl -X POST --silent --data "query=`cat $query`" --output /dev/null $endpoint
+    time_query $query $endpoint
+    echo $time
 
   done
 
   echo -e "\n"
 
+done
+
+for option in $OPTIONS ; do
+  sum=sum_${option}_cold
+#  echo $option: ${$sum}
 done
