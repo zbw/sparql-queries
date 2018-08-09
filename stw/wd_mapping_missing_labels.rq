@@ -1,0 +1,38 @@
+# Missing label in WD (in a certain language) for items mapped to STW
+#
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+#
+select distinct ?wd ?relation ?relationLabel ?stw ?stwLabel 
+where {
+  service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
+    # wd items with STW ID
+    ?wd wdt:P3911 ?stwId .
+    filter(isLiteral(?stwId))
+    #
+    # mapping relation
+    optional {
+      ?wd p:P3911/pq:P4390 ?relation .
+      ?relation rdfs:label ?relationLabelLang .
+      # do not replace language here!
+      filter(lang(?relationLabelLang) = 'en')
+      bind(str(?relationLabelLang) as ?relationLabel)
+    }
+    # get label for the wd item, if exists
+    optional {
+      ?wd rdfs:label ?label .
+      filter(lang(?label) = 'en')
+    }
+    filter(!bound(?label))
+  }
+  # look up STW descriptors and labels
+  bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw)
+  ?stw skos:prefLabel ?stwLabelLang .
+  filter(lang(?stwLabelLang) = 'en')
+  bind(str(?stwLabelLang) as ?stwLabel)
+}
+order by ?relationLabel ?stwLabel
