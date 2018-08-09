@@ -1,0 +1,2103 @@
+2018-08-08 23:24:11 Run 1: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.891
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.044
+
+Query ex1_blank on dataset ebblank (WARM)
+0.020
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.720
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:24:45 Run 2: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.067
+
+Query ex1_plain on dataset ebplain (WARM)
+0.028
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.127
+
+Query ex1_blank on dataset ebblank (WARM)
+0.027
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.057
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-08 23:25:15 Run 3: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.933
+
+Query ex1_plain on dataset ebplain (WARM)
+0.028
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.448
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+1.029
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.019
+
+
+2018-08-08 23:25:49 Run 4: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.658
+
+Query ex1_plain on dataset ebplain (WARM)
+0.030
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.082
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.803
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-08 23:26:22 Run 5: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.577
+
+Query ex1_plain on dataset ebplain (WARM)
+0.025
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.347
+
+Query ex1_blank on dataset ebblank (WARM)
+0.023
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.696
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.024
+
+
+2018-08-08 23:26:56 Run 6: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.076
+
+Query ex1_plain on dataset ebplain (WARM)
+0.028
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.116
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.055
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.023
+
+
+2018-08-08 23:27:27 Run 7: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.071
+
+Query ex1_plain on dataset ebplain (WARM)
+0.022
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.118
+
+Query ex1_blank on dataset ebblank (WARM)
+0.026
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.056
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.019
+
+
+2018-08-08 23:27:56 Run 8: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.063
+
+Query ex1_plain on dataset ebplain (WARM)
+0.022
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.124
+
+Query ex1_blank on dataset ebblank (WARM)
+0.023
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.058
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.019
+
+
+2018-08-08 23:28:26 Run 9: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.071
+
+Query ex1_plain on dataset ebplain (WARM)
+0.020
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.124
+
+Query ex1_blank on dataset ebblank (WARM)
+0.028
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.053
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.019
+
+
+2018-08-08 23:28:56 Run 10: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.088
+
+Query ex1_plain on dataset ebplain (WARM)
+0.027
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.119
+
+Query ex1_blank on dataset ebblank (WARM)
+0.021
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.054
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-08 23:29:25 Run 11: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.089
+
+Query ex1_plain on dataset ebplain (WARM)
+0.023
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.132
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.054
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.024
+
+
+2018-08-08 23:29:55 Run 12: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.089
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.117
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.053
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:30:25 Run 13: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.099
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.123
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.053
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.019
+
+
+2018-08-08 23:30:54 Run 14: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.082
+
+Query ex1_plain on dataset ebplain (WARM)
+0.020
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.137
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.060
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:31:24 Run 15: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.064
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.113
+
+Query ex1_blank on dataset ebblank (WARM)
+0.020
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.053
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-08 23:31:54 Run 16: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.063
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.120
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.053
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:32:23 Run 17: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.719
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.221
+
+Query ex1_blank on dataset ebblank (WARM)
+0.020
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.723
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:32:56 Run 18: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.551
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.223
+
+Query ex1_blank on dataset ebblank (WARM)
+0.023
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.339
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-08 23:33:29 Run 19: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.713
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.205
+
+Query ex1_blank on dataset ebblank (WARM)
+0.027
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.556
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-08 23:34:02 Run 20: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.818
+
+Query ex1_plain on dataset ebplain (WARM)
+0.029
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.131
+
+Query ex1_blank on dataset ebblank (WARM)
+0.023
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.922
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:34:36 Run 21: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.100
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.134
+
+Query ex1_blank on dataset ebblank (WARM)
+0.027
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.058
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:35:07 Run 22: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+1.134
+
+Query ex1_plain on dataset ebplain (WARM)
+0.020
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.266
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.459
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:35:40 Run 23: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.668
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.138
+
+Query ex1_blank on dataset ebblank (WARM)
+0.026
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.729
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-08 23:36:14 Run 24: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.629
+
+Query ex1_plain on dataset ebplain (WARM)
+0.027
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.155
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.703
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-08 23:36:47 Run 25: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.582
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.135
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.383
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-08 23:37:21 Run 26: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.105
+
+Query ex1_plain on dataset ebplain (WARM)
+0.023
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.124
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.055
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.019
+
+
+2018-08-08 23:37:51 Run 27: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.094
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.129
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.054
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:38:21 Run 28: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.091
+
+Query ex1_plain on dataset ebplain (WARM)
+0.023
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.111
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.052
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.019
+
+
+2018-08-08 23:38:50 Run 29: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.066
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.133
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.059
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:39:20 Run 30: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.068
+
+Query ex1_plain on dataset ebplain (WARM)
+0.023
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.113
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.058
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.019
+
+
+2018-08-08 23:39:50 Run 31: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.069
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.116
+
+Query ex1_blank on dataset ebblank (WARM)
+0.020
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.054
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:40:19 Run 32: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.093
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.123
+
+Query ex1_blank on dataset ebblank (WARM)
+0.021
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.054
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.018
+
+
+2018-08-08 23:40:49 Run 33: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.072
+
+Query ex1_plain on dataset ebplain (WARM)
+0.025
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.114
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.056
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-08 23:41:18 Run 34: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.061
+
+Query ex1_plain on dataset ebplain (WARM)
+0.022
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.120
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.053
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-08 23:41:48 Run 35: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.092
+
+Query ex1_plain on dataset ebplain (WARM)
+0.022
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.123
+
+Query ex1_blank on dataset ebblank (WARM)
+0.023
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.055
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-08 23:42:18 Run 36: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.703
+
+Query ex1_plain on dataset ebplain (WARM)
+0.027
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.378
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.722
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:42:50 Run 37: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.666
+
+Query ex1_plain on dataset ebplain (WARM)
+0.020
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.033
+
+Query ex1_blank on dataset ebblank (WARM)
+0.021
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.634
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:43:24 Run 38: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.800
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.550
+
+Query ex1_blank on dataset ebblank (WARM)
+0.025
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.564
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.024
+
+
+2018-08-08 23:43:58 Run 39: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.538
+
+Query ex1_plain on dataset ebplain (WARM)
+0.020
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.327
+
+Query ex1_blank on dataset ebblank (WARM)
+0.023
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.623
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:44:32 Run 40: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.100
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.114
+
+Query ex1_blank on dataset ebblank (WARM)
+0.020
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.057
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:45:03 Run 41: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.589
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.334
+
+Query ex1_blank on dataset ebblank (WARM)
+0.021
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.466
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.019
+
+
+2018-08-08 23:45:35 Run 42: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.696
+
+Query ex1_plain on dataset ebplain (WARM)
+0.023
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.232
+
+Query ex1_blank on dataset ebblank (WARM)
+0.027
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.840
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:46:09 Run 43: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.597
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.927
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.837
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:46:44 Run 44: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.737
+
+Query ex1_plain on dataset ebplain (WARM)
+0.020
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.974
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.249
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-08 23:47:17 Run 45: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.818
+
+Query ex1_plain on dataset ebplain (WARM)
+0.022
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.377
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.380
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.019
+
+
+2018-08-08 23:47:49 Run 46: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.286
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.530
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.138
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-08 23:48:21 Run 47: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.070
+
+Query ex1_plain on dataset ebplain (WARM)
+0.023
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.111
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.057
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.019
+
+
+2018-08-08 23:48:50 Run 48: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.092
+
+Query ex1_plain on dataset ebplain (WARM)
+0.029
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.118
+
+Query ex1_blank on dataset ebblank (WARM)
+0.021
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.051
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-08 23:49:20 Run 49: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.098
+
+Query ex1_plain on dataset ebplain (WARM)
+0.022
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.125
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.056
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.019
+
+
+2018-08-08 23:49:49 Run 50: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.091
+
+Query ex1_plain on dataset ebplain (WARM)
+0.025
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.120
+
+Query ex1_blank on dataset ebblank (WARM)
+0.020
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.055
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:50:19 Run 51: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.087
+
+Query ex1_plain on dataset ebplain (WARM)
+0.020
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.122
+
+Query ex1_blank on dataset ebblank (WARM)
+0.023
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.058
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.025
+
+
+2018-08-08 23:50:49 Run 52: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.070
+
+Query ex1_plain on dataset ebplain (WARM)
+0.023
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.124
+
+Query ex1_blank on dataset ebblank (WARM)
+0.021
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.056
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-08 23:51:18 Run 53: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.091
+
+Query ex1_plain on dataset ebplain (WARM)
+0.022
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.113
+
+Query ex1_blank on dataset ebblank (WARM)
+0.025
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.053
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:51:48 Run 54: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.094
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.122
+
+Query ex1_blank on dataset ebblank (WARM)
+0.026
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.056
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:52:18 Run 55: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.564
+
+Query ex1_plain on dataset ebplain (WARM)
+0.025
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.539
+
+Query ex1_blank on dataset ebblank (WARM)
+0.023
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.541
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:52:50 Run 56: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.795
+
+Query ex1_plain on dataset ebplain (WARM)
+0.027
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.288
+
+Query ex1_blank on dataset ebblank (WARM)
+0.029
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.498
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-08 23:53:24 Run 57: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+1.005
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.394
+
+Query ex1_blank on dataset ebblank (WARM)
+0.025
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.735
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:53:58 Run 58: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.823
+
+Query ex1_plain on dataset ebplain (WARM)
+0.020
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.333
+
+Query ex1_blank on dataset ebblank (WARM)
+0.026
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.773
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.026
+
+
+2018-08-08 23:54:32 Run 59: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.541
+
+Query ex1_plain on dataset ebplain (WARM)
+0.022
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.209
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.366
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-08 23:55:05 Run 60: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.667
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.372
+
+Query ex1_blank on dataset ebblank (WARM)
+0.021
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.535
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-08 23:55:39 Run 61: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.652
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.406
+
+Query ex1_blank on dataset ebblank (WARM)
+0.021
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.717
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-08 23:56:13 Run 62: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.757
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+2.121
+
+Query ex1_blank on dataset ebblank (WARM)
+0.025
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.611
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-08 23:56:48 Run 63: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.822
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.677
+
+Query ex1_blank on dataset ebblank (WARM)
+0.021
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.747
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-08 23:57:23 Run 64: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.988
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.444
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.446
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-08 23:57:57 Run 65: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.637
+
+Query ex1_plain on dataset ebplain (WARM)
+0.029
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.475
+
+Query ex1_blank on dataset ebblank (WARM)
+0.027
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.706
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-08 23:58:31 Run 66: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.700
+
+Query ex1_plain on dataset ebplain (WARM)
+0.023
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.375
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.576
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-08 23:59:05 Run 67: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.714
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.455
+
+Query ex1_blank on dataset ebblank (WARM)
+0.026
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.788
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.019
+
+
+2018-08-08 23:59:39 Run 68: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.805
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.475
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.737
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.023
+
+
+2018-08-09 00:00:17 Run 69: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.940
+
+Query ex1_plain on dataset ebplain (WARM)
+0.022
+
+Query ex1_blank  on dataset ebblank (COLD)
+2.790
+
+Query ex1_blank on dataset ebblank (WARM)
+0.027
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+1.198
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-09 00:00:53 Run 70: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+1.516
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.612
+
+Query ex1_blank on dataset ebblank (WARM)
+0.025
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.750
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-09 00:01:30 Run 71: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+2.227
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+3.639
+
+Query ex1_blank on dataset ebblank (WARM)
+0.030
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+2.698
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-09 00:02:13 Run 72: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.031
+
+Query ex1_plain on dataset ebplain (WARM)
+0.010
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.354
+
+Query ex1_blank on dataset ebblank (WARM)
+0.010
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.015
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.009
+
+
+2018-08-09 00:02:46 Run 73: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.039
+
+Query ex1_plain on dataset ebplain (WARM)
+0.010
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.302
+
+Query ex1_blank on dataset ebblank (WARM)
+0.010
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.013
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.010
+
+
+2018-08-09 00:03:17 Run 74: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+1.004
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.940
+
+Query ex1_blank on dataset ebblank (WARM)
+0.021
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+1.085
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-09 00:03:53 Run 75: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.826
+
+Query ex1_plain on dataset ebplain (WARM)
+0.027
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.854
+
+Query ex1_blank on dataset ebblank (WARM)
+0.023
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.559
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-09 00:04:28 Run 76: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+1.104
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.338
+
+Query ex1_blank on dataset ebblank (WARM)
+0.021
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.850
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-09 00:05:04 Run 77: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+1.252
+
+Query ex1_plain on dataset ebplain (WARM)
+0.022
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.721
+
+Query ex1_blank on dataset ebblank (WARM)
+0.025
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+1.561
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-09 00:05:39 Run 78: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+1.108
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.648
+
+Query ex1_blank on dataset ebblank (WARM)
+0.023
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.543
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-09 00:06:14 Run 79: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.732
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.010
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.611
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.023
+
+
+2018-08-09 00:06:47 Run 80: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.711
+
+Query ex1_plain on dataset ebplain (WARM)
+0.025
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.397
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.528
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-09 00:07:21 Run 81: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.093
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.122
+
+Query ex1_blank on dataset ebblank (WARM)
+0.020
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.061
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-09 00:07:52 Run 82: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.726
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.169
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.725
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.023
+
+
+2018-08-09 00:08:25 Run 83: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.663
+
+Query ex1_plain on dataset ebplain (WARM)
+0.032
+
+Query ex1_blank  on dataset ebblank (COLD)
+0.979
+
+Query ex1_blank on dataset ebblank (WARM)
+0.028
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.441
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-09 00:08:57 Run 84: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.595
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.683
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.354
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-09 00:09:32 Run 85: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.759
+
+Query ex1_plain on dataset ebplain (WARM)
+0.031
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.714
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.644
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.024
+
+
+2018-08-09 00:10:06 Run 86: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+1.340
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.424
+
+Query ex1_blank on dataset ebblank (WARM)
+0.023
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+1.151
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-09 00:10:42 Run 87: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.892
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.246
+
+Query ex1_blank on dataset ebblank (WARM)
+0.031
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.991
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-09 00:11:16 Run 88: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.951
+
+Query ex1_plain on dataset ebplain (WARM)
+0.025
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.241
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.631
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-09 00:11:50 Run 89: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.618
+
+Query ex1_plain on dataset ebplain (WARM)
+0.023
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.519
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.698
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.024
+
+
+2018-08-09 00:12:25 Run 90: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.638
+
+Query ex1_plain on dataset ebplain (WARM)
+0.022
+
+Query ex1_blank  on dataset ebblank (COLD)
+2.096
+
+Query ex1_blank on dataset ebblank (WARM)
+0.023
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+1.204
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-09 00:13:00 Run 91: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.597
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.545
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.702
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.023
+
+
+2018-08-09 00:13:34 Run 92: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.940
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.422
+
+Query ex1_blank on dataset ebblank (WARM)
+0.021
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.837
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.022
+
+
+2018-08-09 00:14:10 Run 93: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.693
+
+Query ex1_plain on dataset ebplain (WARM)
+0.024
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.559
+
+Query ex1_blank on dataset ebblank (WARM)
+0.021
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.491
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-09 00:14:45 Run 94: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.778
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.589
+
+Query ex1_blank on dataset ebblank (WARM)
+0.032
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.468
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.027
+
+
+2018-08-09 00:15:19 Run 95: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+1.237
+
+Query ex1_plain on dataset ebplain (WARM)
+0.021
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.339
+
+Query ex1_blank on dataset ebblank (WARM)
+0.023
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.696
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-09 00:15:54 Run 96: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.638
+
+Query ex1_plain on dataset ebplain (WARM)
+0.026
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.662
+
+Query ex1_blank on dataset ebblank (WARM)
+0.022
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.438
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.023
+
+
+2018-08-09 00:16:28 Run 97: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.849
+
+Query ex1_plain on dataset ebplain (WARM)
+0.025
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.122
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.843
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.020
+
+
+2018-08-09 00:17:03 Run 98: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.725
+
+Query ex1_plain on dataset ebplain (WARM)
+0.020
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.012
+
+Query ex1_blank on dataset ebblank (WARM)
+0.024
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.516
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.026
+
+
+2018-08-09 00:17:36 Run 99: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.498
+
+Query ex1_plain on dataset ebplain (WARM)
+0.028
+
+Query ex1_blank  on dataset ebblank (COLD)
+1.111
+
+Query ex1_blank on dataset ebblank (WARM)
+0.023
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.290
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.021
+
+
+2018-08-09 00:18:08 Run 100: restart fuseki and clear OS caches
+
+Query ex1_plain  on dataset ebplain (COLD)
+0.762
+
+Query ex1_plain on dataset ebplain (WARM)
+0.022
+
+Query ex1_blank  on dataset ebblank (COLD)
+2.137
+
+Query ex1_blank on dataset ebblank (WARM)
+0.026
+
+Query ex1_mixed  on dataset ebmixed (COLD)
+0.744
+
+Query ex1_mixed on dataset ebmixed (WARM)
+0.026
+
+
+plain: avg cold: .54881000000000000000, avg warm: .02362000000000000000
+blank: avg cold: .98795000000000000000, avg warm: .02315000000000000000
+mixed: avg cold: .47393000000000000000, avg warm: .02084000000000000000
