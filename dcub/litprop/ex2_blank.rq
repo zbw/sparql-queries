@@ -1,0 +1,14 @@
+# the thousand most frequent creator names
+#
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select (count(distinct ?pub) as ?count) ?actor
+where {
+  ?pub dct:creator [ rdfs:label ?actor ] .
+}
+group by ?actor
+order by desc(?count)
+limit 1000
+

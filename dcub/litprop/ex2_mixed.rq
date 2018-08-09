@@ -1,0 +1,14 @@
+# the thousand most frequent creator names
+#
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+#
+select (count(distinct ?pub) as ?count) ?actor
+where {
+  ?pub dct:creator ?actor .
+  filter(isLiteral(?actor))
+}
+group by ?actor
+order by desc(?count)
+limit 1000
+
