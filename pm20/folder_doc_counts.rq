@@ -1,14 +1,15 @@
 # Document counts (free and total) for folders connected to WD items
 #
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
 PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?wd (str(?label) as ?wdLabel) ?pm20 (?pm20Id as ?pm20Label) ?numberWorks ?accessibleOnline ?qsStatement
+select ?claimGuid ?wd (str(?label) as ?wdLabel) ?pm20 (?pm20Id as ?pm20Label) ?numberWorks ?accessibleOnline
 where {
   service <http://query.wikidata.org/sparql> {
     #    bind( wd:Q80596 as ?wd)
@@ -39,10 +40,10 @@ where {
   bind(if(bound(?free), str(?free), '0') as ?accessibleOnline)
   bind(if(bound(?total), str(?total), 'unknown') as ?numberWorks)
   #
-  # restrict to items with more than 0 documents online
-  filter( ?accessibleOnline > '0')
-  #
-  # QS statement
+  # QS statement (QS does not work for unknown values!)
   bind(concat(strafter(str(?wd), str(wd:)),'|P4293|"', ?pm20Id,
       '"|P3740|', ?numberWorks, '|P5592|', ?accessibleOnline) as ?qsStatement)
+  #
+  # identifier for the claim connecting the item with the property pm20Id
+  bind(strafter(str(?statement), str(wds:)) as ?claimGuid)
 }
