@@ -1,0 +1,23 @@
+# create Wikipedia page count for items with PM20 id
+#
+PREFIX schema: <http://schema.org/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+construct {
+  ?wd zbwext:wdPageCount ?count .
+}
+where {
+  select ?wd (count(?page) as ?count)
+  where {
+    # restrict to one item for testing
+    ##bind(wd:Q33391 as ?wd)
+    #
+    ?wd wdt:P4293 ?pm20Id .
+    #
+    # get Wikipedia pages
+    ?page schema:about ?wd .
+  }
+  group by ?wd
+}

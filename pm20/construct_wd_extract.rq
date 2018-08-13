@@ -1,0 +1,41 @@
+# create Wikidata extract for items with PM20 id
+#
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+construct {
+  ?wd wdt:P4293 ?pm20Id ;
+    wdt:P227 ?gnd;
+    rdfs:label ?wdLabelLang .
+  ?page schema:about ?wd ;
+    schema:name ?name ;
+    schema:isPartOf ?wikipedia ;
+    schema:inLanguage ?lang .
+}
+where {
+  # restrict to one item for testing
+  ##bind(wd:Q33391 as ?wd)
+  #
+  # relevant Wikipedias
+  values ( ?wikipedia ) {
+    ( <https://en.wikipedia.org/> )
+    ( <https://de.wikipedia.org/> )
+  }
+  # get item data
+  ?wd wdt:P4293 ?pm20Id ;
+      rdfs:label ?wdLabelLang .
+  filter(lang(?wdLabelLang) = 'en' || lang(?wdLabelLang) = 'de')
+  bind(uri(concat('http://purl.org/pressemappe20/', $pm20Id)) as ?pm20)
+  optional {
+    ?wd wdt:P227 ?gnd .
+  }
+  # get Wikipedia pages
+  ?page schema:about ?wd ;
+        schema:name ?name ;
+        schema:isPartOf ?wikipedia ;
+        schema:inLanguage ?lang .
+  filter(lang(?wdLabelLang) = ?lang)
+}
+

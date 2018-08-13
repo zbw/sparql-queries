@@ -1,0 +1,33 @@
+# create birth and death for items with PM20 id
+#
+PREFIX schema: <http://schema.org/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+#
+construct {
+  ?wd gndo:dateOfBirthAndDeath ?life .
+}
+where {
+  {
+    select ?wd (min(?birth1) as ?birth) (max(?death1) as ?death)
+    where {
+      # restrict to one item for testing
+      ##bind(wd:Q33391 as ?wd)
+      #
+      ?wd wdt:P4293 ?pm20Id ;
+          wdt:P31 wd:Q5 .
+      optional {
+        ?wd wdt:P569 ?birthDate .
+      }
+      optional {
+        ?wd wdt:P570 ?deathDate .
+      }
+      bind(if(bound(?birthDate), str(year(?birthDate)), '') as ?birth1)
+      bind(if(bound(?deathDate), str(year(?deathDate)), '')  as ?death1)
+    }
+    group by ?wd
+  }
+  bind(concat(?birth, ' - ', ?death) as ?life)
+}
