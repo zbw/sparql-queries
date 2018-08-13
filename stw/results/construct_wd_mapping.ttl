@@ -1,0 +1,97 @@
+@prefix schema: <http://schema.org/> .
+@prefix p:     <http://www.wikidata.org/prop/> .
+@prefix pq:    <http://www.wikidata.org/prop/qualifier/> .
+@prefix wdt:   <http://www.wikidata.org/prop/direct/> .
+@prefix stw:   <http://zbw.eu/stw/descriptor/> .
+@prefix zbwext: <http://zbw.eu/namespaces/zbw-extensions/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix wd:    <http://www.wikidata.org/entity/> .
+
+wd:Q545  skos:prefLabel    "Baltic Sea"@en , "Ostsee"@de ;
+        skos:relatedMatch  stw:17967-3 , stw:29739-0 .
+
+<https://de.wikipedia.org/wiki/Europa>
+        schema:about     wd:Q46 ;
+        schema:isPartOf  <https://de.wikipedia.org/> ;
+        schema:name      "Europa"@de .
+
+wd:Q46  skos:prefLabel     "Europe"@en , "Europa"@de ;
+        skos:relatedMatch  stw:16815-3 .
+
+<https://de.wikipedia.org/wiki/Bewegung_der_Blockfreien_Staaten>
+        schema:about     wd:Q83201 ;
+        schema:isPartOf  <https://de.wikipedia.org/> ;
+        schema:name      "Bewegung der Blockfreien Staaten"@de .
+
+<https://de.wikipedia.org/wiki/Dauernde_Neutralit%C3%A4t>
+        schema:about     wd:Q1172886 ;
+        schema:isPartOf  <https://de.wikipedia.org/> ;
+        schema:name      "Dauernde Neutralität"@de .
+
+<https://de.wikipedia.org/wiki/Jugoslawien>
+        schema:about     wd:Q36704 ;
+        schema:isPartOf  <https://de.wikipedia.org/> ;
+        schema:name      "Jugoslawien"@de .
+
+<https://de.wikipedia.org/wiki/Geschichte_Deutschlands>
+        schema:about     wd:Q122131 ;
+        schema:isPartOf  <https://de.wikipedia.org/> ;
+        schema:name      "Geschichte Deutschlands"@de .
+
+wd:Q1172886  skos:broadMatch  stw:16417-1 ;
+        skos:prefLabel   "perpetual neutrality"@en , "Dauernde Neutralität"@de .
+
+wd:Q12094  skos:broadMatch  stw:16957-4 ;
+        skos:prefLabel   "Kanton Appenzell Innerrhoden"@de , "canton of Appenzell Innerrhoden"@en .
+
+wd:Q122131  skos:prefLabel  "history of Germany"@en , "Geschichte Deutschlands"@de ;
+        skos:relatedMatch  stw:16834-6 .
+
+wd:Q36704  skos:closeMatch  stw:17176-6 ;
+        skos:prefLabel   "Yugoslavia"@en , "Jugoslawien"@de .
+
+<https://de.wikipedia.org/wiki/Karibische_Gemeinschaft>
+        schema:about     wd:Q205995 ;
+        schema:isPartOf  <https://de.wikipedia.org/> ;
+        schema:name      "Karibische Gemeinschaft"@de .
+
+<https://de.wikipedia.org/wiki/Islamische_Welt>
+        schema:about     wd:Q1660687 ;
+        schema:isPartOf  <https://de.wikipedia.org/> ;
+        schema:name      "Islamische Welt"@de .
+
+<https://de.wikipedia.org/wiki/Kanton_Appenzell_Innerrhoden>
+        schema:about     wd:Q12094 ;
+        schema:isPartOf  <https://de.wikipedia.org/> ;
+        schema:name      "Kanton Appenzell Innerrhoden"@de .
+
+<https://de.wikipedia.org/wiki/Kanton_Appenzell_Ausserrhoden>
+        schema:about     wd:Q12079 ;
+        schema:isPartOf  <https://de.wikipedia.org/> ;
+        schema:name      "Kanton Appenzell Ausserrhoden"@de .
+
+<https://de.wikipedia.org/wiki/Liste_sozialistischer_Staaten>
+        schema:about     wd:Q1058417 ;
+        schema:isPartOf  <https://de.wikipedia.org/> ;
+        schema:name      "Liste sozialistischer Staaten"@de .
+
+wd:Q1058417  skos:closeMatch  stw:11123-1 ;
+        skos:prefLabel   "list of socialist states"@en , "Liste sozialistischer Staaten"@de .
+
+wd:Q83201  skos:broadMatch  stw:16417-1 ;
+        skos:prefLabel   "Non-Aligned Movement"@en , "Bewegung der Blockfreien Staaten"@de .
+
+wd:Q1660687  skos:closeMatch  stw:17988-2 ;
+        skos:prefLabel   "Islamische Welt"@en , "Islamische Welt"@de .
+
+wd:Q12079  skos:broadMatch  stw:16957-4 ;
+        skos:prefLabel   "canton of Appenzell Ausserrhoden"@en , "Kanton Appenzell Ausserrhoden"@de .
+
+wd:Q205995  skos:broadMatch  stw:17989-0 , stw:19174-0 ;
+        skos:prefLabel   "CARICOM"@en , "Karibische Gemeinschaft"@de .
+
+<https://de.wikipedia.org/wiki/Ostsee>
+        schema:about     wd:Q545 ;
+        schema:isPartOf  <https://de.wikipedia.org/> ;
+        schema:name      "Ostsee"@de .

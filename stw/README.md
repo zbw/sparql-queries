@@ -28,6 +28,7 @@ Query | Description
 [wd_mapping_missing_labels](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/wd_mapping_missing_labels.rq) | Missing label in WD (in a certain language) for items mapped to STW
 [stw_mix_n_match](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/stw_mix_n_match.rq) | Create input for Wikidata Mix'n'match for STW descriptors
 [overlay_wd_hierarchy](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/overlay_wd_hierarchy.rq) | "Overlay" Wikidata with STW skos:brodaer hierarchy
+[construct_wd_mapping.ttl](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/construct_wd_mapping.rq) | "Overlay" Wikidata with STW skos:brodaer hierarchy
 
 ### STW mappings to other vocabularies
 
