@@ -1,4 +1,4 @@
-# construct mapping from Wikidata
+# Construct SKOS mapping from Wikidata (plus linked Wikipedia pages)
 #
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
@@ -12,7 +12,7 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 construct {
   ?wd ?skosRelation ?stw .
-##  ?stw skos:prefLabel ?stwLabelLang .
+  ?stw skos:prefLabel ?stwLabelLang .
   ?wd skos:prefLabel ?wdLabelLang .
   ?page schema:about ?wd ;
     schema:name ?name ;
@@ -26,8 +26,8 @@ where {
     #
     # mapping relation (is required here!)
     ?wd p:P3911/pq:P4390 ?relation .
-    # skos relation from "equivalent property"
-    ?relation wdt:P1628 ?skosRelation .
+    # URL of the equivalent skos property
+    ?relation wdt:P2699 ?skosRelation .
     #
     # get label for the wd item, if exists
     optional {
