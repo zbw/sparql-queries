@@ -9,7 +9,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 #
-select distinct ?wd ?wdLabel ?relation ?relationLabel ?stw ?stwLabel ?wd
+select distinct ?wd ?wdLabel ?skosRelation ?stw ?stwLabel ?wd
 where {
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
     # wd items with STW ID
@@ -19,9 +19,8 @@ where {
     # mapping relation
     optional {
       ?wd p:P3911/pq:P4390 ?relation .
-      ?relation rdfs:label ?relationLabelLang .
-      filter(lang(?relationLabelLang) = 'en')
-      bind(str(?relationLabelLang) as ?relationLabel)
+      # URI of the equivalent skos property
+      ?relation wdt:P2699 ?skosRelation .
     }
     # get label for the wd item, if exists
     optional {
@@ -36,4 +35,5 @@ where {
   filter(lang(?stwLabelLang) = 'de')
   bind(str(?stwLabelLang) as ?stwLabel)
 }
-order by ?relationLabel ?wdLabel
+order by ?wdLabel str(?skosRelation) ?stwLabelLang
+
