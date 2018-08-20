@@ -8,7 +8,9 @@ PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
 PREFIX  text:   <http://jena.apache.org/text#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
-select distinct ?gndPerson ?gndPersonLabel
+select distinct
+(uri(concat('http://wikidata.org/entity/', max(?wdId))) as ?wd) (max(?wdId) as ?wdLabel)
+?gndPerson ?gndPersonLabel
 (uri(concat('http://econbiz.de/Search/Results?lookfor=gnd%3A', $gndId)) as ?eb)
 ('EB' as ?ebLabel)
 (concat(?life, coalesce(concat("; ", group_concat(distinct str(?occupation) ;
@@ -17,7 +19,6 @@ select distinct ?gndPerson ?gndPersonLabel
     separator = "; ") as ?affiliations)
 (group_concat(distinct ?info ;
     separator = "; ") as ?biographicalInformation)
-(uri(concat('http://wikidata.org/entity/', max(?wdId))) as ?wd) (max(?wdId) as ?wdLabel)
 (uri(concat('https://tools.wmflabs.org/quickstatements/#v1=', max(?wdId), '|P227|"', ?gndId, '"')) as ?addGnd)
 (concat('add GND ', ?gndId) as ?addGndLabel)
 where {
