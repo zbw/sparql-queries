@@ -1,22 +1,29 @@
-# all individual authors named "Fischer, Peter"
+# all individual authors named "Lambertz, Christian"
 #
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
-select (str(count(distinct ?pub)) as ?pubCount) ?actor ?life ?info
+select (str(count(distinct ?pub)) as ?pubCount) ?actor ?name ?life ?info
 where {
   service <http://zbw.eu/beta/sparql/gnd/query> {
+    values ( ?name ) {
+      ( "Lambertz, Christian" )
+    }
     ?actor a gndo:DifferentiatedPerson;
-           gndo:preferredNameForThePerson "Fischer, Peter" .
+           gndo:preferredNameForThePerson ?name .
     optional {
       ?actor gndo:dateOfBirth ?birth .
       bind(str(year(?birth)) as ?life)
     }
     optional {
-      ?actor gndo:biographicalOrHistoricalInformation ?info .
+      ?actor gndo:professionOrOccupation/gndo:preferredNameForTheSubjectHeading ?occupation .
     }
+    optional {
+      ?actor gndo:biographicalOrHistoricalInformation ?info1 .
+    }
+    bind(concat(if(bound(?occupation), concat(?occupation, '; '), ''), if(bound(?info1), ?info1, '')) as ?info)
   }
   ?pub dct:creator ?actor .
 }
-group by ?actor ?life ?info
+group by ?actor ?name ?life ?info
 order by desc(count(distinct ?pub))
