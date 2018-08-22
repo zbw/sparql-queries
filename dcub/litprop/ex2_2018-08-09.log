@@ -1,0 +1,66 @@
+2018-08-09 15:10:15 Run 1: restart fuseki and clear OS caches
+
+Query ex2_plain  on dataset ebplain (COLD)
+239.201
+
+Query ex2_plain on dataset ebplain (WARM)
+206.792
+
+Query ex2_blank  on dataset ebblank (COLD)
+495.980
+
+Query ex2_blank on dataset ebblank (WARM)
+315.127
+
+Query ex2_mixed  on dataset ebmixed (COLD)
+258.755
+
+Query ex2_mixed on dataset ebmixed (WARM)
+235.159
+
+
+2018-08-09 15:39:58 Run 2: restart fuseki and clear OS caches
+
+Query ex2_plain  on dataset ebplain (COLD)
+264.258
+
+Query ex2_plain on dataset ebplain (WARM)
+215.768
+
+Query ex2_blank  on dataset ebblank (COLD)
+474.103
+
+Query ex2_blank on dataset ebblank (WARM)
+329.184
+
+Query ex2_mixed  on dataset ebmixed (COLD)
+263.640
+
+Query ex2_mixed on dataset ebmixed (WARM)
+247.555
+
+
+2018-08-09 16:10:24 Run 3: restart fuseki and clear OS caches
+
+Query ex2_plain  on dataset ebplain (COLD)
+255.388
+
+Query ex2_plain on dataset ebplain (WARM)
+219.060
+
+Query ex2_blank  on dataset ebblank (COLD)
+492.432
+
+Query ex2_blank on dataset ebblank (WARM)
+314.842
+
+Query ex2_mixed  on dataset ebmixed (COLD)
+248.209
+
+Query ex2_mixed on dataset ebmixed (WARM)
+233.783
+
+
+plain: avg cold: 252.94900000000000000000, avg warm: 213.87333333333333333333
+blank: avg cold: 487.50500000000000000000, avg warm: 319.71766666666666666666
+mixed: avg cold: 256.86800000000000000000, avg warm: 238.83233333333333333333
