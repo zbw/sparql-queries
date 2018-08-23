@@ -1,4 +1,4 @@
-# Get all mappings from Wikidata to STW (with labels in German language)
+# Get all mappings from Wikidata to STW (with labels in German and English)
 #
 # needs to run from an endpoint holding the vocabulary of the external-id
 # in order to get the labels
@@ -9,7 +9,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 #
-select distinct ?wd ?wdLabel ?skosRelation ?stw ?stwLabel ?wd
+select distinct ?wd ?wdLabel ?skosRelation ?stw ?stwLabel
 where {
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
     # wd items with STW ID
@@ -24,16 +24,21 @@ where {
     }
     # get label for the wd item, if exists
     optional {
-      ?wd rdfs:label ?label .
-      filter(lang(?label) = 'de')
-      bind(str(?label) as ?wdLabel)
+      ?wd rdfs:label ?wdLabelDe .
+      filter(lang(?wdLabelDe) = 'de')
     }
+    optional {
+      ?wd rdfs:label ?wdLabelEn .
+      filter(lang(?wdLabelEn) = 'en')
+    }
+    bind(concat(if(bound(?wdLabelDe), str(?wdLabelDe), ''), ' | ', if(bound(?wdLabelEn), str(?wdLabelEn), '')) as ?wdLabel)
   }
   # look up STW descriptors and labels
   bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw)
-  ?stw skos:prefLabel ?stwLabelLang .
-  filter(lang(?stwLabelLang) = 'de')
-  bind(str(?stwLabelLang) as ?stwLabel)
+  ?stw skos:prefLabel ?stwLabelDe .
+  filter(lang(?stwLabelDe) = 'de')
+  ?stw skos:prefLabel ?stwLabelEn .
+  filter(lang(?stwLabelEn) = 'en')
+  bind(concat(if(bound(?stwLabelDe), str(?stwLabelDe), ''), ' | ', if(bound(?stwLabelEn), str(?stwLabelEn), '')) as ?stwLabel)
 }
 order by ?wdLabel str(?skosRelation) ?stwLabelLang
-
