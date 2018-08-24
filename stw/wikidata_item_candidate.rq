@@ -1,0 +1,72 @@
+# Possibly missing Wikidata items - extract STW data for creation
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX stw: <http://zbw.eu/stw/descriptor/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+#
+select ?stw ?stwId (str(?prefLabelDe) as ?L_de) (str(?prefLabelEn) as ?L_en) ?gndId 
+(group_concat(distinct str(?altLabelDe);
+    separator = "|") as ?A_de)
+(group_concat(distinct str(?altLabelEn);
+    separator = "|") as ?A_en)
+## ?thsys_de ?thsys_en
+where {
+  {
+    # all stw descriptors
+    select distinct ?stw
+##      (group_concat(distinct str(?thsysLabelDe);
+##          separator = " / ") as ?thsys_de)
+##      (group_concat(distinct str(?thsysLabelEn);
+##          separator = " / ") as ?thsys_en)
+    where {
+      ?thsys a zbwext:Thsys ;
+             skos:notation ?nta .
+
+##      ?thsys rdfs:label ?thsysLabelDe .
+##      filter(lang(?thsysLabelDe) = 'de')
+
+##      ?thsys rdfs:label ?thsysLabelEn .
+##      filter(lang(?thsysLabelEn) = 'en')
+
+      ?stw a zbwext:Descriptor ;
+           skos:broader ?thsys .
+      #      
+      # restrict to subthesaurus
+      filter(strstarts(?nta, 'W'))
+    }
+##    group by ?stw
+  } minus {
+    # descriptors already linked to items
+    service <https://query.wikidata.org/sparql> {
+      ?wd wdt:P3911 ?stwId .
+      bind(uri(concat(str(stw:), ?stwId)) as ?stw)
+    }
+  }
+  ?stw skos:prefLabel ?prefLabelEn
+  filter(lang(?prefLabelEn) = 'en')
+  ?stw skos:prefLabel ?prefLabelDe
+  filter(lang(?prefLabelDe) = 'de')
+  #
+  # add alt labels
+  optional {
+    ?stw skos:altLabel ?altLabelEn
+    filter(lang(?altLabelEn) = 'en')
+  }
+  optional {
+    ?stw skos:altLabel ?altLabelDe
+    filter(lang(?altLabelDe) = 'de')
+  }
+  # add gnd
+  optional {
+    ?stw skos:exactMatch ?gnd .
+    ?gnd dcterms:isPartOf <http://zbw.eu/stw/mapping/gnd/target> .
+    bind(strafter(str(?gnd), 'http://d-nb.info/gnd/') as ?gndId)
+  }
+  bind(strafter(str(?stw), str(stw:)) as ?stwId)
+}
+group by ?stw ?stwId ?prefLabelDe ?prefLabelEn ?thsys_de ?thsys_en ?gndId
+
