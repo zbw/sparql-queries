@@ -15,7 +15,6 @@ use JSON qw'decode_json encode_json';
 use Path::Tiny;
 use REST::Client;
 
-#use Text::Truncate;
 use URI::Escape;
 
 my $ENDPOINT = 'http://zbw.eu/beta/sparql/stw/query';
@@ -47,44 +46,74 @@ if ($@) {
 my $stw_retrieved           = "|S813|+2018-08-24T00:00:00Z/10";
 my $stw_reference_statement = "|S248|Q26903352$stw_retrieved";
 
+my @new_entries;
+
 foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
 
-  print Dumper $entry;
+  ##print Dumper $entry;
 
-  print "CREATE\n";
+  # entry for the new pseudo-sparql result
+  my %new_entry = ( stw => $entry->{stw}, );
+  $new_entry{stwLabel}{type}  = "literal";
+  $new_entry{stwLabel}{value} = "$entry->{L_de}{value} | $entry->{L_en}{value}";
+
+  my $qs = 'CREATE';
+  ##print "CREATE\n";
 
   foreach my $lang (qw/ de en /) {
-    
+
     # labels and aliases
-    foreach my $type ( qw/ L A / ) {
+    foreach my $type (qw/ L A /) {
       my $field = "${type}_$lang";
-      if ($entry->{$field}{value} ) {
-        my @labels = split(/\|/, $entry->{$field}{value});
+      if ( $entry->{$field}{value} ) {
+        my @labels = split( /\|/, $entry->{$field}{value} );
         foreach my $label (@labels) {
+
           # skip items with excessive altLabels
-          next if (scalar(@labels) > 10);
-          if ($lang eq 'en') {
+          next if ( scalar(@labels) > 10 );
+          if ( $lang eq 'en' ) {
             $label = lcfirst($label);
           }
-          print "LAST|$type$lang|\"$label\"\n";
+          ##print "LAST|$type$lang|\"$label\"\n";
+          $qs .= "||LAST|$type$lang|\"$label\"";
         }
       }
     }
   }
+
   # set record specific source statements
   my $source_statement = "|S248|Q26903352|S3911|\"$entry->{stwId}{value}\""
     . "|S1476|en:\"$entry->{L_en}{value}\"$stw_retrieved";
 
   # economical concept
-  print "LAST|P31|Q29028649$source_statement\n";
+  ##print "LAST|P31|Q29028649$source_statement\n";
+  $qs .= "||LAST|P31|Q29028649$source_statement";
 
   # external IDs
   if ( $entry->{gndId} ) {
-    print "LAST|P227|\"$entry->{gndId}->{value}\"$source_statement\n";
+    ##print "LAST|P227|\"$entry->{gndId}->{value}\"$source_statement\n";
+##    $qs .= "||LAST|P227|\"$entry->{gndId}->{value}\"$source_statement";
   }
-  # stw id
-  print "LAST|P3911|\"$entry->{stwId}{value}\"\n";
 
-  exit;
+  # stw id
+  ##print "LAST|P3911|\"$entry->{stwId}{value}\"\n";
+##  $qs .= "||LAST|P3911|\"$entry->{stwId}{value}\"";
+
+  $new_entry{qs}{type}  = "uri";
+  $new_entry{qs}{value} = "https://tools.wmflabs.org/quickstatements#v1=$qs";
+
+  push( @new_entries, \%new_entry );
+
+  last;
 }
+
+my %new_json = (
+  head    => { vars => [qw/ stw stwLabel qs qsLabel/] },
+  results => {
+    bindings => \@new_entries,
+  },
+);
+
+# output as json file
+path('/var/www/html/beta/tmp/test.json')->spew(encode_json \%new_json);
 
