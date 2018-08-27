@@ -1,8 +1,11 @@
 #!/bin/env perl
-# nbt, 11.4.2017
+# nbt, 23.8.2018
 
-# create a list of STW concepts which have no links in Wikidata,
-# with links invoking Quickstatements for adding these concepts
+# Create a list of STW concepts which have no links in Wikidata,
+# with Quickstatements to create an item.
+
+# Pseudo-sparql result set with clickable QS links is useless, because linkw do
+# not work with multiple statements - therefore use plain html.
 
 use strict;
 use warnings;
@@ -15,26 +18,26 @@ use JSON qw'decode_json encode_json';
 use Path::Tiny;
 use REST::Client;
 
-use URI::Escape;
-
-my $ENDPOINT = 'http://zbw.eu/beta/sparql/stw/query';
-##my $ENDPOINT = 'http://172.16.10.102:3030/ebds/query';
-my $QUERY_FN = '../stw/wikidata_item_candidate.rq';
-
-my $result_data;
+my $ENDPOINT    = 'http://zbw.eu/beta/sparql/stw/query';
+my $QUERY       = path('../stw/wikidata_item_candidate.rq');
+my $OUTPUT_JSON = path('/var/www/html/beta/tmp/stw_qs_create.json');
+my $OUTPUT_HTML = path('/var/www/html/beta/tmp/stw_qs_create.html');
+my $TODAY       = `date +%F | tr -d "\n"`;
+my $RETRIEVED   = "|S813|+${TODAY}T00:00:00Z/11";
 
 # initialize rest client
 my $client = REST::Client->new( timeout => 600 );
 
-# get query and encode it
-my $query = path($QUERY_FN)->slurp;
-$query = uri_escape($query);
-
-# create GET url
-my $url = $ENDPOINT . '?query=' . $query;
-
 # execute the request (may also ask for 'text/csv') and write response to file
-$client->GET( $url, { 'Accept' => 'application/sparql-results+json' } );
+$client->POST(
+  $ENDPOINT,
+  $QUERY->slurp,
+  {
+    'Content-type' => 'application/sparql-query',
+    'Accept'       => 'application/sparql-results+json'
+  }
+);
+my $result_data;
 eval {
   my $json = $client->responseContent();
   $result_data = decode_json($json);
@@ -43,27 +46,40 @@ if ($@) {
   die "Error parsing response: ", $client->responseContent(), "\n";
 }
 
-my $stw_retrieved           = "|S813|+2018-08-24T00:00:00Z/10";
-my $stw_reference_statement = "|S248|Q26903352$stw_retrieved";
-
-my @new_entries;
+# html head, one click selection of text to insert
+my $html  = $OUTPUT_HTML->openw;
+my $title = "QS: Create item from STW";
+print $html <<"EOF";
+<!DOCTYPE html>
+<html><head><title>$title</title><style>
+.force-select {
+  -webkit-user-select: all;  /* Chrome 49+ */
+  -moz-user-select: all;     /* Firefox 43+ */
+  -ms-user-select: all;      /* No support yet */
+  user-select: all;          /* Likely future */
+}
+</style></head><body>
+<h1>$title</h1>
+EOF
 
 foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
 
   ##print Dumper $entry;
 
-  # entry for the new pseudo-sparql result
-  my %new_entry = ( stw => $entry->{stw}, );
-  $new_entry{stwLabel}{type}  = "literal";
-  $new_entry{stwLabel}{value} = "$entry->{L_de}{value} | $entry->{L_en}{value}";
+  my $label = "$entry->{L_de}{value} | $entry->{L_en}{value}";
+  my $url   = $entry->{stw}{value};
 
-  my $qs = 'CREATE';
-  ##print "CREATE\n";
+  # start html entry
+  print $html
+    "\n<h3><a href='$url'>$label</a></h3>\n\n<pre class='force-select'>\n";
 
-  foreach my $lang (qw/ de en /) {
+  print $html "CREATE\n";
 
-    # labels and aliases
-    foreach my $type (qw/ L A /) {
+  # labels, desriptions (from scope notes) and aliases
+  foreach my $type (qw/ L D A /) {
+
+    foreach my $lang (qw/ de en /) {
+
       my $field = "${type}_$lang";
       if ( $entry->{$field}{value} ) {
         my @labels = split( /\|/, $entry->{$field}{value} );
@@ -74,46 +90,38 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
           if ( $lang eq 'en' ) {
             $label = lcfirst($label);
           }
-          ##print "LAST|$type$lang|\"$label\"\n";
-          $qs .= "||LAST|$type$lang|\"$label\"";
+          print $html "LAST|$type$lang|\"$label\"\n";
         }
       }
     }
+
+    # insert extra newline for visual separation
+    if ( $entry->{"${type}_de"}{value} or $entry->{"${type}_en"}{value} ) {
+      print $html "\n";
+    }
   }
 
-  # set record specific source statements
+  # prepare record specific source statements
   my $source_statement = "|S248|Q26903352|S3911|\"$entry->{stwId}{value}\""
-    . "|S1476|en:\"$entry->{L_en}{value}\"$stw_retrieved";
+    . "|S1476|en:\"$entry->{L_en}{value}\"$RETRIEVED";
 
   # economical concept
-  ##print "LAST|P31|Q29028649$source_statement\n";
-  $qs .= "||LAST|P31|Q29028649$source_statement";
+  print $html "LAST|P31|Q29028649$source_statement\n";
 
   # external IDs
   if ( $entry->{gndId} ) {
-    ##print "LAST|P227|\"$entry->{gndId}->{value}\"$source_statement\n";
-##    $qs .= "||LAST|P227|\"$entry->{gndId}->{value}\"$source_statement";
+    print $html "LAST|P227|\"$entry->{gndId}->{value}\"$source_statement\n";
   }
 
-  # stw id
-  ##print "LAST|P3911|\"$entry->{stwId}{value}\"\n";
-##  $qs .= "||LAST|P3911|\"$entry->{stwId}{value}\"";
+  # stw id with exact match
+  print $html "LAST|P3911|\"$entry->{stwId}{value}\"|P4390|Q39893449\n";
 
-  $new_entry{qs}{type}  = "uri";
-  $new_entry{qs}{value} = "https://tools.wmflabs.org/quickstatements#v1=$qs";
+  # finish entry
+  print $html "</pre>\n";
 
-  push( @new_entries, \%new_entry );
-
-  last;
+  ##last;
 }
 
-my %new_json = (
-  head    => { vars => [qw/ stw stwLabel qs qsLabel/] },
-  results => {
-    bindings => \@new_entries,
-  },
-);
-
-# output as json file
-path('/var/www/html/beta/tmp/test.json')->spew(encode_json \%new_json);
+# finish html
+print $html "\n</body></html>\n";
 
