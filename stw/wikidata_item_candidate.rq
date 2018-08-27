@@ -13,6 +13,8 @@ select ?stw ?stwId (str(?prefLabelDe) as ?L_de) (str(?prefLabelEn) as ?L_en) ?gn
     separator = "|") as ?A_de)
 (group_concat(distinct str(?altLabelEn);
     separator = "|") as ?A_en)
+(sample(?scopeNoteDe) as ?D_de)
+(sample(?scopeNoteEn) as ?D_en)
 ## ?thsys_de ?thsys_en
 where {
   {
@@ -59,6 +61,15 @@ where {
   optional {
     ?stw skos:altLabel ?altLabelDe
     filter(lang(?altLabelDe) = 'de')
+  }
+  # add scope notes
+  optional {
+    ?stw skos:scopeNote ?scopeNoteEn
+    filter(lang(?scopeNoteEn) = 'en')
+  }
+  optional {
+    ?stw skos:scopeNote ?scopeNoteDe
+    filter(lang(?scopeNoteDe) = 'de')
   }
   # add gnd
   optional {
