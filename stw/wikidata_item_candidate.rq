@@ -19,7 +19,7 @@ select ?stw ?stwId (str(?prefLabelDe) as ?L_de) (str(?prefLabelEn) as ?L_en) ?gn
 where {
   {
     # all stw descriptors
-    select distinct ?stw
+    select distinct ?stw ?nta
 ##      (group_concat(distinct str(?thsysLabelDe);
 ##          separator = " / ") as ?thsys_de)
 ##      (group_concat(distinct str(?thsysLabelEn);
@@ -80,4 +80,4 @@ where {
   bind(strafter(str(?stw), str(stw:)) as ?stwId)
 }
 group by ?stw ?stwId ?prefLabelDe ?prefLabelEn ?thsys_de ?thsys_en ?gndId
-
+order by min(?nta)
