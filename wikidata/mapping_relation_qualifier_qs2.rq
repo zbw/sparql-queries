@@ -7,20 +7,21 @@ PREFIX ps: <http://www.wikidata.org/prop/statement/>
 PREFIX q: <http://www.wikidata.org/prop/qualifier/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-select ?wd ?wdLabel ?value ?qs2
+select ?wd ?wdLabel ?externalId ?qs2
 where {
-  values ( ?propName ?defaultType ) {
+  values ( ?externalPropertyName ?defaultType ) {
     #  STW-ID  exactMatch
     ( 'P3911' 'Q39893449' )
   }
-  bind(uri(concat( str(p:), ?propName )) as ?property)
-  bind(uri(concat( str(ps:), ?propName)) as ?ps)
+  bind(uri(concat( str(p:), ?externalPropertyName )) as ?property)
+  bind(uri(concat( str(ps:), ?externalPropertyName)) as ?propertyStatement)
   #
   # get all unqualified properties
   ?wd ?property ?statement .
-  ?statement ?ps ?value .
+  ?statement ?propertyStatement ?externalId .
+  # ... where no mapping relation type qualifier exists
   filter(not exists {
-      ?statement q:P4390 ?relation .
+      ?statement q:P4390 ?mappingRelation .
     }
   )
   # get label for the wd item, if exists
@@ -30,5 +31,5 @@ where {
     bind(str(?label) as ?wdLabel)
   }
   # create QS2 statements
-  bind(concat(strafter(str(?wd), str(wd:)), '|', ?propName, '|"', ?value, '"|P4390|', ?defaultType) as ?qs2)
+  bind(concat(strafter(str(?wd), str(wd:)), '|', ?externalPropertyName, '|"', ?externalId, '"|P4390|', ?defaultType) as ?qs2)
 }
