@@ -5,20 +5,25 @@
 #
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
 #
 select distinct ?wd ?wdLabel ?skosRelation ?stw ?stwLabel
 where {
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
     # wd items with STW ID
-    ?wd wdt:P3911 ?stwId .
+    ## CAUTION: the following line does not retrive multiple qualified statements
+    ## ?wd wdt:P3911 ?stwId .
+    ?wd p:P3911 ?statement .
+    ?statement ps:P3911 ?stwId .
     filter(isLiteral(?stwId))
     #
     # mapping relation
     optional {
-      ?wd p:P3911/pq:P4390 ?relation .
+      ?statement pq:P4390 ?relation .
       # URI of the equivalent skos property
       ?relation wdt:P2699 ?skosRelation .
     }
