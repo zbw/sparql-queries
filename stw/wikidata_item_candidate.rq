@@ -80,4 +80,4 @@ where {
   bind(strafter(str(?stw), str(stw:)) as ?stwId)
 }
 group by ?stw ?stwId ?prefLabelDe ?prefLabelEn ?thsys_de ?thsys_en ?gndId
-order by min(?nta)
+order by min(?nta) str(?prefLabelDe)

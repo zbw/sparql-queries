@@ -1,4 +1,4 @@
-#!/bin/env perl
+#!/usr/bin/env perl
 # nbt, 23.8.2018
 
 # Create a list of STW concepts which have no links in Wikidata,
@@ -19,7 +19,7 @@ use Path::Tiny;
 use REST::Client;
 
 my $ENDPOINT    = 'http://zbw.eu/beta/sparql/stw/query';
-my $QUERY       = path('../stw/wikidata_item_candidate.rq');
+my $QUERY       = path('/opt/sparql-queries/stw/wikidata_item_candidate.rq');
 my $OUTPUT_JSON = path('/var/www/html/beta/tmp/stw_qs_create.json');
 my $OUTPUT_HTML = path('/var/www/html/beta/tmp/stw_qs_create.html');
 my $TODAY       = `date +%F | tr -d "\n"`;
