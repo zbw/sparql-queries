@@ -1,0 +1,30 @@
+# To understand the handling of deprecated concepts:
+# - list deprecated concepts and (optionally) their replacements, 
+# - show if deprecated concepts are still skos:Concepts/zbwext:Descriptors.
+# 
+# you may want to use the Pivot Table functionality of SPARQL Lab with variables: isConcept, isDescriptor, isThsys
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+prefix zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+SELECT ?replacement ?concept ?label ?isDescriptor ?isConcept ?isThsys ?scheme
+WHERE {
+  ?concept owl:deprecated true .
+  bind(if(EXISTS{?concept a skos:Concept .}, 'true', 'false') as ?isConcept)
+  bind(if(EXISTS{?concept a zbwext:Descriptor .}, 'true', 'false') as ?isDescriptor)
+  bind(if(EXISTS{?concept a zbwext:Thsys .}, 'true', 'false') as ?isThsys)
+  {?concept rdfs:label ?label } UNION {?concept skos:prefLabel ?label }.
+  filter (lang(?label) = 'en')
+  
+  OPTIONAL {
+    ?concept dcterms:isReplacedBy ?replacement .
+  }
+  OPTIONAL {
+    ?concept skos:inScheme ?scheme .
+  }
+}
+ORDER BY ?scheme ?concept
