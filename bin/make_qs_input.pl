@@ -35,6 +35,9 @@ my $query = $query_file->slurp;
 # dataset and endpoint are derived from the query directory
 my $dataset  = $query_file->parent->basename;
 my $endpoint = "http://zbw.eu/beta/sparql/$dataset/query";
+if ( $dataset eq 'wikidata' ) {
+  $endpoint = 'https://query.wikidata.org/sparql';
+}
 
 # output file derived from query file, plus date for repeated runs
 my $date    = `date +%F | tr -d "\n"`;
