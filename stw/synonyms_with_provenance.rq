@@ -29,7 +29,7 @@ WHERE {
     bind(?foundConcept as ?stwConcept)
   } UNION {
     ?foundConcept skos:exactMatch ?stwConcept .
-    ?stwConcept a zbwext:descriptor .
+    ?stwConcept a zbwext:Descriptor .
   }
   # get all concepts in an exactMatch cluster
   {
