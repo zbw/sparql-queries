@@ -59,4 +59,4 @@ Query | Description
 [synonyms](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/synonyms.rq) | List of synonyms for STW concepts (for use in RePEc/Ideas and maybe other applications)
 [synonyms_by_stw_id](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/synonyms_by_stw_id.rq) | List of grouped synonyms for STW concepts (for use in EconBiz)
 [synonyms_by_gnd_id](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/synonyms_by_gnd_id.rq) | List of grouped synonyms for GND concepts (via STW mapping, for use in EconBiz)
-
+[deprecated_concepts_replacements](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/deprecated_concepts_replacements.rq)| List deprecated concepts and (optionally) their replacements
