@@ -29,6 +29,7 @@ Query | Description
 [stw_mix_n_match](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/stw_mix_n_match.rq) | Create input for Wikidata Mix'n'match for STW descriptors
 [overlay_wd_hierarchy](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/overlay_wd_hierarchy.rq) | "Overlay" Wikidata with STW skos:brodaer hierarchy
 [construct_wd_mapping](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/construct_wd_mapping.rq) | Construct SKOS mapping from Wikidata (plus linked Wikipedia pages)
+[indirect_mapping_via_wd](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/indirect_mapping_via_wd.rq) | Indirect mapping from STW to another vocabulary (default: UNESCO thesaurus) via Wikidata, for now restricted to exact matches
 
 ### STW mappings to other vocabularies
 
