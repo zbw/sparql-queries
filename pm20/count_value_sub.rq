@@ -1,0 +1,15 @@
+# Count values of a certain property within a substructure for PM20 folders
+#
+PREFIX schema: <http://schema.org/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select (str(count(?pm20)) as ?count) ?value
+where {
+  values ( ?sub ?property ) {
+    ( zbwext:activity schema:about )
+  }
+  ?pm20 a zbwext:Pm20Folder ;
+        ?sub [ ?property ?value ].
+}
+group by ?value
+order by desc(count(?value))
