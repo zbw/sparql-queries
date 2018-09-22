@@ -1,8 +1,8 @@
 # Count values of a certain property for PM20 folders
 #
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX schema: <http://schema.org/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
-PREFIX dct: <http://purl.org/dc/terms/>
 #
 select (str(count(?pm20)) as ?count) ?value
 where {
