@@ -13,8 +13,6 @@ where {
   ?pm20 a zbwext:Pm20Folder ;
     ?property ?value ;
     skos:prefLabel ?pm20Label .
-  ?pm20 zbwext:freeDocCount ?docCount .
-  filter(?docCount > 0)
 }
 order by ?pm20Label
 
