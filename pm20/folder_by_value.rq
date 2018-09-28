@@ -1,0 +1,20 @@
+# List folders by property value
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select ?pm20 ?pm20Label ?property ?value
+where {
+  values ( ?property ?value ) {
+    ( schema:nationality "Schweiz" )
+  }
+  ?pm20 a zbwext:Pm20Folder ;
+    ?property ?value ;
+    skos:prefLabel ?pm20Label .
+  ?pm20 zbwext:freeDocCount ?docCount .
+  filter(?docCount > 0)
+}
+order by ?pm20Label
+
