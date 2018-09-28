@@ -4,7 +4,7 @@ PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX schema: <http://schema.org/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?count (str(count(?pm20)) as ?countLabel) ?value
+select ?count (str(count(distinct ?pm20)) as ?countLabel) ?value
 where {
   values ( ?property ) {
     ( schema:nationality )
