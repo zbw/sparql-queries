@@ -1,0 +1,14 @@
+# Count values of a certain property within a substructure for PM20 folders
+#
+PREFIX schema: <http://schema.org/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?pm20 ?pm20Label ?sub ?property ?value
+where {
+  values ( ?sub ?property ?value ) {
+    ( zbwext:activity schema:about "Gründer" )
+  }
+  ?pm20 a zbwext:Pm20Folder ;
+        ?sub [ ?property ?value ].
+}
+order by ?pm20Label
