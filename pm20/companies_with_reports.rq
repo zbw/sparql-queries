@@ -9,7 +9,7 @@ PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX schema: <http://schema.org/>
 #
 SELECT ?pm20 ?pm20Label ?fromTo ?type (group_concat(distinct ?broaderLocation;
-    separator='; ') as ?locations) (group_concat(distinct ?industry;
+    separator='; ') as ?broaderLocations) (group_concat(distinct ?industry;
     separator='; ') as ?industries) ?reports
 WHERE {
   ?pm20 a zbwext:CompanyFolder ;
