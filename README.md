@@ -25,6 +25,8 @@ Dataset-specific queries
 
 ### [STW Thesaurus for Economics](stw)
 
+### [20th Century Press Archives (PM20)](pm20)
+
 ### [German Integrated Autority File (GND)](gnd)
 
 ### [Economists subset of GND](econ_pers)
@@ -32,8 +34,6 @@ Dataset-specific queries
 ### [Wikidata](wikidata)
 
 ### [VIAF](viaf)
-
-### [lobid](lobid)
 
 Contributing
 ------------
