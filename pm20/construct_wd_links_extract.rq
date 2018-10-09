@@ -1,0 +1,33 @@
+# Create Wikidata items with PM20 id or linked
+# via GND or GeoNames from PM20
+#
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+construct {
+  ?wd wdt:P4293 ?pm20Id ;
+    wdt:P227 ?gndId ;
+    wdt:P1566 ?geoId .
+}
+where {
+  hint:Query hint:optimizer "None" .
+  #
+  # get item data
+  {
+    ?wd wdt:P4293 ?pm20Id .
+  } union {
+    service <http://zbw.eu/beta/sparql/pm20/query> {
+      ?s gndo:gndIdentifier ?gndId .
+    }
+    ?wd wdt:P227 ?gndId .
+  } union {
+    service <http://zbw.eu/beta/sparql/pm20/query> {
+      ?s zbwext:geoIdentifier ?geoId .
+    }
+    ?wd wdt:P1566 ?geoId .
+  }      
+}
+
