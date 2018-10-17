@@ -9,7 +9,7 @@ PREFIX wds: <http://www.wikidata.org/entity/statement/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?claimGuid ?wd (str(?label) as ?wdLabel) ?pm20 (?pm20Id as ?pm20Label) ?numberWorks ?accessibleOnline
+select ?qsStatement ?wd (str(?label) as ?wdLabel) ?pm20 (?pm20Id as ?pm20Label) ?numberWorks ?accessibleOnline
 where {
   service <http://query.wikidata.org/sparql> {
     #    bind( wd:Q80596 as ?wd)
