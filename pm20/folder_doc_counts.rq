@@ -36,9 +36,9 @@ where {
   # If a person folder was created after 1948, no content at all is online.
   # Therefore we can conclude that the number of accessible documents is 0.
   # We don't know how many documents exist on paper or microfilm,
-  # so the total number of documents is unknown.
+  # so the total number of documents is unknown (somevalue).
   bind(if(bound(?free), str(?free), '0') as ?accessibleOnline)
-  bind(if(bound(?total), str(?total), 'unknown') as ?numberWorks)
+  bind(if(bound(?total), str(?total), 'somevalue') as ?numberWorks)
   #
   # QS statement (QS does not work for unknown values!)
   bind(concat(strafter(str(?wd), str(wd:)),'|P4293|"', ?pm20Id,
