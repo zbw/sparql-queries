@@ -1,8 +1,7 @@
 ## Queries for Wikidata
 
 Uses the Wikidata SPARQL endpoint at
-`https://query.wikidata.org/bigdata/namespace/wdq/sparql`. Due to its current
-limitations, queries can be sent via GET only.
+`https://query.wikidata.org/sparql`.
 
 Query | Description
 ------|------------
@@ -53,6 +52,12 @@ see also [STW mapping to Wikidata](../stw#stw-mapping-to-wikidata)
 Query | Description
 ------|------------
 [search_concept_by_stw_labels](http://zbw.eu/beta/sparql-lab/?endpoint=http://172.16.10.102:3030/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_concept_by_stw_labels.rq) | Search a concept by all preferred and alternate labels from stw and other linked concepts (rank by calculated total score)
+
+#### re. PM20
+
+Query | Description
+------|------------
+[search_pm20_corp](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql//wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_pm20_corp.rq) | Search a PM20 company by all preferred and alternate labels (rank by calculated total score)
 
 
 ### Documentation

@@ -1,0 +1,77 @@
+earch for organizations from PM20, looking up all available
+# labels, with additional data for identification
+#
+# Uses diverse literal properties, brings the best match on top
+# of the list
+#
+PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX text:   <http://jena.apache.org/text#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX schema: <http://schema.org/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xs: <http://www.w3.org/2001/XMLSchema#>
+#
+select distinct ?pm20 (str(?prefLabel) as ?pm20Label) ?wd ?wdLabel
+?time ?description ?addpm20 ('add' as ?addpm20Label)
+# debug information
+# ?score ?literal ?labels
+where {
+  # lookup additional information about pm20 folder
+  service <http://zbw.eu/beta/sparql/pm20/query> {
+    select ?pm20 ?prefLabel (group_concat(?altLabel) as ?altLabels)
+    where {
+      values ( ?pm20 ) {
+        ( <http://purl.org/pressemappe20/folder/co/018039> )
+      }
+      ?pm20 skos:prefLabel ?prefLabel ;
+            skos:altLabel ?alt .
+      # truncate combined alt labels
+      bind(coalesce(strbefore(?alt, ' <'), strbefore(?alt, ' -- '), ?alt) as ?altLabel)
+    }
+    group by ?pm20 ?prefLabel
+  }
+  # create one string of all labels
+  bind(concat(?prefLabel, ' ', ?altLabels) as ?labels)
+  #
+  # limit number of results to 30
+  (?wd ?score ?literal) text:query ( ?labels 100 ) .
+  #
+  # try to get a label
+  optional {
+    ?wd rdfs:label ?wdLabelDe .
+    filter(lang(?wdLabelDe) = 'de')
+  }
+  optional {
+    ?wd rdfs:label ?wdLabelEn .
+    filter(lang(?wdLabelEn) = 'en')
+  }
+  bind(strafter(str(?wd), str(wd:)) as ?wdId)
+  bind(coalesce(str(?wdLabelDe), str(?wdLabelEn), ?wdId) as ?wdLabel)
+  #
+  # try to get a description
+  optional {
+    ?wd schema:description ?descDe .
+    filter(lang(?descDe) = 'de')
+  }
+  optional {
+    ?wd schema:description ?descEn .
+    filter(lang(?descEn) = 'en')
+  }
+  bind(coalesce(str(?descDe), str(?descEn), '') as ?description)
+  #
+  optional {
+    ?wd wdt:P571 ?established .
+  }
+  optional {
+    ?wd wdt:P576 ?terminated .
+  }
+  bind(concat(if(bound(?established), str(year(?established)), ''), ' - ', if(bound(?terminated), str(year(?terminated)), '')) as ?time)
+  #
+  # Quickstatements link
+  bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/co/') as ?id)
+  bind(uri(concat('https://tools.wmflabs.org/quickstatements/#v1=', ?wdId, '|P4293|"co%2F', ?idd, '"')) as ?addpm20)
+}
+
