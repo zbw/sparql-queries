@@ -12,13 +12,15 @@ where {
   }
   # used in fulltext search
   ?pm20 text:query ?searchString ;
-    a ?type ;
-    skos:prefLabel ?pm20Label ;
-    zbwext:freeDocCount ?docCount .
+        a ?type ;
+        skos:prefLabel ?pm20Label .
   #
-  # restrict to person and organization folders with free documents
-  filter(?type in (zbwext:PersonFolder, zbwext:CompanyFolder))
-  filter(?docCount > 0)
+  # exclude the non-distinctive superclass
+  filter(?type != zbwext:Pm20Folder)
+  #
+  optional {
+    ?pm20 zbwext:freeDocCount ?docCount .
+  }
 }
 order by ?type ?pm20Label
 
