@@ -11,6 +11,7 @@ Query | Description
 [count_by_country](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/count_by_country.rq) | Subject and ware folder count by country
 [count_by_ware](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/count_by_ware.rq) | Folder count by ware
 [missing_ids_in_wikidata_via_gnd](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/missing_ids_in_wikidata_via_gnd.rq) | Get missing PM20 IDs for WD items with known GND ID (Wikidata endpoint)
+[companies_missing_wd](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/companies_missing_wd.rq) | Organizations which are not linked to Wikidata, with search links
 [folder_doc_counts](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/folder_doc_counts.rq) | Document counts (free and total) for folders connected to WD items
 
 ### Controlled vocabularies (parameterized queries)
