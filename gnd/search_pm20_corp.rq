@@ -1,0 +1,45 @@
+# Text search for organizations from PM20, looking up all available 
+# labels, with additional data for identification
+#
+# Uses diverse literal properties, brings the best match on top
+# of the list
+#
+PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX  text:   <http://jena.apache.org/text#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+#
+select ?pm20 (?prefLabel as ?pm20Label) ?gnd ?gndLabel 
+?time ?gndId
+# debug information
+# ?score ?literal ?labels
+where {
+  # lookup additional information about pm20 folder
+  service <http://zbw.eu/beta/sparql/pm20/query> {
+    select ?pm20 ?prefLabel (group_concat(?altLabel) as ?altLabels)
+    where {
+      values ( ?pm20 ) {
+        ( <http://purl.org/pressemappe20/folder/co/000032> )
+      }
+      ?pm20 skos:prefLabel ?prefLabel ;
+            skos:altLabel ?alt .
+      # truncate combined alt labels
+      bind(coalesce(strbefore(?alt, ' -- '), ?alt) as ?altLabel)
+    }
+    group by ?pm20 ?prefLabel
+  }
+  # create one string of all labels
+  bind(concat(?prefLabel, ' ', ?altLabels) as ?labels)
+  #
+  # limit number of results to 30
+  (?gnd ?score ?literal) text:query ( ?labels 30 ) .
+  ?gnd gndo:preferredNameForTheCorporateBody ?gndLabel ;
+       gndo:gndIdentifier ?gndId .
+  optional {
+    ?gnd gndo:dateOfEstablishment ?established .
+  }
+  optional {
+    ?gnd gndo:dateOfTermination ?terminated .
+  }
+  bind(concat(if(bound(?established), ?established, ''), ' - ', if(bound( ?terminated), ?terminated, '')) as ?time)
+}

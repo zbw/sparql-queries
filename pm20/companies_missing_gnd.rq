@@ -1,0 +1,27 @@
+# Organizations which are not linked to GND, with search links
+#
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+#
+select (str(?freeDocCount) as ?docCount) ?pm20 ?pm20Label ?fromTo ?search ('search' as ?searchLabel)
+where {
+  # all organizations with free documents
+  ?pm20 a zbwext:CompanyFolder ;
+        skos:prefLabel ?pm20Label ;
+        zbwext:fromTo ?fromTo ;
+        zbwext:freeDocCount ?freeDocCount .
+  filter(?freeDocCount > 0)
+  #
+  # without GND id
+  filter(not exists {
+      ?pm20 gndo:gndIdentifier [] .
+    }
+  )
+  # search link
+  bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/') as ?pm20Id)
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/gnd/search_pm20_corp.rq&pm20=<', str(?pm20), '>')) as ?search)
+}
+order by desc(?freeDocCount) ?pm20Label
+
