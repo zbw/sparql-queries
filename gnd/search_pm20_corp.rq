@@ -9,7 +9,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX  text:   <http://jena.apache.org/text#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
-select ?pm20 (?prefLabel as ?pm20Label) ?gnd ?gndLabel 
+select distinct ?pm20 (?prefLabel as ?pm20Label) ?gnd ?gndLabel 
 ?time ?gndId
 # debug information
 # ?score ?literal ?labels
