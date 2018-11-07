@@ -36,9 +36,18 @@ where {
   # create one string of all labels
   bind(concat(?prefLabel, ' ', ?altLabels) as ?labels)
   #
-  # limit number of results to 30
+  # search text and limit number of results
   (?wd ?score ?literal) text:query ( ?labels 100 ) .
   #
+  # filter out wikimedia categories and disambig pages
+  filter(not exists {
+      ?wd wdt:P31 wd:Q4167836 .
+    }
+  )
+  filter(not exists {
+      ?wd wdt:P31 wd:Q4167410 .
+    }
+  )
   # try to get a label
   optional {
     ?wd rdfs:label ?wdLabelDe .
@@ -62,6 +71,7 @@ where {
   }
   bind(coalesce(str(?descDe), str(?descEn), '') as ?description)
   #
+  # additional information to display
   optional {
     ?wd wdt:P571 ?established .
   }
@@ -72,6 +82,6 @@ where {
   #
   # Quickstatements link
   bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/co/') as ?id)
-  bind(uri(concat('https://tools.wmflabs.org/quickstatements/#v1=', ?wdId, '|P4293|"co%2F', ?idd, '"')) as ?addpm20)
+  bind(uri(concat('https://tools.wmflabs.org/quickstatements/#v1=', ?wdId, '|P4293|"co%2F', ?id, '"')) as ?addpm20)
 }
 
