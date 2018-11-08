@@ -39,15 +39,12 @@ where {
   # search text and limit number of results
   (?wd ?score ?literal) text:query ( ?labels 100 ) .
   #
-  # filter out wikimedia categories and disambig pages
-  filter(not exists {
-      ?wd wdt:P31 wd:Q4167836 .
-    }
-  )
-  filter(not exists {
-      ?wd wdt:P31 wd:Q4167410 .
-    }
-  )
+  # filter out wikimedia categories, disambig pages, first-family names, templates
+  optional {
+    ?wd wdt:P31 ?class .
+  }
+  filter(?class not in (wd:Q4167836, wd:Q4167410, wd:Q202444, wd:Q101352, wd:Q11266439))
+  #
   # try to get a label
   optional {
     ?wd rdfs:label ?wdLabelDe .
