@@ -58,6 +58,7 @@ Query | Description
 Query | Description
 ------|------------
 [search_pm20_corp](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql//wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_pm20_corp.rq) | Search a PM20 company by all preferred and alternate labels (rank by calculated total score)
+[missing_pm20_id_via_gnd](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/missing_pm20_id_via_gnd.rq) | Get missing PM20 IDs for WD items with known GND ID
 
 
 ### Documentation
