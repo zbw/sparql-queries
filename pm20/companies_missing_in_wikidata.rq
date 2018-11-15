@@ -8,6 +8,7 @@ PREFIX schema: <http://schema.org/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
 select ?pm20 ?pm20Label ?mnm (?mnmId as ?mnmLabel) ?wdLabel ?type ?incepted ?abandoned ?gndId
+?pm20Id
 where {
   # determine for which entries we want to create items
   {
