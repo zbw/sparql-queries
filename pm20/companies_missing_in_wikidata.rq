@@ -1,0 +1,57 @@
+# Extract information for creating missing company items in Wikidata
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX schema: <http://schema.org/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+#
+select ?pm20 ?pm20Label ?mnm (?mnmId as ?mnmLabel) ?wdLabel ?type ?incepted ?abandoned ?gndId
+where {
+  # determine for which entries we want to create items
+  {
+    # already checked entries of M-n-m catalog
+    graph <http://zbw.eu/beta/mix-n-match-623/ng> {
+      ?pm20 dc:identifier ?mnmId .
+      filter(?mnmId < '25376941')
+      bind(uri(concat('https://tools.wmflabs.org/mix-n-match/#/entry/', ?mnmId)) as ?mnm)
+      bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/') as ?pm20Id)
+    }
+  } minus {
+    # minus all entries which are linked to WD items
+    service <https://query.wikidata.org/sparql> {
+      ?wd wdt:P4293 ?pm20Id .
+    }
+  }
+  ?pm20 skos:prefLabel ?pm20Label ;
+        zbwext:freeDocCount ?docCount .
+  #
+  # apply further restrictions:
+  # only if folder has documents
+  filter(?docCount > 0)
+  # restrict to one type of organization
+  # TODO: use some lookup table instead of fixed translation
+  # 'Unternehmen' -> Q4830453 (business)
+  ?pm20 dc:type 'Unternehmen' .
+  bind('Q4830453' as ?type)
+  # remove entries with suspect labels including '()'
+  filter(!contains(?pm20Label, '('))
+  #
+  # adapt label to WD rules
+  bind(if(strends(?pm20Label, ' AG'), strbefore(?pm20Label, ' AG'), ?pm20Label) as ?wdLabel)
+  #
+  # now get further information to add to WD
+  #
+  optional {
+    ?pm20 schema:foundingDate ?incepted .
+  }
+  optional {
+    ?pm20 schema:dissolutionDate ?abandoned .
+  }
+  optional {
+    ?pm20 gndo:gndIdentifier ?gndId .
+  }
+}
+order by ?mnmId
+
