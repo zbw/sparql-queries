@@ -7,7 +7,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-select ?wdId ?wd ?wdLabel ?pm20 ?pm20Label ?qsStatement
+select ?gndId ?pm20 ?pm20Label ?wd ?wdLabel ?qsStatement
 #(?pm20Id as ?targetId)
 where {
   hint:Query hint:optimizer "None" .
@@ -29,4 +29,5 @@ where {
   }
   bind(concat(?wdId, '|P4293|"', ?pm20Id, '"|S248|Q36948990|S1476|en:"Via P227 lookup with GND value from PM20 folder"') as ?qsStatement)
 }
+order by ?pm20Label
 
