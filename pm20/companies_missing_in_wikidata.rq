@@ -7,9 +7,17 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
-select ?pm20 ?pm20Label ?mnm (?mnmId as ?mnmLabel) ?wdLabel ?type ?incepted ?abandoned ?gndId
-?pm20Id
+select ?pm20 ?pm20Label ?mnm (?mnmId as ?mnmLabel) ?wdLabel ?classQid ?incepted ?abandoned ?gndId
+?pm20Id ?descrDe ?descrEn
 where {
+  # type settings
+  # ?descrDe must be equal to organization type
+  values ( ?descrDe ?classQid ?descrEn ) {
+    ( 'Unternehmen' 'Q4830453' 'business' )
+    ( 'Kolonialgesellschaft' 'Q1700154' 'colonial society' )
+    ( 'Verein' 'Q48204' 'association' )
+  }
+  #
   # determine for which entries we want to create items
   {
     # already checked entries of M-n-m catalog
@@ -32,10 +40,7 @@ where {
   # only if folder has documents
   filter(?docCount > 0)
   # restrict to one type of organization
-  # TODO: use some lookup table instead of fixed translation
-  # 'Unternehmen' -> Q4830453 (business)
-  ?pm20 dc:type 'Unternehmen' .
-  bind('Q4830453' as ?type)
+  ?pm20 dc:type ?descrDe .
   # remove entries with suspect labels including '()'
   filter(!contains(?pm20Label, '('))
   #
