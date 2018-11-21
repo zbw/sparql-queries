@@ -6,294 +6,343 @@
     "bindings": [
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#UndifferentiatedPerson" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "UndifferentiatedPerson" } ,
         "gndCount": { "type": "literal" , "value": "7040168" } ,
         "wdCount": { "type": "literal" , "value": "84" } ,
         "percentage": { "type": "literal" , "value": "0.0 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#DifferentiatedPerson" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "DifferentiatedPerson" } ,
         "gndCount": { "type": "literal" , "value": "4917517" } ,
         "wdCount": { "type": "literal" , "value": "576651" } ,
         "percentage": { "type": "literal" , "value": "11.7 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#CorporateBody" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "CorporateBody" } ,
         "gndCount": { "type": "literal" , "value": "1345566" } ,
         "wdCount": { "type": "literal" , "value": "28932" } ,
         "percentage": { "type": "literal" , "value": "2.2 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#ConferenceOrEvent" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "ConferenceOrEvent" } ,
         "gndCount": { "type": "literal" , "value": "678950" } ,
         "wdCount": { "type": "literal" , "value": "551" } ,
         "percentage": { "type": "literal" , "value": "0.1 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#MusicalWork" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "MusicalWork" } ,
         "gndCount": { "type": "literal" , "value": "189972" } ,
         "wdCount": { "type": "literal" , "value": "2305" } ,
         "percentage": { "type": "literal" , "value": "1.2 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#TerritorialCorporateBodyOrAdministrativeUnit" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "TerritorialCorporateBodyOrAdministrativeUnit" } ,
         "gndCount": { "type": "literal" , "value": "187219" } ,
         "wdCount": { "type": "literal" , "value": "37475" } ,
         "percentage": { "type": "literal" , "value": "20.0 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#Work" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "Work" } ,
         "gndCount": { "type": "literal" , "value": "152205" } ,
         "wdCount": { "type": "literal" , "value": "6414" } ,
         "percentage": { "type": "literal" , "value": "4.2 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#SubjectHeadingSensoStricto" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "SubjectHeadingSensoStricto" } ,
         "gndCount": { "type": "literal" , "value": "136639" } ,
         "wdCount": { "type": "literal" , "value": "21320" } ,
         "percentage": { "type": "literal" , "value": "15.6 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#SeriesOfConferenceOrEvent" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "SeriesOfConferenceOrEvent" } ,
         "gndCount": { "type": "literal" , "value": "123611" } ,
         "wdCount": { "type": "literal" , "value": "366" } ,
         "percentage": { "type": "literal" , "value": "0.3 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#OrganOfCorporateBody" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "OrganOfCorporateBody" } ,
         "gndCount": { "type": "literal" , "value": "109814" } ,
         "wdCount": { "type": "literal" , "value": "1741" } ,
         "percentage": { "type": "literal" , "value": "1.6 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#BuildingOrMemorial" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "BuildingOrMemorial" } ,
         "gndCount": { "type": "literal" , "value": "66627" } ,
         "wdCount": { "type": "literal" , "value": "4830" } ,
         "percentage": { "type": "literal" , "value": "7.2 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#NomenclatureInBiologyOrChemistry" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "NomenclatureInBiologyOrChemistry" } ,
         "gndCount": { "type": "literal" , "value": "30903" } ,
         "wdCount": { "type": "literal" , "value": "2368" } ,
         "percentage": { "type": "literal" , "value": "7.7 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#PlaceOrGeographicName" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "PlaceOrGeographicName" } ,
         "gndCount": { "type": "literal" , "value": "26062" } ,
         "wdCount": { "type": "literal" , "value": "1198" } ,
         "percentage": { "type": "literal" , "value": "4.6 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#Family" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "Family" } ,
         "gndCount": { "type": "literal" , "value": "19544" } ,
         "wdCount": { "type": "literal" , "value": "1124" } ,
         "percentage": { "type": "literal" , "value": "5.8 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#NaturalGeographicUnit" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "NaturalGeographicUnit" } ,
         "gndCount": { "type": "literal" , "value": "18470" } ,
         "wdCount": { "type": "literal" , "value": "2904" } ,
         "percentage": { "type": "literal" , "value": "15.7 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#Company" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "Company" } ,
         "gndCount": { "type": "literal" , "value": "14578" } ,
         "wdCount": { "type": "literal" , "value": "483" } ,
         "percentage": { "type": "literal" , "value": "3.3 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#AdministrativeUnit" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "AdministrativeUnit" } ,
         "gndCount": { "type": "literal" , "value": "12302" } ,
         "wdCount": { "type": "literal" , "value": "2711" } ,
         "percentage": { "type": "literal" , "value": "22.0 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#MusicalCorporateBody" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "MusicalCorporateBody" } ,
         "gndCount": { "type": "literal" , "value": "11905" } ,
         "wdCount": { "type": "literal" , "value": "1411" } ,
         "percentage": { "type": "literal" , "value": "11.9 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#SubjectHeading" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "SubjectHeading" } ,
         "gndCount": { "type": "literal" , "value": "8808" } ,
         "wdCount": { "type": "literal" , "value": "149" } ,
         "percentage": { "type": "literal" , "value": "1.7 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#SoftwareProduct" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "SoftwareProduct" } ,
         "gndCount": { "type": "literal" , "value": "8146" } ,
         "wdCount": { "type": "literal" , "value": "471" } ,
         "percentage": { "type": "literal" , "value": "5.8 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#Manuscript" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "Manuscript" } ,
         "gndCount": { "type": "literal" , "value": "5972" } ,
         "wdCount": { "type": "literal" , "value": "135" } ,
         "percentage": { "type": "literal" , "value": "2.3 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#Language" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "Language" } ,
         "gndCount": { "type": "literal" , "value": "5813" } ,
         "wdCount": { "type": "literal" , "value": "658" } ,
         "percentage": { "type": "literal" , "value": "11.3 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#ProductNameOrBrandName" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "ProductNameOrBrandName" } ,
         "gndCount": { "type": "literal" , "value": "5754" } ,
         "wdCount": { "type": "literal" , "value": "434" } ,
         "percentage": { "type": "literal" , "value": "7.5 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#Expression" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "Expression" } ,
         "gndCount": { "type": "literal" , "value": "5331" } ,
         "wdCount": { "type": "literal" , "value": "4" } ,
         "percentage": { "type": "literal" , "value": "0.1 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#HistoricSingleEventOrEra" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "HistoricSingleEventOrEra" } ,
         "gndCount": { "type": "literal" , "value": "5287" } ,
         "wdCount": { "type": "literal" , "value": "583" } ,
         "percentage": { "type": "literal" , "value": "11.0 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#WayBorderOrLine" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "WayBorderOrLine" } ,
         "gndCount": { "type": "literal" , "value": "4742" } ,
         "wdCount": { "type": "literal" , "value": "571" } ,
         "percentage": { "type": "literal" , "value": "12.0 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#EthnographicName" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "EthnographicName" } ,
         "gndCount": { "type": "literal" , "value": "4268" } ,
         "wdCount": { "type": "literal" , "value": "272" } ,
         "percentage": { "type": "literal" , "value": "6.4 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#ReligiousCorporateBody" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "ReligiousCorporateBody" } ,
         "gndCount": { "type": "literal" , "value": "3613" } ,
         "wdCount": { "type": "literal" , "value": "224" } ,
         "percentage": { "type": "literal" , "value": "6.2 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#ProvenanceCharacteristic" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "ProvenanceCharacteristic" } ,
         "gndCount": { "type": "literal" , "value": "3563" } ,
         "wdCount": { "type": "literal" , "value": "0" } ,
         "percentage": { "type": "literal" , "value": "0.0 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#RoyalOrMemberOfARoyalHouse" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "RoyalOrMemberOfARoyalHouse" } ,
         "gndCount": { "type": "literal" , "value": "3122" } ,
         "wdCount": { "type": "literal" , "value": "2231" } ,
         "percentage": { "type": "literal" , "value": "71.5 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#CharactersOrMorphemes" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "CharactersOrMorphemes" } ,
         "gndCount": { "type": "literal" , "value": "3094" } ,
         "wdCount": { "type": "literal" , "value": "27" } ,
         "percentage": { "type": "literal" , "value": "0.9 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#VersionOfAMusicalWork" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "VersionOfAMusicalWork" } ,
         "gndCount": { "type": "literal" , "value": "2928" } ,
         "wdCount": { "type": "literal" , "value": "5" } ,
         "percentage": { "type": "literal" , "value": "0.2 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#ReligiousTerritory" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "ReligiousTerritory" } ,
         "gndCount": { "type": "literal" , "value": "2798" } ,
         "wdCount": { "type": "literal" , "value": "139" } ,
         "percentage": { "type": "literal" , "value": "5.0 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#NameOfSmallGeographicUnitLyingWithinAnotherGeographicUnit" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "NameOfSmallGeographicUnitLyingWithinAnotherGeographicUnit" } ,
         "gndCount": { "type": "literal" , "value": "1982" } ,
         "wdCount": { "type": "literal" , "value": "225" } ,
         "percentage": { "type": "literal" , "value": "11.4 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#ProjectOrProgram" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "ProjectOrProgram" } ,
         "gndCount": { "type": "literal" , "value": "1781" } ,
         "wdCount": { "type": "literal" , "value": "30" } ,
         "percentage": { "type": "literal" , "value": "1.7 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#MeansOfTransportWithIndividualName" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "MeansOfTransportWithIndividualName" } ,
         "gndCount": { "type": "literal" , "value": "1394" } ,
         "wdCount": { "type": "literal" , "value": "134" } ,
         "percentage": { "type": "literal" , "value": "9.6 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#LiteraryOrLegendaryCharacter" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "LiteraryOrLegendaryCharacter" } ,
         "gndCount": { "type": "literal" , "value": "1367" } ,
         "wdCount": { "type": "literal" , "value": "509" } ,
         "percentage": { "type": "literal" , "value": "37.2 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#Collection" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "Collection" } ,
         "gndCount": { "type": "literal" , "value": "1264" } ,
         "wdCount": { "type": "literal" , "value": "3" } ,
         "percentage": { "type": "literal" , "value": "0.2 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#ReligiousAdministrativeUnit" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "ReligiousAdministrativeUnit" } ,
         "gndCount": { "type": "literal" , "value": "1073" } ,
         "wdCount": { "type": "literal" , "value": "81" } ,
         "percentage": { "type": "literal" , "value": "7.5 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#CollectivePseudonym" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "CollectivePseudonym" } ,
         "gndCount": { "type": "literal" , "value": "585" } ,
         "wdCount": { "type": "literal" , "value": "56" } ,
         "percentage": { "type": "literal" , "value": "9.6 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#Gods" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "Gods" } ,
         "gndCount": { "type": "literal" , "value": "575" } ,
         "wdCount": { "type": "literal" , "value": "443" } ,
         "percentage": { "type": "literal" , "value": "77.0 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#MemberState" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "MemberState" } ,
         "gndCount": { "type": "literal" , "value": "573" } ,
         "wdCount": { "type": "literal" , "value": "306" } ,
         "percentage": { "type": "literal" , "value": "53.4 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#GroupOfPersons" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "GroupOfPersons" } ,
         "gndCount": { "type": "literal" , "value": "385" } ,
         "wdCount": { "type": "literal" , "value": "36" } ,
         "percentage": { "type": "literal" , "value": "9.4 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#Country" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "Country" } ,
         "gndCount": { "type": "literal" , "value": "312" } ,
         "wdCount": { "type": "literal" , "value": "244" } ,
         "percentage": { "type": "literal" , "value": "78.2 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#ExtraterrestrialTerritory" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "ExtraterrestrialTerritory" } ,
         "gndCount": { "type": "literal" , "value": "269" } ,
         "wdCount": { "type": "literal" , "value": "128" } ,
         "percentage": { "type": "literal" , "value": "47.6 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#Spirits" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "Spirits" } ,
         "gndCount": { "type": "literal" , "value": "106" } ,
         "wdCount": { "type": "literal" , "value": "9" } ,
         "percentage": { "type": "literal" , "value": "8.5 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#FictivePlace" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "FictivePlace" } ,
         "gndCount": { "type": "literal" , "value": "34" } ,
         "wdCount": { "type": "literal" , "value": "23" } ,
         "percentage": { "type": "literal" , "value": "67.6 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#FictiveCorporateBody" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "FictiveCorporateBody" } ,
         "gndCount": { "type": "literal" , "value": "17" } ,
         "wdCount": { "type": "literal" , "value": "0" } ,
         "percentage": { "type": "literal" , "value": "0.0 %" }
       } ,
       {
         "gndoClass": { "type": "uri" , "value": "http://d-nb.info/standards/elementset/gnd#FictiveTerm" } ,
+        "gndoClassLabel": { "type": "literal" , "value": "FictiveTerm" } ,
         "gndCount": { "type": "literal" , "value": "2" } ,
         "wdCount": { "type": "literal" , "value": "2" } ,
         "percentage": { "type": "literal" , "value": "100.0 %" }
