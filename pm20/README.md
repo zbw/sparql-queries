@@ -14,6 +14,7 @@ Query | Description
 [companies_missing_gnd](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/companies_missing_gnd.rq) | Organizations which are not linked to GND, with search links
 [folder_doc_counts](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/folder_doc_counts.rq) | Document counts (free and total) for folders connected to WD items
 [companies_missing_in_wikidata](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/companies_missing_in_wikidata.rq) | Extract information for creating missing company items in Wikidata
+[ag_for_openrefine](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/ag_for_openrefine.rq) | PM20 country classification prepared for CSV ouput and matching in OpenRefine
 
 ### Controlled vocabularies (parameterized queries)
 

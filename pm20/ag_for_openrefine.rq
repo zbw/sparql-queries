@@ -1,0 +1,41 @@
+# Create a table of not-yet mapped ag entries for OpenRefine
+# (ag = Historische Länderklassifikation)
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX schema: <http://schema.org/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+#
+select distinct ?broaderEn ?id ?labelEn ?labelDe (str(?note) as ?noteDe) ?gndId
+where {
+  graph <http://zbw.eu/beta/ag/ng> {
+    ?s skos:prefLabel ?labelLangEn ;
+       dct:identifier ?id .
+    filter(lang(?labelLangEn) = 'en')
+    bind(str(?labelLangEn) as ?labelEn)
+    ?s skos:prefLabel ?labelLangDe .
+    filter(lang(?labelLangDe) = 'de')
+    bind(str(?labelLangDe) as ?labelDe)
+    #
+    # gnd for indirect mapping
+    ?s gndo:gndIdentifier ?gndId .
+    #
+#    filter(not exists {
+#        ?s skos:exactMatch ?wd .
+#        filter(contains(str(?wd), 'wikidata'))
+#      }
+#    )
+    ?broader skos:narrower ?s ;
+             skos:prefLabel ?broaderLangEn .
+    filter(lang(?broaderLangEn) = 'en')
+    bind(str(?broaderLangEn) as ?broaderEn)
+    optional {
+      ?s skos:note ?note .
+      filter(!contains(?note, 'FolderCount'))
+    }
+  }
+}
+order by ?broaderEn ?id
+
