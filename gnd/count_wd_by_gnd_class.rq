@@ -22,8 +22,8 @@ where {
     filter(strstarts(str(?gndoClass), str(gndo:)))
     bind(0 as ?inWd)
   }
-  bind(strafter(?gndClass), gndo:) as ?gndoClassLabel)
+  bind(strafter(str(?gndClass), str(gndo:)) as ?gndoClassLabel)
 }
-group by ?gndoClass
+group by ?gndoClass ?gndoClassLabel
 order by desc(count(distinct ?gnd))
 
