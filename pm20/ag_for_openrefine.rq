@@ -20,7 +20,9 @@ where {
     bind(str(?labelLangDe) as ?labelDe)
     #
     # gnd for indirect mapping
-    ?s gndo:gndIdentifier ?gndId .
+    optional {
+      ?s gndo:gndIdentifier ?gndId .
+    }
     #
 #    filter(not exists {
 #        ?s skos:exactMatch ?wd .
