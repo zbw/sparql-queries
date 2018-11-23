@@ -1,0 +1,50 @@
+# Get missing class for WD items from PM20 organizations
+#
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+#
+select ?pm20Id ?wd ?wdLabel ?orgType ?classQid ?qsStatement
+where {
+  hint:Query hint:optimizer "None" .
+  #
+  # all companies from PM20
+  service <http://zbw.eu/beta/sparql/pm20/query> {
+    ?pm20 a zbwext:CompanyFolder ;
+          skos:prefLabel ?pm20Label ;
+          dcterms:identifier ?pm20Id ;
+          dc:type ?orgType .
+  }
+  values ( ?orgType ?classQid ?descrEn ) {
+    ( 'Unternehmen' 'Q4830453' 'business' )
+    ( 'Kolonialgesellschaft' 'Q1700154' 'colonial society' )
+    ( 'Verein' 'Q48204' 'association' )
+  }
+  # all WD items for this subset
+  ?wd wdt:P4293 ?pm20Id .
+  #
+  # TODO: exclude related matches
+  #
+  # exclude all items which already have a class
+  filter(not exists {
+      ?wd wdt:P31 [] .
+    }
+  )
+  # get other fields for display and for the statement
+  bind(strafter(str(?wd), 'http://www.wikidata.org/entity/') as ?wdId)
+  optional {
+    ?wd rdfs:label ?wdLabelLang .
+    filter(lang(?wdLabelLang) = 'de')
+    bind(str(?wdLabelLang) as ?wdLabel)
+  }
+  bind(substr(str(now()), 0, 11) as ?today)
+  bind(concat(?wdId, '|P31|', ?classQid, '|S248|Q36948990|S1476|de:"', ?pm20Label, '"|S4293|"', ?pm20Id, '"|S813|+', ?today, 'T00:00:00Z/11') as ?qsStatement)
+}
+order by ?wdLabel
+
