@@ -32,8 +32,8 @@ Readonly my %CONFIG    => (
   source_title => 'pm20Label',
   source_id    => 'pm20Id',
   label        => {
-    de => 'wdLabel',
-    en => 'wdLabel',
+    de => 'pm20Label',
+    en => 'pm20Label',
   },
   descr => {
     de => 'descrDe',
