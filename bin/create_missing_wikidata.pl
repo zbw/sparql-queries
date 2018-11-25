@@ -59,7 +59,7 @@ Readonly my %CONFIG    => (
     },
     {
       pid        => 'P1448',
-      var_name   => 'wdLabel',
+      var_name   => 'pm20Label',
       value_type => 'monolingual-text',
       lang       => 'und',
     },
