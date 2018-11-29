@@ -6,20 +6,23 @@ PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX wikibase: <http://wikiba.se/ontology#>
 PREFIX bd: <http://www.bigdata.com/rdf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
 #
-select  (str(count(?item)) as ?count) ?prop
+select  (str(count(?item)) as ?count) ?prop ?propLabel
 where
 {
+  hint:Query hint:optimizer "None" .
   # stated in 20th century press archives
   ?provenance pr:P248 wd:Q36948990 .
   ?object prov:wasDerivedFrom ?provenance .
   ?item ?property ?object .
   # q&d
   bind(strafter(str(?property), 'http://www.wikidata.org/prop/') as ?pid)
-  bind(uri(concat('https://www.wikidata.org/entity/', ?pid)) as ?prop)
-#  ?prop rdfs:label ?propLabelEn .
-#  filter(lang(?propLabelEn) = 'en')
+  bind(uri(concat('http://www.wikidata.org/entity/', ?pid)) as ?prop)
+  ?prop rdfs:label ?propLabelEn .
+  filter(lang(?propLabelEn) = 'en')
+  bind(str( ?propLabelEn) as ?propLabel)
 }
-group by ?prop 
+group by ?prop ?propLabel
 order by desc(count(?item))
 
