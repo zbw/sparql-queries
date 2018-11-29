@@ -1,16 +1,19 @@
 # Get missing class for WD items from PM20 organizations
 #
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 PREFIX hint: <http://www.bigdata.com/queryHints#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <https://w3id.org/payswarm#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
-PREFIX dc: <http://purl.org/dc/elements/1.1/>
-PREFIX dcterms: <http://purl.org/dc/terms/>
 #
-select ?pm20Id ?wd ?wdLabel ?orgType ?classQid ?qsStatement
+select distinct ?pm20Id ?wd ?wdLabel ?orgType ?classQid ?qsStatement
 where {
   hint:Query hint:optimizer "None" .
   #
@@ -18,7 +21,7 @@ where {
   service <http://zbw.eu/beta/sparql/pm20/query> {
     ?pm20 a zbwext:CompanyFolder ;
           skos:prefLabel ?pm20Label ;
-          dcterms:identifier ?pm20Id ;
+          dct:identifier ?pm20Id ;
           dc:type ?orgType .
   }
   values ( ?orgType ?classQid ?descrEn ) {
@@ -29,7 +32,13 @@ where {
   # all WD items for this subset
   ?wd wdt:P4293 ?pm20Id .
   #
-  # TODO: exclude related matches
+  # exclude related matches (which may be of different type)
+  ?wd p:P4293 ?statement .
+  filter(not exists {
+      ?statement pq:P4390 wd:Q39894604 ;
+                 ps:P4293 ?pm20Id .
+    }
+  )
   #
   # exclude all items which already have a class
   filter(not exists {
