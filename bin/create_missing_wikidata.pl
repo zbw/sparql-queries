@@ -17,64 +17,125 @@ use REST::Client;
 
 # limit setting just stops output (on next run, after import, created items are
 # excluded by query)
-Readonly my $LIMIT    => 2000;
-Readonly my $ENDPOINT => 'http://zbw.eu/beta/sparql/pm20/query';
-Readonly my $QUERY =>
-  path('/opt/sparql-queries/pm20/companies_missing_in_wikidata.rq');
-Readonly my $TODAY      => `date +%F | tr -d "\n"`;
-Readonly my $SOURCE_QID => '|S248|Q36948990';      # 20th century press archives
-Readonly my $SOURCE_TITLE => '|S1476|';
-Readonly my $SOURCE_ID    => '|S4293|';
-Readonly my $RETRIEVED    => "|S813|+${TODAY}T00:00:00Z/11";
+Readonly my $LIMIT     => 2000;
+Readonly my $TODAY     => `date +%F | tr -d "\n"`;
+Readonly my $RETRIEVED => "|S813|+${TODAY}T00:00:00Z/11";
 
-Readonly my @LANGUAGES => qw/ de en /;
-Readonly my %CONFIG    => (
-  source_title => 'pm20Label',
-  source_id    => 'pm20Id',
-  label        => {
-    de => 'pm20Label',
-    en => 'pm20Label',
+Readonly my @LANGUAGES     => qw/ de en /;
+Readonly my %SOURCE_CONFIG => (
+  gnd => {
+    endpoint        => 'http://zbw.eu/beta/sparql/gnd/query',
+    source_qid      => '|S248|Q36578',                          # GND
+    source_property => 'P227',
+    source_title    => '|S1476|',
+    source_id       => '|S227|',
   },
-  descr => {
-    de => 'descrDe',
-    en => 'descrEn',
-  },
-  properties => [
-    {
-      pid        => 'P31',
-      var_name   => 'classQid',
-      value_type => 'item',
-    },
-    {
-      pid        => 'P571',
-      var_name   => 'incepted',
-      value_type => 'date',
-      precision  => '',
-    },
-    {
-      pid        => 'P576',
-      var_name   => 'abandoned',
-      value_type => 'date',
-      precision  => '',
-    },
-    {
-      pid        => 'P1448',
-      var_name   => 'pm20Label',
-      value_type => 'monolingual-text',
-      lang       => 'und',
-    },
-    {
-      pid        => 'P227',
-      var_name   => 'gndId',
-      value_type => 'literal',
-    },
-  ],
+  pm20 => {
+    endpoint => 'http://zbw.eu/beta/sparql/pm20/query',
+    source_qid      => '|S248|Q36948990',    # 20th century press archives
+    source_property => 'P4293',
+    source_title    => '|S1476|',
+    source_id       => '|S4293|',
+  }
 );
 
+Readonly my %CONFIG => (
+  gnd_pe => {
+    source     => 'gnd',
+    label_type => 'last_first',
+    query => path('/opt/sparql-queries/gnd/persons_missing_in_wikidata.rq'),
+    source_title => 'gndLabel',
+    source_id    => 'gndId',
+    label        => {
+      de => 'gndLabel',
+      en => 'gndLabel',
+    },
+    descr => {
+      de => 'descrDe',
+      en => 'descrEn',
+    },
+    properties => [
+      {
+        pid        => 'P31',
+        var_name   => 'classQid',
+        value_type => 'item',
+      },
+      {
+        pid        => 'P569',
+        var_name   => 'birth',
+        value_type => 'date',
+      },
+      {
+        pid        => 'P570',
+        var_name   => 'death',
+        value_type => 'date',
+      },
+      {
+        pid        => 'P106',
+        var_name   => 'occupationQid',
+        value_type => 'item',
+      },
+    ],
+  },
+
+  pm20_co => {
+    source     => 'pm20',
+    label_type => 'co',
+    query => path('/opt/sparql-queries/pm20/companies_missing_in_wikidata.rq'),
+    source_title => 'pm20Label',
+    source_id    => 'pm20Id',
+    label        => {
+      de => 'pm20Label',
+      en => 'pm20Label',
+    },
+    descr => {
+      de => 'descrDe',
+      en => 'descrEn',
+    },
+    properties => [
+      {
+        pid        => 'P31',
+        var_name   => 'classQid',
+        value_type => 'item',
+      },
+      {
+        pid        => 'P571',
+        var_name   => 'incepted',
+        value_type => 'date',
+      },
+      {
+        pid        => 'P576',
+        var_name   => 'abandoned',
+        value_type => 'date',
+      },
+      {
+        pid        => 'P1448',
+        var_name   => 'pm20Label',
+        value_type => 'monolingual-text',
+        lang       => 'und',
+      },
+      {
+        pid        => 'P227',
+        var_name   => 'gndId',
+        value_type => 'literal',
+      },
+    ],
+  }
+);
+
+my ( $config, $src_cfg );
+my $type = $ARGV[0];
+if ( $type and exists $CONFIG{$type} ) {
+  $config  = $CONFIG{$type};
+  $src_cfg = $SOURCE_CONFIG{ $config->{source} };
+} else {
+  die "usage: $0 ", join( '|', keys %CONFIG ), "\n";
+}
+
 # output file derived from query file, plus date for repeated runs
-my $date    = `date +%F | tr -d "\n"`;
-my $outfile = $QUERY->parent->child('results')
-  ->child( $QUERY->basename('.rq') . ".${date}.qs.txt" );
+my $query   = $config->{query};
+my $outfile = $query->parent->child('results')
+  ->child( $query->basename('.rq') . ".${TODAY}.qs.txt" );
 
 if ( -f $outfile ) {
   die "Error: $outfile exists\n";
@@ -85,8 +146,8 @@ my $client = REST::Client->new( timeout => 600 );
 
 # execute the request (may also ask for 'text/csv') and write response to file
 $client->POST(
-  $ENDPOINT,
-  $QUERY->slurp,
+  $src_cfg->{endpoint},
+  $query->slurp,
   {
     'Content-type' => 'application/sparql-query',
     'Accept'       => 'application/sparql-results+json'
@@ -112,11 +173,11 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
 
   # set record specific reference statement
   my $reference_statement =
-      $SOURCE_QID
-    . $SOURCE_TITLE
-    . quote( $entry->{ $CONFIG{source_title} }{value}, 'de' )
-    . $SOURCE_ID
-    . quote( $entry->{ $CONFIG{source_id} }{value} )
+      $src_cfg->{source_qid}
+    . $src_cfg->{source_title}
+    . quote( $entry->{ $config->{source_title} }{value}, 'de' )
+    . $src_cfg->{source_id}
+    . quote( $entry->{ $config->{source_id} }{value} )
     . $RETRIEVED;
 
   # new item
@@ -124,25 +185,26 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
 
   # output fields
   foreach my $field (qw/ label descr alias /) {
-    next unless $CONFIG{$field};
+    next unless $config->{$field};
     my $abbrev = uc( substr( $field, 0, 1 ) );
     foreach my $lang (@LANGUAGES) {
-      my $value = $entry->{ $CONFIG{$field}{$lang} }{value};
+      my $value = $entry->{ $config->{$field}{$lang} }{value};
 
       # transform label according to Wikidata rules
       if ( $field eq 'label' ) {
-        $value = adjust_label( $value, 'co' );
+        $value = adjust_label( $value, $config->{label_type} );
       }
       print $fh "LAST|$abbrev$lang|" . quote($value) . "\n";
     }
   }
 
-  # output PM20 property (without reference)
-  print $fh 'LAST|P4293|'
-    . quote( $entry->{ $CONFIG{source_id} }{value} ) . "\n";
+  # output source property (without reference)
+  print $fh 'LAST|'
+    . $src_cfg->{source_property} . '|'
+    . quote( $entry->{ $config->{source_id} }{value} ) . "\n";
 
   # output properties
-  foreach my $property ( @{ $CONFIG{properties} } ) {
+  foreach my $property ( @{ $config->{properties} } ) {
     my $value = $entry->{ $property->{var_name} }{value};
     next unless $value;
 
@@ -188,6 +250,8 @@ sub format_date {
   # TODO interpret different data formats
   if ( $date =~ m/^\d\d\d\d$/ ) {
     $date = "+$date-01-01T00:00:00Z/9";
+  } elsif ( $date =~ m/^\d\d\d\d-\d\d-\d\d$/ ) {
+    $date = "+${date}T00:00:00Z/11";
   } else {
     warn "Unknown date format in [$date] - returning string\n";
     $date = "\"$date\"";
@@ -197,11 +261,21 @@ sub format_date {
 }
 
 sub adjust_label {
-  my $label = shift or die "param missing\n";
-  my $ltype = shift or die "param missing\n";
+  my $label      = shift or die "param missing\n";
+  my $label_type = shift or die "param missing\n";
+
+  # for persons
+  if ( $label_type eq 'last_first' ) {
+    ## reverse name parts
+    my ( $last, $first ) = split( /, /, $label );
+    if ($last) {
+      $label = "$first $last";
+    }
+  }
 
   # for companies
-  if ( $ltype eq 'co' ) {
+  if ( $label_type eq 'co' ) {
+    ## cut off legal form
     $label =~ s/(.*) Ltd\.$/$1/g;
     $label =~ s/(.*) Ltd$/$1/g;
     $label =~ s/(.*) Limited$/$1/g;
