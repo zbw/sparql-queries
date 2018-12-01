@@ -25,7 +25,7 @@ Readonly my @LANGUAGES     => qw/ de en /;
 Readonly my %SOURCE_CONFIG => (
   gnd => {
     endpoint        => 'http://zbw.eu/beta/sparql/gnd/query',
-    source_qid      => '|S248|Q36578',                          # GND
+    source_qid      => '|S248|Q36578',       # GND
     source_property => 'P227',
     source_title    => '|S1476|',
     source_id       => '|S227|',
@@ -62,12 +62,12 @@ Readonly my %CONFIG => (
       },
       {
         pid        => 'P569',
-        var_name   => 'birth',
+        var_name   => 'births',
         value_type => 'date',
       },
       {
         pid        => 'P570',
-        var_name   => 'death',
+        var_name   => 'deaths',
         value_type => 'date',
       },
       {
