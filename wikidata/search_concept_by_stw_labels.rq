@@ -15,25 +15,30 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select distinct ?qs2Input ?wd ?wdLabel ?class ?classLabel (str(sum(?score)) as ?totalScore)
+select distinct ?qs2Input ?wd ?wdLabel ?class ?classLabel
+?labels
+(str(sum(?score)) as ?totalScore)
 where {
   # get all name variantss for search
   service <http://zbw.eu/beta/sparql/stw/query> {
-    values ( ?stwId ) {
-      # defaults to "Cost accounting"
-      ( "12884-4" )
+    select (group_concat(?label) as ?labels)
+    where {
+      values ( ?stwId ) {
+        # defaults to "Cost accounting"
+        ( "12884-4" )
+      }
+      bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw) .
+      {
+        ?stw skos:prefLabel|skos:altLabel|skos:hiddenLabel ?labelLang
+      } union {
+        ?stw skos:exactMatch/(skos:prefLabel|skos:altLabel|skos:hiddenLabel) ?labelLang
+      }
+      bind(str(?labelLang) as ?label)
     }
-    bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw) .
-    {
-      ?stw skos:prefLabel|skos:altLabel|skos:hiddenLabel ?labelLang
-    } union {
-      ?stw skos:exactMatch/(skos:prefLabel|skos:altLabel|skos:hiddenLabel) ?labelLang
-    }
-    bind(str(?labelLang) as ?label)
   }
   # full text search, limit number of results to 20
   # (query strings and index without language tags)
-  (?wd ?score) text:query (?label 20) .
+  (?wd ?score) text:query (?labels 20) .
   bind(strafter(str(?wd), str(wd:)) as ?wdId)
   #
   # exclude certain classes
@@ -63,6 +68,6 @@ where {
   # create input statement for QuickStatements2
   bind(concat(?wdId, '|P3911|"', ?stwId, '"') as ?qs2Input)
 }
-group by ?wd ?wdId ?wdLabel ?qs2Input ?class ?classLabel
+group by ?wd ?wdId ?wdLabel ?qs2Input ?class ?classLabel ?labels
 order by desc(sum(?score))
 limit 20
