@@ -4,17 +4,20 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 #
-select ?stw ?stwLabel ?lookup ('lookup in WD' as ?lookupLabel)
+select ?nta ?stw ?stwLabel ?lookup ('lookup in WD' as ?lookupLabel)
 where {
   {
   ?stw a zbwext:Descriptor ;
-       skos:broader ?thsys ;
-       skos:prefLabel ?prefLang .
+       skos:broader ?thsys .
   ?thsys a zbwext:Thsys ;
          skos:notation ?nta ;
          skos:prefLabel ?prefSysLang .
-  filter(lang(?prefLang) = 'de')
   filter(lang(?prefSysLang) = 'de')
+  ?stw skos:prefLabel ?prefLabelEn
+  filter(lang(?prefLabelEn) = 'en')
+  ?stw skos:prefLabel ?prefLabelDe
+  filter(lang(?prefLabelDe) = 'de')
+  bind(concat(?prefLabelDe, ' | ', ?prefLabelEn) as ?stwLabel)
   #
   # selection by notation (G already covered by m-n-m #507)
   filter(strstarts(?nta, 'W.'))
@@ -25,7 +28,6 @@ where {
     }
   }
   bind(strafter(str(?stw), 'http://zbw.eu/stw/descriptor/') as ?stwId)
-  bind(str(?prefLang) as ?stwLabel)
   bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_concept_by_stw_labels.rq&stwId=', ?stwId)) as ?lookup)
 }
 order by ?nta ?stwLabel
