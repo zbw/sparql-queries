@@ -1,4 +1,4 @@
-# List of unmapped descritors in the sequence of the mix-n-match file
+# List of unmapped descriptors in the sequence of the mix-n-match file
 #
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
