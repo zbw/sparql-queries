@@ -15,17 +15,17 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select distinct ?qs2Input ?wd ?wdLabel ?class ?classLabel
-?labels
-(str(sum(?score)) as ?totalScore)
+select distinct ?wd ?wdLabel (group_concat(distinct ?classLabel ; separator='; ') as ?classes) ?qs2Input
+#?labels
+#(str(sum(?score)) as ?totalScore)
 where {
   # get all name variantss for search
   service <http://zbw.eu/beta/sparql/stw/query> {
-    select (group_concat(?label) as ?labels)
+    select ?stwId (group_concat(distinct ?label) as ?labels)
     where {
       values ( ?stwId ) {
         # defaults to "Cost accounting"
-        ( "12884-4" )
+        ( "12480-0" )
       }
       bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw) .
       {
@@ -35,6 +35,7 @@ where {
       }
       bind(str(?labelLang) as ?label)
     }
+    group by ?stwId
   }
   # full text search, limit number of results to 20
   # (query strings and index without language tags)
@@ -56,9 +57,15 @@ where {
     "Q13442814" # scientific article
     ))
   # add item label
-  ?wd rdfs:label ?wdLabelLang .
-  filter(lang(?wdLabelLang) = 'en')
-  bind(str(?wdLabelLang) as ?wdLabel)
+  optional {
+    ?wd rdfs:label ?wdLabelDe .
+    filter(lang(?wdLabelDe) = 'de')
+  }
+  optional {
+    ?wd rdfs:label ?wdLabelEn .
+    filter(lang(?wdLabelEn) = 'en')
+  }
+  bind(concat(if(bound(?wdLabelDe), str(?wdLabelDe), ''), ' | ', if(bound(?wdLabelEn), str(?wdLabelEn), '')) as ?wdLabel)
   #
   # add class label
   ?class rdfs:label ?classLabelLang .
@@ -68,6 +75,6 @@ where {
   # create input statement for QuickStatements2
   bind(concat(?wdId, '|P3911|"', ?stwId, '"') as ?qs2Input)
 }
-group by ?wd ?wdId ?wdLabel ?qs2Input ?class ?classLabel ?labels
+group by ?wd ?wdId ?wdLabel ?qs2Input ?labels
 order by desc(sum(?score))
 limit 20
