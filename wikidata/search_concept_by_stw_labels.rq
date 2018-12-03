@@ -41,6 +41,7 @@ where {
   bind(strafter(str(?class), str(wd:)) as ?classId)
   filter(?classId not in (
     "Q4167410", # disambiguation page
+    "Q11266439", # template
     "Q4830453", # business enterprise
     "Q7725634", # literary work
     "Q732577",  # publication
