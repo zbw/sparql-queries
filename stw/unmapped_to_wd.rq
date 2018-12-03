@@ -1,0 +1,30 @@
+# List of unmapped descritors in the sequence of the mix-n-match file
+#
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+select ?stw ?stwLabel 
+where {
+  {
+  ?stw a zbwext:Descriptor ;
+       skos:broader ?thsys ;
+       skos:prefLabel ?prefLang .
+  ?thsys a zbwext:Thsys ;
+         skos:notation ?nta ;
+         skos:prefLabel ?prefSysLang .
+  filter(lang(?prefLang) = 'de')
+  filter(lang(?prefSysLang) = 'de')
+  #
+  # selection by notation (G already covered by m-n-m #507)
+  filter(strstarts(?nta, 'W.'))
+  } minus {
+    service <https://query.wikidata.org/sparql> {
+      ?wd wdt:P3911 ?stwId .
+      bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw)
+    }
+  }
+  bind(str(?prefLang) as ?stwLabel)
+}
+order by ?nta ?stwLabel
+
