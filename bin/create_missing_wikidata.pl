@@ -18,6 +18,7 @@ use REST::Client;
 # limit setting just stops output (on next run, after import, created items are
 # excluded by query)
 Readonly my $LIMIT     => 2000;
+Readonly my $NAMED_AS  => '|S1810|',
 Readonly my $TODAY     => `date +%F | tr -d "\n"`;
 Readonly my $RETRIEVED => "|S813|+${TODAY}T00:00:00Z/11";
 
@@ -27,14 +28,12 @@ Readonly my %SOURCE_CONFIG => (
     endpoint        => 'http://zbw.eu/beta/sparql/gnd/query',
     source_qid      => '|S248|Q36578',       # GND
     source_property => 'P227',
-    source_title    => '|S1476|',
     source_id       => '|S227|',
   },
   pm20 => {
     endpoint => 'http://zbw.eu/beta/sparql/pm20/query',
     source_qid      => '|S248|Q36948990',    # 20th century press archives
     source_property => 'P4293',
-    source_title    => '|S1476|',
     source_id       => '|S4293|',
   }
 );
@@ -174,7 +173,7 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
   # set record specific reference statement
   my $reference_statement =
       $src_cfg->{source_qid}
-    . $src_cfg->{source_title}
+    . $NAMED_AS .
     . quote( $entry->{ $config->{source_title} }{value}, 'de' )
     . $src_cfg->{source_id}
     . quote( $entry->{ $config->{source_id} }{value} )
