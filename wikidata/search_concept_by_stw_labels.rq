@@ -4,7 +4,8 @@
 #
 # Requires a full-text index, as provided by Jena
 # (WDQS currently does not support full text search, see
-# https://phabricator.wikimedia.org/T141813)
+# https://phabricator.wikimedia.org/T141813 -
+# mwapi fulltext search seems to work differently)
 #
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <http://schema.org/>
@@ -15,17 +16,17 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select distinct ?wd ?wdLabel (group_concat(distinct ?classLabel ; separator='; ') as ?classes) ?qs2Input
+select distinct ?wd ?wdLabel (group_concat(distinct ?classLabel ;
+    separator='; ') as ?classes) ?qs2Input
 #?labels
 #(str(sum(?score)) as ?totalScore)
 where {
-  # get all name variantss for search
+  # get all name variants for search
   service <http://zbw.eu/beta/sparql/stw/query> {
     select ?stwId (group_concat(distinct ?label) as ?labels)
     where {
       values ( ?stwId ) {
-        # defaults to "Cost accounting"
-        ( "12480-0" )
+        ( "13516-0" )
       }
       bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw) .
       {
@@ -42,21 +43,29 @@ where {
   (?wd ?score) text:query (?labels 20) .
   bind(strafter(str(?wd), str(wd:)) as ?wdId)
   #
-  # exclude certain classes
-  ?wd wdt:P31 ?class .
-  bind(strafter(str(?class), str(wd:)) as ?classId)
-  filter(?classId not in (
-    "Q4167410", # disambiguation page
-    "Q11266439", # template
-    "Q4830453", # business enterprise
-    "Q7725634", # literary work
-    "Q732577",  # publication
-    "Q571",     # book
-    "Q23927052", # conference paper
-    "Q5633421", # scientific journal
-    "Q13442814" # scientific article
-    ))
-  # add item label
+  # add class information, if available
+  optional {
+    ?wd wdt:P31 ?class .
+    bind(strafter(str(?class), str(wd:)) as ?classId)
+    #
+    # exclude certain classes
+    filter(?classId not in (
+        "Q4167410", # disambiguation page
+        "Q11266439", # template
+        "Q4830453", # business enterprise
+        "Q7725634", # literary work
+        "Q732577",  # publication
+        "Q571",     # book
+        "Q23927052", # conference paper
+        "Q5633421", # scientific journal
+        "Q13442814" # scientific article
+      ))
+    # add class label
+    ?class rdfs:label ?classLabelLang .
+    filter(lang(?classLabelLang) = 'en')
+    bind(str(?classLabelLang) as ?classLabel)
+  }
+  # add item labels
   optional {
     ?wd rdfs:label ?wdLabelDe .
     filter(lang(?wdLabelDe) = 'de')
@@ -66,11 +75,6 @@ where {
     filter(lang(?wdLabelEn) = 'en')
   }
   bind(concat(if(bound(?wdLabelDe), str(?wdLabelDe), ''), ' | ', if(bound(?wdLabelEn), str(?wdLabelEn), '')) as ?wdLabel)
-  #
-  # add class label
-  ?class rdfs:label ?classLabelLang .
-  filter(lang(?classLabelLang) = 'en')
-  bind(str(?classLabelLang) as ?classLabel)
   #
   # create input statement for QuickStatements2
   bind(concat(?wdId, '|P3911|"', ?stwId, '"') as ?qs2Input)
