@@ -52,13 +52,18 @@ where {
     filter(?classId not in (
         "Q4167410", # disambiguation page
         "Q11266439", # template
+        "Q4167836", # category
         "Q4830453", # business enterprise
         "Q7725634", # literary work
         "Q732577",  # publication
         "Q571",     # book
         "Q23927052", # conference paper
         "Q5633421", # scientific journal
-        "Q13442814" # scientific article
+        "Q13442814", # scientific article
+        "Q7366",    # song
+        "Q134556",  # single
+        "Q16551537", # album
+        "Q11424"    # film
       ))
     # add class label
     ?class rdfs:label ?classLabelLang .
