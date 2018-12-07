@@ -17,7 +17,7 @@ PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
 select distinct ?wd ?wdLabel (group_concat(distinct ?classLabel ;
-    separator='; ') as ?classes) ?qs2Input
+    separator='; ') as ?classes) ?addStw ('add' as ?addStwLabel)
 #?labels
 #(str(sum(?score)) as ?totalScore)
 where {
@@ -81,8 +81,10 @@ where {
   }
   bind(concat(if(bound(?wdLabelDe), str(?wdLabelDe), ''), ' | ', if(bound(?wdLabelEn), str(?wdLabelEn), '')) as ?wdLabel)
   #
-  # create input statement for QuickStatements2
+  # Quickstatements link
   bind(concat(?wdId, '|P3911|"', ?stwId, '"') as ?qs2Input)
+  bind(uri(concat('https://tools.wmflabs.org/quickstatements/#v1=', ?qs2Input)) as ?addStw)
+
 }
 group by ?wd ?wdId ?wdLabel ?qs2Input ?labels
 order by desc(sum(?score))
