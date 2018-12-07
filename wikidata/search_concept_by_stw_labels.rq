@@ -86,6 +86,6 @@ where {
   bind(uri(concat('https://tools.wmflabs.org/quickstatements/#v1=', ?qs2Input)) as ?addStw)
 
 }
-group by ?wd ?wdId ?wdLabel ?qs2Input ?labels
+group by ?wd ?wdId ?wdLabel ?addStw ?labels
 order by desc(sum(?score))
 limit 20
