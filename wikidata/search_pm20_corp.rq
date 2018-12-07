@@ -43,7 +43,24 @@ where {
   optional {
     ?wd wdt:P31 ?class .
   }
-  filter(?class not in (wd:Q4167836, wd:Q4167410, wd:Q202444, wd:Q101352, wd:Q11266439))
+  # exclude certain classes
+  filter(!bound(?class) || ?class not in (
+      wd:Q4167410,  # disambiguation page
+      wd:Q11266439, # template
+      wd:Q4167836,  # category
+      wd:Q202444,   # given name
+      wd:Q101352,   # family name
+      wd:Q7725634,  # literary work
+      wd:Q732577,   # publication
+      wd:Q571,      # book
+      wd:Q23927052, # conference paper
+      wd:Q5633421,  # scientific journal
+      wd:Q13442814, # scientific article
+      wd:Q7366,     # song
+      wd:Q134556,   # single
+      wd:Q16551537, # album
+      wd:Q11424     # film
+    ))
   #
   # try to get a label
   optional {

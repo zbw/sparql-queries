@@ -46,30 +46,30 @@ where {
   # add class information, if available
   optional {
     ?wd wdt:P31 ?class .
-    bind(strafter(str(?class), str(wd:)) as ?classId)
     #
-    # exclude certain classes
-    filter(?classId not in (
-        "Q4167410", # disambiguation page
-        "Q11266439", # template
-        "Q4167836", # category
-        "Q4830453", # business enterprise
-        "Q7725634", # literary work
-        "Q732577",  # publication
-        "Q571",     # book
-        "Q23927052", # conference paper
-        "Q5633421", # scientific journal
-        "Q13442814", # scientific article
-        "Q7366",    # song
-        "Q134556",  # single
-        "Q16551537", # album
-        "Q11424"    # film
-      ))
     # add class label
     ?class rdfs:label ?classLabelLang .
     filter(lang(?classLabelLang) = 'en')
     bind(str(?classLabelLang) as ?classLabel)
   }
+  # exclude certain classes
+  filter(!bound(?class) || ?class not in (
+      wd:Q4167410,  # disambiguation page
+      wd:Q11266439, # template
+      wd:Q4167836,  # category
+      wd:Q4830453,  # business enterprise
+      wd:Q7725634,  # literary work
+      wd:Q732577,   # publication
+      wd:Q571,      # book
+      wd:Q23927052, # conference paper
+      wd:Q5633421,  # scientific journal
+      wd:Q13442814, # scientific article
+      wd:Q7366,     # song
+      wd:Q134556,   # single
+      wd:Q16551537, # album
+      wd:Q11424     # film
+    ))
+  #
   # add item labels
   optional {
     ?wd rdfs:label ?wdLabelDe .
