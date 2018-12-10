@@ -1,0 +1,27 @@
+# Persons which are not linked to Wikidata, with search links
+#
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select *
+where {
+  ?pm20 a zbwext:PersonFolder ;
+        skos:prefLabel ?pm20Label ;
+        zbwext:freeDocCount ?docCount ;
+        dcterms:identifier ?pm20Id .
+  filter(?docCount > 0)
+  #
+  # Wikidata
+  optional {
+    graph <http://zbw.eu/beta/wikidata/ng> {
+      ?wd wdt:P4293 ?pm20Id .
+    }
+  }
+  filter(!bound(?wd))
+  #
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql//wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_corp_by_pm20_names.rq&pm20=<', str(?pm20), '>')) as ?search)
+}
+order by desc(?docCount)
