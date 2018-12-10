@@ -26,15 +26,15 @@ where {
       values ( ?pm20 ) {
 ( <http://purl.org/pressemappe20/folder/pe/009975> )
       }
-      ?pm20 skos:prefLabel ?prefLabel ;
-            skos:altLabel ?alt .
-      # truncate combined alt labels
-      bind(coalesce(strbefore(?alt, ' <'), strbefore(?alt, ' -- '), ?alt) as ?altLabel)
+      ?pm20 skos:prefLabel ?prefLabel .
+      optional {
+        ?pm20 skos:altLabel ?altLabel .
+      }
     }
     group by ?pm20 ?prefLabel
   }
   # create one string of all labels
-  bind(concat(?prefLabel, ' ', ?altLabels) as ?labels)
+  bind(concat(?prefLabel, if(bound(?altLabels), concat(' ', ?altLabels), '')) as ?labels)
   #
   # search text and limit number of results
   (?wd ?score ?literal) text:query ( ?labels 100 ) .

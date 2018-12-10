@@ -8,7 +8,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX schema: <http://schema.org/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
-select ?pm20 ?pm20Label (str(?docCount) as ?count) ?life ?search ('search' as ?searchLabel)
+select ?pm20 ?life ?pm20Label (str(?docCount) as ?count) ?search ('search' as ?searchLabel)
 where {
   ?pm20 a zbwext:PersonFolder ;
         skos:prefLabel ?pm20Label ;
