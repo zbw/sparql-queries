@@ -5,8 +5,10 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 #PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX schema: <http://schema.org/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
-select *
+select ?pm20 ?pm20Label (str(?docCount) as ?count) ?life ?search ('search' as ?searchLabel)
 where {
   ?pm20 a zbwext:PersonFolder ;
         skos:prefLabel ?pm20Label ;
@@ -22,6 +24,10 @@ where {
   }
   filter(!bound(?wd))
   #
-  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql//wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_corp_by_pm20_names.rq&pm20=<', str(?pm20), '>')) as ?search)
+  optional {
+    ?pm20 gndo:dateOfBirthAndDeath ?life .
+  }
+  #
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql//wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_person_by_pm20_names.rq&pm20=<', str(?pm20), '>')) as ?search)
 }
 order by desc(?docCount)
