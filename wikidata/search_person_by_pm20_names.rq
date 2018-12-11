@@ -4,7 +4,7 @@
 # Uses diverse literal properties, brings the best match on top
 # of the list
 #
-PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gndo:   <http://d-nb.info/standards/elementset/gnd#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX text:   <http://jena.apache.org/text#>
@@ -14,24 +14,27 @@ PREFIX schema: <http://schema.org/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX xs: <http://www.w3.org/2001/XMLSchema#>
 #
-select distinct ?pm20 (str(?prefLabel) as ?pm20Label) ?wd ?wdLabel
+select distinct ?pm20 (?prefLabel as ?pm20Label) ?life ?wd ?wdLabel
 ?time ?description ?addpm20 ('add' as ?addpm20Label)
 # debug information
 # ?score ?literal ?labels
 where {
   # lookup additional information about pm20 folder
   service <http://zbw.eu/beta/sparql/pm20/query> {
-    select ?pm20 ?prefLabel (group_concat(?altLabel) as ?altLabels)
+    select ?pm20 ?prefLabel ?life (group_concat(?altLabel) as ?altLabels)
     where {
       values ( ?pm20 ) {
-( <http://purl.org/pressemappe20/folder/pe/009975> )
+        ( <http://purl.org/pressemappe20/folder/pe/006432> )
       }
       ?pm20 skos:prefLabel ?prefLabel .
       optional {
         ?pm20 skos:altLabel ?altLabel .
       }
+      optional {
+        ?pm20 gndo:dateOfBirthAndDeath ?life .
+      }
     }
-    group by ?pm20 ?prefLabel
+    group by ?pm20 ?prefLabel ?life
   }
   # create one string of all labels
   bind(concat(?prefLabel, if(bound(?altLabels), concat(' ', ?altLabels), '')) as ?labels)
