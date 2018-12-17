@@ -1,0 +1,43 @@
+# Occupations of GND economists mapped to Wikidata
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX gnd: <http://d-nb.info/gnd/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select *
+where {
+  {
+    # determine for which entries we want to check occupations
+    select ?gndOccupation (count(?gnd) as ?count)
+    where {
+      graph ?mnmGraph {
+        # catalog and state
+        # (late binding for ?mnmGraph!)
+        values ( ?catalogId ) {
+          ( '431' )
+        }
+        ?gnd dc:identifier [] .
+        #
+        bind(uri(concat('http://zbw.eu/beta/mix-n-match-', ?catalogId, '/ng')) as ?mnmGraph)
+        #
+      }
+      ?gnd gndo:professionOrOccupation ?gndOccupation .
+    }
+    group by ?gndOccupation 
+    having (?count > 10)
+  }
+  ?gndOccupation gndo:preferredNameForTheSubjectHeading ?gndOccupationLabel .
+  #
+  bind(strafter(str(?gndOccupation), 'http://d-nb.info/gnd/') as ?gndOccupationId)
+  optional {
+    service <https://query.wikidata.org/sparql> {
+      ?wd wdt:P227 ?gndOccupationId .
+    }
+  }
+}
+order by desc(?count)
+

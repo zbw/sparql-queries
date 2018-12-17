@@ -25,8 +25,8 @@ Query | Description
 ------|------------
 [count_wd_by_gnd_class](count_wd_by_gnd_class.rq) (non-exec) | EXPENSIVE - runs for more than 1,5 h! Count Wikidata items linked to GND by GND class ([results](http://zbw.eu/beta/sparql-lab/result?resultRef=https://api.github.com/repos/zbw/sparql-queries/contents/gnd/results/count_wd_by_gnd_class.gnd_2018-10.json))
 [search_pm20_corp](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/gnd/search_pm20_corp.rq) | Text search for organizations from PM20, looking up all available labels, with additional data for identification and link to add a GND ID to an Wikidata item via QuickStatements2 link 
-[persons_missing_in_wikidata](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/gnd/persons_missing_in_wikidata.rq) | 
-Map old PND/GKD/SWD/GND IDs to valid GND IDs _(without limit, this query may time out)_
+[persons_missing_in_wikidata](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/gnd/persons_missing_in_wikidata.rq) | Extract information for creating missing person items in Wikidata
+[persons_missing_in_wikidata](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/gnd/persons_missing_in_wikidata.rq) | Extract information for creating missing person items in Wikidata
 
 
 ### Queries for building subject specific subsets for persons and corporate bodies
