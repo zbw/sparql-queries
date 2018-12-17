@@ -34,7 +34,7 @@ where {
          zbwext:fromTo ?fromTo ;
          zbwext:freeDocCount ?freeDocCount .
   filter(?freeDocCount > 0)
-  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql//wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_corp_by_pm20_names.rq&pm20=<', str(?pm20), '>')) as ?search)
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_corp_by_pm20_names.rq&pm20=<', str(?pm20), '>')) as ?search)
 }
 order by ?mnmId
 

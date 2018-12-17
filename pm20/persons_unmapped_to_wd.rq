@@ -10,24 +10,27 @@ PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
 select ?pm20 ?life ?pm20Label (str(?docCount) as ?count) ?search ('search' as ?searchLabel)
 where {
-  ?pm20 a zbwext:PersonFolder ;
-        skos:prefLabel ?pm20Label ;
-        zbwext:freeDocCount ?docCount ;
-        dcterms:identifier ?pm20Id .
-  filter(?docCount > 0)
-  #
-  # Wikidata
-  optional {
-    graph <http://zbw.eu/beta/wikidata/ng> {
-      ?wd wdt:P4293 ?pm20Id .
+  {
+    ?pm20 a zbwext:PersonFolder ;
+          skos:prefLabel ?pm20Label ;
+          zbwext:freeDocCount ?docCount ;
+          dcterms:identifier ?pm20Id .
+    filter(?docCount > 0)
+    #
+  } minus {
+    # entries linked in Wikidata
+    service <https://query.wikidata.org/sparql> {
+      select ?pm20Id
+      where {
+        ?wd wdt:P4293 ?pm20Id .
+      }
     }
   }
-  filter(!bound(?wd))
-  #
   optional {
     ?pm20 gndo:dateOfBirthAndDeath ?life .
   }
   #
-  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql//wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_person_by_pm20_names.rq&pm20=<', str(?pm20), '>')) as ?search)
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_person_by_pm20_names.rq&pm20=<', str(?pm20), '>')) as ?search)
 }
 order by desc(?docCount)
+
