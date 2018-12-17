@@ -8,7 +8,7 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select *
+select distinct *
 where {
   {
     # determine for which entries we want to check occupations
@@ -27,15 +27,27 @@ where {
       }
       ?gnd gndo:professionOrOccupation ?gndOccupation .
     }
-    group by ?gndOccupation 
+    group by ?gndOccupation
     having (?count > 10)
   }
   ?gndOccupation gndo:preferredNameForTheSubjectHeading ?gndOccupationLabel .
-  #
   bind(strafter(str(?gndOccupation), 'http://d-nb.info/gnd/') as ?gndOccupationId)
+  #
+  # female form of the occupation
+  optional {
+    ?gndOccupation gndo:relatedTerm ?related .
+    ?related gndo:preferredNameForTheSubjectHeading ?relatedLabel .
+    filter(bound(?related) && strends(str(?gndOccupationLabel), 'in'))
+  }
+  bind(if(bound(?related), strafter(str(?related), 'http://d-nb.info/gnd/'), 'dummy') as ?relatedId)
+  #
   optional {
     service <https://query.wikidata.org/sparql> {
-      ?wd wdt:P227 ?gndOccupationId .
+      {
+        ?wd wdt:P227 ?gndOccupationId .
+      } union {
+        ?wd wdt:P227 ?relatedId .
+      }
     }
   }
 }
