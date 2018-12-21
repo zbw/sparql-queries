@@ -31,4 +31,5 @@ where {
     filter(contains(str(?page), 'wikipedia.org'))
   }
 }
+order by desc(?st)
 
