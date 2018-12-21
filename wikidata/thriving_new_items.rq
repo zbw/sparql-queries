@@ -1,0 +1,34 @@
+# Numbers of properties/ids and WP pages for newly created items
+# (missing top female economists from RePEc ranking, created in a batch in April 2017)
+# 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX schema: <http://schema.org/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+#
+select ?wd (str(?st) as ?st_cnt) (str(?ids) as ?id_cnt) ?page
+where {
+  # female economists
+  ?wd wdt:P106 wd:Q188094 ;
+      wdt:P21 wd:Q6581072 .
+  # created in QS batch at 2017-04-25
+  bind(strafter(str(?wd), str(wd:)) as ?qid)
+  filter(?qid >= 'Q29570123' && ?qid <= 'Q29571199')
+  #
+  # number of statements
+  ?wd wikibase:statements ?st .
+  # restrict to initially created
+  #filter(?st = 4)
+  #
+  # number of identifiers
+  ?wd wikibase:identifiers ?ids .
+  # restrict to initially created
+  #filter(?ids = 1)
+  #
+  # WP pages
+  optional {
+    ?page schema:about ?wd .
+    filter(contains(str(?page), 'wikipedia.org'))
+  }
+}
+
