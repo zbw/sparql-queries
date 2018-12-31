@@ -1,4 +1,4 @@
-# Create a table ip entries for OpenRefine
+# Create a table of ip entries for OpenRefine
 # (ip = Alte HWWA Warenklassifikation)
 #
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -8,7 +8,8 @@ PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
-select distinct ?broaderDe ?id ?notation ?labelEn ?labelDe (str(?note) as ?noteDe) ?gndId
+select distinct ?broaderDe ?id ?notation ?labelEn ?labelDe (str(count(distinct ?pm20)) as ?cnt) # (str(?note) as ?noteDe)
+?gndId ?s
 where {
   graph <http://zbw.eu/beta/ip/ng> {
     ?s skos:prefLabel ?labelLangDe ;
@@ -40,9 +41,11 @@ where {
     }
     optional {
       ?s skos:note ?note .
+      filter(!contains(?note, 'folderCount'))
     }
-    filter(bound(?note) && contains(?note, 'folderCount'))
   }
+  ?pm20 zbwext:ware ?s .
 }
+group by ?s ?broaderDe ?id ?notation ?labelEn ?labelDe ?gndId
 order by ?notation ?id
 
