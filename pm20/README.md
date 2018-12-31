@@ -22,6 +22,7 @@ Query | Description
 [count_by_subject](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/count_by_subject.rq) | Folder count by subject
 **Vocabs** |
 [ag_for_openrefine](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/ag_for_openrefine.rq) | PM20 country classification prepared for CSV ouput and matching in OpenRefine
+[ip_for_openrefine](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/ip_for_openrefine.rq) | PM20 ware classification prepared for CSV ouput and matching in OpenRefine
 
 ### Controlled vocabularies (parameterized queries)
 
