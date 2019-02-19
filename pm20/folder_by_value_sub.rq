@@ -1,0 +1,23 @@
+# List folders for a value of a certain property within a substructure for PM20 folders
+#
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct ?pm20 ?pm20Label ?pm20Related ?pm20RelatedLabel ?sub ?property ?value
+where {
+  values ( ?sub ?property ?value ) {
+    ( schema:member schema:roleName "Gründer" )
+  }
+  ?pm20 a zbwext:Pm20Folder ;
+        ?sub [ ?property ?value ] ;
+               skos:prefLabel ?pm20Label .
+  optional {
+    ?pm20 ?sub ?bnode .
+    ?bnode ?property ?value ;
+           schema:url ?pm20RelatedAsString ;
+           schema:name ?pm20RelatedLabel .
+    bind(uri(?pm20RelatedAsString) as ?pm20Related)
+  }
+}
+order by ?pm20Label

@@ -1,0 +1,26 @@
+# Search folders by text
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX text: <http://jena.apache.org/text#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct ?type ?pm20 ?pm20Label (str(?docCount) as ?docCnt)
+where {
+  # "query parameter"
+  values ( ?searchString ) {
+    ( 'warburg' )
+  }
+  # used in fulltext search
+  ?pm20 text:query ?searchString ;
+        a ?type ;
+        skos:prefLabel ?pm20Label .
+  #
+  # exclude the non-distinctive superclass
+  filter(?type != zbwext:Pm20Folder)
+  #
+  optional {
+    ?pm20 zbwext:freeDocCount ?docCount .
+  }
+}
+order by ?type ?pm20Label
+

@@ -9,7 +9,7 @@ PREFIX wds: <http://www.wikidata.org/entity/statement/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?claimGuid ?wd (str(?label) as ?wdLabel) ?pm20 (?pm20Id as ?pm20Label) ?numberWorks ?accessibleOnline
+select ?qsStatement ?wd (str(?label) as ?wdLabel) ?pm20 (?pm20Id as ?pm20Label) ?numberWorks ?accessibleOnline
 where {
   service <http://query.wikidata.org/sparql> {
     #    bind( wd:Q80596 as ?wd)
@@ -36,9 +36,9 @@ where {
   # If a person folder was created after 1948, no content at all is online.
   # Therefore we can conclude that the number of accessible documents is 0.
   # We don't know how many documents exist on paper or microfilm,
-  # so the total number of documents is unknown.
+  # so the total number of documents is unknown (somevalue).
   bind(if(bound(?free), str(?free), '0') as ?accessibleOnline)
-  bind(if(bound(?total), str(?total), 'unknown') as ?numberWorks)
+  bind(if(bound(?total), str(?total), 'somevalue') as ?numberWorks)
   #
   # QS statement (QS does not work for unknown values!)
   bind(concat(strafter(str(?wd), str(wd:)),'|P4293|"', ?pm20Id,

@@ -1,0 +1,54 @@
+# Create Wikidata extract for items relevant to PM20
+#
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+
+#
+construct {
+  ?wd rdfs:label ?wdLabelLang .
+  ?page schema:about ?wd ;
+    schema:name ?name ;
+    schema:isPartOf ?wikipedia ;
+    schema:inLanguage ?lang .
+}
+where {
+  hint:Query hint:optimizer "None" .
+  #
+  # relevant Wikipedias
+  values ( ?wikipedia ) {
+    ( <https://en.wikipedia.org/> )
+    ( <https://de.wikipedia.org/> )
+  }
+  # restrict to one item for testing
+  ##bind(wd:Q33391 as ?wd)
+  #
+  # get item data
+  {
+    ?wd wdt:P4293 ?pm20Id .
+  } union {
+    service <http://zbw.eu/beta/sparql/pm20/query> {
+      ?s gndo:gndIdentifier ?gndId .
+    }
+    ?wd wdt:P227 ?gndId .
+  } union {
+    service <http://zbw.eu/beta/sparql/pm20/query> {
+      ?s zbwext:geoIdentifier ?geoId .
+    }
+    ?wd wdt:P1566 ?geoId .
+  }
+  #
+  # get labels and additional fields
+  ?wd rdfs:label ?wdLabelLang .
+  filter(lang(?wdLabelLang) = 'en' || lang(?wdLabelLang) = 'de')
+  #
+  # get Wikipedia pages
+  ?page schema:about ?wd ;
+        schema:name ?name ;
+        schema:isPartOf ?wikipedia ;
+        schema:inLanguage ?lang .
+  filter(lang(?wdLabelLang) = ?lang)
+}

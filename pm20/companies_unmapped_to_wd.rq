@@ -1,0 +1,40 @@
+# Organizations from an M-n-m catalog which are not linked to Wikidata,
+# with search links
+#
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+#
+select ?mnm (?mnmId as ?mnmLabel) ?pm20 ?pm20Label ?fromTo (str(?freeDocCount) as ?docCount) ?search ('search' as ?searchLabel)
+where {
+  {
+    # already checked entries of M-n-m catalog
+    graph ?mnmGraph {
+      # catalog
+      # (late binding for ?mnmGraph!)
+      values ( ?catalogId ) {
+        ( '623' )
+      }
+      bind(uri(concat('http://zbw.eu/beta/mix-n-match-', ?catalogId, '/ng')) as ?mnmGraph)
+      #
+      ?pm20 dc:identifier ?mnmId .
+      #
+      bind(uri(concat('https://tools.wmflabs.org/mix-n-match/#/entry/', ?mnmId)) as ?mnm)
+      bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/') as ?pm20Id)
+    }
+  } minus {
+    # remove all allready existing pm20 ids
+    service <https://query.wikidata.org/sparql> {
+      ?wd wdt:P4293 ?pm20Id .
+    }
+  }
+  ?pm20  a zbwext:CompanyFolder ;
+         skos:prefLabel ?pm20Label ;
+         zbwext:fromTo ?fromTo ;
+         zbwext:freeDocCount ?freeDocCount .
+  filter(?freeDocCount > 0)
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_corp_by_pm20_names.rq&pm20=<', str(?pm20), '>')) as ?search)
+}
+order by ?mnmId
+

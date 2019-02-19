@@ -30,6 +30,8 @@ Query | Description
 [overlay_wd_hierarchy](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/overlay_wd_hierarchy.rq) | "Overlay" Wikidata with STW skos:brodaer hierarchy
 [construct_wd_mapping](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/construct_wd_mapping.rq) | Construct SKOS mapping from Wikidata (plus linked Wikipedia pages)
 [indirect_mapping_via_wd](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/indirect_mapping_via_wd.rq) | Indirect mapping from STW to another vocabulary (default: UNESCO thesaurus) via Wikidata, for now restricted to exact matches
+[wikidata_item_candidate](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/wikidata_item_candidate.rq) | Possibly missing Wikidata items - extract STW data for creation
+[unmapped_to_wd](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/unmapped_to_wd.rq) | List of unmapped descriptors in the sequence of the mix-n-match file
 
 ### STW mappings to other vocabularies
 

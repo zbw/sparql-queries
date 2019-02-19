@@ -1,0 +1,103 @@
+# Search for persons from PM20, looking up all available
+# labels, with additional data for identification
+#
+# Uses diverse literal properties, brings the best match on top
+# of the list
+#
+PREFIX gndo:   <http://d-nb.info/standards/elementset/gnd#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX text:   <http://jena.apache.org/text#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX schema: <http://schema.org/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xs: <http://www.w3.org/2001/XMLSchema#>
+#
+select distinct ?pm20 (?prefLabel as ?pm20Label) ?life ?wd ?wdLabel
+?time ?description ?addpm20 ('add' as ?addpm20Label)
+# debug information
+# ?score ?literal ?labels
+where {
+  # lookup additional information about pm20 folder
+  service <http://zbw.eu/beta/sparql/pm20/query> {
+    select ?pm20 ?prefLabel ?life (group_concat(?altLabel) as ?altLabels)
+    where {
+      values ( ?pm20 ) {
+        ( <http://purl.org/pressemappe20/folder/pe/006432> )
+      }
+      ?pm20 skos:prefLabel ?prefLabel .
+      optional {
+        ?pm20 skos:altLabel ?altLabel .
+      }
+      optional {
+        ?pm20 gndo:dateOfBirthAndDeath ?life .
+      }
+    }
+    group by ?pm20 ?prefLabel ?life
+  }
+  # create one string of all labels
+  bind(concat(?prefLabel, if(bound(?altLabels), concat(' ', ?altLabels), '')) as ?labels)
+  #
+  # search text and limit number of results
+  (?wd ?score ?literal) text:query ( ?labels 100 ) .
+  #
+  # filter out wikimedia categories, disambig pages, first-family names, templates
+  optional {
+    ?wd wdt:P31 ?class .
+  }
+  # exclude certain classes
+  filter(!bound(?class) || ?class not in (
+      wd:Q4167410,  # disambiguation page
+      wd:Q11266439, # template
+      wd:Q4167836,  # category
+      wd:Q202444,   # given name
+      wd:Q7725634,  # literary work
+      wd:Q732577,   # publication
+      wd:Q571,      # book
+      wd:Q23927052, # conference paper
+      wd:Q5633421,  # scientific journal
+      wd:Q13442814, # scientific article
+      wd:Q7366,     # song
+      wd:Q134556,   # single
+      wd:Q16551537, # album
+      wd:Q11424     # film
+    ))
+  #
+  # try to get a label
+  optional {
+    ?wd rdfs:label ?wdLabelDe .
+    filter(lang(?wdLabelDe) = 'de')
+  }
+  optional {
+    ?wd rdfs:label ?wdLabelEn .
+    filter(lang(?wdLabelEn) = 'en')
+  }
+  bind(strafter(str(?wd), str(wd:)) as ?wdId)
+  bind(coalesce(str(?wdLabelDe), str(?wdLabelEn), ?wdId) as ?wdLabel)
+  #
+  # try to get a description
+  optional {
+    ?wd schema:description ?descDe .
+    filter(lang(?descDe) = 'de')
+  }
+  optional {
+    ?wd schema:description ?descEn .
+    filter(lang(?descEn) = 'en')
+  }
+  bind(coalesce(str(?descDe), str(?descEn), '') as ?description)
+  #
+  # additional information to display
+  optional {
+    ?wd wdt:P569 ?born .
+  }
+  optional {
+    ?wd wdt:P570 ?died .
+  }
+  bind(concat(if(bound(?born), str(year(?born)), ''), ' - ', if(bound(?died), str(year(?died)), '')) as ?time)
+  #
+  # Quickstatements link
+  bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/pe/') as ?id)
+  bind(uri(concat('https://tools.wmflabs.org/quickstatements/#v1=', ?wdId, '|P4293|"pe%2F', ?id, '"')) as ?addpm20)
+}
+

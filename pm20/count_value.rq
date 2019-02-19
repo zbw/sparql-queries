@@ -1,0 +1,20 @@
+# Count values of a certain property for PM20 folders
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?count (str(count(distinct ?pm20)) as ?countLabel) ?value
+where {
+  values ( ?property ) {
+    ( schema:nationality )
+  }
+  ?pm20 a zbwext:Pm20Folder ;
+    ?property ?value .
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query',
+        '&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/folder_by_value.rq&property=',
+        str(?property), '&value="', ?value, '"')) as ?count)
+}
+group by ?value ?count
+order by desc(count(?value))
+

@@ -19,9 +19,11 @@ select distinct ?wd ?wdLabel
     separator = "; ") as ?description)
 (group_concat(distinct ?affiliation ;
     separator = "; ") as ?affiliations)
-(sum(?score) as ?totalScore)
+# (sum(?score) as ?totalScore)
+(uri(concat('https://tools.wmflabs.org/quickstatements/#v1=', max(?wdId), '|P227|"', max(?gndId), '"')) as ?addGnd)
+('add gndId' as ?addGndLabel)
 where {
-  # get all name variantss for search
+  # get all name variants for search
   service <http://zbw.eu/beta/sparql/gnd/query> {
     values ( ?gndId ?language ) {
       # defaults to economist Dunning, John H.
@@ -70,8 +72,10 @@ where {
   bind(if(bound(?birthDate), str(year(?birthDate)), '') as ?birth)
   bind(if(bound(?deathDate), str(year(?deathDate)), '')  as ?death)
   bind(concat(?birth, ' - ', ?death) as ?life)
+  #
+  bind(strafter(str(?wd), str(wd:)) as ?wdId)
 }
-group by ?wd ?wdLabel ?life
+group by ?wd ?wdLabel ?gndId ?life
 order by desc(sum(?score))
 limit 20
 

@@ -1,0 +1,65 @@
+# Extract information for creating missing gnd person items in Wikidata
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX gnd: <http://d-nb.info/gnd/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?gnd ?gndLabel ?mnm (?mnmId as ?mnmLabel) $gndId
+('Q5' as ?classQid) ?occupationQid
+# multiple dates will be catched by date syntax check later
+(group_concat(distinct ?birth) as ?births)  (group_concat(distinct ?death) as ?deaths)
+(?occupationEn as ?descrEn)
+(group_concat(?info;
+    separator = '; ') as ?infos)
+(concat(?occupationDe, if(bound(?infos), concat(' (', ?infos, ')'), '')) as ?descrDe)
+where {
+  #
+  # determine for which entries we want to create items
+  {
+    # already checked entries of M-n-m catalog
+    graph ?mnmGraph {
+      # catalog and state
+      # (late binding for ?mnmGraph!)
+      values ( ?catalogId ?maxCheckedId ) {
+        ( '431' '19348270' )
+      }
+      bind(uri(concat('http://zbw.eu/beta/mix-n-match-', ?catalogId, '/ng')) as ?mnmGraph)
+      #
+      ?gnd dc:identifier ?mnmId .
+      filter(?mnmId < ?maxCheckedId)
+      bind(uri(concat('https://tools.wmflabs.org/mix-n-match/#/entry/', ?mnmId)) as ?mnm)
+      bind(strafter(str(?gnd), 'http://d-nb.info/gnd/') as ?gndId)
+    }
+  } minus {
+    # minus all entries which are linked to WD items
+    service <https://query.wikidata.org/sparql> {
+      ?wd wdt:P227 ?gndId .
+    }
+  }
+  values ( ?gndProfession ?occupationQid ?occupationDe ?occupationEn ) {
+    ( gnd:4066533-1 'Q188094' 'Wirtschaftswissenschaftler' 'economist' )
+    ( gnd:4270482-0 'Q188094' 'Wirtschaftswissenschaftlerin' 'economist' )
+#    ( gnd:4145078-4 undef 'Betriebswirt' 'business economist' )
+  }
+  #
+  # mandatory fields
+  ?gnd gndo:preferredNameForThePerson ?gndLabel ;
+       gndo:professionOrOccupation ?gndProfession .
+  #
+  # additional info
+  optional {
+    ?gnd gndo:dateOfBirth ?birth .
+  }
+  optional {
+    ?gnd gndo:dateOfDeath ?death .
+  }
+  optional {
+    ?gnd gndo:biographicalOrHistoricalInformation ?info .
+  }
+}
+group by ?gnd ?gndLabel ?mnm ?mnmId $gndId ?occupationQid ?occupationEn ?occupationDe
+order by ?mnmId
+

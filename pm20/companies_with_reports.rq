@@ -1,0 +1,33 @@
+# List of all organizations
+#
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX schema: <http://schema.org/>
+#
+SELECT ?type ?pm20 ?pm20Label ?fromTo (group_concat(distinct ?broaderLocation;
+    separator='; ') as ?broaderLocations) (group_concat(distinct ?industry;
+    separator='; ') as ?industries) ?reports
+WHERE {
+  ?pm20 a zbwext:CompanyFolder ;
+        skos:prefLabel ?pm20Label ;
+        zbwext:broaderLocation ?broaderLocation ;
+        schema:industry ?industry ;
+        dc:type ?type ;
+        zbwext:freeDocCount ?docCount .
+  filter(?docCount > 0)
+  optional {
+    ?pm20 zbwext:fromTo ?fromTo .
+  }
+  #  optional {
+  ?pm20 zbwext:reportCount ?repCount .
+  filter(?repCount > 0)
+  bind(str(?repCount) as ?reports)
+  #  }
+}
+group by ?pm20 ?pm20Label ?fromTo ?type ?reports
+order by ?pm20Label
+

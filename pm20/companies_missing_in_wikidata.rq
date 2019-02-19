@@ -1,0 +1,67 @@
+# Extract information for creating missing company items in Wikidata
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX schema: <http://schema.org/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+#
+select ?pm20 ?pm20Label ?mnm (?mnmId as ?mnmLabel) ?wdLabel ?incepted ?abandoned ?gndId
+?pm20Id ?classQid (?orgType as ?descrDe) ?descrEn
+where {
+  #
+  # determine for which entries we want to create items
+  {
+    # already checked entries of M-n-m catalog
+    graph ?mnmGraph {
+      # catalog and state
+      # (late binding for ?mnmGraph!)
+      values ( ?catalogId ?maxCheckedId ) {
+        ( '623' '25376941' )
+      }
+      bind(uri(concat('http://zbw.eu/beta/mix-n-match-', ?catalogId, '/ng')) as ?mnmGraph)
+      #
+      ?pm20 dc:identifier ?mnmId .
+      filter(?mnmId < ?maxCheckedId)
+      bind(uri(concat('https://tools.wmflabs.org/mix-n-match/#/entry/', ?mnmId)) as ?mnm)
+      bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/') as ?pm20Id)
+    }
+  } minus {
+    # minus all entries which are linked to WD items
+    service <https://query.wikidata.org/sparql> {
+      ?wd wdt:P4293 ?pm20Id .
+    }
+  }
+  # organization type mappings
+  values ( ?orgType ?classQid ?descrEn ) {
+    ( 'Unternehmen' 'Q4830453' 'business' )
+    ( 'Kolonialgesellschaft' 'Q1700154' 'colonial society' )
+    ( 'Verein' 'Q48204' 'association' )
+  }
+  #
+  ?pm20 skos:prefLabel ?pm20Label ;
+        zbwext:freeDocCount ?docCount .
+  #
+  # apply further restrictions:
+  # only if folder has documents
+  filter(?docCount > 0)
+  # restrict to certain types of organization
+  ?pm20 dc:type ?orgType .
+  # remove entries with suspect labels including '()'
+  filter(!contains(?pm20Label, '('))
+  #
+  # now get further information to add to WD
+  #
+  optional {
+    ?pm20 schema:foundingDate ?incepted .
+  }
+  optional {
+    ?pm20 schema:dissolutionDate ?abandoned .
+  }
+  optional {
+    ?pm20 gndo:gndIdentifier ?gndId .
+  }
+}
+order by ?mnmId
+
