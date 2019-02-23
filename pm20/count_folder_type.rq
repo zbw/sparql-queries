@@ -1,10 +1,42 @@
-# Count pm20 ids in Wikidata by folder type
+# Count pm20 ids in total, with docs and with link in WD, by folder type
 #
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 #
-select (str(count(distinct ?pm20Id)) as ?idCount) ?type
+select ?type  (str(count(distinct ?pm20Id)) as ?totalCount) (str(sum(?hasDocs)) as ?withDocs) (str(sum(?hasWd)) as ?withWd) (str(sum(?hasWdAndDocs)) as ?withWdAndDocs) (concat(str(round((sum(?hasWdAndDocs)/sum(?hasDocs))*1000)/10), ' %') as ?percentage)
+(concat('| ', substr(str(now()),0,11), ' | ', ?type, ' | ', ?totalCount, ' | ', ?withDocs, ' | ', ?withWd, ' | ', ?withWdAndDocs, ' | ', ?percentage ) as ?statsLine)
 where {
-  ?wd wdt:P4293 ?pm20Id .
+  {
+    # all folders
+    ?pm20 a zbwext:Pm20Folder ;
+          dcterms:identifier ?pm20Id .
+    # check if documents are available
+    optional {
+      ?pm20 zbwext:freeDocCount ?docCount .
+    }
+    bind(if(bound(?docCount) && (?docCount > 0), 1, 0) as ?hasDocs)
+    bind(0 as ?hasWd)
+    bind(0 as ?hasWdAndDocs)
+  } union {
+    # folders linked from WD
+    service <https://query.wikidata.org/sparql> {
+      # since one pm20Id may be linked to multiple wd items,
+      # we need 'distinct' here
+      select distinct ?pm20 ?pm20Id
+      where {
+        ?wd wdt:P4293 ?pm20Id .
+        bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
+      }
+    }
+    bind(1 as ?hasWd)
+    # check if documents are available
+    optional {
+      ?pm20 zbwext:freeDocCount ?docCount .
+    }
+    bind(if(bound(?docCount) && (?docCount > 0), 1, 0) as ?hasWdAndDocs)
+    bind(0 as ?hasDocs)
+  }
   bind(substr(?pm20Id, 0, 3) as ?type)
 }
 group by ?type
