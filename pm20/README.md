@@ -6,7 +6,7 @@ Query | Description
 ------|------------
 [dummy](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/dummy.rq) | ([results](http://zbw.eu/beta/sparql-lab/result?resultRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/results/dummy.json))
 [search_folders_by_text](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/search_folders_by_text.rq) | Search folders by text
-[count_folder_type](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/spqrql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/count_folder_type.rq) | Count pm20 ids in total, with docs and with link in WD, by folder type ([results](results/count_folder_type.tsv))
+[count_folder_type](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/count_folder_type.rq) | Count pm20 ids in total, with docs and with link in WD, by folder type ([results](results/count_folder_type.tsv))
 [folder_doc_counts](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/folder_doc_counts.rq) | Document counts (free and total) for folders connected to WD items
 **Persons** |
 [persons_unmapped_to_wd](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/persons_unmapped_to_wd.rq) | Persons which are not linked to Wikidata, with search links
