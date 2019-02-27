@@ -9,7 +9,7 @@ PREFIX wds: <http://www.wikidata.org/entity/statement/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?qsStatement ?wd (str(?label) as ?wdLabel) ?pm20 (?pm20Id as ?pm20Label) ?numberWorks ?accessibleOnline
+select ?qsStatement ?wd ?wdLabel ?pm20 (?pm20Id as ?pm20Label) ?numberWorks ?accessibleOnline
 where {
   service <http://query.wikidata.org/sparql> {
     #    bind( wd:Q80596 as ?wd)
@@ -21,8 +21,11 @@ where {
     filter(not exists {
         ?statement (pq:P3740 | pq:5592) [] .
       })
-    ?wd rdfs:label ?label .
-    filter(lang(?label) = 'en')
+    optional {
+      ?wd rdfs:label ?label .
+      filter(lang(?label) = 'en')
+    }
+    bind(coalesce(str(?label), strafter(str(?wd),'/entity/')) as ?wdLabel)
   }
   bind(uri(concat('http://purl.org/pressemappe20/folder/', $pm20Id)) as ?pm20)
   #
