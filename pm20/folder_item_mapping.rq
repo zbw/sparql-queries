@@ -10,7 +10,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select ?item (str(?label) as ?itemLabel) ?relationLabel ?pm20 ?pm20Label
+select distinct ?item (str(?label) as ?itemLabel) ?relationLabel ?pm20 ?pm20Label
 where {
   values ( ?type ) {
     ( 'sh' )
@@ -35,7 +35,10 @@ where {
   }
   # PM20 label (if known via "named as")
   optional {
-    ?item p:P4293/pq:P1810 ?name .
+    ?item p:P4293 ?statement .
+    ?statement pq:P1810 ?name ;
+               ps:P4293 ?pm20Id .
   }
   bind(coalesce(?name, ?pm20Id) as ?pm20Label)
 }
+order by ?itemLabel
