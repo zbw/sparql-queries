@@ -10,7 +10,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select distinct ?item (str(?label) as ?itemLabel) ?relationLabel ?pm20 ?pm20Label
+select distinct ?item ?itemLabel ?relationLabel ?pm20 ?pm20Label
 where {
   values ( ?type ) {
     ( 'sh' )
@@ -23,8 +23,11 @@ where {
   bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
   #
   # WD label
-  ?item rdfs:label ?label .
-  filter(lang(?label) = 'en')
+  optional {
+    ?item rdfs:label ?label .
+    filter(lang(?label) = 'en')
+  }
+  bind(collate(str(?label), strafter(str(?item),'/entity/')) as ?itemLabel)
   #
   # skos mapping relation (if defined)
   optional {
