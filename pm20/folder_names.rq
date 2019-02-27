@@ -10,7 +10,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select ?qsStatement ?wd (str(?label) as ?wdLabel) ?pm20 (?prefLabel as ?pm20Label) 
+select ?qsStatement ?wd ?wdLabel ?pm20 (?prefLabel as ?pm20Label) 
 where {
   values ( ?pmType ) {
     ( zbwext:SubjectFolder )
@@ -25,8 +25,11 @@ where {
     filter(not exists {
         ?statement (pq:1810) [] .
       })
-    ?wd rdfs:label ?label .
-    filter(lang(?label) = 'en')
+    optional {
+      ?item rdfs:label ?label .
+      filter(lang(?label) = 'en')
+    }
+    bind(coalesce(str(?label), strafter(str(?item),'/entity/')) as ?wdLabel)
   }
   bind(uri(concat('http://purl.org/pressemappe20/folder/', $pm20Id)) as ?pm20)
   #
