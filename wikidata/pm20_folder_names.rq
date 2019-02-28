@@ -1,0 +1,45 @@
+# Folder names for folders connected to WD items
+#
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select ?qsStatement ?item ?itemLabel ?pm20 (?prefLabel as ?pm20Label) 
+where {
+  values ( ?type ) {
+    ( 'sh' )
+  }
+  #    bind( wd:Q80596 as ?item)
+  ?item p:P4293 ?statement .
+  ?statement ps:P4293 ?pm20Id .
+  filter(isLiteral(?pm20Id))
+  #
+  # skip all items where the folder name already exists
+  filter(not exists {
+      ?statement (pq:1810) [] .
+    })
+  optional {
+    ?item rdfs:label ?label .
+    filter(lang(?label) = 'en')
+  }
+  bind(coalesce(str(?label), strafter(str(?item),'/entity/')) as ?itemLabel)
+  bind(uri(concat('http://purl.org/pressemappe20/folder/', $pm20Id)) as ?pm20)
+  #
+  service <http://query.wikidata.org/sparql> {
+    #
+    # only folders of a certain type
+    ?pm20 a ?pmType ;
+          skos:prefLabel ?prefLabel .
+    #
+    # QS statement (QS does not work for unknown values!)
+    bind(concat(strafter(str(?item), str(wd:)),'|P4293|"', ?pm20Id,
+        '"|P1810|"', ?prefLabel, '"') as ?qsStatement)
+  }
+}
+
