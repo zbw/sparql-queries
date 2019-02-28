@@ -1,0 +1,51 @@
+# Wikidata items with linked PM20 folders
+#
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select distinct ?item ?itemLabel ?relationLabel ?pm20 ?pm20Label
+where {
+  values ( ?type ) {
+    ( 'sh' )
+  }
+  ?item wdt:P4293 ?pm20Id .
+  filter(isLiteral(?pm20Id))
+  #
+  # restrict to according type
+  filter(strstarts(?pm20Id, ?type))
+  bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
+  #
+  # WD label
+  optional {
+    ?item rdfs:label ?itemLabelEn .
+    filter(lang(?itemLabelEn) = 'en')
+  }
+  optional {
+    ?item rdfs:label ?itemLabelDe .
+    filter(lang(?itemLabelDe) = 'de')
+  }
+  bind(str(coalesce(?itemLabelEn, ?itemLabelDe, strafter(?item, '/entity/'))) as ?itemLabel)
+  #
+  # skos mapping relation (if defined)
+  optional {
+    ?item p:P4293/pq:P4390 ?relation .
+    ?relation rdfs:label ?relationLabelLang .
+    filter(lang(?relationLabelLang) = 'en')
+    bind(str(?relationLabelLang) as ?relationLabel)
+  }
+  # PM20 label (if known via "named as")
+  optional {
+    ?item p:P4293 ?statement .
+    ?statement pq:P1810 ?name ;
+               ps:P4293 ?pm20Id .
+  }
+  bind(coalesce(?name, ?pm20Id) as ?pm20Label)
+}
+order by ?itemLabel
