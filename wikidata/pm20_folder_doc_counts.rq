@@ -32,7 +32,7 @@ where {
     ?item rdfs:label ?itemLabelDe .
     filter(lang(?itemLabelDe) = 'de')
   }
-  bind(str(coalesce(?itemLabelEn, ?itemLabelDe, strafter(?item, '/entity/'))) as ?itemLabel)
+  bind(str(coalesce(?itemLabelEn, ?itemLabelDe, strafter(str(?item), '/entity/'))) as ?itemLabel)
   #
   # get counts from PM20 endpoint
   service <http://zbw.eu/beta/sparql/pm20/query> {
