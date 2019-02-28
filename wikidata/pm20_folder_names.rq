@@ -16,16 +16,18 @@ where {
     ( 'sh' )
   }
   #    bind( wd:Q80596 as ?item)
-  ?item wdt:P4293 ?pm20Id .
+  ?item p:P4293 ?statement .
+  ?statement ps:P4293 ?pm20Id .
   filter(isLiteral(?pm20Id))
-  #
-  # restrict to type
-  filter(strstarts(?pm20Id, ?type)
   #
   # skip all items where the folder name already exists
   filter(not exists {
       ?statement (pq:1810) [] .
     })
+  # restrict to type
+  filter(strstarts(?pm20Id, ?type)
+  bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
+  #
   # WD label
   optional {
     ?item rdfs:label ?itemLabelEn .
@@ -37,6 +39,7 @@ where {
   }
   bind(str(coalesce(?itemLabelEn, ?itemLabelDe, strafter(?item, '/entity/'))) as ?itemLabel)
   #
+  # get name from PM20 endpoint
   service <http://query.wikidata.org/sparql> {
     ?pm20 skos:prefLabel ?prefLabel .
   }
