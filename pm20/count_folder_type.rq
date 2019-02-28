@@ -1,8 +1,9 @@
 # Count pm20 ids in total, with docs and with link in WD, by folder type
 #
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
-PREFIX dcterms: <http://purl.org/dc/terms/>
 #
 select ?type  (str(count(distinct ?pm20Id)) as ?totalCount) (str(sum(?hasDocs)) as ?withDocs) (str(sum(?hasWd)) as ?withWd) (str(sum(?hasWdAndDocs)) as ?withWdAndDocs) (concat(str(round((sum(?hasWdAndDocs)/sum(?hasDocs))*1000)/10), ' %') as ?percentage)
 (concat('| ', substr(str(now()),0,11), ' || ', ?totalCount, ' || ', ?withDocs, ' || ', ?withWd, ' || ', ?withWdAndDocs, ' || ', ?percentage ) as ?statsLine)
@@ -25,6 +26,7 @@ where {
       # we need 'distinct' here
       select distinct ?pm20 ?pm20Id
       where {
+        hint:Query hint:optimizer "None" .
         ?wd wdt:P4293 ?pm20Id .
         bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
       }
