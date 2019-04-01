@@ -6,30 +6,30 @@
     "bindings": [
       {
         "type": { "type": "literal" , "value": "co" } ,
-        "totalCount": { "type": "literal" , "value": "42195" } ,
-        "withDocs": { "type": "literal" , "value": "8004" } ,
-        "withWd": { "type": "literal" , "value": "2269" } ,
-        "withWdAndDocs": { "type": "literal" , "value": "1764" } ,
-        "percentage": { "type": "literal" , "value": "22.0 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2019-03-04 || 42195 || 8004 || 2269 || 1764 || 22.0 %" }
+        "totalCount": { "type": "literal" , "value": "42256" } ,
+        "withDocs": { "type": "literal" , "value": "8219" } ,
+        "withWd": { "type": "literal" , "value": "2271" } ,
+        "withWdAndDocs": { "type": "literal" , "value": "1767" } ,
+        "percentage": { "type": "literal" , "value": "21.5 %" } ,
+        "statsLine": { "type": "literal" , "value": "| 2019-04-01 || 42256 || 8219 || 2271 || 1767 || 21.5 %" }
       } ,
       {
         "type": { "type": "literal" , "value": "pe" } ,
-        "totalCount": { "type": "literal" , "value": "18561" } ,
-        "withDocs": { "type": "literal" , "value": "5267" } ,
-        "withWd": { "type": "literal" , "value": "8970" } ,
+        "totalCount": { "type": "literal" , "value": "18582" } ,
+        "withDocs": { "type": "literal" , "value": "5266" } ,
+        "withWd": { "type": "literal" , "value": "8978" } ,
         "withWdAndDocs": { "type": "literal" , "value": "4906" } ,
-        "percentage": { "type": "literal" , "value": "93.1 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2019-03-04 || 18561 || 5267 || 8970 || 4906 || 93.1 %" }
+        "percentage": { "type": "literal" , "value": "93.2 %" } ,
+        "statsLine": { "type": "literal" , "value": "| 2019-04-01 || 18582 || 5266 || 8978 || 4906 || 93.2 %" }
       } ,
       {
         "type": { "type": "literal" , "value": "sh" } ,
-        "totalCount": { "type": "literal" , "value": "9036" } ,
-        "withDocs": { "type": "literal" , "value": "8880" } ,
-        "withWd": { "type": "literal" , "value": "35" } ,
-        "withWdAndDocs": { "type": "literal" , "value": "35" } ,
+        "totalCount": { "type": "literal" , "value": "9204" } ,
+        "withDocs": { "type": "literal" , "value": "9048" } ,
+        "withWd": { "type": "literal" , "value": "36" } ,
+        "withWdAndDocs": { "type": "literal" , "value": "36" } ,
         "percentage": { "type": "literal" , "value": "0.4 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2019-03-04 || 9036 || 8880 || 35 || 35 || 0.4 %" }
+        "statsLine": { "type": "literal" , "value": "| 2019-04-01 || 9204 || 9048 || 36 || 36 || 0.4 %" }
       } ,
       {
         "type": { "type": "literal" , "value": "wa" } ,
@@ -38,7 +38,7 @@
         "withWd": { "type": "literal" , "value": "8" } ,
         "withWdAndDocs": { "type": "literal" , "value": "8" } ,
         "percentage": { "type": "literal" , "value": "0.3 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2019-03-04 || 2891 || 2890 || 8 || 8 || 0.3 %" }
+        "statsLine": { "type": "literal" , "value": "| 2019-04-01 || 2891 || 2890 || 8 || 8 || 0.3 %" }
       }
     ]
   }
