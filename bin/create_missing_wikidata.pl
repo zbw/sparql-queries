@@ -9,6 +9,7 @@ use open ":encoding(utf8)";
 
 binmode STDOUT, ":utf8";
 
+use Carp;
 use Data::Dumper;
 use JSON qw'decode_json encode_json';
 use Path::Tiny;
@@ -18,7 +19,7 @@ use REST::Client;
 # limit setting just stops output (on next run, after import, created items are
 # excluded by query)
 Readonly my $LIMIT     => 2000;
-Readonly my $NAMED_AS  => '|S1810|',
+Readonly my $NAMED_AS  => '|S1810|';
 Readonly my $TODAY     => `date +%F | tr -d "\n"`;
 Readonly my $RETRIEVED => "|S813|+${TODAY}T00:00:00Z/11";
 
@@ -26,7 +27,7 @@ Readonly my @LANGUAGES     => qw/ de en /;
 Readonly my %SOURCE_CONFIG => (
   gnd => {
     endpoint        => 'http://zbw.eu/beta/sparql/gnd/query',
-    source_qid      => '|S248|Q36578',       # GND
+    source_qid      => '|S248|Q36578',                          # GND
     source_property => 'P227',
     source_id       => '|S227|',
   },
@@ -119,7 +120,41 @@ Readonly my %CONFIG => (
         value_type => 'literal',
       },
     ],
-  }
+  },
+
+  pm20_pe => {
+    source     => 'pm20',
+    label_type => 'last_first',
+    query => path('/opt/sparql-queries/pm20/persons_missing_in_wikidata.rq'),
+    source_title => 'pm20Label',
+    source_id    => 'pm20Id',
+    label        => {
+      de => 'pm20Label',
+      en => 'pm20Label',
+    },
+    properties => [
+      {
+        pid        => 'P31',
+        var_name   => 'classQid',
+        value_type => 'item',
+      },
+      {
+        pid        => 'P569',
+        var_name   => 'birth',
+        value_type => 'date',
+      },
+      {
+        pid        => 'P570',
+        var_name   => 'death',
+        value_type => 'date',
+      },
+      {
+        pid        => 'P227',
+        var_name   => 'gndId',
+        value_type => 'literal',
+      },
+    ],
+  },
 );
 
 my ( $config, $src_cfg );
@@ -173,17 +208,19 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
   # set record specific reference statement
   my $reference_statement =
       $src_cfg->{source_qid}
-    . $NAMED_AS .
+    . $NAMED_AS
     . quote( $entry->{ $config->{source_title} }{value}, 'de' )
     . $src_cfg->{source_id}
     . quote( $entry->{ $config->{source_id} }{value} )
     . $RETRIEVED;
 
   # new item
+  ##warn Dumper $entry;
   print $fh "\nCREATE\n";
 
   # output fields
   foreach my $field (qw/ label descr alias /) {
+    ##warn "  $field\n";
     next unless $config->{$field};
     my $abbrev = uc( substr( $field, 0, 1 ) );
     foreach my $lang (@LANGUAGES) {
@@ -195,6 +232,11 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
       }
       print $fh "LAST|$abbrev$lang|" . quote($value) . "\n";
     }
+
+    # special case gnd-like labels with qualifiers
+    if ( $config->{label_type} eq 'last_first' ) {
+      description_from_label($entry);
+    }
   }
 
   # output source property (without reference)
@@ -204,6 +246,7 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
 
   # output properties
   foreach my $property ( @{ $config->{properties} } ) {
+    next unless $entry->{ $property->{var_name} };
     my $value = $entry->{ $property->{var_name} }{value};
     next unless $value;
 
@@ -229,7 +272,7 @@ print "$count statements written to $outfile\n";
 #####################
 
 sub quote {
-  my $text = shift or die "param missing\n";
+  my $text = shift or confess "param missing";
   my $lang = shift;
 
   my $q = '"';
@@ -244,7 +287,7 @@ sub quote {
 }
 
 sub format_date {
-  my $date = shift or die "param missing\n";
+  my $date = shift or confess "param missing";
 
   # TODO interpret different data formats
   if ( $date =~ m/^\d\d\d\d$/ ) {
@@ -260,14 +303,16 @@ sub format_date {
 }
 
 sub adjust_label {
-  my $label      = shift or die "param missing\n";
-  my $label_type = shift or die "param missing\n";
+  my $label      = shift or confess "param missing";
+  my $label_type = shift or confess "param missing";
 
   # for persons
   if ( $label_type eq 'last_first' ) {
+    ## remove optional qulifier in angle brackets
+    $label =~ s/ \<.*?\>$//;
     ## reverse name parts
     my ( $last, $first ) = split( /, /, $label );
-    if ($last) {
+    if ($first) {
       $label = "$first $last";
     }
   }
@@ -298,4 +343,15 @@ sub adjust_label {
     $label =~ s/(.*) Co\.,$/$1/g;
   }
   return $label;
+}
+
+sub description_from_label {
+  my $entry = shift or confess "param missing";
+
+  if ( $entry->{ $config->{label}{de} }{value} =~ m/ <(.*?)>$/ ) {
+    print $fh "LAST|Dde|" . quote($1) . "\n";
+    if ( $1 eq "Familie" ) {
+      print $fh "LAST|Den|\"family\"\n";
+    }
+  }
 }
