@@ -23,7 +23,9 @@ Readonly my $NAMED_AS  => '|S1810|';
 Readonly my $TODAY     => `date +%F | tr -d "\n"`;
 Readonly my $RETRIEVED => "|S813|+${TODAY}T00:00:00Z/11";
 
-Readonly my @LANGUAGES     => qw/ de en /;
+Readonly my @LANGUAGES => qw/ de en /;
+Readonly my $DEFAULT_PROPERTY_QUERY =>
+  path('/opt/sparql-queries/pm20/property_missing_in_wikidata.rq');
 Readonly my %SOURCE_CONFIG => (
   gnd => {
     endpoint        => 'http://zbw.eu/beta/sparql/gnd/query',
@@ -54,28 +56,24 @@ Readonly my %CONFIG => (
       de => 'descrDe',
       en => 'descrEn',
     },
-    properties => [
-      {
-        pid        => 'P31',
+    properties => {
+      P31 => {
         var_name   => 'classQid',
         value_type => 'item',
       },
-      {
-        pid        => 'P569',
+      P569 => {
         var_name   => 'births',
         value_type => 'date',
       },
-      {
-        pid        => 'P570',
+      P570 => {
         var_name   => 'deaths',
         value_type => 'date',
       },
-      {
-        pid        => 'P106',
+      P106 => {
         var_name   => 'occupationQid',
         value_type => 'item',
       },
-    ],
+    },
   },
 
   pm20_co => {
@@ -92,34 +90,30 @@ Readonly my %CONFIG => (
       de => 'descrDe',
       en => 'descrEn',
     },
-    properties => [
-      {
-        pid        => 'P31',
+    properties => {
+      P31 => {
         var_name   => 'classQid',
         value_type => 'item',
       },
-      {
-        pid        => 'P571',
+      P571 => {
         var_name   => 'incepted',
         value_type => 'date',
       },
-      {
-        pid        => 'P576',
+      P576 => {
         var_name   => 'abandoned',
         value_type => 'date',
       },
-      {
+      P1448 => {
         pid        => 'P1448',
         var_name   => 'pm20Label',
         value_type => 'monolingual-text',
         lang       => 'und',
       },
-      {
-        pid        => 'P227',
+      P227 => {
         var_name   => 'gndId',
         value_type => 'literal',
       },
-    ],
+    },
   },
 
   pm20_pe => {
@@ -132,45 +126,58 @@ Readonly my %CONFIG => (
       de => 'pm20Label',
       en => 'pm20Label',
     },
-    properties => [
-      {
-        pid        => 'P31',
+    properties => {
+      P31 => {
         var_name   => 'classQid',
         value_type => 'item',
       },
-      {
-        pid        => 'P569',
+      P569 => {
         var_name   => 'birth',
         value_type => 'date',
       },
-      {
-        pid        => 'P570',
+      P570 => {
         var_name   => 'death',
         value_type => 'date',
       },
-      {
-        pid        => 'P227',
+      P227 => {
         var_name   => 'gndId',
+        prop       => 'gndo:identifier',
         value_type => 'literal',
       },
-    ],
+    },
   },
 );
 
 my ( $config, $src_cfg );
-my $type = $ARGV[0];
-if ( $type and exists $CONFIG{$type} ) {
+my $type     = $ARGV[0];
+my $mode     = $ARGV[1] || 'create';
+my $property = $ARGV[2];
+if ( $type and exists $CONFIG{$type} and $mode =~ m/^(create|enhance)$/ ) {
   $config  = $CONFIG{$type};
   $src_cfg = $SOURCE_CONFIG{ $config->{source} };
 } else {
-  die "usage: $0 ", join( '|', keys %CONFIG ), "\n";
+  die "usage: $0 [", join( '|', keys %CONFIG ), "] {create|enhance pid}\n";
+}
+my @valid_properties = keys $config->{properties};
+if ( $mode eq 'enhance'
+  and not( $property and grep ( m/^$property$/, @valid_properties ) ) )
+{
+  die "usage: $0 $type $mode [", join( '|', @valid_properties ), "]\n";
 }
 
 # output file derived from query file, plus date for repeated runs
-my $query   = $config->{query};
-my $outfile = $query->parent->child('results')
-  ->child( $query->basename('.rq') . ".${TODAY}.qs.txt" );
-
+my ( $query, $outfile );
+if ( $mode eq 'create' ) {
+  $query   = $config->{query};
+  $outfile = $query->parent->child('results')
+    ->child( $query->basename('.rq') . ".${TODAY}.qs.txt" );
+} else {
+  $query = $config->{query};
+  $outfile =
+      $property . '_'
+    . $query->parent->child('results')
+    ->child( $query->basename('.rq') . ".${TODAY}.qs.txt" );
+}
 if ( -f $outfile ) {
   die "Error: $outfile exists\n";
 }
@@ -245,26 +252,24 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
     . quote( $entry->{ $config->{source_id} }{value} ) . "\n";
 
   # output properties
-  foreach my $property ( @{ $config->{properties} } ) {
-    next unless $entry->{ $property->{var_name} };
-    my $value = $entry->{ $property->{var_name} }{value};
+  foreach my $property ( keys $config->{properties} ) {
+    my $prop_cfg = $config->{properties}{$property};
+    next unless $entry->{ $prop_cfg->{var_name} };
+    my $value = $entry->{ $prop_cfg->{var_name} }{value};
     next unless $value;
 
-    if ( $property->{value_type} eq 'item' ) {
+    if ( $prop_cfg->{value_type} eq 'item' ) {
       ## use unquoted value
-    } elsif ( $property->{value_type} eq 'literal' ) {
+    } elsif ( $prop_cfg->{value_type} eq 'literal' ) {
       $value = quote($value);
-    } elsif ( $property->{value_type} eq 'date' ) {
+    } elsif ( $prop_cfg->{value_type} eq 'date' ) {
       $value = format_date($value);
-    } elsif ( $property->{value_type} eq 'monolingual-text' ) {
-      $value = quote( $value, $property->{lang} );
+    } elsif ( $prop_cfg->{value_type} eq 'monolingual-text' ) {
+      $value = quote( $value, $prop_cfg->{lang} );
     } else {
-      die 'Error: Unknown value_type [' . $property->{value_type} . "]\n";
+      die 'Error: Unknown value_type [' . $prop_cfg->{value_type} . "]\n";
     }
-    print $fh 'LAST|'
-      . $property->{pid} . '|'
-      . $value
-      . $reference_statement . "\n";
+    print $fh 'LAST|' . $property . '|' . $value . $reference_statement . "\n";
   }
 }
 print "$count statements written to $outfile\n";
