@@ -9,14 +9,14 @@ PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
 select ?qid ?pm20Id ?pm20Label ?wdProperty ?value
 where {
-  values ( ?srcType ?srcProperty ?wdProperty ) {
+  values ( ?sourceType ?sourceProperty ?wdProperty ) {
     ( zbwext:PersonFolder gndo:gndIdentifier wdt:P227 )
   }
   #
   # all pm20 entries with a certain property
   {
-    ?pm20 a ?srcType ;
-          ?srcProperty ?value ;
+    ?pm20 a ?sourceType ;
+          ?sourceProperty ?value ;
           skos:prefLabel ?pm20LabelLang .
     bind(str(?pm20LabelLang) as ?pm20Label)
     bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/') as ?pm20Id)

@@ -23,9 +23,7 @@ Readonly my $NAMED_AS  => '|S1810|';
 Readonly my $TODAY     => `date +%F | tr -d "\n"`;
 Readonly my $RETRIEVED => "|S813|+${TODAY}T00:00:00Z/11";
 
-Readonly my @LANGUAGES => qw/ de en /;
-Readonly my $DEFAULT_PROPERTY_QUERY =>
-  path('/opt/sparql-queries/pm20/property_missing_in_wikidata.rq');
+Readonly my @LANGUAGES     => qw/ de en /;
 Readonly my %SOURCE_CONFIG => (
   gnd => {
     endpoint        => 'http://zbw.eu/beta/sparql/gnd/query',
@@ -38,6 +36,8 @@ Readonly my %SOURCE_CONFIG => (
     source_qid      => '|S248|Q36948990',    # 20th century press archives
     source_property => 'P4293',
     source_id       => '|S4293|',
+    default_property_query =>
+      path('/opt/sparql-queries/pm20/property_missing_in_wikidata.rq'),
   }
 );
 
@@ -80,6 +80,7 @@ Readonly my %CONFIG => (
     source     => 'pm20',
     label_type => 'co',
     query => path('/opt/sparql-queries/pm20/companies_missing_in_wikidata.rq'),
+    source_type  => 'zbwext:CompanyFolder',
     source_title => 'pm20Label',
     source_id    => 'pm20Id',
     label        => {
@@ -120,6 +121,7 @@ Readonly my %CONFIG => (
     source     => 'pm20',
     label_type => 'last_first',
     query => path('/opt/sparql-queries/pm20/persons_missing_in_wikidata.rq'),
+    source_type  => 'zbwext:PersonFolder',
     source_title => 'pm20Label',
     source_id    => 'pm20Id',
     label        => {
@@ -132,17 +134,19 @@ Readonly my %CONFIG => (
         value_type => 'item',
       },
       P569 => {
-        var_name   => 'birth',
-        value_type => 'date',
+        var_name        => 'birth',
+        value_type      => 'date',
+        source_property => 'schema:birthDate',
       },
       P570 => {
-        var_name   => 'death',
-        value_type => 'date',
+        var_name        => 'death',
+        source_property => 'schema:deathDate',
+        value_type      => 'date',
       },
       P227 => {
-        var_name   => 'gndId',
-        prop       => 'gndo:identifier',
-        value_type => 'literal',
+        var_name        => 'gndId',
+        value_type      => 'literal',
+        source_property => 'gndo:gndIdentifier',
       },
     },
   },
@@ -167,16 +171,26 @@ if ( $mode eq 'enhance'
 }
 
 # output file derived from query file, plus date for repeated runs
-my ( $query, $outfile );
+my ( $queryfile, $outfile, $query );
 if ( $mode eq 'create' ) {
-  $query   = $config->{query};
-  $outfile = $query->parent->child('results')
-    ->child( $query->basename('.rq') . ".${TODAY}.qs.txt" );
+  $queryfile = $config->{query};
+  $query     = $queryfile->slurp;
+  $outfile   = $queryfile->parent->child('results')
+    ->child( $queryfile->basename('.rq') . ".${TODAY}.qs.txt" );
 } else {
-  $query = $src_cfg->{query} || $DEFAULT_PROPERTY_QUERY;
+  my $prop_cfg = $config->{properties}{$property};
+  if ( $prop_cfg->{query} ) {
+    $queryfile = $prop_cfg->{query};
+    $query     = $queryfile->slurp;
+  } else {
+    $queryfile = $src_cfg->{default_property_query};
+    $query = adapt_default_query( $queryfile->slurp, $property );
+  }
+
   $outfile =
-    $query->parent->child('results')
-    ->child( $property . '_' . $query->basename('.rq') . ".${TODAY}.qs.txt" );
+    $queryfile->parent->child('results')
+    ->child(
+    $property . '_' . $queryfile->basename('.rq') . ".${TODAY}.qs.txt" );
 }
 if ( -f $outfile ) {
   die "Error: $outfile exists\n";
@@ -188,7 +202,7 @@ my $client = REST::Client->new( timeout => 600 );
 # execute the request (may also ask for 'text/csv') and write response to file
 $client->POST(
   $src_cfg->{endpoint},
-  $query->slurp,
+  $query,
   {
     'Content-type' => 'application/sparql-query',
     'Accept'       => 'application/sparql-results+json'
@@ -379,4 +393,19 @@ sub description_from_label {
       print $fh "LAST|Den|\"family\"\n";
     }
   }
+}
+
+sub adapt_default_query {
+  my $query    = shift or die "param missing";
+  my $property = shift or die "param missing";
+
+  my $source_property = $config->{properties}{$property}{source_property};
+
+  # uses string replacement instead of values clause,
+  # because that allows for property paths also
+  $query =~ s/a \?sourceType/a $config->{source_type}/gms;
+  $query =~ s/\?sourceProperty \?value/$source_property \?value/gms;
+  $query =~ s/\?wdProperty \[/wdt:$property \[/gms;
+
+  return $query;
 }
