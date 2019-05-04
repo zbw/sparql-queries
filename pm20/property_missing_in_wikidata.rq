@@ -7,7 +7,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
-select ?qid ?pm20Id ?wdProperty ?value
+select ?qid ?pm20Id ?pm20Label ?wdProperty ?value
 where {
   values ( ?srcType ?srcProperty ?wdProperty ) {
     ( zbwext:PersonFolder gndo:gndIdentifier wdt:P227 )
@@ -16,7 +16,9 @@ where {
   # all pm20 entries with a certain property
   {
     ?pm20 a ?srcType ;
-          ?srcProperty ?value .
+          ?srcProperty ?value ;
+          skos:prefLabel ?pm20LabelLang .
+    bind(str(?pm20LabelLang) as ?pm20Label)
     bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/') as ?pm20Id)
   } minus {
     # minus all WD items for which the property alerady exists
@@ -25,5 +27,8 @@ where {
           ?wdProperty [] .
     }
   }
-  ?pm20 zbwext:wdIdentifier ?qid .
+  graph <http://zbw.eu/beta/wikidata/ng> {
+    ?wd skos:exactMatch ?pm20 .
+    bind(strafter(str(?wd), 'http://www.wikidata.org/entity/')  as ?qid)
+  }
 }

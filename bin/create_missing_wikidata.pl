@@ -148,6 +148,7 @@ Readonly my %CONFIG => (
   },
 );
 
+# evaluate commandline arguments
 my ( $config, $src_cfg );
 my $type     = $ARGV[0];
 my $mode     = $ARGV[1] || 'create';
@@ -172,11 +173,10 @@ if ( $mode eq 'create' ) {
   $outfile = $query->parent->child('results')
     ->child( $query->basename('.rq') . ".${TODAY}.qs.txt" );
 } else {
-  $query = $config->{query};
+  $query = $src_cfg->{query} || $DEFAULT_PROPERTY_QUERY;
   $outfile =
-      $property . '_'
-    . $query->parent->child('results')
-    ->child( $query->basename('.rq') . ".${TODAY}.qs.txt" );
+    $query->parent->child('results')
+    ->child( $property . '_' . $query->basename('.rq') . ".${TODAY}.qs.txt" );
 }
 if ( -f $outfile ) {
   die "Error: $outfile exists\n";
@@ -215,66 +215,86 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
   # set record specific reference statement
   my $reference_statement =
       $src_cfg->{source_qid}
-    . $NAMED_AS
-    . quote( $entry->{ $config->{source_title} }{value}, 'de' )
     . $src_cfg->{source_id}
     . quote( $entry->{ $config->{source_id} }{value} )
+    . $NAMED_AS
+    . quote( $entry->{ $config->{source_title} }{value} )
     . $RETRIEVED;
 
-  # new item
-  ##warn Dumper $entry;
-  print $fh "\nCREATE\n";
+  if ( $mode eq 'create' ) {
 
-  # output fields
-  foreach my $field (qw/ label descr alias /) {
-    ##warn "  $field\n";
-    next unless $config->{$field};
-    my $abbrev = uc( substr( $field, 0, 1 ) );
-    foreach my $lang (@LANGUAGES) {
-      my $value = $entry->{ $config->{$field}{$lang} }{value};
+    # new item
+    print $fh "\nCREATE\n";
 
-      # transform label according to Wikidata rules
-      if ( $field eq 'label' ) {
-        $value = adjust_label( $value, $config->{label_type} );
+    # output fields
+    foreach my $field (qw/ label descr alias /) {
+      ##warn "  $field\n";
+      next unless $config->{$field};
+      my $abbrev = uc( substr( $field, 0, 1 ) );
+      foreach my $lang (@LANGUAGES) {
+        my $value = $entry->{ $config->{$field}{$lang} }{value};
+
+        # transform label according to Wikidata rules
+        if ( $field eq 'label' ) {
+          $value = adjust_label( $value, $config->{label_type} );
+        }
+        print $fh "LAST|$abbrev$lang|" . quote($value) . "\n";
       }
-      print $fh "LAST|$abbrev$lang|" . quote($value) . "\n";
+
+      # special case gnd-like labels with qualifiers
+      if ( $config->{label_type} eq 'last_first' ) {
+        description_from_label($entry);
+      }
     }
 
-    # special case gnd-like labels with qualifiers
-    if ( $config->{label_type} eq 'last_first' ) {
-      description_from_label($entry);
+    # output source property (without reference)
+    print $fh 'LAST|'
+      . $src_cfg->{source_property} . '|'
+      . quote( $entry->{ $config->{source_id} }{value} ) . "\n";
+
+    # output properties
+    foreach my $property ( keys $config->{properties} ) {
+      my $prop_cfg = $config->{properties}{$property};
+      next unless $entry->{ $prop_cfg->{var_name} };
+      my $value = $entry->{ $prop_cfg->{var_name} }{value};
+      next unless $value;
+
+      print $fh 'LAST|'
+        . $property . '|'
+        . prepare_value( $property, $value )
+        . $reference_statement . "\n";
     }
-  }
+  } else {
 
-  # output source property (without reference)
-  print $fh 'LAST|'
-    . $src_cfg->{source_property} . '|'
-    . quote( $entry->{ $config->{source_id} }{value} ) . "\n";
-
-  # output properties
-  foreach my $property ( keys $config->{properties} ) {
-    my $prop_cfg = $config->{properties}{$property};
-    next unless $entry->{ $prop_cfg->{var_name} };
-    my $value = $entry->{ $prop_cfg->{var_name} }{value};
-    next unless $value;
-
-    if ( $prop_cfg->{value_type} eq 'item' ) {
-      ## use unquoted value
-    } elsif ( $prop_cfg->{value_type} eq 'literal' ) {
-      $value = quote($value);
-    } elsif ( $prop_cfg->{value_type} eq 'date' ) {
-      $value = format_date($value);
-    } elsif ( $prop_cfg->{value_type} eq 'monolingual-text' ) {
-      $value = quote( $value, $prop_cfg->{lang} );
-    } else {
-      die 'Error: Unknown value_type [' . $prop_cfg->{value_type} . "]\n";
-    }
-    print $fh 'LAST|' . $property . '|' . $value . $reference_statement . "\n";
+    # only one property - query has to use fixed variable names
+    print $fh $entry->{qid}{value} . '|'
+      . $property . '|'
+      . prepare_value( $property, $entry->{value}{value} )
+      . $reference_statement . "\n";
   }
 }
 print "$count statements written to $outfile\n";
 
 #####################
+
+sub prepare_value {
+  my $property = shift or confess "param missing";
+  my $value    = shift or confess "param missing";
+
+  my $value_type = $config->{properties}{$property}{value_type};
+  if ( $value_type eq 'item' ) {
+    ## use unquoted value
+  } elsif ( $value_type eq 'literal' ) {
+    $value = quote($value);
+  } elsif ( $value_type eq 'date' ) {
+    $value = format_date($value);
+  } elsif ( $value_type eq 'monolingual-text' ) {
+    $value = quote( $value, $config->{properties}{$property}{lang} );
+  } else {
+    die "Error: Unknown value_type [$value_type]\n";
+  }
+  return $value;
+}
 
 sub quote {
   my $text = shift or confess "param missing";
