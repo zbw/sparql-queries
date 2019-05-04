@@ -28,7 +28,8 @@ where {
   # only if folder has documents
   filter(?docCount > 0)
   #
-  bind('Q5' as ?classQid)
+  # may include families
+  bind(if(contains(str(?pm20Label), '<Familie>'), 'Q8436','Q5') as ?classQid)
   #
   optional {
     ?pm20 gndo:gndIdentifier ?gndId .
