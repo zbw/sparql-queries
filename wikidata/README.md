@@ -21,12 +21,22 @@ Query | Description
 [pm20_economists](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_economists.rq) | Show pm20 folders for persons of a certain occupation
 [all_subclasses](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/all_subclasses.rq) | Get all subclasses of a Wikidata class
 
+#### Queries re. PM20
+
+Query | Description
+------|------------
+[pm20_folder_mapping](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_folder_mapping.rq) | Wikidata items with linked PM20 folders
+[pm20_references](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_references.rq) | Properties with reference from PM20
+[missing_pm20_id_via_gnd](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/missing_pm20_id_via_gnd.rq) | Get missing PM20 IDs for WD items with known GND ID
+[missing_class_via_pm20](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/missing_class_via_pm20.rq) | Get missing class for WD items from PM20 organizations
+[pm20_folder_doc_counts](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_folder_doc_counts.rq) | Get document counts (free and total) for folders connected to WD items
+[pm20_folder_names](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_folder_names.rq) | Get folder names for folders connected to WD items
+
 
 ### "Power queries"
 
-Due to limitations of the public Wikidata endpoint (in particular timeouts,
-and the preclusion of the "service" clause for federated queries), the
-following queries do not work there and require a "private" endpoint.
+Due to limitations of the public Wikidata endpoint (in particular timeouts),
+the following queries do not work there and require a "private" endpoint.
 Therefore, links to __cached result files__ has been added.
 
 #### re. persons/economists
@@ -60,9 +70,6 @@ Query | Description
 ------|------------
 [search_corp_by_pm20_names](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_corp_by_pm20_names.rq) | Search a PM20 company by all preferred and alternate labels (rank by calculated total score)
 [search_person_by_pm20_names](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_person_by_pm20_names.rq) | Search a PM20 person by all preferred and alternate labels (rank by calculated total score)
-[missing_pm20_id_via_gnd](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/missing_pm20_id_via_gnd.rq) | Get missing PM20 IDs for WD items with known GND ID
-[missing_class_via_pm20](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/missing_class_via_pm20.rq) | Get missing class for WD items from PM20 organizations
-[pm20_references](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_references.rq) | Properties with reference from PM20
 
 
 ### Documentation

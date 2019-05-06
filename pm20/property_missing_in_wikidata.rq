@@ -1,0 +1,34 @@
+# Extract information for creating missing properties in Wikidata
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX schema: <http://schema.org/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+#
+select ?qid ?pm20Id ?pm20Label ?wdProperty ?value
+where {
+  values ( ?sourceType ?sourceProperty ?wdProperty ) {
+    ( zbwext:PersonFolder gndo:gndIdentifier wdt:P227 )
+  }
+  #
+  # all pm20 entries with a certain property
+  {
+    ?pm20 a ?sourceType ;
+          ?sourceProperty ?value ;
+          skos:prefLabel ?pm20LabelLang .
+    bind(str(?pm20LabelLang) as ?pm20Label)
+    bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/') as ?pm20Id)
+  } minus {
+    # minus all WD items for which the property alerady exists
+    service <https://query.wikidata.org/sparql> {
+      ?wd wdt:P4293 ?pm20Id ;
+          ?wdProperty [] .
+    }
+  }
+  graph <http://zbw.eu/beta/wikidata/ng> {
+    ?wd skos:exactMatch ?pm20 .
+    bind(strafter(str(?wd), 'http://www.wikidata.org/entity/')  as ?qid)
+  }
+}

@@ -1,0 +1,59 @@
+# Get missing document counts (free and total) for folders connected to WD items
+#
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?qsStatement ?item ?itemLabel ?pm20 (?pm20Id as ?pm20Label) ?numberWorks ?accessibleOnline
+where {
+  hint:Query hint:optimizer "None" .
+  ?item p:P4293 ?statement .
+  ?statement ps:P4293 ?pm20Id .
+  filter(isLiteral(?pm20Id))
+  #
+  # skip all items where one of the counts already exists
+  filter(not exists {
+      ?statement (pq:P3740 | pq:5592) [] .
+    })
+  bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
+  #
+  # WD label
+  optional {
+    ?item rdfs:label ?itemLabelEn .
+    filter(lang(?itemLabelEn) = 'en')
+  }
+  optional {
+    ?item rdfs:label ?itemLabelDe .
+    filter(lang(?itemLabelDe) = 'de')
+  }
+  bind(str(coalesce(?itemLabelEn, ?itemLabelDe, strafter(str(?item), '/entity/'))) as ?itemLabel)
+  #
+  # get counts from PM20 endpoint
+  service <http://zbw.eu/beta/sparql/pm20/query> {
+    #
+    # get the document counts if available, set if not
+    optional {
+      ?pm20 zbwext:totalDocCount ?total .
+    }
+    optional {
+      ?pm20 zbwext:freeDocCount ?free .
+    }
+    # If a person folder was created after 1948, no content at all is online.
+    # Therefore we can conclude that the number of accessible documents is 0.
+    # We don't know how many documents exist on paper or microfilm,
+    # so the total number of documents is unknown (somevalue).
+    bind(if(bound(?free), str(?free), '0') as ?accessibleOnline)
+    bind(if(bound(?total), str(?total), 'somevalue') as ?numberWorks)
+  }
+  #
+  # QS statement
+  bind(concat(strafter(str(?item), '/entity/'),'|P4293|"', ?pm20Id,
+      '"|P3740|', ?numberWorks, '|P5592|', ?accessibleOnline) as ?qsStatement)
+}
+

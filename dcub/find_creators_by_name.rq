@@ -1,0 +1,18 @@
+# all persons named "Fischer, Peter"
+#
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select (count(distinct ?pub) as ?count) ?actor
+where {
+  graph <http://zbw.eu/beta/gnd/ng> {
+    ?actor gndo:preferredNameForThePerson "Fischer, Peter" .
+  }
+  graph <http://zbw.eu/beta/ebds/ng> {
+    ?pub dcterms:creator ?actor .
+  }
+}
+group by ?actor
+order by desc(?count)
