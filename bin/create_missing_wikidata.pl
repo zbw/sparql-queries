@@ -128,6 +128,10 @@ Readonly my %CONFIG => (
       de => 'pm20Label',
       en => 'pm20Label',
     },
+    descr => {
+      de => 'descrDe',
+      en => 'descrEn',
+    },
     properties => {
       P31 => {
         var_name   => 'classQid',
@@ -247,17 +251,13 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
       my $abbrev = uc( substr( $field, 0, 1 ) );
       foreach my $lang (@LANGUAGES) {
         my $value = $entry->{ $config->{$field}{$lang} }{value};
+        next unless $value;
 
         # transform label according to Wikidata rules
         if ( $field eq 'label' ) {
           $value = adjust_label( $value, $config->{label_type} );
         }
         print $fh "LAST|$abbrev$lang|" . quote($value) . "\n";
-      }
-
-      # special case gnd-like labels with qualifiers
-      if ( $config->{label_type} eq 'last_first' ) {
-        description_from_label($entry);
       }
     }
 
@@ -382,17 +382,6 @@ sub adjust_label {
     $label =~ s/(.*) Co\.,$/$1/g;
   }
   return $label;
-}
-
-sub description_from_label {
-  my $entry = shift or confess "param missing";
-
-  if ( $entry->{ $config->{label}{de} }{value} =~ m/ <(.*?)>$/ ) {
-    print $fh "LAST|Dde|" . quote($1) . "\n";
-    if ( $1 eq "Familie" ) {
-      print $fh "LAST|Den|\"family\"\n";
-    }
-  }
 }
 
 sub adapt_default_query {

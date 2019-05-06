@@ -7,7 +7,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
-select ?pm20 ?pm20Label ?pm20Id ?classQid ?gndId
+select ?pm20 ?pm20Label ?descrDe ?descrEn ?pm20Id ?classQid ?gndId
 where {
   #
   # determine for which entries we want to create items
@@ -28,8 +28,14 @@ where {
   # only if folder has documents
   filter(?docCount > 0)
   #
-  # may include families
+  # Wikidata class - may be family
   bind(if(contains(str(?pm20Label), '<Familie>'), 'Q8436','Q5') as ?classQid)
+  #
+  # description
+  optional {
+    ?pm20 schema:hasOccupation ?descrDe .
+  }
+  bind(if(contains(str(?pm20Label), '<Familie>'), 'family','') as ?descrEn)
   #
   optional {
     ?pm20 gndo:gndIdentifier ?gndId .
