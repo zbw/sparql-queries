@@ -144,8 +144,8 @@ Readonly my %CONFIG => (
       },
       P570 => {
         var_name        => 'death',
-        source_property => 'schema:deathDate',
         value_type      => 'date',
+        source_property => 'schema:deathDate',
       },
       P227 => {
         var_name        => 'gndId',

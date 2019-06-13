@@ -7,7 +7,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
 #
-select ?pm20 ?pm20Label ?descrDe ?descrEn ?pm20Id ?classQid ?gndId
+select ?pm20 ?pm20Label ?descrDe ?descrEn ?pm20Id ?classQid ?gndId ?birth ?death
 where {
   #
   # determine for which entries we want to create items
@@ -39,6 +39,15 @@ where {
   #
   optional {
     ?pm20 gndo:gndIdentifier ?gndId .
+  }
+  # birth/death (only if not familly)
+  optional {
+    ?pm20 schema:birthDate ?birth .
+    filter(!contains(?pm20Label, '<Familie>'))
+  }
+  optional {
+    ?pm20 schema:deathDate ?death .
+    filter(!contains(?pm20Label, '<Familie>'))
   }
 }
 
