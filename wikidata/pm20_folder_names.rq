@@ -14,6 +14,7 @@ select ?qsStatement ?item ?itemLabel ?pm20 (?prefLabel as ?pm20Label)
 where {
   values ( ?type ) {
     ( 'sh' )
+    ( 'wa' )
   }
   ?item p:P4293 ?statement .
   ?statement ps:P4293 ?pm20Id .
