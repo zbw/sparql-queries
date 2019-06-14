@@ -152,6 +152,11 @@ Readonly my %CONFIG => (
         value_type      => 'literal',
         source_property => 'gndo:gndIdentifier',
       },
+      P106 => {
+        query => path('/opt/sparql-queries/pm20/wd_occupation_economist.rq'),
+        var_name => 'occupationQid',
+        value_type => 'item',
+      },
     },
   },
 );

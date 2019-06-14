@@ -1,0 +1,36 @@
+# Extract information about occupations in WD in Wikidata
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX schema: <http://schema.org/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+#
+select distinct ?qid (?occupationQid as ?value) ?pm20 ?pm20Label ?pm20Id ?activity ?docCount
+where {
+  #
+  values ( ?activity ?occupationQid ) {
+    ( 'Wirtschaftswissenschaft' 'Q188094' )
+    ( 'Betriebswirtschaftslehre' 'Q1860032' )
+  }
+  service <https://query.wikidata.org/sparql> {
+    bind(uri(concat(str(wd:), ?occupationQid)) as ?occupation)
+    ?wd wdt:P4293 ?pm20Id ;
+        wdt:P31 wd:Q5 .
+    filter (not exists {
+        ?wd wdt:P106 ?occupation .
+      }
+    )
+    bind(strafter(str(?wd), str(wd:)) as ?qid)
+  }
+  bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
+  ?pm20 a zbwext:PersonFolder ;
+        skos:prefLabel ?pm20Label ;
+        zbwext:activity/schema:about ?activity .
+  optional {
+    ?pm20 zbwext:freeDocCount ?docCount .
+  }
+  # apply further restrictions:
+  # only if folder has documents
+  ###filter(?docCount > 0)
+}
