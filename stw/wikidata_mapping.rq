@@ -36,6 +36,7 @@ where {
       ?wd rdfs:label ?wdLabelEn .
       filter(lang(?wdLabelEn) = 'en')
     }
+    #bind(concat(if(bound(?wdLabelEn), str(?wdLabelEn), ''), ' | ', if(bound(?wdLabelDe), str(?wdLabelDe), '')) as ?wdLabel)
     bind(concat(if(bound(?wdLabelDe), str(?wdLabelDe), ''), ' | ', if(bound(?wdLabelEn), str(?wdLabelEn), '')) as ?wdLabel)
   }
   # look up STW descriptors and labels
