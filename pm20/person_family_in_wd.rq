@@ -1,0 +1,27 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX gnd: <http://d-nb.info/gnd/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+#
+SELECT ?wdfamily ?wdperson
+WHERE {  
+  ?pm20family a gndo:Family ;
+              dct:identifier ?pm20familyId ;
+              dct:hasPart ?pm20person .
+  service <https://query.wikidata.org/sparql> {
+    ?wdfamily wdt:P4293 ?pm20familyId .
+  }
+  bind(strafter(str(?pm20person), 'http://purl.org/pressemappe20/folder/') as ?pm20personId)
+  service <https://query.wikidata.org/sparql> {
+    ?wdperson wdt:P31 wd:Q5 ;
+              wdt:P4293 ?pm20personId .
+    filter(not exists {
+        ?wdperson wdt:P53 [] .
+      }
+    )
+  }
+}
