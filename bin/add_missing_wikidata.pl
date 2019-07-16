@@ -159,8 +159,8 @@ Readonly my %CONFIG => (
       },
       P53 => {
         query      => path('/opt/sparql-queries/pm20/wd_person_family.rq'),
-        qid        => 'wdperson',
-        var_name   => 'wdfamily',
+        qid        => 'wdpersonQid',
+        var_name   => 'wdfamilyQid',
         value_type => 'item',
       },
     },

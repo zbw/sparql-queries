@@ -8,7 +8,7 @@ PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select ?wdfamily ?wdperson (?pm20familyId as ?pm20Id) ?pm20Label
+select ?wdfamilyQid ?wdpersonQid (?pm20familyId as ?pm20Id) ?pm20Label
 where {
   ?pm20family a gndo:Family ;
               dct:identifier ?pm20familyId ;
@@ -26,4 +26,6 @@ where {
       }
     )
   }
+  bind(strafter(str(?wdfamily), str(wd:)) as ?wdfamilyQid)
+  bind(strafter(str(?wdperson), str(wd:)) as ?wdpersonQid)
 }
