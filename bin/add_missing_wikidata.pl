@@ -153,8 +153,14 @@ Readonly my %CONFIG => (
         source_property => 'gndo:gndIdentifier',
       },
       P106 => {
-        query => path('/opt/sparql-queries/pm20/wd_occupation_economist.rq'),
+        query    => path('/opt/sparql-queries/pm20/wd_occupation_economist.rq'),
         var_name => 'occupationQid',
+        value_type => 'item',
+      },
+      P53 => {
+        query      => path('/opt/sparql-queries/pm20/wd_person_family.rq'),
+        qid        => 'wdperson',
+        var_name   => 'wdfamily',
         value_type => 'item',
       },
     },
@@ -236,12 +242,14 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
   last if $count > $LIMIT;
 
   # set record specific reference statement
+  my $entry_source_id    = quote( $entry->{ $config->{source_id} }{value} );
+  my $entry_source_title = quote( $entry->{ $config->{source_title} }{value} );
   my $reference_statement =
       $src_cfg->{source_qid}
     . $src_cfg->{source_id}
-    . quote( $entry->{ $config->{source_id} }{value} )
+    . $entry_source_id
     . $NAMED_AS
-    . quote( $entry->{ $config->{source_title} }{value} )
+    . $entry_source_title
     . $RETRIEVED;
 
   if ( $mode eq 'create' ) {
@@ -285,10 +293,12 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
     }
   } else {
 
-    # only one property - query has to use fixed variable names
-    print $fh $entry->{qid}{value} . '|'
+    # only one property
+    my $qid   = $config->{properties}{$property}{qid}      || 'qid';
+    my $value = $config->{properties}{$property}{var_name} || 'value';
+    print $fh $entry->{$qid}{value} . '|'
       . $property . '|'
-      . prepare_value( $property, $entry->{value}{value} )
+      . prepare_value( $property, $entry->{$value}{value} )
       . $reference_statement . "\n";
   }
 }
