@@ -6,11 +6,13 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX gnd: <http://d-nb.info/gnd/>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-SELECT ?wdfamily ?wdperson
-WHERE {  
+select ?wdfamily ?wdperson (?pm20familyId as ?pm20Id) ?pm20Label
+where {
   ?pm20family a gndo:Family ;
               dct:identifier ?pm20familyId ;
+              skos:prefLabel ?pm20Label ;
               dct:hasPart ?pm20person .
   service <https://query.wikidata.org/sparql> {
     ?wdfamily wdt:P4293 ?pm20familyId .
