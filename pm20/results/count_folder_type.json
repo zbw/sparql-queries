@@ -8,19 +8,19 @@
         "type": { "type": "literal" , "value": "co" } ,
         "totalCount": { "type": "literal" , "value": "42256" } ,
         "withDocs": { "type": "literal" , "value": "8285" } ,
-        "withWd": { "type": "literal" , "value": "2398" } ,
-        "withWdAndDocs": { "type": "literal" , "value": "1803" } ,
+        "withWd": { "type": "literal" , "value": "2401" } ,
+        "withWdAndDocs": { "type": "literal" , "value": "1806" } ,
         "percentage": { "type": "literal" , "value": "21.8 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2019-08-05 || 42256 || 8285 || 2398 || 1803 || 21.8 %" }
+        "statsLine": { "type": "literal" , "value": "| 2019-08-06 || 42256 || 8285 || 2401 || 1806 || 21.8 %" }
       } ,
       {
         "type": { "type": "literal" , "value": "pe" } ,
         "totalCount": { "type": "literal" , "value": "18582" } ,
         "withDocs": { "type": "literal" , "value": "5266" } ,
-        "withWd": { "type": "literal" , "value": "9469" } ,
+        "withWd": { "type": "literal" , "value": "9470" } ,
         "withWdAndDocs": { "type": "literal" , "value": "5266" } ,
         "percentage": { "type": "literal" , "value": "100.0 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2019-08-05 || 18582 || 5266 || 9469 || 5266 || 100.0 %" }
+        "statsLine": { "type": "literal" , "value": "| 2019-08-06 || 18582 || 5266 || 9470 || 5266 || 100.0 %" }
       } ,
       {
         "type": { "type": "literal" , "value": "sh" } ,
@@ -29,7 +29,7 @@
         "withWd": { "type": "literal" , "value": "37" } ,
         "withWdAndDocs": { "type": "literal" , "value": "37" } ,
         "percentage": { "type": "literal" , "value": "0.4 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2019-08-05 || 9204 || 9048 || 37 || 37 || 0.4 %" }
+        "statsLine": { "type": "literal" , "value": "| 2019-08-06 || 9204 || 9048 || 37 || 37 || 0.4 %" }
       } ,
       {
         "type": { "type": "literal" , "value": "wa" } ,
@@ -38,7 +38,7 @@
         "withWd": { "type": "literal" , "value": "8" } ,
         "withWdAndDocs": { "type": "literal" , "value": "8" } ,
         "percentage": { "type": "literal" , "value": "0.3 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2019-08-05 || 2891 || 2890 || 8 || 8 || 0.3 %" }
+        "statsLine": { "type": "literal" , "value": "| 2019-08-06 || 2891 || 2890 || 8 || 8 || 0.3 %" }
       }
     ]
   }
