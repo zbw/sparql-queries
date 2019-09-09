@@ -12,9 +12,13 @@ where {
   values ( ?activity ?occupationQid ) {
     ( 'Wirtschaftswissenschaft' 'Q188094' )
     ( 'Betriebswirtschaftslehre' 'Q1860032' )
+    ( 'Sozialwissenschaften' 'Q15319501' )
+    ( 'Geowissenschaften' 'Q11424604' )
   }
+  # in WDQS
   service <https://query.wikidata.org/sparql> {
     bind(uri(concat(str(wd:), ?occupationQid)) as ?occupation)
+    # all Wikidata items with PM20 id
     ?wd wdt:P4293 ?pm20Id ;
         wdt:P31 wd:Q5 .
     filter (not exists {
@@ -23,6 +27,7 @@ where {
     )
     bind(strafter(str(?wd), str(wd:)) as ?qid)
   }
+  # in custom SPARQL endpoint
   bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
   ?pm20 a zbwext:PersonFolder ;
         skos:prefLabel ?pm20Label ;
