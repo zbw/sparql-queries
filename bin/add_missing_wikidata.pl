@@ -70,6 +70,7 @@ Readonly my %CONFIG => (
         value_type => 'date',
       },
       P106 => {
+        query    => path('/opt/sparql-queries/gnd/wd_occupation_economist.rq'),
         var_name   => 'occupationQid',
         value_type => 'item',
       },

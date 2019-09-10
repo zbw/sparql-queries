@@ -1,0 +1,39 @@
+# Extract information about occupations from GND for Wikidata
+#
+PREFIX gndo:  <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gnd:  <http://d-nb.info/gnd/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+#
+select distinct ?qid ?occupationQid ?gnd ?gndLabel ?gndId
+where {
+  #
+  # occupation IDs in GND and Wikidata
+  values ( ?occupationGndId ?occupationQid ) {
+    ( '4066533-1' 'Q188094' ) # economist
+  }
+  bind(uri(concat(str(gnd:), ?occupationGndId)) as ?occupationGnd)
+  bind(uri(concat(str(wd:), ?occupationQid)) as ?occupationWd)
+  #
+  # reach out to Wikidata endpoint and get all Wikidata items
+  # with GND that are humans w/o known occupation
+  service <https://query.wikidata.org/sparql> {
+    ?wd wdt:P227 ?gndId ;
+        wdt:P31 wd:Q5 .
+    filter (not exists {
+        ?wd wdt:P106 ?occupationWd .
+      }
+    )
+    # remove results with blank nodes ('unknown value')
+    # (otherwise result set on GND side is exploding)
+    filter(isLiteral(?gndId))
+    bind(strafter(str(?wd), str(wd:)) as ?qid)
+  }
+  #
+  # back on GND endpoint, ask for the occupation
+  bind(uri(concat(str(gnd:), ?gndId)) as ?gnd)
+  ?gnd gndo:professionOrOccupation ?occupationGnd ;
+       gndo:preferredNameForThePerson ?gndLabel .
+}
+
