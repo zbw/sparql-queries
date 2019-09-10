@@ -1,0 +1,32 @@
+# GND economists w/o occupation in WD
+#
+PREFIX gndo:  <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gnd:  <http://d-nb.info/gnd/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+select ?qid ?occupationQid ?gndId
+where {
+  # with query optimizer activated, query times out ...
+  hint:Query hint:optimizer "None" .
+  # intialize 
+  bind('Q188094' as ?occupationQid)
+  bind(uri(concat(str(wd:), ?occupationQid)) as ?occupation)
+  #
+  # reach out to GND endpoint
+  service <http://zbw.eu/beta/sparql/gnd/query> {
+    # GND entries with profession "economist"
+    ?gnd gndo:professionOrOccupation gnd:4066533-1 .
+    bind (strafter(str(?gnd), str(gnd:)) as ?gndId) .
+  }
+  # back at Wikidata endpoint
+  # get items with one of the GND IDs
+  ?item wdt:P227 ?gndId .
+  # ... without occupaton "economist"
+  filter( not exists {
+    ?item wdt:P106 ?occupation .
+  })
+  bind(strafter(str(?item), str(wd:)) as ?qid)
+}
+
