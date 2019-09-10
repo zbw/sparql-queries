@@ -10,22 +10,28 @@ select ?qid ?occupationQid ?gndId
 where {
   # with query optimizer activated, query times out ...
   hint:Query hint:optimizer "None" .
-  # intialize 
-  bind('Q188094' as ?occupationQid)
-  bind(uri(concat(str(wd:), ?occupationQid)) as ?occupation)
+  #
+  # occupation IDs in GND and Wikidata
+  values ( ?occupationGndId ?occupationQid ) {
+    ( '4066533-1' 'Q188094' ) # economist
+  }
+  bind(uri(concat(str(gnd:), ?occupationGndId)) as ?occupationGnd)
+  bind(uri(concat(str(wd:), ?occupationQid)) as ?occupationWd)
   #
   # reach out to GND endpoint
   service <http://zbw.eu/beta/sparql/gnd/query> {
     # GND entries with profession "economist"
-    ?gnd gndo:professionOrOccupation gnd:4066533-1 .
+    ?gnd gndo:professionOrOccupation ?occupationGnd .
     bind (strafter(str(?gnd), str(gnd:)) as ?gndId) .
+    filter(isLiteral(?gndId))
   }
   # back at Wikidata endpoint
-  # get items with one of the GND IDs
-  ?item wdt:P227 ?gndId .
-  # ... without occupaton "economist"
+  # get items for humans with one of the GND IDs
+  ?item wdt:P227 ?gndId ;
+        wdt:P31 wd:Q5 .
+  # ... which not already have that occupation
   filter( not exists {
-    ?item wdt:P106 ?occupation .
+    ?item wdt:P106 ?occupationWd .
   })
   bind(strafter(str(?item), str(wd:)) as ?qid)
 }
