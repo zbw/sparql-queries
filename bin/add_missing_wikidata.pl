@@ -297,6 +297,7 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
     # only one property
     my $qid   = $config->{properties}{$property}{qid}      || 'qid';
     my $value = $config->{properties}{$property}{var_name} || 'value';
+print Dumper $entry;
     print $fh $entry->{$qid}{value} . '|'
       . $property . '|'
       . prepare_value( $property, $entry->{$value}{value} )

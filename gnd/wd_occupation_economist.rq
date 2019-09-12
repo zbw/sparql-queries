@@ -14,8 +14,9 @@ where {
   service <https://query.wikidata.org/sparql> {
     ?wd wdt:P227 ?gndId ;
         wdt:P31 wd:Q5 .
-    # economist in Wikidata
-    bind(uri(concat(str(wd:), 'Q188094' )) as ?occupationWd)
+    # economist id in Wikidata
+    bind('Q188094' as ?occupationQid)
+    bind(uri(concat(str(wd:), ?occupationQid )) as ?occupationWd)
     filter (not exists {
         ?wd wdt:P106 ?occupationWd .
       }
@@ -28,8 +29,9 @@ where {
   #
   # back on GND endpoint, ask for the occupation
   bind(uri(concat(str(gnd:), ?gndId)) as ?gnd)
-  # economist in GND
-  bind(uri(concat(str(gnd:), '4066533-1')) as ?occupationGnd)
+  # economist id in GND
+  bind('4066533-1' as ?occupationGndId)
+  bind(uri(concat(str(gnd:), ?occupationGndId )) as ?occupationGnd)
   ?gnd gndo:professionOrOccupation ?occupationGnd ;
        gndo:preferredNameForThePerson ?gndLabel .
 }
