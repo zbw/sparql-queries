@@ -71,7 +71,7 @@ Readonly my %CONFIG => (
       },
       P106 => {
         query    => path('/opt/sparql-queries/gnd/wd_occupation_economist.rq'),
-        var_name   => 'occupationQid',
+        var_name => 'occupationQid',
         value_type => 'item',
       },
     },
@@ -114,6 +114,18 @@ Readonly my %CONFIG => (
       P227 => {
         var_name   => 'gndId',
         value_type => 'literal',
+      },
+      P112 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_person.rq'),
+        var_name => 'founderQid',
+        value_type => 'item',
+      },
+      P3320 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_person.rq'),
+        var_name => 'boardQid',
+        value_type => 'item',
       },
     },
   },
@@ -187,6 +199,7 @@ if ( $mode eq 'enhance'
 }
 
 # output file derived from query file, plus date for repeated runs
+my $prop_cfg = $config->{properties}{$property};
 my ( $queryfile, $outfile, $query );
 if ( $mode eq 'create' ) {
   $queryfile = $config->{query};
@@ -194,7 +207,6 @@ if ( $mode eq 'create' ) {
   $outfile   = $queryfile->parent->child('results')
     ->child( $queryfile->basename('.rq') . ".${TODAY}.qs.txt" );
 } else {
-  my $prop_cfg = $config->{properties}{$property};
   if ( $prop_cfg->{query} ) {
     $queryfile = $prop_cfg->{query};
     $query     = $queryfile->slurp;
@@ -215,9 +227,13 @@ if ( -f $outfile ) {
 # initialize rest client
 my $client = REST::Client->new( timeout => 600 );
 
+# endpoint depends on source, yet may be overridden for certain properties
+# (federated queries)
+my $endpoint = $prop_cfg->{endpoint} || $src_cfg->{endpoint};
+
 # execute the request (may also ask for 'text/csv') and write response to file
 $client->POST(
-  $src_cfg->{endpoint},
+  $endpoint,
   $query,
   {
     'Content-type' => 'application/sparql-query',
@@ -236,11 +252,6 @@ if ($@) {
 my $count = 0;
 my $fh    = $outfile->openw_utf8;
 foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
-
-  # Limit the numer of results
-  # (data checking required)
-  $count++;
-  last if $count > $LIMIT;
 
   # set record specific reference statement
   my $entry_source_id    = quote( $entry->{ $config->{source_id} }{value} );
@@ -297,13 +308,20 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
     # only one property
     my $qid   = $config->{properties}{$property}{qid}      || 'qid';
     my $value = $config->{properties}{$property}{var_name} || 'value';
+    next if $entry->{$value}{value} eq '';
 print Dumper $entry;
     print $fh $entry->{$qid}{value} . '|'
       . $property . '|'
       . prepare_value( $property, $entry->{$value}{value} )
       . $reference_statement . "\n";
   }
+  #
+  # Limit the numer of results
+  # (data checking required)
+  $count++;
+  last if $count >= $LIMIT;
 }
+
 print "$count statements written to $outfile\n";
 
 #####################
