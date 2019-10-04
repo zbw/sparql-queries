@@ -9,16 +9,20 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 select distinct ?qid ?occupationQid ?gnd ?gndLabel ?gndId
 where {
   #
+  # occupation IDs in GND and Wikidata
+  values ( ?occupationGndId ?occupationQid ) {
+    ( '4066533-1' 'Q188094' ) # economist
+  }
+  bind(uri(concat(str(gnd:), ?occupationGndId)) as ?occupationGnd)
+  #
   # reach out to Wikidata endpoint and get all Wikidata items
   # with GND that are humans w/o known occupation
   service <https://query.wikidata.org/sparql> {
     ?wd wdt:P227 ?gndId ;
         wdt:P31 wd:Q5 .
-    # economist id in Wikidata
-    bind('Q188094' as ?occupationQid)
-    bind(uri(concat(str(wd:), ?occupationQid )) as ?occupationWd)
     filter (not exists {
-        ?wd wdt:P106 ?occupationWd .
+        # binding for ?occupationQid is out of scope here!
+        ?wd wdt:P106 <http://www.wikidata.org/entity/Q188094> .
       }
     )
     # remove results with blank nodes ('unknown value')
@@ -29,9 +33,7 @@ where {
   #
   # back on GND endpoint, ask for the occupation
   bind(uri(concat(str(gnd:), ?gndId)) as ?gnd)
-  # economist id in GND
-  bind('4066533-1' as ?occupationGndId)
-  bind(uri(concat(str(gnd:), ?occupationGndId )) as ?occupationGnd)
+  #
   ?gnd gndo:professionOrOccupation ?occupationGnd ;
        gndo:preferredNameForThePerson ?gndLabel .
 }

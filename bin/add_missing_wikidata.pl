@@ -126,6 +126,32 @@ Readonly my %CONFIG => (
         query    => path('/opt/sparql-queries/wikidata/pm20_company_person.rq'),
         var_name => 'boardQid',
         value_type => 'item',
+        qualifiers => {
+          P580 => {
+            var_name   => 'from',
+            value_type => 'date',
+          },
+          P582 => {
+            var_name   => 'to',
+            value_type => 'date',
+          },
+        },
+      },
+      P5052 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_person.rq'),
+        var_name => 'advisoryQid',
+        value_type => 'item',
+        qualifiers => {
+          P580 => {
+            var_name   => 'from',
+            value_type => 'date',
+          },
+          P582 => {
+            var_name   => 'to',
+            value_type => 'date',
+          },
+        },
       },
     },
   },
@@ -295,27 +321,36 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
     foreach my $property ( keys $config->{properties} ) {
       my $prop_cfg = $config->{properties}{$property};
       next unless $entry->{ $prop_cfg->{var_name} };
-      my $value = $entry->{ $prop_cfg->{var_name} }{value};
+      my $value_type = $prop_cfg->{value_type};
+      my $value      = $entry->{ $prop_cfg->{var_name} }{value};
       next unless $value;
 
       print $fh 'LAST|'
         . $property . '|'
-        . prepare_value( $property, $value )
+        . prepare_value( $value_type, $value )
         . $reference_statement . "\n";
     }
   } else {
 
     # only one property
-    my $qid   = $config->{properties}{$property}{qid}      || 'qid';
-    my $value = $config->{properties}{$property}{var_name} || 'value';
-    next if $entry->{$value}{value} eq '';
-print Dumper $entry;
+    my $qid        = $config->{properties}{$property}{qid} || 'qid';
+    my $value_type = $prop_cfg->{value_type};
+    my $value      = $entry->{ $prop_cfg->{var_name} }{value};
+    next if $value eq '';
+
+    # add optional qualifier statements
+    my $qualifier_statements =
+      $prop_cfg->{qualifiers}
+      ? get_qualifier_statements( $prop_cfg->{qualifiers}, $entry )
+      : '';
+
     print $fh $entry->{$qid}{value} . '|'
       . $property . '|'
-      . prepare_value( $property, $entry->{$value}{value} )
+      . prepare_value( $value_type, $value )
+      . $qualifier_statements
       . $reference_statement . "\n";
   }
-  #
+
   # Limit the numer of results
   # (data checking required)
   $count++;
@@ -327,10 +362,9 @@ print "$count statements written to $outfile\n";
 #####################
 
 sub prepare_value {
-  my $property = shift or confess "param missing";
-  my $value    = shift or confess "param missing";
+  my $value_type = shift or confess "param missing";
+  my $value      = shift or confess "param missing";
 
-  my $value_type = $config->{properties}{$property}{value_type};
   if ( $value_type eq 'item' ) {
     ## use unquoted value
   } elsif ( $value_type eq 'literal' ) {
@@ -433,3 +467,20 @@ sub adapt_default_query {
 
   return $query;
 }
+
+sub get_qualifier_statements {
+  my $cfg   = shift or die "param missing";
+  my $entry = shift or die "param missing";
+
+  my $statements = '';
+  foreach my $qualifier ( sort keys %$cfg ) {
+    my $qual_cfg   = $cfg->{$qualifier};
+    my $value      = $entry->{ $qual_cfg->{var_name} }{value};
+    my $value_type = $qual_cfg->{value_type};
+    next unless $value;
+    $statements .=
+      '|' . $qualifier . '|' . prepare_value( $value_type, $value );
+  }
+  return $statements;
+}
+
