@@ -3,6 +3,9 @@
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
@@ -40,6 +43,13 @@ where {
     bind(strafter(?memberUrl, 'folder/') as ?memberId)
   }
   ?companyItem wdt:P4293 ?pm20Id .
+  #
+  # exclude items linked with mapping relations
+  ?companyItem p:P4293 ?statement .
+  filter (not exists {
+    ?statement pq:P4390 [] .
+    })
+  #
   ?personItem wdt:P4293 ?memberId .
   filter (not exists {
       ?companyItem ?property ?personItem .
