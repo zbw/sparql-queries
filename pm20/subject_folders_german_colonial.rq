@@ -1,0 +1,24 @@
+# Subject folders former German colonial empire
+#
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select ?geoNta ?subjectNta ?pm20 ?pm20Label (str(?docCount) as ?docs)
+where {
+  ?pm20 a zbwext:SubjectFolder ;
+        skos:prefLabel ?pm20Label ;
+        zbwext:country ?country ;
+        zbwext:subject ?subject ;
+        zbwext:freeDocCount ?docCount .
+  graph <http://zbw.eu/beta/je/ng> {
+    ?subject skos:notation ?subjectNta .
+  }
+  graph <http://zbw.eu/beta/ag/ng> {
+    ?country skos:notation ?geoNta .
+    filter(?geoNta in ('C110','D10','D60','C87','C58','C65','B103'))
+  }
+}
+order by ?geoNta ?subjectNta
+
