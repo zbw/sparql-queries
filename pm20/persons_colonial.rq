@@ -1,0 +1,27 @@
+# List PM20 person folders active in colonial affairs
+#
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct ?pm20 ?pm20Label ?fromTo ?countryOfOrigin ?occupation ?locationOfActivity
+where {
+  ?pm20 a zbwext:PersonFolder ;
+        zbwext:activity [ schema:about 'Kolonialwesen' ;
+                          schema:location ?locationOfActivity ] ;
+      skos:prefLabel ?pm20Label .
+  optional {
+    ?pm20 schema:nationality ?countryOfOrigin .
+  }
+  # filter(?countryOfOrigin = 'Deutschland' || ?locationOfActivity = 'Deutschland')
+  optional {
+    ?pm20 schema:hasOccupation ?occupation .
+  }
+  optional {
+    ?pm20 gndo:dateOfBirthAndDeath ?fromTo .
+  }
+}
+order by ?pm20Label
+

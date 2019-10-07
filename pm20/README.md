@@ -19,6 +19,12 @@ Query | Description
 [count_by_country](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/count_by_country.rq) | Subject and ware folder count by country
 [count_by_ware](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/count_by_ware.rq) | Folder count by ware
 [count_by_subject](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/count_by_subject.rq) | Folder count by subject
+**Colonial affairs** |
+[persons_colonial](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/persons_colonial.rq) | Persons active in colonial affairs
+[companies_colonial](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/companies_colonial.rq) | Companies active in colonial affairs
+[subjects_colonial_german](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/subjects_colonial_german.rq) | Subject folders from former German colonial empire
+[wares_colonial_german](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/wares_colonial_german.rq) | Ware folders from former German colonial empire
+
 **Vocabs** |
 [ag_for_openrefine](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/ag_for_openrefine.rq) | PM20 country classification prepared for CSV ouput and matching in OpenRefine
 [ip_for_openrefine](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/ip_for_openrefine.rq) | PM20 ware classification prepared for CSV ouput and matching in OpenRefine
