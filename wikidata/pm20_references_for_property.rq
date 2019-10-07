@@ -8,13 +8,13 @@ PREFIX bd: <http://www.bigdata.com/rdf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX hint: <http://www.bigdata.com/queryHints#>
 #
-select ?prop ?propLabel (str(count(?item)) as ?countLabel)
-  (uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql',
-          '&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_references_for_property.rq',
-          '&pid=', ?pid)) as ?count)
+select  ?item ?prop ?propLabel
 where
 {
   hint:Query hint:optimizer "None" .
+  values ( ?pid ) {
+    ( P569 )
+  }
   # stated in 20th century press archives and/or
   # references a certain PM20 folder
   {
@@ -23,16 +23,13 @@ where
     ?provenance pr:P4293 [] .
   }
   ?object prov:wasDerivedFrom ?provenance .
+  #
+  bind(uri(concat('http://www.wikidata.org/prop/',?pid)) as ?property)
   ?item ?property ?object .
   # q&d
-  bind(strafter(str(?property), 'http://www.wikidata.org/prop/') as ?pid)
   bind(uri(concat('http://www.wikidata.org/entity/', ?pid)) as ?prop)
   ?prop rdfs:label ?propLabelEn .
   filter(lang(?propLabelEn) = 'en')
   bind(str( ?propLabelEn) as ?propLabel)
-  #
-
 }
-group by ?pid ?prop ?propLabel
-order by desc(count(?item))
 
