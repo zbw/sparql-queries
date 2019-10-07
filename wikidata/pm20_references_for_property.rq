@@ -13,7 +13,7 @@ where
 {
   hint:Query hint:optimizer "None" .
   values ( ?pid ) {
-    ( P569 )
+    ( 'P569' )
   }
   # stated in 20th century press archives and/or
   # references a certain PM20 folder

@@ -11,7 +11,7 @@ PREFIX hint: <http://www.bigdata.com/queryHints#>
 select ?prop ?propLabel (str(count(?item)) as ?countLabel)
   (uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql',
           '&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_references_for_property.rq',
-          '&pid=', ?pid)) as ?count)
+          '&pid="', ?pid, '"')) as ?count)
 where
 {
   hint:Query hint:optimizer "None" .
