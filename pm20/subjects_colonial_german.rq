@@ -17,8 +17,27 @@ where {
   }
   graph <http://zbw.eu/beta/ag/ng> {
     ?country skos:notation ?geoNta .
-    filter(?geoNta in ('A11','B103','C58','C65','C87','C110','D10','D60'))
   }
+  # all German colonies + Deutsche Kolonien (in general)
+  filter( ?geoNta in ('A11','B103','C58','C65','C87','C110','D10','D60' )
+    # diverse notations in (western) Europe, Germany and Hamburg
+    || ( ?geoNta in ('A1','A4','A9', 'A10') && (
+          # Kolonialpolitik
+           strstarts(?subjectNta, 'g5')
+          # Förderung des Rohstoffbezuges aus den Kolonien
+        || strstarts(?subjectNta, 'n1 SM 002')
+          # Forschung und Lehre über Kolonien und Ausland
+        || strstarts(?subjectNta, 'k1 SM 012')
+          # Kolonialschulwesen (im Mutterland)
+        || strstarts(?subjectNta, 'k2 SM 005')
+          # Ausländische und koloniale Arbeiter
+        || strstarts(?subjectNta, 'n 15 SM 011')
+          # Auslandbanken und Kolonialbanken
+        || strstarts(?subjectNta, 'n 24 SM 012')
+       ) )
+      # Zentralstelle Kolonialinstitut
+    || ( ?geoNta in ('A9') && strstarts(?subjectNta, 'k SM 0501'))
+  )
 }
 order by ?geoNta ?subjectNta
 
