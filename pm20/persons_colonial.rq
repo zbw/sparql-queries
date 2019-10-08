@@ -2,12 +2,26 @@
 #
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select distinct ?pm20 ?pm20Label ?fromTo ?countryOfOrigin ?occupation ?locationOfActivity
+select distinct ?pm20 ?pm20Label ?fromTo ?countryOfOrigin ?occupation ?locationOfActivity ?item ?workLocation ?workLocationLabel
 where {
+  service <https://query.wikidata.org/sparql> {
+    ?item wdt:P4293 ?pm20Id ;
+          wdt:P31 wd:Q5 .
+    bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
+    optional {
+      ?item wdt:P937 ?workLocation .
+      ?workLocation rdfs:label ?labelLang .
+      filter(lang(?labelLang) = 'de')
+      bind(str(?labelLang) as ?workLocationLabel)
+    }
+  }
   ?pm20 a zbwext:PersonFolder ;
         zbwext:activity [ schema:about 'Kolonialwesen' ;
                           schema:location ?locationOfActivity ] ;
