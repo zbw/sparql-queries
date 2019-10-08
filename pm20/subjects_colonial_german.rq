@@ -17,7 +17,7 @@ where {
   }
   graph <http://zbw.eu/beta/ag/ng> {
     ?country skos:notation ?geoNta .
-    filter(?geoNta in ('C110','D10','D60','C87','C58','C65','B103'))
+    filter(?geoNta in ('A11','B103','C58','C65','C87','C110','D10','D60'))
   }
 }
 order by ?geoNta ?subjectNta
