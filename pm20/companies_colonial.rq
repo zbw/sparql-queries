@@ -12,6 +12,14 @@ where {
   ?pm20 a zbwext:CompanyFolder ;
     dc:type 'Kolonialgesellschaft' ;
     skos:prefLabel ?pm20Label .
+  #
+  optional {
+    ?pm20 skos:notation ?nta .
+    bind(strbefore(?nta, ' ') as ?geoNta)
+  }
+  # Restrict to Germany and German colonies
+  filter( bound(?geoNta) && ?geoNta in ('A9','A10','A11','B103','C58','C65','C87','C110','D10','D60' ))
+  #
   optional {
     ?pm20 schema:industry ?industry .
   }
