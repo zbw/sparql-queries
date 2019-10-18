@@ -8,25 +8,32 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
 select ?gndId ?pm20 ?pm20Label ?wd ?wdLabel ?qsStatement
-#(?pm20Id as ?targetId)
 where {
+  # query optimizer can make some queries so slow, that they hit the timeout
   hint:Query hint:optimizer "None" .
+  #
+  # Reach out to PM20 endpoint
   service <http://zbw.eu/beta/sparql/pm20/query> {
     ?pm20 gndo:gndIdentifier ?gndId ;
           dct:identifier ?pm20Id ;
           skos:prefLabel ?pm20Label .
   }
+  # back in Wikidata: items with matching gndId
   ?wd wdt:P227 ?gndId .
+  #
+  # skip item which are already linked to PM20
   filter(not exists {
       ?wd wdt:P4293 [] .
     }
   )
-  bind(strafter(str(?wd), 'http://www.wikidata.org/entity/') as ?wdId)
+  # for informational purposes, add label
   optional {
     ?wd rdfs:label ?wdLabelLang .
     filter(lang(?wdLabelLang) = 'de')
     bind(str(?wdLabelLang) as ?wdLabel)
   }
+  # construct QS input
+  bind(strafter(str(?wd), 'http://www.wikidata.org/entity/') as ?wdId)
   bind(concat(?wdId, '|P4293|"', ?pm20Id, '"|S248|Q36948990|S1476|en:"Via P227 lookup with GND value from PM20 folder"') as ?qsStatement)
 }
 order by ?pm20Label
