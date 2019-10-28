@@ -172,6 +172,11 @@ Readonly my %CONFIG => (
       en => 'descrEn',
     },
     properties => {
+      P27 => {
+        query    => path('/opt/sparql-queries/pm20/wd_citizenship.rq'),
+        var_name => 'countryQid',
+        value_type => 'item',
+      },
       P31 => {
         var_name   => 'classQid',
         value_type => 'item',
@@ -272,7 +277,7 @@ eval {
   $result_data = decode_json($json);
 };
 if ($@) {
-  die "Error parsing response: ", $client->responseContent(), "\n";
+  die "Error parsing response from $endpoint: ", $client->responseContent(), "\n";
 }
 
 my $count = 0;
