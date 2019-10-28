@@ -1,0 +1,39 @@
+# Plain list of synonyms by id for Mix-n-match (with language)
+#
+# Uses STW descriptors as well as exact matching concepts from other thesauri
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext:  <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct ?id (lcase(str(?label)) as ?synonym) (lang(?label) as ?lang)
+where {
+  # restrict to a sub-thesaurus
+  ?stw a zbwext:Descriptor ;
+       skos:broader ?thsys .
+  ?thsys a zbwext:Thsys ;
+         skos:notation ?nta .
+  filter(strstarts(?nta, 'B.'))
+  {
+    # include all labels from STW
+    {
+      ?stw skos:prefLabel ?label
+    }
+    UNION
+    {
+      ?stw skos:altLabel ?label
+    }
+    # include labels from matching concepts in other thesauri
+    UNION
+    {
+      ?stw skos:exactMatch/skos:prefLabel ?label
+    }
+    UNION
+    {
+      ?stw skos:exactMatch/skos:altLabel ?label
+    }
+  }
+  #
+  bind(strafter(str(?stw), 'stw/descriptor/') as ?id)
+}
+order by ?id ?synonym
+
