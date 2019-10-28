@@ -42,5 +42,5 @@ where {
   bind(str(?prefLang) as ?name)
 }
 group by ?id ?name ?descrElem
-order by (min(strbefore(?descrElem,' '))) ?name
+order by (min(strbefore(?prefSysLang,' '))) ?name
 
