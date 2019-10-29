@@ -9,7 +9,7 @@ PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX schema: <http://schema.org/>
 #
 SELECT ?type ?pm20 ?pm20Label ?fromTo (group_concat(distinct ?industry;
-    separator='; ') as ?industries) (str(?docCount) as ?cnt) (str(?reportCount) as ?reportCnt)
+    separator='; ') as ?industries) (str(?docCount) as ?docs) (str(?repCount) as ?reports)
 WHERE {
   ?pm20 a zbwext:CompanyFolder ;
         skos:prefLabel ?pm20Label ;
@@ -17,19 +17,24 @@ WHERE {
         skos:notation ?notation ;
         dc:type ?type ;
         zbwext:freeDocCount ?docCount .
+  # only companies with documents
   filter(?docCount > 0)
-
-  # restrict by country notation
-  filter(strstarts(?notation, 'A22')) # UK
+  #
+  # restrict by country notation (see
+  # http://zbw.eu/beta/skosmos/pm20ag/en/page/157538)
+  ##filter(strstarts(?notation, 'A9') || strstarts(?notation, 'A10')) # Germany
+  ##filter(strstarts(?notation, 'A22')) # UK
   ##filter(strstarts(?notation, 'A28')) # France
-
+  #
   optional {
     ?pm20 zbwext:fromTo ?fromTo .
   }
   optional {
     ?pm20 zbwext:reportCount ?repCount .
   }
+  # only companies with business reports
+  ##filter(?repCount > 0)
 }
-group by ?pm20 ?pm20Label ?fromTo ?type ?docCount ?reports
+group by ?pm20 ?pm20Label ?fromTo ?type ?docCount ?repCount
 order by ?pm20Label
 
