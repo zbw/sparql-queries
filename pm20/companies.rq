@@ -8,7 +8,7 @@ PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX schema: <http://schema.org/>
 #
-SELECT ?type ?pm20 ?pm20Label ?fromTo (group_concat(distinct ?industry;
+SELECT ?type ?pm20 ?pm20Label ?fromTo ?notation (group_concat(distinct ?industry;
     separator='; ') as ?industries) (str(?docCount) as ?docs) (str(?repCount) as ?reports)
 WHERE {
   ?pm20 a zbwext:CompanyFolder ;
@@ -35,6 +35,6 @@ WHERE {
   # only companies with business reports
   ##filter(?repCount > 0)
 }
-group by ?pm20 ?pm20Label ?fromTo ?type ?docCount ?repCount
+group by ?pm20 ?pm20Label ?fromTo ?type ?docCount ?repCount ?notation
 order by ?pm20Label
 
