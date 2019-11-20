@@ -1,7 +1,7 @@
 # Insert external ids redundantly into default graph, because
 # WD have no access zu named graphs
 #
-PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 insert {

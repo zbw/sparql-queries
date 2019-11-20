@@ -1,7 +1,7 @@
 # GND economists w/o occupation in WD
 #
-PREFIX gndo:  <http://d-nb.info/standards/elementset/gnd#>
-PREFIX gnd:  <http://d-nb.info/gnd/>
+PREFIX gndo:  <https://d-nb.info/standards/elementset/gnd#>
+PREFIX gnd:  <https://d-nb.info/gnd/>
 PREFIX hint: <http://www.bigdata.com/queryHints#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>

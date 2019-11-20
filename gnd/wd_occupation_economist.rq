@@ -1,7 +1,7 @@
 # Extract information about occupations from GND for Wikidata
 #
-PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
-PREFIX gnd: <http://d-nb.info/gnd/>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
+PREFIX gnd: <https://d-nb.info/gnd/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX wd: <http://www.wikidata.org/entity/>

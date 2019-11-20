@@ -19,7 +19,7 @@ use REST::Client;
 Readonly my $MNM_URL_TEMPLATE =>
 'https://tools.wmflabs.org/mix-n-match/api.php?query=download2&catalogs=CATALOG_ID&as_file=1';
 Readonly my %URI => (
-  gnd  => 'http://d-nb.info/gnd/',
+  gnd  => 'https://d-nb.info/gnd/',
   pm20 => 'http://purl.org/pressemappe20/folder/',
 );
 
