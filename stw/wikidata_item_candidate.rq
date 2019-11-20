@@ -38,7 +38,7 @@ where {
            skos:broader ?thsys .
       #      
       # restrict to subthesaurus
-      filter(strstarts(?nta, 'W'))
+      filter(strstarts(?nta, 'G'))
     }
 ##    group by ?stw
   } minus {
