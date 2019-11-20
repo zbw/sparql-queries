@@ -11,7 +11,7 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX zbwext:  <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX text:    <http://jena.apache.org/text#>
 #
-SELECT DISTINCT ?synonym (group_concat(?prov; separator = ' | ') as ?datasets)
+SELECT DISTINCT ?synonym (group_concat(distinct ?prov; separator = ' | ') as ?datasets)
 #SELECT DISTINCT ?synonym ?prov ?concept
 WHERE {
   # also: 'unemployment', 'skills', 'waste management'
@@ -33,6 +33,7 @@ WHERE {
   }
   # get all concepts in an exactMatch cluster
   {
+    ?stwConcept a zbwext:Descriptor .
     bind(?stwConcept as ?concept)
     bind('stw' as ?prov)
   } UNION {

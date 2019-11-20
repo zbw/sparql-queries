@@ -1,0 +1,43 @@
+# Subject folders from former German colonial empire
+#
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select ?geoNta ?subjectNta ?pm20 ?pm20Label (str(?docCount) as ?docs)
+where {
+  ?pm20 a zbwext:SubjectFolder ;
+        skos:prefLabel ?pm20Label ;
+        zbwext:country ?country ;
+        zbwext:subject ?subject ;
+        zbwext:freeDocCount ?docCount .
+  graph <http://zbw.eu/beta/je/ng> {
+    ?subject skos:notation ?subjectNta .
+  }
+  graph <http://zbw.eu/beta/ag/ng> {
+    ?country skos:notation ?geoNta .
+  }
+  # all German colonies + Deutsche Kolonien (in general)
+  filter( ?geoNta in ('A11','B103','C58','C65','C87','C110','D10','D60' )
+    # diverse notations in (western) Europe, Germany and Hamburg
+    || ( ?geoNta in ('A1','A4','A9', 'A10') && (
+          # Kolonialpolitik
+           strstarts(?subjectNta, 'g5')
+          # Förderung des Rohstoffbezuges aus den Kolonien
+        || strstarts(?subjectNta, 'n1 SM 002')
+          # Forschung und Lehre über Kolonien und Ausland
+        || strstarts(?subjectNta, 'k1 SM 012')
+          # Kolonialschulwesen (im Mutterland)
+        || strstarts(?subjectNta, 'k2 SM 005')
+          # Ausländische und koloniale Arbeiter
+        || strstarts(?subjectNta, 'n 15 SM 011')
+          # Auslandbanken und Kolonialbanken
+        || strstarts(?subjectNta, 'n 24 SM 012')
+       ) )
+      # Zentralstelle Kolonialinstitut
+    || ( ?geoNta in ('A9') && strstarts(?subjectNta, 'k SM 0501'))
+  )
+}
+order by ?geoNta ?subjectNta
+

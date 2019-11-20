@@ -1,0 +1,37 @@
+# List company folders active in colonial affairs
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select ?pm20 ?pm20Label ?fromTo ?industries (group_concat(?broaderLocation;
+    separator='; ') as ?broaderLocations)
+where {
+  select ?pm20 ?pm20Label ?fromTo (group_concat(?industry;
+      separator = '; ') as ?industries) ?broaderLocation
+  where {
+    ?pm20 a zbwext:CompanyFolder ;
+          dc:type 'Kolonialgesellschaft' ;
+          skos:prefLabel ?pm20Label .
+    bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/') as ?pm20Id)
+    optional {
+      ?pm20 schema:industry ?industry .
+    }
+    optional {
+      ?pm20 zbwext:fromTo ?fromTo .
+    }
+    optional {
+      ?pm20 zbwext:broaderLocation ?broaderLocation .
+    }
+    optional {
+      ?pm20 skos:notation ?notation .
+    }
+    # restrict to Germany
+    #filter(strstarts(?notation, 'A9') ||  strstarts(?notation, 'A10') || ?pm20Id in ('co/080530', 'co/080611', 'co/080784', 'co/029801', 'co/080848', 'co/051783', 'co/037133'))
+  }
+  group by ?pm20 ?pm20Label ?fromTo ?broaderLocation
+}
+group by ?pm20 ?pm20Label ?fromTo ?industries
+order by ?pm20Label
+

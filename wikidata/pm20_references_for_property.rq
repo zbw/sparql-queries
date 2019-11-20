@@ -1,0 +1,35 @@
+# Properties with reference from PM20
+#
+PREFIX pr: <http://www.wikidata.org/prop/reference/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+#
+select  ?item ?prop ?propLabel
+where
+{
+  hint:Query hint:optimizer "None" .
+  values ( ?pid ) {
+    ( 'P569' )
+  }
+  # stated in 20th century press archives and/or
+  # references a certain PM20 folder
+  {
+    ?provenance pr:P248 wd:Q36948990 .
+  } union {
+    ?provenance pr:P4293 [] .
+  }
+  ?object prov:wasDerivedFrom ?provenance .
+  #
+  bind(uri(concat('http://www.wikidata.org/prop/',?pid)) as ?property)
+  ?item ?property ?object .
+  # q&d
+  bind(uri(concat('http://www.wikidata.org/entity/', ?pid)) as ?prop)
+  ?prop rdfs:label ?propLabelEn .
+  filter(lang(?propLabelEn) = 'en')
+  bind(str( ?propLabelEn) as ?propLabel)
+}
+

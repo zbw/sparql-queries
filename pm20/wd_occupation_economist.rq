@@ -1,4 +1,4 @@
-# Extract information about occupations in WD in Wikidata
+# Extract information about occupations from PM20 for Wikidata
 #
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
@@ -6,12 +6,14 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX schema: <http://schema.org/>
 PREFIX wd: <http://www.wikidata.org/entity/>
 #
-select distinct ?qid (?occupationQid as ?value) ?pm20 ?pm20Label ?pm20Id ?activity ?docCount
+select distinct ?qid ?occupationQid ?pm20 ?pm20Label ?pm20Id ?activity ?docCount
 where {
   #
   values ( ?activity ?occupationQid ) {
     ( 'Wirtschaftswissenschaft' 'Q188094' )
     ( 'Betriebswirtschaftslehre' 'Q1860032' )
+    ( 'Sozialwissenschaft' 'Q15319501' )
+    ( 'Geowissenschaft' 'Q11424604' )
   }
   service <https://query.wikidata.org/sparql> {
     bind(uri(concat(str(wd:), ?occupationQid)) as ?occupation)
@@ -34,3 +36,4 @@ where {
   # only if folder has documents
   ###filter(?docCount > 0)
 }
+

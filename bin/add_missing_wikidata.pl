@@ -70,7 +70,8 @@ Readonly my %CONFIG => (
         value_type => 'date',
       },
       P106 => {
-        var_name   => 'occupationQid',
+        query    => path('/opt/sparql-queries/gnd/wd_occupation_economist.rq'),
+        var_name => 'occupationQid',
         value_type => 'item',
       },
     },
@@ -114,6 +115,44 @@ Readonly my %CONFIG => (
         var_name   => 'gndId',
         value_type => 'literal',
       },
+      P112 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_person.rq'),
+        var_name => 'founderQid',
+        value_type => 'item',
+      },
+      P3320 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_person.rq'),
+        var_name => 'boardQid',
+        value_type => 'item',
+        qualifiers => {
+          P580 => {
+            var_name   => 'from',
+            value_type => 'date',
+          },
+          P582 => {
+            var_name   => 'to',
+            value_type => 'date',
+          },
+        },
+      },
+      P5052 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_person.rq'),
+        var_name => 'advisoryQid',
+        value_type => 'item',
+        qualifiers => {
+          P580 => {
+            var_name   => 'from',
+            value_type => 'date',
+          },
+          P582 => {
+            var_name   => 'to',
+            value_type => 'date',
+          },
+        },
+      },
     },
   },
 
@@ -133,6 +172,11 @@ Readonly my %CONFIG => (
       en => 'descrEn',
     },
     properties => {
+      P27 => {
+        query    => path('/opt/sparql-queries/pm20/wd_citizenship.rq'),
+        var_name => 'countryQid',
+        value_type => 'item',
+      },
       P31 => {
         var_name   => 'classQid',
         value_type => 'item',
@@ -159,8 +203,8 @@ Readonly my %CONFIG => (
       },
       P53 => {
         query      => path('/opt/sparql-queries/pm20/wd_person_family.rq'),
-        qid        => 'wdperson',
-        var_name   => 'wdfamily',
+        qid        => 'wdpersonQid',
+        var_name   => 'wdfamilyQid',
         value_type => 'item',
       },
     },
@@ -186,6 +230,7 @@ if ( $mode eq 'enhance'
 }
 
 # output file derived from query file, plus date for repeated runs
+my $prop_cfg = $config->{properties}{$property};
 my ( $queryfile, $outfile, $query );
 if ( $mode eq 'create' ) {
   $queryfile = $config->{query};
@@ -193,7 +238,6 @@ if ( $mode eq 'create' ) {
   $outfile   = $queryfile->parent->child('results')
     ->child( $queryfile->basename('.rq') . ".${TODAY}.qs.txt" );
 } else {
-  my $prop_cfg = $config->{properties}{$property};
   if ( $prop_cfg->{query} ) {
     $queryfile = $prop_cfg->{query};
     $query     = $queryfile->slurp;
@@ -214,9 +258,13 @@ if ( -f $outfile ) {
 # initialize rest client
 my $client = REST::Client->new( timeout => 600 );
 
+# endpoint depends on source, yet may be overridden for certain properties
+# (federated queries)
+my $endpoint = $prop_cfg->{endpoint} || $src_cfg->{endpoint};
+
 # execute the request (may also ask for 'text/csv') and write response to file
 $client->POST(
-  $src_cfg->{endpoint},
+  $endpoint,
   $query,
   {
     'Content-type' => 'application/sparql-query',
@@ -229,17 +277,12 @@ eval {
   $result_data = decode_json($json);
 };
 if ($@) {
-  die "Error parsing response: ", $client->responseContent(), "\n";
+  die "Error parsing response from $endpoint: ", $client->responseContent(), "\n";
 }
 
 my $count = 0;
 my $fh    = $outfile->openw_utf8;
 foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
-
-  # Limit the numer of results
-  # (data checking required)
-  $count++;
-  last if $count > $LIMIT;
 
   # set record specific reference statement
   my $entry_source_id    = quote( $entry->{ $config->{source_id} }{value} );
@@ -283,34 +326,50 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
     foreach my $property ( keys $config->{properties} ) {
       my $prop_cfg = $config->{properties}{$property};
       next unless $entry->{ $prop_cfg->{var_name} };
-      my $value = $entry->{ $prop_cfg->{var_name} }{value};
+      my $value_type = $prop_cfg->{value_type};
+      my $value      = $entry->{ $prop_cfg->{var_name} }{value};
       next unless $value;
 
       print $fh 'LAST|'
         . $property . '|'
-        . prepare_value( $property, $value )
+        . prepare_value( $value_type, $value )
         . $reference_statement . "\n";
     }
   } else {
 
     # only one property
-    my $qid   = $config->{properties}{$property}{qid}      || 'qid';
-    my $value = $config->{properties}{$property}{var_name} || 'value';
+    my $qid        = $config->{properties}{$property}{qid} || 'qid';
+    my $value_type = $prop_cfg->{value_type};
+    my $value      = $entry->{ $prop_cfg->{var_name} }{value};
+    next if $value eq '';
+
+    # add optional qualifier statements
+    my $qualifier_statements =
+      $prop_cfg->{qualifiers}
+      ? get_qualifier_statements( $prop_cfg->{qualifiers}, $entry )
+      : '';
+
     print $fh $entry->{$qid}{value} . '|'
       . $property . '|'
-      . prepare_value( $property, $entry->{$value}{value} )
+      . prepare_value( $value_type, $value )
+      . $qualifier_statements
       . $reference_statement . "\n";
   }
+
+  # Limit the numer of results
+  # (data checking required)
+  $count++;
+  last if $count >= $LIMIT;
 }
+
 print "$count statements written to $outfile\n";
 
 #####################
 
 sub prepare_value {
-  my $property = shift or confess "param missing";
-  my $value    = shift or confess "param missing";
+  my $value_type = shift or confess "param missing";
+  my $value      = shift or confess "param missing";
 
-  my $value_type = $config->{properties}{$property}{value_type};
   if ( $value_type eq 'item' ) {
     ## use unquoted value
   } elsif ( $value_type eq 'literal' ) {
@@ -413,3 +472,20 @@ sub adapt_default_query {
 
   return $query;
 }
+
+sub get_qualifier_statements {
+  my $cfg   = shift or die "param missing";
+  my $entry = shift or die "param missing";
+
+  my $statements = '';
+  foreach my $qualifier ( sort keys %$cfg ) {
+    my $qual_cfg   = $cfg->{$qualifier};
+    my $value      = $entry->{ $qual_cfg->{var_name} }{value};
+    my $value_type = $qual_cfg->{value_type};
+    next unless $value;
+    $statements .=
+      '|' . $qualifier . '|' . prepare_value( $value_type, $value );
+  }
+  return $statements;
+}
+

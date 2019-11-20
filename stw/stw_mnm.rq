@@ -1,0 +1,46 @@
+# Create input for Wikidata Mix'n'match for STW descriptors
+#
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select distinct ?id ?name (concat(?descrElem, ' [', group_concat(str(?prefSysLang);
+      separator = '; '), '] ') as ?description)
+where {
+  ?stw a zbwext:Descriptor ;
+       skos:broader ?thsys ;
+       skos:prefLabel ?prefLang .
+  ?thsys a zbwext:Thsys ;
+         skos:notation ?nta ;
+         skos:prefLabel ?prefSysLang .
+  filter(lang(?prefLang) = 'de')
+  filter(lang(?prefSysLang) = 'de')
+  #
+  # selection by notation (G already covered by m-n-m #507)
+  # (W already covered by m-n-m #1259)  
+  filter(strstarts(?nta, 'B.'))
+  # build descriptor part of the description
+  {
+    select ?stw ( group_concat(str(?label);
+        separator = ' | ') as ?descrElem)
+    where {
+      {
+        ?stw skos:prefLabel ?label .
+        filter(lang(?label) = 'en')
+      } union {
+        ?stw skos:altLabel ?label .
+      } union {
+        ?stw skos:scopeNote ?label
+      } union {
+        ?stw skos:historyNote ?label
+      } union {
+        ?stw skos:editorialNote ?label
+      }
+    }
+    group by ?stw
+  }
+  bind(strafter(str(?stw), 'http://zbw.eu/stw/descriptor/') as ?id)
+  bind(str(?prefLang) as ?name)
+}
+group by ?id ?name ?descrElem
+order by (min(strbefore(?prefSysLang,' '))) ?name
+

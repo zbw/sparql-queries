@@ -33,5 +33,5 @@ where {
     }
   }
   filter(bound(?wd))
-}
+  filter(str(?graph) != "http://zbw.eu/beta/pm20ag/ng")
 

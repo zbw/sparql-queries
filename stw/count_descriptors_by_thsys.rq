@@ -1,0 +1,24 @@
+# Number of descriptors per thsys (thsys end nodes only)
+#
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?thsys (str(?thsysLabelLang) as ?thsysLabel) (str(count(distinct ?descriptor)) as ?descriptorCount)
+where {
+  ?thsys a zbwext:Thsys ;
+         skos:prefLabel ?thsysLabelLang .
+  filter(lang(?thsysLabelLang) = 'de')
+  # 
+  # filter out all thsys with narrower thsys
+  filter(not exists {
+      ?thsys skos:narrower ?x .
+      ?x a zbwext:Thsys .
+    }
+  )
+  ?thsys skos:narrower ?descriptor .
+  ?descriptor a zbwext:Descriptor .
+}
+group by ?thsys ?thsysLabelLang
+order by count(distinct ?descriptor)
+

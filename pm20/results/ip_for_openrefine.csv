@@ -1,0 +1,97 @@
+broaderDe,id,notation,labelEn,labelDe,cnt,gndId,s
+Energie und Wasser,142964,PEW01.04-01,,Holzkohle,1,,http://zbw.eu/beta/pm20voc/ip/142964
+Konsumgut,142115,PID04-Dr,,Betäubungsmittel,3,4013058-7,http://zbw.eu/beta/pm20voc/ip/142115
+Betäubungsmittel,143124,PID04-Dr05,,"Koka, Kokain",39,4048610-2,http://zbw.eu/beta/pm20voc/ip/143124
+Schmuckwaren,142111,PID04-Sc01,Amber,Bernstein,22,4005818-9,http://zbw.eu/beta/pm20voc/ip/142111
+Alte HWWA Warenklassifikation,148466,PID07,Metals,Metalle,1,,http://zbw.eu/beta/pm20voc/ip/148466
+Metalle,161442,PID07.01,Non-ferrous metal,NE-Metall,1,4001573-7,http://zbw.eu/beta/pm20voc/ip/161442
+Halbmetall,141977,PID07.01-Hm01,Antimony,Antimon,38,4002299-7,http://zbw.eu/beta/pm20voc/ip/141977
+Halbmetall,142006,PID07.01-Hm02,Arsenic,Arsen,35,4192970-6,http://zbw.eu/beta/pm20voc/ip/142006
+NE-Metall,143156,PID07.01-Ku,Copper,Kupfer,1,,http://zbw.eu/beta/pm20voc/ip/143156
+NE-Metall,143572,PID07.01-Lm,Light metal,Leichtmetall,1,4035174-9,http://zbw.eu/beta/pm20voc/ip/143572
+Leichtmetall,141969,PID07.01-Lm01,Aluminium,Aluminium,94,4001573-7,http://zbw.eu/beta/pm20voc/ip/141969
+Leichtmetall,142042,PID07.01-Lm02,,Barium,29,4144082-1,http://zbw.eu/beta/pm20voc/ip/142042
+Leichtmetall,142103,PID07.01-Lm03,,Beryllium,20,4152626-0,http://zbw.eu/beta/pm20voc/ip/142103
+Eisen- und Stahlwaren,142113,PID07.03-01,,"Beschläge, Scharnier",12,4005997-2,http://zbw.eu/beta/pm20voc/ip/142113
+Eisen- und Stahlwaren,142094,PID07.03-Co,,Behälter,14,4278776-2,http://zbw.eu/beta/pm20voc/ip/142094
+Geräte und Werkzeuge,141947,PID07.03-Wz01,,"Axt, Beil, Hammer",13,4140714-3,http://zbw.eu/beta/pm20voc/ip/141947
+Maschinenbauprodukte,141985,PID08-Ap,Appliances and instruments,Apparate und Instrumente,42,4061555-8,http://zbw.eu/beta/pm20voc/ip/141985
+Apparate und Instrumente,142039,PID08-Ap01,,Barometer,7,4144061-4,http://zbw.eu/beta/pm20voc/ip/142039
+Maschinenbauprodukte,142004,PID08-Ar,Fittings (Armature),Armatur,16,4062521-7,http://zbw.eu/beta/pm20voc/ip/142004
+Maschinenbauprodukte,142020,PID08-Au,Gaming and vending machines,Automat,27,4131669-1,http://zbw.eu/beta/pm20voc/ip/142020
+Maschinenbauprodukte,142084,PID08-Ba,Construction machinery,Baumaschine,22,4210172-4,http://zbw.eu/beta/pm20voc/ip/142084
+Maschinenbauprodukte,142112,PID08-Bg,,Bergbaumaschine,33,4007575-8,http://zbw.eu/beta/pm20voc/ip/142112
+Bergbaumaschine,143121,PID08-Bg02,,"Kohlemaschine, Gewinnung und Aufbereitung",19,4164504-2,http://zbw.eu/beta/pm20voc/ip/143121
+Landwirtschaftliche Maschine,142087,PID08-Ld01,,Baumrodemaschine,5,4467130-1,http://zbw.eu/beta/pm20voc/ip/142087
+Landwirtschaftliche Maschine,142092,PID08-Ld02,,Baumwollmaschine,19,4034316-9,http://zbw.eu/beta/pm20voc/ip/142092
+Nahrungsmittelmaschine,142027,PID08-Nm01,,Bäckereimaschine,16,4722915-9,http://zbw.eu/beta/pm20voc/ip/142027
+Kraftfahrzeug,141974,PID09.02-Kf,Trailer,Anhänger (Last- und Wohnanhänger),12,4166836-4,http://zbw.eu/beta/pm20voc/ip/141974
+Kraftfahrzeug,142028,PID09.02-Nf01,Excavator,Bagger,23,4052125-4,http://zbw.eu/beta/pm20voc/ip/142028
+Bleichmittel,142107,PID13-Dr02,,Bentonit,6,4144479-6,http://zbw.eu/beta/pm20voc/ip/142107
+Düngemittel,165930,PID13-Du01,Ammonia,Ammoniak,44,4299792-6,http://zbw.eu/beta/pm20voc/ip/165930
+Lösungsmittel (außer Seifen-),141945,PID13-Ko01,Aether,Äther,20,4070978-4,http://zbw.eu/beta/pm20voc/ip/141945
+Lösungsmittel (außer Seifen-),163481,PID13-Ko02,Alcohol,Alkohol (Chemie),33,4073754-8,http://zbw.eu/beta/pm20voc/ip/163481
+Lösungsmittel (außer Seifen-),142022,PID13-Ko03,,Azeton,18,4141244-8,http://zbw.eu/beta/pm20voc/ip/142022
+Lösungsmittel (außer Seifen-),142110,PID13-Ko04,,Benzol,34,4164493-1,http://zbw.eu/beta/pm20voc/ip/142110
+Lebensmittelchemikalie,142024,PID13-Lm01,,Backpulver,14,4206348-6,http://zbw.eu/beta/pm20voc/ip/142024
+Konservierungsmittel,141956,PID13-Pm02,Alaun,Alaun,18,4365663-8,http://zbw.eu/beta/pm20voc/ip/141956
+Drogen und Chemikalien,142018,PID13-Rm,,Aufbereitungsmittel,4,4003500-1,http://zbw.eu/beta/pm20voc/ip/142018
+Aufbereitungsmittel,141952,PID13-Rm01,Activated carbon,Aktivkohle,11,4000977-4,http://zbw.eu/beta/pm20voc/ip/141952
+Säure,143122,PID13-Sc06,,Kohlensäure,32,4192064-8,http://zbw.eu/beta/pm20voc/ip/143122
+Drogen und Chemikalien,143989,PID13.02-Ks,,Treibstoff,1,4125922-1,http://zbw.eu/beta/pm20voc/ip/143989
+Treibstoff,141946,PID13.02-Ks01,Ethyl alcohol,Äthylbenzin,9,4381759-2,http://zbw.eu/beta/pm20voc/ip/141946
+Treibstoff,142108,PID13.02-Ks02,Petrol,Benzin,110,4144507-7,http://zbw.eu/beta/pm20voc/ip/142108
+Kunstharz,142029,PID14-Ha01,Bakelit,Bakelit,25,4033676-1,http://zbw.eu/beta/pm20voc/ip/142029
+"Bekleidung, Textilien und Faserstoffe",142106,PID19-Bk,Clothing,Bekleidung,97,4223396-3,http://zbw.eu/beta/pm20voc/ip/142106
+"Bekleidung, Textilien und Faserstoffe",142091,PID19-Bw01,,Baumwollindustrie,68,4492136-6,http://zbw.eu/beta/pm20voc/ip/142091
+"Bekleidung, Textilien und Faserstoffe",154932,PID19-Bw02,,Baumwolltextilien,40,4332956-1,http://zbw.eu/beta/pm20voc/ip/154932
+"Bekleidung, Textilien und Faserstoffe",166456,PID19-Bz,"Chlothing industry, branches and accessories",Bekleidungssparten und Zubehör,26,4061751-8,http://zbw.eu/beta/pm20voc/ip/166456
+Pflanzenfaser,142048,PID19-Nf01,,Bast,5,4174058-0,http://zbw.eu/beta/pm20voc/ip/142048
+Pflanzenfaser,141957,PID19-Nf018,Halfah grass,Alfagras,17,4021764-4,http://zbw.eu/beta/pm20voc/ip/141957
+Pflanzenfaser,196460,PID19-Nf02,Cotton yarn,Baumwollgarn,48,4332956-1,http://zbw.eu/beta/pm20voc/ip/196460
+Pflanzenfaser,142013,PID19-Nf06,Milkweed,Asclepiasfaser,13,4174058-0,http://zbw.eu/beta/pm20voc/ip/142013
+Pflanzenfaser,143125,PID19-Nf11,,Kokosfaser,26,,http://zbw.eu/beta/pm20voc/ip/143125
+"Nahrungs-, Futter- und Genußmittel",142026,PID20-Ba,Bakery product,Backwaren,63,4511731-7,http://zbw.eu/beta/pm20voc/ip/142026
+Gewürz,141976,PID20-Gw01,Anise,Anis,10,4142493-1,http://zbw.eu/beta/pm20voc/ip/141976
+Öl und Fett,142093,PID20-Oe01,,"Baumwollsaat, Baumwollsaatöl",42,4728647-7,http://zbw.eu/beta/pm20voc/ip/142093
+Getränk,141966,PID20.02-Sp,Ethanol,Alkohol,168,4125880-0,http://zbw.eu/beta/pm20voc/ip/141966
+Alkohol,141943,PID20.02-Sp01,Absinth,Absinth,13,4189692-0,http://zbw.eu/beta/pm20voc/ip/141943
+Bauwirtschaft,142016,PID22-Bd01,Asphalt,Asphalt,60,4183576-1,http://zbw.eu/beta/pm20voc/ip/142016
+Bauwirtschaft,142083,PID22-Bf01,,Bau- und Isolierplatten,38,4520443-3,http://zbw.eu/beta/pm20voc/ip/142083
+Bauwirtschaft,142086,PID22-Bs,,Baumaterial,87,4057151-8,http://zbw.eu/beta/pm20voc/ip/142086
+"Steine, Erden, Keramik und Glas",142014,PID23-As,Asbestos,Asbest,62,4143197-2,http://zbw.eu/beta/pm20voc/ip/142014
+Edelstein und Halbedelstein,141944,PID23-Ed01,Agate,Achat,4,4052949-6,http://zbw.eu/beta/pm20voc/ip/141944
+Gips,141953,PID23-Gi01,Alabaster,Alabaster,5,4141793-8,http://zbw.eu/beta/pm20voc/ip/141953
+"Steine, Erden, Keramik und Glas",142046,PID23-Na01,,Basalt,8,4279398-1,http://zbw.eu/beta/pm20voc/ip/142046
+Tropische Frucht,142038,PLW04-Bn,Banana,Banane,103,4043051-0,http://zbw.eu/beta/pm20voc/ip/142038
+Pflanzenbauprodukte,142089,PLW04-Bw,Cotton,Baumwolle,162,4400051-0,http://zbw.eu/beta/pm20voc/ip/142089
+Gemüse,142012,PLW04-Gm01,Artichokes,Artischocken,8,4143140-6,http://zbw.eu/beta/pm20voc/ip/142012
+Gemüse,143119,PLW04-Gm08,,Kohl,25,4051799-8,http://zbw.eu/beta/pm20voc/ip/143119
+Pflanzenbauprodukte,142035,PLW04-Gr02,,Bambus,35,4174058-0,http://zbw.eu/beta/pm20voc/ip/142035
+Kartoffel,142005,PLW04-Kf01,Arrowroot,Arrowroot (Tacca),12,4459032-5,http://zbw.eu/beta/pm20voc/ip/142005
+Kartoffel,142049,PLW04-Kf02,,Batate,21,4427325-3,http://zbw.eu/beta/pm20voc/ip/142049
+Heilpflanze,141967,PLW04-Kr01,,Aloe,7,4405230-3,http://zbw.eu/beta/pm20voc/ip/141967
+Heilpflanze,142041,PLW04-Kr03,,Barosma,2,4177105-9,http://zbw.eu/beta/pm20voc/ip/142041
+Nuss und Kern,142023,PLW04-Nu01,,Babassunuss,6,4316053-0,http://zbw.eu/beta/pm20voc/ip/142023
+Nuss und Kern,143126,PLW04-Nu05,Coconut,Kokosnuss,1,4125533-1,http://zbw.eu/beta/pm20voc/ip/143126
+Frucht,141980,PLW04-Ob01,Apple,Apfel,55,4043051-0,http://zbw.eu/beta/pm20voc/ip/141980
+Frucht,142021,PLW04-Ob02,,Avocatbirne,14,4120964-3,http://zbw.eu/beta/pm20voc/ip/142021
+Tropische Frucht,141970,PLW04-Tr01,Pineapple,Ananas,57,4043051-0,http://zbw.eu/beta/pm20voc/ip/141970
+Frucht,141948,PLW04-Zs,Citrus fruits,Agrumen,70,4304842-0,http://zbw.eu/beta/pm20voc/ip/141948
+Agrumen,141981,PLW04-Zs01,Orange,Apfelsine,77,4372979-4,http://zbw.eu/beta/pm20voc/ip/141981
+Agrumen,142001,PLW04-Zs02,Apricot,Aprikose,24,4262467-8,http://zbw.eu/beta/pm20voc/ip/142001
+Wolle,141972,PLW05-Wo01,Angora rabbit wool,Angorakaninchenwolle,16,4190250-6,http://zbw.eu/beta/pm20voc/ip/141972
+Forstprodukte,141950,PLW06-Fp01,Acacia bark,Akazienrinde,14,4141694-6,http://zbw.eu/beta/pm20voc/ip/141950
+Forstprodukte,142032,PLW06-Fp02,,Balsam,12,4248922-2,http://zbw.eu/beta/pm20voc/ip/142032
+Forstprodukte,142109,PLW06-Fp03,,Benzoe,1,,http://zbw.eu/beta/pm20voc/ip/142109
+Holz,142002,PLW06-Hz01,Araucaria,Araucaria,4,4326195-4,http://zbw.eu/beta/pm20voc/ip/142002
+Holz,142033,PLW06-Hz02,,Balsaholz,12,4143961-2,http://zbw.eu/beta/pm20voc/ip/142033
+Meeresprodukte,141959,PLW07-Mp01,Algae and seaweed,Algen und Seetang,30,4001173-2,http://zbw.eu/beta/pm20voc/ip/141959
+Meeresprodukte,141941,PLW07-Mt01,Eel,Aal,14,4433645-7,http://zbw.eu/beta/pm20voc/ip/141941
+Meeresprodukte,142019,PLW07-Mt02,,Auster,30,4131765-8,http://zbw.eu/beta/pm20voc/ip/142019
+Abfall und Sekundärrohstoffe,141942,PRB01-01,Waste and scrap,Abfälle und Altmaterial,34,4396701-2,http://zbw.eu/beta/pm20voc/ip/141942
+Bergbauprodukte,143120,PRB02.01,Coal,Kohle,159,4031687-7,http://zbw.eu/beta/pm20voc/ip/143120
+Kohle,143123,PRB02.01-Ru,,Kohlenstoff (Ruß),23,4164538-8,http://zbw.eu/beta/pm20voc/ip/143123
+Bergbauprodukte,218756,PRB02.01-St,,Kohlenstaub,10,4164535-2,http://zbw.eu/beta/pm20voc/ip/218756
+Bergbauprodukte,218757,PRB02.01.01,,Kohleveredelung,8,4164493-1,http://zbw.eu/beta/pm20voc/ip/218757
+Bergbauprodukte,142294,PRB02.06,Petroleum,Erdöl,1,,http://zbw.eu/beta/pm20voc/ip/142294

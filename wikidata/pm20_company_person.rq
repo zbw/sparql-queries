@@ -1,0 +1,68 @@
+# Get the connections between companies and persons
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select ?pm20Id ?pm20Label ?qid ?founderQid ?boardQid ?advisoryQid ?fromTo ?from ?to
+where {
+  hint:Query hint:optimizer "None" .
+  #
+  # org -> pers
+  values ( ?roleName ?property ) {
+    ( "Gründer" wdt:P112 )
+#    ( "Leitung" wdt:P1037 ) # director/manager
+    ( "Leitung" wdt:P3320 ) # board member
+    ( "Aufsichtsrat" wdt:P5052 )
+  }
+  # reverse direction (pers -> org>
+#  values ( ?roleName ?revProperty ) {
+#    ( "Mitarbeiter / Mitarbeiterin" wdt:P108 )
+#  }
+  #
+  # all companies with members from PM20
+  service <http://zbw.eu/beta/sparql/pm20/query> {
+    ?pm20 a zbwext:CompanyFolder ;
+          skos:prefLabel ?pm20Label ;
+          dct:identifier ?pm20Id ;
+          schema:member ?member .
+    ?member schema:url ?memberUrl ;
+            schema:roleName ?roleName .
+    optional {
+      ?member zbwext:fromTo ?fromTo .
+    }
+    bind(strafter(?memberUrl, 'folder/') as ?memberId)
+  }
+  ?companyItem wdt:P4293 ?pm20Id .
+  #
+  # exclude items linked with mapping relations
+  ?companyItem p:P4293 ?statement .
+  filter (not exists {
+    ?statement pq:P4390 [] .
+    })
+  #
+  ?personItem wdt:P4293 ?memberId .
+  filter (not exists {
+      ?companyItem ?property ?personItem .
+    }
+  )
+  bind(if(?roleName = 'Gründer', strafter(str(?personItem), str(wd:)), '') as ?founderQid)
+  bind(if(?roleName = 'Leitung', strafter(str(?personItem), str(wd:)), '') as ?boardQid)
+  bind(if(?roleName = 'Aufsichtsrat', strafter(str(?personItem), str(wd:)), '') as ?advisoryQid)
+  #
+  # for founders, meaning of fromTo is probably different
+  # some fromTo entries concate multiple periods - skip these for now
+  bind(if(bound(?fromTo) && ?roleName != 'Gründer' && strbefore(?fromTo, '-') && regex(?fromTo, '^[0-9]{4}-[0-9]{4}$'), strbefore(?fromTo, '-'), '') as ?from)
+  bind(if(bound(?fromTo) && ?roleName != 'Gründer' && strafter(?fromTo, '-') && regex(?fromTo, '^[0-9]{4}-[0-9]{4}$'), strafter(?fromTo, '-'), '') as ?to)
+  #
+  bind(strafter(str(?companyItem), str(wd:)) as ?qid)
+}
