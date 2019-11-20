@@ -1,7 +1,7 @@
 # Map old PND/GKD/SWD/GND IDs to valid GND IDs
 # (other ISILs, like 101c for Deutsches Musikarchiv, are mapped to type 'xxx')
 #
-PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 #
 select distinct ?type ?oldId ?id
 where {

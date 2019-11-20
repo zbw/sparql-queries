@@ -2,7 +2,7 @@
 # for all wikidata items and for persons in particular
 #
 PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>

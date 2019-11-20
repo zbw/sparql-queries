@@ -5,7 +5,7 @@
 # This version of output reveals the inner working of the query,
 # matching word by word via the full text index against possibly
 # multiple literals connected to a subject.
-PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
+PREFIX  gndo:   <https://d-nb.info/standards/elementset/gnd#>
 PREFIX  text:   <http://jena.apache.org/text#>
 #
 select *

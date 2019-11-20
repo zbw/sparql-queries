@@ -4,7 +4,7 @@
 # use alternate SELECT statement
 #
 PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
-PREFIX gnd:     <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gnd:     <https://d-nb.info/standards/elementset/gnd#>
 PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dcterms: <http://purl.org/dc/terms/>

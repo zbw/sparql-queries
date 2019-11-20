@@ -1,7 +1,7 @@
 # Get missing PM20 IDs for WD items with known GND ID
 #
 PREFIX dct: <http://purl.org/dc/terms/>
-PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 PREFIX hint: <http://www.bigdata.com/queryHints#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>

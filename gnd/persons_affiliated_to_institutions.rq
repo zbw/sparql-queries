@@ -1,19 +1,19 @@
 # Names of persons affiliated to selected institutions
 #
-PREFIX :        <http://d-nb.info/gnd/>
-PREFIX gndo:    <http://d-nb.info/standards/elementset/gnd#>
+PREFIX :        <https://d-nb.info/gnd/>
+PREFIX gndo:    <https://d-nb.info/standards/elementset/gnd#>
 select distinct ?corp (str(?corpName) as ?corpLabel) ?person (str(?personName) as ?personLabel)
 where {
   values ( ?corp )
   {
-    ( <http://d-nb.info/gnd/1002465-7> )  # Bundesbank
-    ( <http://d-nb.info/gnd/37419-2> )    # DIW
-    ( <http://d-nb.info/gnd/16015541-1> ) # GESIS
-    ( <http://d-nb.info/gnd/16345994-0> ) # IFO
-    ( <http://d-nb.info/gnd/39048-3> )    # RWI
-    ( <http://d-nb.info/gnd/90968-3> )    # WZB
-    ( <http://d-nb.info/gnd/10158795-8> ) # ZBW
-    ( <http://d-nb.info/gnd/2120785-9> )  # ZEW
+    ( <https://d-nb.info/gnd/1002465-7> )  # Bundesbank
+    ( <https://d-nb.info/gnd/37419-2> )    # DIW
+    ( <https://d-nb.info/gnd/16015541-1> ) # GESIS
+    ( <https://d-nb.info/gnd/16345994-0> ) # IFO
+    ( <https://d-nb.info/gnd/39048-3> )    # RWI
+    ( <https://d-nb.info/gnd/90968-3> )    # WZB
+    ( <https://d-nb.info/gnd/10158795-8> ) # ZBW
+    ( <https://d-nb.info/gnd/2120785-9> )  # ZEW
     
   }
   ?corp gndo:preferredNameForTheCorporateBody ?corpName .

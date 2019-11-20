@@ -1,6 +1,6 @@
 # All GND persons linked to ORCID
 #
-PREFIX gndo:   <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gndo:   <https://d-nb.info/standards/elementset/gnd#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 #
 select *

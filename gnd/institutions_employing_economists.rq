@@ -1,7 +1,7 @@
 # Names of institutions which employ economists
 #
-PREFIX :        <http://d-nb.info/gnd/>
-PREFIX gndo:    <http://d-nb.info/standards/elementset/gnd#>
+PREFIX :        <https://d-nb.info/gnd/>
+PREFIX gndo:    <https://d-nb.info/standards/elementset/gnd#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #

@@ -1,6 +1,6 @@
 # Count Wikidata items linked to GND by GND class
 #
-PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
@@ -14,7 +14,7 @@ where {
       ?wd wdt:P227 ?gndId .
       filter (isLiteral(?gndId))
     }
-    bind (uri(concat('http://d-nb.info/gnd/', ?gndId)) as ?gnd)
+    bind (uri(concat('https://d-nb.info/gnd/', ?gndId)) as ?gnd)
     ?gnd a ?gndoClass .
     bind(1 as ?inWd)
   } union {

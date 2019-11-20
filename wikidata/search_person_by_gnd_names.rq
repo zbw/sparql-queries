@@ -5,7 +5,7 @@
 # (WDQS currently does not support full text search, see
 # https://phabricator.wikimedia.org/T141813)
 #
-PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <http://schema.org/>
 PREFIX text: <http://jena.apache.org/text#>

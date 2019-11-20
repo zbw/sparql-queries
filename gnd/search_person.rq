@@ -3,7 +3,7 @@
 # Uses diverse literal properties, brings the best match on top
 # of the list
 #
-PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
+PREFIX  gndo:   <https://d-nb.info/standards/elementset/gnd#>
 PREFIX  text:   <http://jena.apache.org/text#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #

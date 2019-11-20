@@ -2,9 +2,9 @@
 # (defaults to purely subjects headings)
 #
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX gndsc: <http://d-nb.info/standards/vocab/gnd/gnd-sc#>
+PREFIX gndsc: <https://d-nb.info/standards/vocab/gnd/gnd-sc#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 #
 select (str(max(?scNotation)) as ?notation) ?subjectCategory (str(sample(?label)) as ?subjectCategoryLabel) (str(count(distinct ?concept)) as ?count)
 where {

@@ -1,9 +1,9 @@
 # Geographical distribution of economists (in GND)
 #
-PREFIX :        <http://d-nb.info/gnd/>
-PREFIX gndo:    <http://d-nb.info/standards/elementset/gnd#>
+PREFIX :        <https://d-nb.info/gnd/>
+PREFIX gndo:    <https://d-nb.info/standards/elementset/gnd#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix area: <http://d-nb.info/standards/vocab/gnd/geographic-area-code#>
+prefix area: <https://d-nb.info/standards/vocab/gnd/geographic-area-code#>
 #
 select (str(count(?person)) as ?count) ?area
 where {

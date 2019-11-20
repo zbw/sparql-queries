@@ -1,7 +1,7 @@
 # Information about persons
 #
-PREFIX :        <http://d-nb.info/gnd/>
-PREFIX gndo:    <http://d-nb.info/standards/elementset/gnd#>
+PREFIX :        <https://d-nb.info/gnd/>
+PREFIX gndo:    <https://d-nb.info/standards/elementset/gnd#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 construct {
   ?person gndo:affiliation ?corp ;
@@ -13,7 +13,7 @@ construct {
 where {
   values ( ?person )
   {
-    ( <http://d-nb.info/gnd/124825109> )  # Snower
+    ( <https://d-nb.info/gnd/124825109> )  # Snower
   }
   ?person gndo:affiliation ?corp ;
     gndo:preferredNameForThePerson ?personName ;

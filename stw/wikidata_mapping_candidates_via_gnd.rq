@@ -40,7 +40,7 @@ where {
 #      bind(str(?wikipediaLabelLang) as ?wikipediaLabel)
 #    }
   }
-  bind(uri(concat('http://d-nb.info/gnd/', ?gndId)) as ?gnd)
+  bind(uri(concat('https://d-nb.info/gnd/', ?gndId)) as ?gnd)
   #
   # look up STW descriptors and labels
   ?stw skos:exactMatch ?gnd ;

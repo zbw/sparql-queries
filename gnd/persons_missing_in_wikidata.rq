@@ -1,8 +1,8 @@
 # Extract information for creating missing gnd person items in Wikidata
 #
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
-PREFIX gnd: <http://d-nb.info/gnd/>
-PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gnd: <https://d-nb.info/gnd/>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
@@ -31,7 +31,7 @@ where {
       ?gnd dc:identifier ?mnmId .
       filter(?mnmId < ?maxCheckedId)
       bind(uri(concat('https://tools.wmflabs.org/mix-n-match/#/entry/', ?mnmId)) as ?mnm)
-      bind(strafter(str(?gnd), 'http://d-nb.info/gnd/') as ?gndId)
+      bind(strafter(str(?gnd), 'https://d-nb.info/gnd/') as ?gndId)
     }
   } minus {
     # minus all entries which are linked to WD items

@@ -6,7 +6,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 #PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX schema: <http://schema.org/>
-PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 #
 select ?pm20 ?life ?pm20Label (str(?docCount) as ?count) ?search ('search' as ?searchLabel)
 where {

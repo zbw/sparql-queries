@@ -1,7 +1,7 @@
 # GND persons by profession
 #
-PREFIX :        <http://d-nb.info/gnd/>
-PREFIX gndo:    <http://d-nb.info/standards/elementset/gnd#>
+PREFIX :        <https://d-nb.info/gnd/>
+PREFIX gndo:    <https://d-nb.info/standards/elementset/gnd#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 #
 select (str(count(?person)) as ?count) ?profession (sample(?label) as ?professionLabel)

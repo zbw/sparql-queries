@@ -75,7 +75,7 @@ where {
   optional {
     ?stw skos:exactMatch ?gnd .
     ?gnd dcterms:isPartOf <http://zbw.eu/stw/mapping/gnd/target> .
-    bind(strafter(str(?gnd), 'http://d-nb.info/gnd/') as ?gndId)
+    bind(strafter(str(?gnd), 'https://d-nb.info/gnd/') as ?gndId)
   }
   bind(strafter(str(?stw), str(stw:)) as ?stwId)
 }

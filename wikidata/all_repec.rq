@@ -28,7 +28,7 @@ where {
     ?wd wdt:P496 ?orcidId
   }
   bind(uri(concat('https://authors.repec.org/pro/', ?repecId)) as ?repec)
-  bind(uri(concat('http://d-nb.info/gnd/', ?gndId)) as ?gnd)
+  bind(uri(concat('https://d-nb.info/gnd/', ?gndId)) as ?gnd)
   bind(uri(concat("http://orcid.org/", ?orcidId)) as ?orcid)
 }
 order by ?repecId

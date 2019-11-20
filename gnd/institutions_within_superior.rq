@@ -1,6 +1,6 @@
 # Economics institutions within superior institutions
 #
-PREFIX  gndo:   <http://d-nb.info/standards/elementset/gnd#>
+PREFIX  gndo:   <https://d-nb.info/standards/elementset/gnd#>
 #
 select *
 where {

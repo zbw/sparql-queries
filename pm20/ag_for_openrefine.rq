@@ -6,7 +6,7 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX schema: <http://schema.org/>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX gndo: <http://d-nb.info/standards/elementset/gnd#>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 #
 select distinct ?broaderEn ?id ?labelEn ?labelDe (str(?note) as ?noteDe) ?gndId
 where {

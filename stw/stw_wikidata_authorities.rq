@@ -55,7 +55,7 @@ where {
     }
   }
   bind(uri(concat("http://zbw.eu/stw/descriptor/", $stwId)) as ?stw)
-  bind(uri(concat("http://d-nb.info/gnd/", $gndId)) as ?gnd)
+  bind(uri(concat("https://d-nb.info/gnd/", $gndId)) as ?gnd)
   bind(uri(concat("http://vocabularies.unesco.org/thesaurus/", ?unescoId)) as ?unesco)
   bind(uri(concat("http://vocab.getty.edu/page/aat/", ?aatId)) as ?aat)
   bind(uri(concat("http://vocab.getty.edu/page/tgn/", ?tgnId)) as ?tgn)

@@ -23,7 +23,7 @@ where {
     where {
       ?gnd zbwext:econbizCount ?cnt .
       filter(?cnt > 0)
-      bind(strafter(str(?gnd), 'http://d-nb.info/gnd/') as ?gndId)
+      bind(strafter(str(?gnd), 'https://d-nb.info/gnd/') as ?gndId)
     }
   }
   # join to wikidata and restrict to humans
