@@ -7,7 +7,7 @@ select *
 where {
   ?person a gndo:DifferentiatedPerson ;
           owl:sameAs ?orcid .
-  filter(strstarts(str(?orcid), 'http://orcid.org/'))
+  filter(strstarts(str(?orcid), 'https://orcid.org/'))
   ?person gndo:preferredNameForThePerson ?personLabel .
 }
 order by ?personLabel
