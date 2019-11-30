@@ -1,0 +1,45 @@
+# construct skos:prefLabel and skos:altLabel for gnd
+#
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+construct {
+  ?gnd skos:prefLabel ?prefLabel ;
+    skos:altLabel ?altLabel.
+}
+where {
+  {
+    ?gnd gndo:preferredNameForTheConferenceOrEvent ?pref .
+  } union {
+    ?gnd gndo:preferredNameForTheCorporateBody ?pref .
+  } union {
+    ?gnd gndo:preferredNameForTheFamily ?pref .
+  } union {
+    ?gnd gndo:preferredNameForThePerson ?pref .
+  } union {
+    ?gnd gndo:preferredNameForThePlaceOrGeographicName ?pref .
+  } union {
+    ?gnd gndo:preferredNameForTheSubjectHeading ?pref .
+  } union {
+    ?gnd gndo:preferredNameForTheWork ?pref .
+  }
+  bind (strlang(?pref, 'de') as ?prefLabel)
+  #
+  {
+    ?gnd gndo:variantNameForTheConferenceOrEvent ?alt .
+  } union {
+    ?gnd gndo:variantNameForTheCorporateBody ?alt .
+  } union {
+    ?gnd gndo:variantNameForTheFamily ?alt .
+  } union {
+    ?gnd gndo:variantNameForThePerson ?alt .
+  } union {
+    ?gnd gndo:variantNameForThePlaceOrGeographicName ?alt .
+  } union {
+    ?gnd gndo:variantNameForTheSubjectHeading ?alt .
+  } union {
+    ?gnd gndo:variantNameForTheWork ?alt .
+  }
+  bind (strlang(?alt, 'de') as ?altLabel)
+}
+
