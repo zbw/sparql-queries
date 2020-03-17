@@ -1,0 +1,38 @@
+# Persons
+#
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX schema: <http://schema.org/>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
+#
+select distinct ?pm20 ?pm20Label ?life ?nationality
+(group_concat(distinct ?activity; separator='; ') as ?activities)
+(group_concat(distinct ?location; separator='; ') as ?locations) (str(?docCount) as ?count)
+where {
+  {
+    ?pm20 a zbwext:PersonFolder ;
+          skos:prefLabel ?pm20Label ;
+          zbwext:freeDocCount ?docCount ;
+          dcterms:identifier ?pm20Id .
+    filter(?docCount > 0)
+    #
+  }
+  optional {
+    ?pm20 gndo:dateOfBirthAndDeath ?life .
+  }
+  optional {
+    ?pm20 schema:nationality ?nationality .
+  }
+  optional {
+    ?pm20 zbwext:activity/schema:about ?activity .
+  }
+  optional {
+    ?pm20 zbwext:activity/schema:location ?location .
+  }
+}
+group by ?pm20 ?pm20Label ?life ?nationality ?docCount
+order by desc(?docCount)
+
