@@ -5,8 +5,8 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select distinct ?stwId ?concept (str(?prefLabel) AS ?conceptLabel)
-(group_concat(?altLabel; separator = ';') as ?altLabels)
-(group_concat(?broaderId; separator = ';') as ?broaderIds)
+(group_concat(?altLabel; separator = ' | ') as ?altLabels)
+(group_concat(?broaderId; separator = ' | ') as ?broaderIds)
 where {
   values ( ?language ) {
     ( "en" )
