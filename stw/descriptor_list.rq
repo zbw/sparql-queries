@@ -1,0 +1,26 @@
+# List of descriptors, with synonyms
+#
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct ?stwId ?concept (str(?prefLabel) AS ?conceptLabel) (group_concat(?altLabel; separator = ';') as ?altLabels)
+where {
+  values ( ?language ) {
+    ( "en" )
+  }
+  ?concept a zbwext:Descriptor ;
+    skos:prefLabel ?prefLabel .
+  filter (not exists { ?concept owl:deprecated true })
+  filter (lang(?prefLabel) = ?language)
+
+  optional {
+    ?concept skos:altLabel ?altLabel .
+    filter (lang(?altLabel) = ?language)
+  }
+
+  bind(strafter(str(?concept), 'http://zbw.eu/stw/descriptor/') as ?stwId)
+}
+group by ?stwId ?concept ?prefLabel
+ORDER by ?prefLabel ?altLabel
+
