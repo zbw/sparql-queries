@@ -3,7 +3,7 @@
 Query | Description
 ------|------------
 [search_concepts_by_text](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/search_concepts_by_text.rq) | Search concepts by text
-[descriptor_list](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/descriptor_list.rq) | List of descriptors, with synonyms and broader descriptor ids (can be used for downloading a simplified version - monolingual, w/o categories) - of STW as CSV)
+[descriptor_list](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/descriptor_list.rq) | List of descriptors, with synonyms and broader descriptor ids (can be used for downloading a simplified version of STW - monolingual and w/o categories - as CSV file)
 [construct_combined1](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/construct_combined1.rq) | Descriptors, with related and narrower descriptors, and their synonyms, searched via text query (as used for the /combined1 econ-ws service)
 [count_concept_types](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/count_concept_types.rq) | Count STW concept types (descriptor/thsys) 
 [count_altlabels](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/count_altlabels.rq) | Count skos:altLabels of STW descriptors 
