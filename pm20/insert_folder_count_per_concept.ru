@@ -17,9 +17,9 @@ where {
     where {
       values ( ?g ?class ?property ?countProperty ) {
         ( <http://zbw.eu/beta/je/ng> zbwext:SubjectFolder zbwext:subject zbwext:folderCount )
-        ( <http://zbw.eu/beta/ag/ng> zbwext:SubjectFolder zbwext:country zbwext:jeFolderCount )
+        ( <http://zbw.eu/beta/ag/ng> zbwext:SubjectFolder zbwext:country zbwext:shFolderCount )
         ( <http://zbw.eu/beta/ip/ng> zbwext:WareFolder zbwext:ware zbwext:folderCount )
-        ( <http://zbw.eu/beta/ag/ng> zbwext:WareFolder zbwext:country zbwext:ipFolderCount )
+        ( <http://zbw.eu/beta/ag/ng> zbwext:WareFolder zbwext:country zbwext:waFolderCount )
       }
       ?pm20 a ?class ;
             ?property ?concept .

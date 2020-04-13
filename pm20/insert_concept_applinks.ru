@@ -15,9 +15,9 @@ where {
     bind('http://webopac.hwwa.de/PresseMappe20/Digiview_MENU.cfm?T=' as ?linksub1)
     values ( ?vocab ?countProperty ?linksub2 )
     {
-      ( 'ag' zbwext:jeFolderCount 'S&G=' )
+      ( 'ag' zbwext:shFolderCount 'S&G=' )
       ( 'je' zbwext:folderCount 'S&S=' )
-      ( 'ag' zbwext:ipFolderCount 'W&G=' )
+      ( 'ag' zbwext:waFolderCount 'W&G=' )
       ( 'ip' zbwext:folderCount 'W&W=' )
     }
     ?concept ?countProperty ?value .
