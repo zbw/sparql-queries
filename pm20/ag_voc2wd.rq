@@ -1,0 +1,26 @@
+# Insert links to WD into vocab (derived from GND or GeoNames)
+#
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+construct {
+    ?s skos:exactMatch ?wd .
+    ?wd skos:exactMatch ?s .
+}
+where {
+  values ( ?prop ?pm20Property ?wdProperty ) {
+    ( "gnd" gndo:gndIdentifier wdt:P227 )
+  }
+  graph <http://zbw.eu/beta/ag/ng> {
+    ?s skos:prefLabel ?sLabelLang .
+    filter(lang(?sLabelLang) = 'de')
+    bind(str(?sLabelLang) as ?sLabel)
+    ?s gndo:gndIdentifier ?id .
+  }
+  service <http://query.wikidata.org/sparql> {
+    ?wd wdt:P227 ?id .
+  }
+}
