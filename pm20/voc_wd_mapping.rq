@@ -1,0 +1,39 @@
+# Mapping of the countries category system to WD
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?notationLong ?notation ?concept ?conceptLabel ('=' as ?rel) ?wd ?wdLabel
+where {
+  graph <http://zbw.eu/beta/ag/ng> {
+    ?concept a skos:Concept ;
+             skos:exactMatch ?wd ;
+             skos:notation ?notation ;
+             zbwext:notationLong ?notationLong .
+    filter(strstarts(str(?wd), 'http://www.wikidata.org/entity/'))
+    #
+    optional {
+      ?concept skos:prefLabel ?conceptLabelDe .
+      filter(lang( ?conceptLabelDe) = 'de')
+    }
+    optional {
+      ?concept skos:prefLabel ?conceptLabelEn .
+      filter(lang( ?conceptLabelEn) = 'en')
+    }
+    bind(concat(if(bound(?conceptLabelDe), str(?conceptLabelDe), ''), ' | ', if(bound(?conceptLabelEn), str(?conceptLabelEn), '')) as ?conceptLabel)
+  }
+  graph <http://zbw.eu/beta/wikidata/ng> {
+    optional {
+      ?wd rdfs:label ?wdLabelDe .
+      filter(lang( ?wdLabelDe) = 'de')
+    }
+    optional {
+      ?wd rdfs:label ?wdLabelEn .
+      filter(lang( ?wdLabelEn) = 'en')
+    }
+    bind(concat(if(bound(?wdLabelDe), str(?wdLabelDe), ''), ' | ', if(bound(?wdLabelEn), str(?wdLabelEn), '')) as ?wdLabel)
+  }
+}
+order by ?notationLong
+
