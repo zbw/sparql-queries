@@ -1,0 +1,16 @@
+# Get all QIDs of all mapped PM20 vocabulary conceps
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select distinct ?qid
+where {
+  # get wd mappings for all skos concepts in named graphs
+  graph ?g {
+    ?concept a skos:Concept ;
+             skos:exactMatch ?wd .
+    filter(strstarts(str(?wd), 'http://www.wikidata.org/entity/'))
+    bind(strafter(str(?wd), 'http://www.wikidata.org/entity/') as ?qid)
+  }
+}
+

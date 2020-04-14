@@ -1,0 +1,19 @@
+# WD labels for items mapped to concepts (categories)
+# (template - values have to be filled in)
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+construct {
+  ?wd rdfs:label ?label .
+}
+where {
+  values ?qid {
+     'Q2' 
+  }
+  #
+  # get wd mappings for all skos concepts in named graphs
+  bind(uri(concat('http://www.wikidata.org/entity/', ?qid)) as ?wd)
+  ?wd rdfs:label ?label .
+  filter(lang(?label) in ('en', 'de'))
+}
