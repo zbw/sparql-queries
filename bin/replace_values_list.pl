@@ -19,6 +19,8 @@ my $VALUES = read_file($ARGV[1]);
 # Restrictions:
 # - only one values clause
 # - only one single value in the clause
+# Format in query file:
+# - no parentheses for variable and replacements (e.g. 'values ?x { "abc" "xyz" }')
 $QUERY =~ s/ ( \s+ values \s+ .*? \s+ { ) .*? \s+ } /$1\n$VALUES\n}/ixms;
 
 print $QUERY;
