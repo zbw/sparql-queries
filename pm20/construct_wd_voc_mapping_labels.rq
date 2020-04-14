@@ -1,5 +1,5 @@
 # WD labels for items mapped to concepts (categories)
-# (template - values have to be filled in)
+# (template - actual bindings for ?qid have to be filled in)
 #
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -9,7 +9,7 @@ construct {
 }
 where {
   values ?qid {
-     'Q2' 
+     "Q2" 
   }
   #
   # get wd mappings for all skos concepts in named graphs
