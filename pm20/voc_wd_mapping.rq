@@ -1,17 +1,19 @@
 # Mapping of the countries category system to WD
 #
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX pm20ag: <http://zbw.eu/beta/pm20voc/ag/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?notationLong ?notation ?concept ?conceptLabel ('=' as ?rel) ?wd ?wdLabel
+select ?notationLong ?notation ?concept ?conceptLabel ('=' as ?rel) ?wd ?wdLabel ?statement
 where {
   graph <http://zbw.eu/beta/ag/ng> {
     ?concept a skos:Concept ;
              skos:exactMatch ?wd ;
              skos:notation ?notation ;
              zbwext:notationLong ?notationLong .
-    filter(strstarts(str(?wd), 'http://www.wikidata.org/entity/'))
+    filter(strstarts(str(?wd), str(wd:)))
     #
     optional {
       ?concept skos:prefLabel ?conceptLabelDe .
@@ -34,6 +36,10 @@ where {
     }
     bind(concat(if(bound(?wdLabelDe), str(?wdLabelDe), ''), ' | ', if(bound(?wdLabelEn), str(?wdLabelEn), '')) as ?wdLabel)
   }
+  # create a exception.remove statement
+  bind(strafter(str(?concept), str(pm20ag:)) as ?conceptId)
+  bind(strafter(str(?wd), str(wd:)) as ?wdId)
+  bind(concat(?conceptId, ",'=',", ?wdId, ",,,") as ?statement)
 }
 order by ?notationLong
 
