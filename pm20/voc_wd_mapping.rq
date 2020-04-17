@@ -39,7 +39,7 @@ where {
   # create a exception.remove statement
   bind(strafter(str(?concept), str(pm20ag:)) as ?conceptId)
   bind(strafter(str(?wd), str(wd:)) as ?wdId)
-  bind(concat(?conceptId, ",'=',", ?wdId, ",,,") as ?statement)
+  bind(concat(?conceptId, ",=,", ?wdId, ",,,") as ?statement)
 }
 order by ?notationLong
 
