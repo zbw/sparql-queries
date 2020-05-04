@@ -6,14 +6,22 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?notationLong ?notation ?notationLabel ?concept ?conceptLabel ('=' as ?rel) ?wd ?wdLabel ?statement
+select distinct ?notationLong ?notation ?notationLabel ?concept ?conceptLabel ?rel ?wd ?wdLabel ?statement
 where {
+  values ( ?rel ?relChr ) {
+    (skos:exactMatch "=")
+    (skos:narrowMatch ">")
+    (skos:broadMatch "<")
+    (skos:closeMatch "*")
+    (skos:relatedMatch "^")
+  }
   graph <http://zbw.eu/beta/ag/ng> {
     ?concept a skos:Concept ;
-             skos:exactMatch ?wd ;
+             ?rel ?wd ;
              skos:notation ?notationLabel ;
              zbwext:notationLong ?notationLong .
     filter(strstarts(str(?wd), str(wd:)))
+    bind(uri(concat('http://zbw.eu/beta/pm20sig/geo/', ?notationLabel)) as ?notation)
     #
     optional {
       ?concept skos:prefLabel ?conceptLabelDe .
@@ -36,11 +44,10 @@ where {
     }
     bind(concat(if(bound(?wdLabelDe), str(?wdLabelDe), ''), ' | ', if(bound(?wdLabelEn), str(?wdLabelEn), '')) as ?wdLabel)
   }
-  bind(uri(concat('http://zbw.eu/beta/pm20sig/geo/', ?notationLabel)) as ?notation)
   # create a exception.remove statement
   bind(strafter(str(?concept), str(pm20ag:)) as ?conceptId)
   bind(strafter(str(?wd), str(wd:)) as ?wdId)
-  bind(concat(?conceptId, ",=,", ?wdId, ",,,") as ?statement)
+  bind(concat(?conceptId, ",", ?relChr, ",", ?wdId, ",,,") as ?statement)
 }
 order by ?notationLong
 
