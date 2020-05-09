@@ -6,7 +6,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select distinct ?notationLong ?notation ?notationLabel ?concept ?conceptLabel ?rel ?wd ?wdLabel ?statement
+select distinct ?notationLong ?notation ?notationLabel ?concept ?conceptLabel ?rel (?relChr as ?relLabel) ?wd ?wdLabel ?statement
 where {
   values ( ?rel ?relChr ) {
     (skos:exactMatch "=")
