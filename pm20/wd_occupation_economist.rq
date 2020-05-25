@@ -10,10 +10,10 @@ select distinct ?qid ?occupationQid ?pm20 ?pm20Label ?pm20Id ?activity ?docCount
 where {
   #
   values ( ?activity ?occupationQid ) {
-    ( 'Wirtschaftswissenschaft' 'Q188094' )
-    ( 'Betriebswirtschaftslehre' 'Q1860032' )
-    ( 'Sozialwissenschaft' 'Q15319501' )
-    ( 'Geowissenschaft' 'Q11424604' )
+    ( 'Wirtschaftswissenschaft'@de 'Q188094' )
+    ( 'Betriebswirtschaftslehre'@de 'Q1860032' )
+    ( 'Sozialwissenschaft'@de 'Q15319501' )
+    ( 'Geowissenschaft'@de 'Q11424604' )
   }
   service <https://query.wikidata.org/sparql> {
     bind(uri(concat(str(wd:), ?occupationQid)) as ?occupation)

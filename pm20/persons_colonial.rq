@@ -23,7 +23,7 @@ where {
     }
   }
   ?pm20 a zbwext:PersonFolder ;
-        zbwext:activity [ schema:about 'Kolonialwesen' ;
+        zbwext:activity [ schema:about 'Kolonialwesen'@de ;
                           schema:location ?locationOfActivity ] ;
       skos:prefLabel ?pm20Label .
   optional {
