@@ -29,26 +29,26 @@ where {
   # get item data
   {
     ?wd wdt:P4293 ?pm20Id .
-  } union {
-    service <http://zbw.eu/beta/sparql/pm20/query> {
-      ?s gndo:gndIdentifier ?gndId .
-    }
-    ?wd wdt:P227 ?gndId .
-  } union {
-    service <http://zbw.eu/beta/sparql/pm20/query> {
-      ?s zbwext:geoIdentifier ?geoId .
-    }
-    ?wd wdt:P1566 ?geoId .
+#  } union {
+#    service <http://zbw.eu/beta/sparql/pm20/query> {
+#      ?s gndo:gndIdentifier ?gndId .
+#    }
+#    ?wd wdt:P227 ?gndId .
+#  } union {
+#    service <http://zbw.eu/beta/sparql/pm20/query> {
+#      ?s zbwext:geoIdentifier ?geoId .
+#    }
+#    ?wd wdt:P1566 ?geoId .
   }
   #
   # get labels and additional fields
-  ?wd rdfs:label ?wdLabelLang .
-  filter(lang(?wdLabelLang) = 'en' || lang(?wdLabelLang) = 'de')
+#  ?wd rdfs:label ?wdLabelLang .
+#  filter(lang(?wdLabelLang) = 'en' || lang(?wdLabelLang) = 'de')
   #
   # get Wikipedia pages
   ?page schema:about ?wd ;
-        schema:name ?name ;
         schema:isPartOf ?wikipedia ;
+        schema:name ?name ;
         schema:inLanguage ?lang .
-  filter(lang(?wdLabelLang) = ?lang)
+#  filter(lang(?wdLabelLang) = ?lang)
 }
