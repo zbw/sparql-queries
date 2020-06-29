@@ -11,16 +11,16 @@
         "withWd": { "type": "literal" , "value": "2534" } ,
         "withWdAndDocs": { "type": "literal" , "value": "1961" } ,
         "percentage": { "type": "literal" , "value": "23.5 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2020-05-30 || 42256 || 8350 || 2534 || 1961 || 23.5 %" }
+        "statsLine": { "type": "literal" , "value": "| 2020-06-29 || 42256 || 8350 || 2534 || 1961 || 23.5 %" }
       } ,
       {
         "type": { "type": "literal" , "value": "pe" } ,
         "totalCount": { "type": "literal" , "value": "16654" } ,
         "withDocs": { "type": "literal" , "value": "5284" } ,
-        "withWd": { "type": "literal" , "value": "9645" } ,
+        "withWd": { "type": "literal" , "value": "9675" } ,
         "withWdAndDocs": { "type": "literal" , "value": "5284" } ,
         "percentage": { "type": "literal" , "value": "100.0 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2020-05-30 || 16654 || 5284 || 9645 || 5284 || 100.0 %" }
+        "statsLine": { "type": "literal" , "value": "| 2020-06-29 || 16654 || 5284 || 9675 || 5284 || 100.0 %" }
       } ,
       {
         "type": { "type": "literal" , "value": "sh" } ,
@@ -29,7 +29,7 @@
         "withWd": { "type": "literal" , "value": "38" } ,
         "withWdAndDocs": { "type": "literal" , "value": "38" } ,
         "percentage": { "type": "literal" , "value": "0.4 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2020-05-30 || 9204 || 9065 || 38 || 38 || 0.4 %" }
+        "statsLine": { "type": "literal" , "value": "| 2020-06-29 || 9204 || 9065 || 38 || 38 || 0.4 %" }
       } ,
       {
         "type": { "type": "literal" , "value": "wa" } ,
@@ -38,7 +38,7 @@
         "withWd": { "type": "literal" , "value": "8" } ,
         "withWdAndDocs": { "type": "literal" , "value": "8" } ,
         "percentage": { "type": "literal" , "value": "0.3 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2020-05-30 || 2891 || 2890 || 8 || 8 || 0.3 %" }
+        "statsLine": { "type": "literal" , "value": "| 2020-06-29 || 2891 || 2890 || 8 || 8 || 0.3 %" }
       }
     ]
   }
