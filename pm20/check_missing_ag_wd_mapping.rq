@@ -1,0 +1,30 @@
+# Check for missing entries in the mapping of the countries category system to WD
+#
+PREFIX pm20ag: <http://zbw.eu/beta/pm20voc/ag/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct ?concept ?notationLabel ?wd 
+where {
+  values (?known_unmapped) {
+    # see comments in ite-srv24:/opt/pm20x/var/mapping/ag_wd/readme.txt
+    ( pm20ag:157538 ) # HWWA-Ländersystematik
+    ( pm20ag:206753 ) # A10n
+    ( pm20ag:141036 ) # A44
+    ( pm20ag:141390 ) # C37
+  }
+  graph <http://zbw.eu/beta/ag/ng> {
+    ?concept a skos:Concept ;
+             skos:notation ?notationLabel ;
+             zbwext:notationLong ?notationLong .
+  filter(not exists {
+      ?concept skos:exactMatch ?wd .
+      filter(strstarts(str(?wd), str(wd:)))
+    })
+    ## does not work!!
+    ##filter(?concept not in (?known_unmapped))
+  }
+      
+}
