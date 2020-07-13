@@ -6,9 +6,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-select ?notationLong ?signature ?country ?countryLabel 
-?shCount (str(sum(?shCnt)) as ?shCountLabel)
-?waCount (str(sum(?waCnt)) as ?waCountLabel)
+select ?notationLong ?signature ?country ?countryLabel ?note ?shCount ?shCountLabel ?waCount ?waCountLabel
 where {
   graph  <http://zbw.eu/beta/ag/ng>  {
     values ( ?lang ) {
@@ -18,19 +16,24 @@ where {
              skos:notation ?signature ;
              zbwext:notationLong ?notationLong ;
              skos:prefLabel ?countryLabelLang .
+    optional {
+      ?country zbwext:shFolderCount ?shCnt .
+      bind(str(?shCnt) as ?shCountLabel)
+    }
+    optional {
+      ?country zbwext:waFolderCount ?waCnt .
+      bind(str(?waCnt) as ?waCountLabel)
+    }
+    optional {
+      ?country skos:scopeNote ?noteLang .
+      filter(lang(?noteLang) = ?lang)
+      bind(str(?noteLang) as ?note)
+    }
     filter(lang(?countryLabelLang) = ?lang)
     bind(str(?countryLabelLang) as ?countryLabel)
   }
-  optional {
-    ?pm20 zbwext:country ?country ;
-          zbwext:freeDocCount ?docCount .
-    bind(if(contains(str(?pm20), '/sh/'), 1, 0) as ?shCnt)
-    bind(if(contains(str(?pm20), '/wa/'), 1, 0) as ?waCnt)
-  }
   bind(if(?shCnt > 0, uri(concat('http://webopac.hwwa.de/PresseMappe20/Digiview_MENU.cfm?T=S&G=', ?countryId)), '-') as ?shCount)
   bind(if(?waCnt > 0, uri(concat('http://webopac.hwwa.de/PresseMappe20/Digiview_MENU.cfm?T=W&G=', ?countryId)), '-') as ?waCount)
-
 }
-group by ?signature ?notationLong ?country ?countryLabel ?shCount ?waCount
 order by ?notationLong
 
