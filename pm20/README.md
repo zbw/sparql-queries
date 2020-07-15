@@ -31,6 +31,7 @@ Query | Description
 [ip_for_openrefine](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/ip_for_openrefine.rq) | PM20 ware classification prepared for CSV ouput and matching in OpenRefine
 [geo_by_signature](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/geo_by_signature.rq) | Systematic list of geo categories
 [voc_wd_mapping](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/voc_wd_mapping.rq) | Mapping of countries category system to WD
+[add_category_code](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/add_category_code.rq) | Statements for adding missing category codes to Wikidata
 
 ### Controlled vocabularies (parameterized queries)
 

@@ -1,0 +1,57 @@
+# Get PM20 category codes for WD items mapped to PM20
+#
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX ag: <http://zbw.eu/beta/pm20voc/ag/>
+#
+select ?wd ?wdLabel ?rel ?relProp ?signature ?category ?categoryLabel ?qsStatement
+where {
+  values ( ?rel ?relProp ) {
+    ( skos:exactMatch 'Q39893449' )
+    ( skos:closeMatch 'Q39893184' )
+    ( skos:relatedMatch 'Q39894604' )
+    # the following two statements are reversed due to
+    # direction in the source data
+    ( skos:broadMatch 'Q39893967' )
+    ( skos:narrowMatch 'Q39894595' )
+  }
+  # TODO exclude existing Signatures in WD
+  graph <http://zbw.eu/beta/ag/ng> {
+    ?category a skos:Concept ;
+              ?rel ?wd ;
+              skos:prefLabel ?categoryLabelLang ;
+              skos:notation ?signature .
+    filter(strstarts(str(?wd), str(wd:)))
+    filter(lang(?categoryLabelLang) = 'de')
+    bind(str(?categoryLabelLang) as ?categoryLabel)
+    #
+    # restrict to categories used for sh or wa folders
+    optional {
+      ?category zbwext:shFolderCount ?shCnt .
+    }
+    optional {
+      ?category zbwext:waFolderCount ?waCnt .
+    }
+    filter(bound(?shCnt) || bound(?waCnt))
+    # remove root entry of category system
+    filter(?signature != 'AG')
+  }
+  # add Wikidata labels (informative)
+  graph <http://zbw.eu/beta/wikidata/ng> {
+    ?wd rdfs:label ?wdLabelLang .
+    filter(lang(?wdLabelLang) = 'de')
+    bind(str(?wdLabelLang) as ?wdLabel)
+  }
+  #
+  # QS statement (QS does not work for unknown values!)
+  bind(concat(strafter(str(?wd), str(wd:)),'|P4293|"', ?signature,
+      ## TODO use perhaps English label? Or both?
+      ##'"|P1810|"', ?categoryLabel,
+      '"|P4390|', ?relProp) as ?qsStatement)
+}
+order by ?wdLabel
+
