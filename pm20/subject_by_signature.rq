@@ -1,0 +1,39 @@
+# Systematic subject category list
+#
+PREFIX schema: <http://schema.org/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select ?notationLong ?signature ?category ?categoryLabel ?note ?count ?countLabel
+where {
+  graph  <http://zbw.eu/beta/je/ng> {
+    values ( ?lang ) {
+      ( 'de' )
+    }
+    ?category dct:identifier ?categoryId ;
+              skos:notation ?signature ;
+              zbwext:notationLong ?notationLong ;
+              skos:prefLabel ?categoryLabelLang .
+    # remove root entry of category system
+    filter(?signature != 'JE')
+    # TODO temporarily remove entries not starting with [a-z]
+    filter(regex(?signature, '^[a-z]'))
+    #
+    optional {
+      ?category zbwext:folderCount ?cnt .
+      bind(str(?cnt) as ?countLabel)
+    }
+    optional {
+      ?category skos:scopeNote ?noteLang .
+      filter(lang(?noteLang) = ?lang)
+      bind(str(?noteLang) as ?note)
+    }
+    filter(lang(?categoryLabelLang) = ?lang)
+    bind(str(?categoryLabelLang) as ?categoryLabel)
+  }
+  bind(if(?cnt > 0, uri(concat('http://webopac.hwwa.de/PresseMappe20/Digiview_MENU.cfm?T=S&S=', ?categoryId)), '-') as ?count)
+}
+order by ?notationLong
+
