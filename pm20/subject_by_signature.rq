@@ -9,7 +9,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 select ?notationLong ?signature ?category ?categoryLabel ?note ?count ?countLabel
 where {
   graph  <http://zbw.eu/beta/je/ng> {
-    values ( ?lang ) {
+    values ( ?language ) {
       ( 'de' )
     }
     ?category dct:identifier ?categoryId ;
@@ -27,10 +27,10 @@ where {
     }
     optional {
       ?category skos:scopeNote ?noteLang .
-      filter(lang(?noteLang) = ?lang)
+      filter(lang(?noteLang) = ?language)
       bind(str(?noteLang) as ?note)
     }
-    filter(lang(?categoryLabelLang) = ?lang)
+    filter(lang(?categoryLabelLang) = ?language)
     bind(str(?categoryLabelLang) as ?categoryLabel)
   }
   bind(if(?cnt > 0, uri(concat('http://webopac.hwwa.de/PresseMappe20/Digiview_MENU.cfm?T=S&S=', ?categoryId)), '-') as ?count)
