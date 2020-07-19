@@ -13,11 +13,13 @@ where {
         zbwext:subject ?subject ;
         zbwext:freeDocCount ?docCount .
   graph <http://zbw.eu/beta/je/ng> {
-    ?subject skos:notation ?subjectNta .
+    ?subject skos:notation ?subjectNta ;
+             zbwext:notationLong ?subjectNtaLong .
   }
   graph <http://zbw.eu/beta/ag/ng> {
     ?country skos:notation ?geoNta .
+             zbwext:notationLong ?geoNtaLong .
   }
 }
-order by ?geoNta ?subjectNta
+order by ?geoNtaLong ?subjectNtaLong
 
