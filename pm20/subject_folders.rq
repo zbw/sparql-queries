@@ -17,7 +17,7 @@ where {
              zbwext:notationLong ?subjectNtaLong .
   }
   graph <http://zbw.eu/beta/ag/ng> {
-    ?country skos:notation ?geoNta .
+    ?country skos:notation ?geoNta ;
              zbwext:notationLong ?geoNtaLong .
   }
 }
