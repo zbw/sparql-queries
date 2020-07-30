@@ -1,0 +1,52 @@
+# Create a table of je entries for OpenRefine
+# (je = Alte HWWA Sachklassifikation)
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX schema: <http://schema.org/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
+#
+select distinct ?id ?notation ?labelDe ?labelEn (str(count(distinct ?pm20)) as ?cnt) # (str(?note) as ?noteDe)
+ ?s
+where {
+  graph <http://zbw.eu/beta/je/ng> {
+    ?s skos:prefLabel ?labelLangDe ;
+       skos:notation ?notation ;
+       zbwext:notationLong ?notationLong ;
+       dct:identifier ?id .
+    filter(lang(?labelLangDe) = 'de')
+    bind(str(?labelLangDe) as ?labelDe)
+    optional {
+      ?s skos:prefLabel ?labelLangEn .
+      filter(lang(?labelLangEn) = 'en')
+      bind(str(?labelLangEn) as ?labelEn)
+    }
+    #
+    # gnd for indirect mapping
+#    optional {
+#      ?s gndo:gndIdentifier ?gndId .
+#    }
+    #
+#    filter(not exists {
+#        ?s skos:exactMatch ?wd .
+#        filter(contains(str(?wd), 'wikidata'))
+#      }
+#    )
+    optional {
+      ?broader skos:narrower ?s ;
+               skos:prefLabel ?broaderLangDe .
+      filter(lang(?broaderLangDe) = 'de')
+      bind(str(?broaderLangDe) as ?broaderDe)
+    }
+    optional {
+      ?s skos:note ?note .
+      filter(!contains(?note, 'folderCount'))
+    }
+  }
+  ?pm20 zbwext:subject ?s .
+}
+group by ?s ?broaderDe ?id ?notation ?labelEn ?labelDe ?gndId
+order by ?notationLong ?id
+
