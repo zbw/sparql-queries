@@ -8,14 +8,17 @@ PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 #
-select distinct ?id ?notation ?labelDe ?labelEn (str(count(distinct ?pm20)) as ?cnt) # (str(?note) as ?noteDe)
- ?s
+select distinct ?id ?notationLong ?notation ?labelDe ?labelEn (str(count(distinct ?pm20)) as ?cnt)
 where {
   graph <http://zbw.eu/beta/je/ng> {
     ?s skos:prefLabel ?labelLangDe ;
        skos:notation ?notation ;
        zbwext:notationLong ?notationLong ;
        dct:identifier ?id .
+
+    # restrict to subset of 2nd level entries
+    #filter(strlen(?notationLong) = 4 || strlen(?notationLong) =5)
+
     filter(lang(?labelLangDe) = 'de')
     bind(str(?labelLangDe) as ?labelDe)
     optional {
@@ -47,6 +50,6 @@ where {
   }
   ?pm20 zbwext:subject ?s .
 }
-group by ?s ?broaderDe ?id ?notation ?labelEn ?labelDe ?gndId
+group by ?s ?id ?notation ?notationLong ?labelEn ?labelDe
 order by ?notationLong ?id
 
