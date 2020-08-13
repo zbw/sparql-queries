@@ -20,27 +20,36 @@ where {
     ( skos:broadMatch 'Q39893967' )
     ( skos:narrowMatch 'Q39894595' )
   }
-  # TODO exclude existing Signatures in WD
-  graph <http://zbw.eu/beta/ag/ng> {
-    ?category a skos:Concept ;
-              ?rel ?wd ;
-              skos:prefLabel ?categoryLabelLang ;
-              skos:notation ?signature .
-    filter(strstarts(str(?wd), str(wd:)))
-    filter(lang(?categoryLabelLang) = 'en')
-    bind(str(?categoryLabelLang) as ?categoryLabel)
-    #
-    # restrict to categories used for sh or wa folders
-    optional {
-      ?category zbwext:shFolderCount ?shCnt .
+  # exclude existing signatures in WD
+  {
+    graph <http://zbw.eu/beta/ag/ng> {
+      ?category a skos:Concept ;
+                ?rel ?wd ;
+                skos:prefLabel ?categoryLabelLang ;
+                skos:notation ?signature .
+      filter(strstarts(str(?wd), str(wd:)))
+      filter(lang(?categoryLabelLang) = 'en')
+      bind(str(?categoryLabelLang) as ?categoryLabel)
+      #
+      # restrict to categories used for sh or wa folders
+      optional {
+        ?category zbwext:shFolderCount ?shCnt .
+      }
+      optional {
+        ?category zbwext:waFolderCount ?waCnt .
+      }
+      filter(bound(?shCnt) || bound(?waCnt))
+      # for now, restrict to sh
+      filter(bound(?shCnt))
+      # remove root entry of category system
+      filter(?signature != 'AG')
     }
-    optional {
-      ?category zbwext:waFolderCount ?waCnt .
+  } minus {
+    service <https://query.wikidata.org/sparql> {
+      ?wd wdt:P8483 ?signature .
     }
-    filter(bound(?shCnt) || bound(?waCnt))
-    # remove root entry of category system
-    filter(?signature != 'AG')
   }
+  #
   # add Wikidata labels (informative)
   graph <http://zbw.eu/beta/wikidata/ng> {
     ?wd rdfs:label ?wdLabelLang .
