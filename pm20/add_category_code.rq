@@ -1,4 +1,5 @@
 # Get PM20 category codes for WD items mapped to PM20
+# here: ag vocab and PM20 geo code (P8483)
 #
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -26,7 +27,7 @@ where {
               skos:prefLabel ?categoryLabelLang ;
               skos:notation ?signature .
     filter(strstarts(str(?wd), str(wd:)))
-    filter(lang(?categoryLabelLang) = 'de')
+    filter(lang(?categoryLabelLang) = 'en')
     bind(str(?categoryLabelLang) as ?categoryLabel)
     #
     # restrict to categories used for sh or wa folders
@@ -43,14 +44,14 @@ where {
   # add Wikidata labels (informative)
   graph <http://zbw.eu/beta/wikidata/ng> {
     ?wd rdfs:label ?wdLabelLang .
-    filter(lang(?wdLabelLang) = 'de')
+    filter(lang(?wdLabelLang) = 'en')
     bind(str(?wdLabelLang) as ?wdLabel)
   }
   #
   # QS statement (QS does not work for unknown values!)
-  bind(concat(strafter(str(?wd), str(wd:)),'|P4293|"', ?signature,
+  bind(concat(strafter(str(?wd), str(wd:)),'|P8483|"', ?signature,
       ## TODO use perhaps English label? Or both?
-      ##'"|P1810|"', ?categoryLabel,
+      '"|P1810|"', ?categoryLabel,
       '"|P4390|', ?relProp) as ?qsStatement)
 }
 order by ?wdLabel
