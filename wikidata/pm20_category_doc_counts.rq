@@ -1,0 +1,30 @@
+# Aggregated document counts by category from all folders
+#
+PREFIX schema: <http://schema.org/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+service <http://zbw.eu/beta/sparql/pm20/query>
+  select ?signature ?country ?countryLabel (str(?shCnt) as ?shCount) (str(sum(?totalDocCount)) as ?total) (str(sum(?freeDocCount)) as ?free) ?complete
+  where {
+    graph  <http://zbw.eu/beta/ag/ng>  {
+      values ( ?language ) {
+        ( 'de' )
+      }
+      ?country dct:identifier ?countryId ;
+              skos:notation ?signature ;
+              zbwext:folderComplete ?complete ;
+              zbwext:notationLong ?notationLong ;
+              skos:prefLabel ?countryLabelLang ;
+              zbwext:shFolderCount ?shCnt .
+      filter(lang(?countryLabelLang) = ?language)
+      bind(str(?countryLabelLang) as ?countryLabel)
+    }
+    ?pm20 zbwext:country ?country .
+    ?pm20 zbwext:freeDocCount ?freeDocCount ;
+          zbwext:totalDocCount ?totalDocCount .
+  }
+  group by ?country ?countryLabel ?signature ?shCnt ?complete
+}
