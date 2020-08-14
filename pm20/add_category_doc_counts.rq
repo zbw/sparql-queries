@@ -14,9 +14,8 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       }
       ?country dct:identifier ?countryId ;
               skos:notation ?signature ;
-              zbwext:folderComplete ?complete ;
-              zbwext:notationLong ?notationLong ;
               skos:prefLabel ?countryLabelLang ;
+              zbwext:foldersComplete ?complete ;
               zbwext:shFolderCount ?shCnt .
       filter(lang(?countryLabelLang) = ?language)
       bind(str(?countryLabelLang) as ?countryLabel)
