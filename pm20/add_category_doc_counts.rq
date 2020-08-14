@@ -44,8 +44,10 @@ where {
     })
   }
 
-  #
-  bind(if(?complete = 'Y', str(?totalCnt), 'somevalue') as ?numberWorks)
+  # since all digitized data up to 1960 has to be considered, almost all folders are incomplete.
+  # therefore, use 'unknown value' everywhere.
+  ## bind(if(?complete = 'Y', str(?totalCnt), 'somevalue') as ?numberWorks)
+  bind( 'somevalue' as ?numberWorks)
   bind(concat(strafter(str(?item), '/entity/'),'|P8483|"',?signature,
       '"|P3740|', ?numberWorks, '|P5592|', ?accessibleOnline) as ?qsStatement)
 }
