@@ -6,7 +6,6 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-service <http://zbw.eu/beta/sparql/pm20/query>
   select ?signature ?country ?countryLabel (str(?shCnt) as ?shCount) (str(sum(?totalDocCount)) as ?total) (str(sum(?freeDocCount)) as ?free) ?complete
   where {
     graph  <http://zbw.eu/beta/ag/ng>  {
@@ -27,4 +26,3 @@ service <http://zbw.eu/beta/sparql/pm20/query>
           zbwext:totalDocCount ?totalDocCount .
   }
   group by ?country ?countryLabel ?signature ?shCnt ?complete
-}

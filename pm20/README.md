@@ -35,6 +35,7 @@ Query | Description
 [ware_by_signature](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/ware_by_signature.rq) | Systematic list of ware categories
 [voc_wd_mapping](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/voc_wd_mapping.rq) | Mapping of countries category system to WD
 [add_category_code](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/add_category_code.rq) | Statements for adding missing category codes to Wikidata
+[add_category_doc_counts](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/add_category_doc_counts.rq) | Get aggregated document counts (free and total) for folders connected to WD items by category for adding to Wikidata
 
 ### Controlled vocabularies (parameterized queries)
 
