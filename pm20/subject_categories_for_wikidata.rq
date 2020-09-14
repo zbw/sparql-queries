@@ -1,0 +1,44 @@
+# Extract information for creating category items in Wikidata
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+select ?notationLong ?labelDe ?labelEn
+('Systematikstelle des Pressearchiv 20. Jahrhundert' as ?descrDe)
+('subject category of the 20th Century Press Archives' as ?descrEn)
+(concat(?subjectCode, ' ', ?labelDe) as ?aliasDe)
+(concat(?subjectCode, ' ', ?labelEn) as ?aliasEn)
+?subjectCode ('Q92707903' as ?classQid) ('Q92732036' as ?partOf)
+where {
+  #
+  graph <http://zbw.eu/beta/je/ng> {
+    ?cat a skos:Concept ;
+      zbwext:notationLong ?notationLong ;
+      skos:notation ?subjectCode .
+    ?cat skos:prefLabel ?labelDeX .
+    filter(lang(?labelDeX) = 'de')
+    bind(str(?labelDeX) as ?labelDe)
+    optional {
+      ?cat skos:prefLabel ?labelEnX .
+      filter(lang(?labelEnX) = 'en')
+      bind(str(?labelEnX) as ?labelEn)
+    }
+    # restriction to real notations (no keywords)
+    filter(regex(?notationLong, "^[a-z]"))
+
+    # filter out special topics for SM
+    filter(!regex(?subjectCode, "^[a-z]0"))
+    filter(!strends(?notationLong, '-'))
+
+    # temporary restriction to upper levels
+    filter(strlen(?notationLong) = 4 || strlen(?notationLong) = 5)
+  #
+  # filter out categories already existing in WD
+  } minus {
+    service <https://query.wikidata.org/sparql> {
+      ?wd wdt:P8484 ?subjectCode .
+    }
+  }
+}
+

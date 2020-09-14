@@ -11,6 +11,10 @@ PREFIX schema: <http://schema.org/>
 SELECT ?type ?pm20 ?pm20Label ?fromTo ?notation (group_concat(distinct ?industry;
     separator='; ') as ?industries) (str(?docCount) as ?docs) (str(?repCount) as ?reports)
 WHERE {
+  # TODO currently only dummy
+  values ( ?language ) {
+    ( 'de' )
+  }
   ?pm20 a zbwext:CompanyFolder ;
         skos:prefLabel ?pm20Label ;
         schema:industry ?industry ;

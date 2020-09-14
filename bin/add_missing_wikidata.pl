@@ -173,8 +173,8 @@ Readonly my %CONFIG => (
     },
     properties => {
       P27 => {
-        query    => path('/opt/sparql-queries/pm20/wd_citizenship.rq'),
-        var_name => 'countryQid',
+        query      => path('/opt/sparql-queries/pm20/wd_citizenship.rq'),
+        var_name   => 'countryQid',
         value_type => 'item',
       },
       P31 => {
@@ -209,6 +209,35 @@ Readonly my %CONFIG => (
       },
     },
   },
+
+  pm20_subject_category => {
+    source     => 'pm20',
+    label_type => 'category',
+    query =>
+      path('/opt/sparql-queries/pm20/subject_categories_for_wikidata.rq'),
+    label => {
+      de => 'labelDe',
+      en => 'labelEn',
+    },
+    descr => {
+      de => 'descrDe',
+      en => 'descrEn',
+    },
+    alias => {
+      de => 'aliasDe',
+      en => 'aliasEn',
+    },
+    properties => {
+      P31 => {
+        var_name   => 'classQid',
+        value_type => 'item',
+      },
+      P8484 => {
+        var_name   => 'subjectCode',
+        value_type => 'literal',
+      },
+    },
+  },
 );
 
 # evaluate commandline arguments
@@ -230,7 +259,7 @@ if ( $mode eq 'enhance'
 }
 
 # output file derived from query file, plus date for repeated runs
-my $prop_cfg = $config->{properties}{$property};
+my $prop_cfg;
 my ( $queryfile, $outfile, $query );
 if ( $mode eq 'create' ) {
   $queryfile = $config->{query};
@@ -238,12 +267,13 @@ if ( $mode eq 'create' ) {
   $outfile   = $queryfile->parent->child('results')
     ->child( $queryfile->basename('.rq') . ".${TODAY}.qs.txt" );
 } else {
+  $prop_cfg = $config->{properties}{$property};
   if ( $prop_cfg->{query} ) {
     $queryfile = $prop_cfg->{query};
     $query     = $queryfile->slurp;
   } else {
     $queryfile = $src_cfg->{default_property_query};
-    $query = adapt_default_query( $queryfile->slurp, $property );
+    $query     = adapt_default_query( $queryfile->slurp, $property );
   }
 
   $outfile =
@@ -277,7 +307,8 @@ eval {
   $result_data = decode_json($json);
 };
 if ($@) {
-  die "Error parsing response from $endpoint: ", $client->responseContent(), "\n";
+  die "Error parsing response from $endpoint: ", $client->responseContent(),
+    "\n";
 }
 
 my $count = 0;
@@ -285,15 +316,19 @@ my $fh    = $outfile->openw_utf8;
 foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
 
   # set record specific reference statement
-  my $entry_source_id    = quote( $entry->{ $config->{source_id} }{value} );
-  my $entry_source_title = quote( $entry->{ $config->{source_title} }{value} );
-  my $reference_statement =
-      $src_cfg->{source_qid}
-    . $src_cfg->{source_id}
-    . $entry_source_id
-    . $NAMED_AS
-    . $entry_source_title
-    . $RETRIEVED;
+  my $reference_statement = '';
+  if ( $config->{source_id} ) {
+    my $entry_source_id = quote( $entry->{ $config->{source_id} }{value} );
+    my $entry_source_title =
+      quote( $entry->{ $config->{source_title} }{value} );
+    $reference_statement =
+        $src_cfg->{source_qid}
+      . $src_cfg->{source_id}
+      . $entry_source_id
+      . $NAMED_AS
+      . $entry_source_title
+      . $RETRIEVED;
+  }
 
   if ( $mode eq 'create' ) {
 
@@ -318,9 +353,12 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
     }
 
     # output source property (without reference)
-    print $fh 'LAST|'
-      . $src_cfg->{source_property} . '|'
-      . quote( $entry->{ $config->{source_id} }{value} ) . "\n";
+    # (if a source should be given)
+    if ( $config->{source_id} ) {
+      print $fh 'LAST|'
+        . $src_cfg->{source_property} . '|'
+        . quote( $entry->{ $config->{source_id} }{value} ) . "\n";
+    }
 
     # output properties
     foreach my $property ( keys $config->{properties} ) {
