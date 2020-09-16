@@ -1,0 +1,55 @@
+# Extract information for creating category items in Wikidata
+#
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?pm20Id ?labelDe ?labelEn
+##('Mappe aus dem Pressearchiv 20. Jahrhundert' as ?descrDe)
+##('folder of the 20th Century Press Archives' as ?descrEn)
+##(concat(?subjectCode, ' ', ?labelDe) as ?aliasDe)
+##(concat(?subjectCode, ' ', ?labelEn) as ?aliasEn)
+?countryCode ?subjectCode ('Q91257459' as ?classQid) ('Q36948990' as ?partOf)
+?wdCountry ?wdSubject
+where {
+  {
+    # main table
+    ?pm20 a zbwext:SubjectFolder ;
+          dct:identifier ?pm20Id ;
+          zbwext:country ?country ;
+          zbwext:subject ?subject .
+    #
+    # subjects
+    graph <http://zbw.eu/beta/je/ng> {
+      ?subject a skos:Concept ;
+               zbwext:notationLong ?notationLong ;
+               skos:notation ?subjectCode .
+      ?subject skos:prefLabel ?labelDeX .
+      filter(lang(?labelDeX) = 'de')
+      bind(str(?labelDeX) as ?labelDe)
+      optional {
+        ?subject skos:prefLabel ?labelEnX .
+        filter(lang(?labelEnX) = 'en')
+        bind(str(?labelEnX) as ?labelEn)
+      }
+      # restriction to real notations (no keywords)
+      filter(regex(?notationLong, "^[a-z]"))
+      #
+      # filter out special topics for SM
+      filter(!regex(?subjectCode, "^[a-z]0"))
+      filter(!strends(?notationLong, '-'))
+      #
+      # temporary restriction to upper levels
+      filter(strlen(?notationLong) = 4 || strlen(?notationLong) = 5)
+    }
+  } minus {
+    # filter out folders already existing in WD
+    service <https://query.wikidata.org/sparql> {
+      ?wd wdt:P31 wd:Q91257459 ;
+          wdt:P4293 ?pm20Id .
+    }
+  }
+}
+
