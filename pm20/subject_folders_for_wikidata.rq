@@ -1,4 +1,4 @@
-# Extract information for creating category items in Wikidata
+# Extract information for creating subject folder items in Wikidata
 #
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -9,8 +9,8 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 select ?pm20Id ?labelDe ?labelEn
 ##('Mappe aus dem Pressearchiv 20. Jahrhundert' as ?descrDe)
 ##('folder of the 20th Century Press Archives' as ?descrEn)
-##(concat(?subjectCode, ' ', ?labelDe) as ?aliasDe)
-##(concat(?subjectCode, ' ', ?labelEn) as ?aliasEn)
+##(concat(?countryCode, ' ', ?subjectCode) as ?aliasDe)
+##(concat(?countryCode, ' ', ?subjectCode) as ?aliasEn)
 ?countryCode ?subjectCode ('Q91257459' as ?classQid) ('Q36948990' as ?partOf)
 ?wdCountry ?wdSubject
 where {
@@ -21,28 +21,42 @@ where {
           zbwext:country ?country ;
           zbwext:subject ?subject .
     #
+    # countries
+    graph <http://zbw.eu/beta/ag/ng> {
+      ?country a skos:Concept ;
+               zbwext:notationLong ?countryNtaLong ;
+               skos:notation ?countryCode .
+      ?country skos:prefLabel ?countryLabelLangDe .
+      filter(lang(?countryLabelLangDe) = 'de')
+      bind(str(?countryLabelLangDe) as ?countryLabelDe)
+      optional {
+        ?country skos:prefLabel ?countryLabelLangEn .
+        filter(lang(?countryLabelLangEn) = 'en')
+        bind(str(?countryLabelLangEn) as ?countryLabelEn)
+      }
+    }
     # subjects
     graph <http://zbw.eu/beta/je/ng> {
       ?subject a skos:Concept ;
-               zbwext:notationLong ?notationLong ;
+               zbwext:notationLong ?subjectNtaLong ;
                skos:notation ?subjectCode .
-      ?subject skos:prefLabel ?labelDeX .
-      filter(lang(?labelDeX) = 'de')
-      bind(str(?labelDeX) as ?labelDe)
+      ?subject skos:prefLabel ?subjectLabelLangDe .
+      filter(lang(?subjectLabelLangDe) = 'de')
+      bind(str(?subjectLabelLangDe) as ?subjectLabelDe)
       optional {
-        ?subject skos:prefLabel ?labelEnX .
-        filter(lang(?labelEnX) = 'en')
-        bind(str(?labelEnX) as ?labelEn)
+        ?subject skos:prefLabel ?subjectLabelLangEn .
+        filter(lang(?subjectLabelLangEn) = 'en')
+        bind(str(?subjectLabelLangEn) as ?subjectLabelEn)
       }
       # restriction to real notations (no keywords)
-      filter(regex(?notationLong, "^[a-z]"))
+      filter(regex(?subjectNtaLong, "^[a-z]"))
       #
       # filter out special topics for SM
       filter(!regex(?subjectCode, "^[a-z]0"))
-      filter(!strends(?notationLong, '-'))
+      filter(!strends(?subjectNtaLong, '-'))
       #
       # temporary restriction to upper levels
-      filter(strlen(?notationLong) = 4 || strlen(?notationLong) = 5)
+      filter(strlen(?subjectNtaLong) = 4 || strlen(?subjectNtaLong) = 5)
     }
   } minus {
     # filter out folders already existing in WD
@@ -51,5 +65,9 @@ where {
           wdt:P4293 ?pm20Id .
     }
   }
+  bind(concat(?countryLabelDe, ' : ', ?subjectLabelDe) as ?labelDe)
+  bind(concat(?countryLabelEn, ' : ', ?subjectLabelEn) as ?labelEn)
+  bind(concat(?countryNtaLong, ' ', ?subjectNtaLong) as ?notationLong)
 }
+order by ?notationLong
 
