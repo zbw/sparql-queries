@@ -9,7 +9,8 @@ select ?notationLong ?labelDe ?labelEn
 ('subject category of the 20th Century Press Archives' as ?descrEn)
 (concat(?subjectCode, ' ', ?labelDe) as ?aliasDe)
 (concat(?subjectCode, ' ', ?labelEn) as ?aliasEn)
-?subjectCode ('Q92707903' as ?classQid) ('Q92732036' as ?partOf)
+?subjectCode ?broaderSubjectCode ?partOf
+('Q92707903' as ?classQid) ('Q92732036' as ?partOf)
 where {
   #
   graph <http://zbw.eu/beta/je/ng> {
@@ -23,6 +24,10 @@ where {
       ?cat skos:prefLabel ?labelLangEn .
       filter(lang(?labelLangEn) = 'en')
       bind(str(?labelLangEn) as ?labelEn)
+    }
+    optional {
+      ?cat skos:broader ?broader .
+      ?broader skos:notation ?broaderSubjectCode .
     }
     # restriction to real notations (no keywords)
     filter(regex(?notationLong, "^[a-z]"))
@@ -39,6 +44,13 @@ where {
     service <https://query.wikidata.org/sparql> {
       ?wd wdt:P8484 ?subjectCode .
     }
+  }
+  # look up broader
+  service <https://query.wikidata.org/sparql> {
+    optional {
+      ?wdBroader wdt:P8484 ?broaderSubjectCode .
+    }
+    bind(if(bound(?wdBroader), strafter(str(?wdBroader), str(wd:)), 'Q92732036') as ?partOf)
   }
 }
 order by ?notationLong
