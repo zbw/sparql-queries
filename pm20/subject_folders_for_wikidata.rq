@@ -12,13 +12,11 @@ select distinct ?pm20Id ?labelDe ?labelEn
 (concat(?countryCode, ' ', ?subjectCode) as ?alias)
 ?countryCode ?subjectCode ('Q91257459' as ?classQid) ('Q36948990' as ?partOf)
 ?countryQid ?subjectQid
-(str(?totalDocCount) as ?docs)
 where {
   {
     # main table
     ?pm20 a zbwext:SubjectFolder ;
           dct:identifier ?pm20Id ;
-          zbwext:totalDocCount ?totalDocCount ;
           zbwext:country ?country ;
           zbwext:subject ?subject .
     #

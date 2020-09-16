@@ -238,6 +238,58 @@ Readonly my %CONFIG => (
       },
     },
   },
+
+  pm20_subject_folder => {
+    source     => 'pm20',
+    label_type => 'subject_folder',
+    query => path('/opt/sparql-queries/pm20/subject_folders_for_wikidata.rq'),
+    label => {
+      de => 'labelDe',
+      en => 'labelEn',
+    },
+    descr => {
+      de => 'descrDe',
+      en => 'descrEn',
+    },
+    alias => {
+      de => 'alias',
+      en => 'alias',
+    },
+    properties => {
+      P31 => {
+        var_name   => 'classQid',
+        value_type => 'item',
+      },
+      P4293 => {
+        var_name   => 'pm20Id',
+        value_type => 'literal',
+      },
+      P361 => {
+        var_name   => 'partOf',
+        value_type => 'item',
+      },
+      P1269 => {
+        var_name   => 'countryQid',
+        value_type => 'item',
+        qualifiers => {
+          'P8483' => {
+            var_name   => 'countryCode',
+            value_type => 'literal',
+          },
+        },
+      },
+      P921 => {
+        var_name   => 'subjectQid',
+        value_type => 'item',
+        qualifiers => {
+          P8484 => {
+            var_name   => 'subjectCode',
+            value_type => 'literal',
+          },
+        },
+      },
+    },
+  },
 );
 
 # evaluate commandline arguments
@@ -371,6 +423,7 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
       print $fh 'LAST|'
         . $property . '|'
         . prepare_value( $value_type, $value )
+        . get_qualifier_statements( $prop_cfg, $entry )
         . $reference_statement . "\n";
     }
   } else {
@@ -390,7 +443,7 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
     print $fh $entry->{$qid}{value} . '|'
       . $property . '|'
       . prepare_value( $value_type, $value )
-      . $qualifier_statements
+      . get_qualifier_statements( $prop_cfg, $entry )
       . $reference_statement . "\n";
   }
 
@@ -412,6 +465,8 @@ sub prepare_value {
     ## use unquoted value
   } elsif ( $value_type eq 'literal' ) {
     $value = quote($value);
+  } elsif ( $value_type eq 'quantity' ) {
+    ## no modification of value
   } elsif ( $value_type eq 'date' ) {
     $value = format_date($value);
   } elsif ( $value_type eq 'monolingual-text' ) {
@@ -516,13 +571,15 @@ sub get_qualifier_statements {
   my $entry = shift or die "param missing";
 
   my $statements = '';
-  foreach my $qualifier ( sort keys %$cfg ) {
-    my $qual_cfg   = $cfg->{$qualifier};
-    my $value      = $entry->{ $qual_cfg->{var_name} }{value};
-    my $value_type = $qual_cfg->{value_type};
-    next unless $value;
-    $statements .=
-      '|' . $qualifier . '|' . prepare_value( $value_type, $value );
+  if ( $cfg->{qualifiers} ) {
+    foreach my $qualifier ( sort keys %{ $cfg->{qualifiers} } ) {
+      my $qual_cfg   = $cfg->{qualifiers}{$qualifier};
+      my $value      = $entry->{ $qual_cfg->{var_name} }{value};
+      my $value_type = $qual_cfg->{value_type};
+      next unless $value;
+      $statements .=
+        '|' . $qualifier . '|' . prepare_value( $value_type, $value );
+    }
   }
   return $statements;
 }
