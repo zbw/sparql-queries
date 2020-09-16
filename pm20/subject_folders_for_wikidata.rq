@@ -6,18 +6,19 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?pm20Id ?labelDe ?labelEn
-##('Mappe aus dem Pressearchiv 20. Jahrhundert' as ?descrDe)
-##('folder of the 20th Century Press Archives' as ?descrEn)
-##(concat(?countryCode, ' ', ?subjectCode) as ?aliasDe)
-##(concat(?countryCode, ' ', ?subjectCode) as ?aliasEn)
+select distinct ?pm20Id ?labelDe ?labelEn
+('Mappe aus dem Pressearchiv 20. Jahrhundert' as ?descrDe)
+('folder of the 20th Century Press Archives' as ?descrEn)
+(concat(?countryCode, ' ', ?subjectCode) as ?alias)
 ?countryCode ?subjectCode ('Q91257459' as ?classQid) ('Q36948990' as ?partOf)
-?wdCountry ?wdSubject
+?countryQid ?subjectQid
+(str(?totalDocCount) as ?docs)
 where {
   {
     # main table
     ?pm20 a zbwext:SubjectFolder ;
           dct:identifier ?pm20Id ;
+          zbwext:totalDocCount ?totalDocCount ;
           zbwext:country ?country ;
           zbwext:subject ?subject .
     #
@@ -56,7 +57,7 @@ where {
       filter(!strends(?subjectNtaLong, '-'))
       #
       # temporary restriction to upper levels
-      filter(strlen(?subjectNtaLong) = 4 || strlen(?subjectNtaLong) = 5)
+      filter(strlen(?subjectNtaLong) <= 5)
     }
   } minus {
     # filter out folders already existing in WD
@@ -65,9 +66,18 @@ where {
           wdt:P4293 ?pm20Id .
     }
   }
+  # Look up linked Wikidata items
+  service <https://query.wikidata.org/sparql> {
+    ?wdSubject wdt:P8484 ?subjectCode .
+    ?wdCountry wdt:P8483 ?countryCode .
+  }
+  # concatenated fields
   bind(concat(?countryLabelDe, ' : ', ?subjectLabelDe) as ?labelDe)
   bind(concat(?countryLabelEn, ' : ', ?subjectLabelEn) as ?labelEn)
   bind(concat(?countryNtaLong, ' ', ?subjectNtaLong) as ?notationLong)
+  #
+  bind(strafter(str(?wdCountry), str(wd:)) as ?countryQid)
+  bind(strafter(str(?wdSubject), str(wd:)) as ?subjectQid)
 }
 order by ?notationLong
 
