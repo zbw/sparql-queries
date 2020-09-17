@@ -7,6 +7,10 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
 select ?geoNta ?subjectNta ?pm20 ?pm20Label (str(?docCount) as ?docs)
 where {
+  # TODO currently only dummy
+  values ( ?language ) {
+    ( 'de' )
+  }
   ?pm20 a zbwext:SubjectFolder ;
         skos:prefLabel ?pm20Label ;
         zbwext:country ?country ;

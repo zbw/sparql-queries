@@ -12,6 +12,10 @@ SELECT ?type ?pm20 ?pm20Label ?fromTo (group_concat(distinct ?broaderLocation;
     separator='; ') as ?broaderLocations) (group_concat(distinct ?industry;
     separator='; ') as ?industries) ?reports
 WHERE {
+  # TODO currently only dummy
+  values ( ?language ) {
+    ( 'de' )
+  }
   ?pm20 a zbwext:CompanyFolder ;
         skos:prefLabel ?pm20Label ;
         zbwext:broaderLocation ?broaderLocation ;

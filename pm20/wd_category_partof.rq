@@ -1,0 +1,36 @@
+# Extract information for creating broader category relations in Wikidata
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+select distinct ?subjectCode ?broaderSubjectCode ?wd ?qid ?partOf
+where {
+  # only apply to category items existing in Wikidata
+  service <https://query.wikidata.org/sparql> {
+    ?wd wdt:P31 wd:Q92707903 ;
+        wdt:P8484 ?subjectCode .
+    # filter out items with partOf statements
+    filter(not exists {
+        ?wd wdt:P361 [] .
+      })
+  }
+  # get broader relations from pm20
+  graph <http://zbw.eu/beta/je/ng> {
+    ?cat a skos:Concept ;
+         skos:notation ?subjectCode ;
+         skos:broader ?broader .
+    ?broader skos:notation ?broaderSubjectCode .
+  }
+  # look up according WD category items
+  optional {
+    service <https://query.wikidata.org/sparql> {
+      ?wdBroader wdt:P31 wd:Q92707903 ;
+                 wdt:P8484 ?broaderSubjectCode .
+    }
+  }
+  bind(if(!bound(?wdBroader) && strlen(?subjectCode) = 1, 'Q92732036', strafter(str(?wdBroader), str(wd:))) as ?partOf)
+  bind(strafter(str(?wd), str(wd:)) as ?qid)
+}
+
