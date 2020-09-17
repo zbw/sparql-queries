@@ -232,6 +232,13 @@ Readonly my %CONFIG => (
         var_name   => 'classQid',
         value_type => 'item',
       },
+      # partOf is not set in create mode query, because broader items not 
+      # necessarily exist, when the narrower item is to be created
+      P361 => {
+        query    => path('/opt/sparql-queries/pm20/wd_category_partof.rq'),
+        var_name   => 'partOf',
+        value_type => 'item',
+      },
       P8484 => {
         var_name   => 'subjectCode',
         value_type => 'literal',
