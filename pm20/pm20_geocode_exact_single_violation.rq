@@ -8,16 +8,16 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 #
-select distinct ?wd ?wdLabel ?relation ?relationLabel ?stw ?stwLabel
+select distinct ?wd ?wdLabel ?relation ?relationLabel
 where {
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
     select ?wd ?wdLabel ?relation ?relationLabel ?geoCode
     where {
-      # identify items with multiple STW ID values
+      # identify items with multiple PM20 geo code values
       {
         select distinct  ?wd (count(?geoCode) as ?geoCount)
         where {
-          # statements on property STW ID
+          # statements on property PM20 geo code
           ?wd p:P8483 ?statement .
           # mapping relation exact match
           ?statement pq:P4390 wd:Q39893449 ;
@@ -26,7 +26,7 @@ where {
         group by ?wd 
         having (?geoCount > 1)
       }
-      # expand to all existing STW IDs and relations for the item
+      # expand to all existing PM20 geo codes and relations for the item
       ?wd wdt:P8483 ?geoCode .
       filter(isLiteral(?geoCode))
       ?wd p:P8483/pq:P4390 ?relation .
