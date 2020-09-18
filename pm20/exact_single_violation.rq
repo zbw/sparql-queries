@@ -11,25 +11,25 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 select distinct ?wd ?wdLabel ?relation ?relationLabel ?stw ?stwLabel
 where {
   service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
-    select ?wd ?wdLabel ?relation ?relationLabel ?stwId
+    select ?wd ?wdLabel ?relation ?relationLabel ?geoCode
     where {
       # identify items with multiple STW ID values
       {
-        select distinct  ?wd (count(?stwId) as ?stwCount)
+        select distinct  ?wd (count(?geoCode) as ?geoCount)
         where {
           # statements on property STW ID
-          ?wd p:P3911 ?statement .
+          ?wd p:P8483 ?statement .
           # mapping relation exact match
           ?statement pq:P4390 wd:Q39893449 ;
-                     ps:P3911 ?stwId .
+                     ps:P8483 ?geoCode .
         }
         group by ?wd 
-        having (?stwCount > 1)
+        having (?geoCount > 1)
       }
       # expand to all existing STW IDs and relations for the item
-      ?wd wdt:P3911 ?stwId .
-      filter(isLiteral(?stwId))
-      ?wd p:P3911/pq:P4390 ?relation .
+      ?wd wdt:P8483 ?geoCode .
+      filter(isLiteral(?geoCode))
+      ?wd p:P8483/pq:P4390 ?relation .
       #
       # get label for the wd item, if exists
       optional {
@@ -42,11 +42,7 @@ where {
       bind(str(?relationLabelLang) as ?relationLabel)
     }
   }
-  # look up STW descriptors and labels
-  bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw)
-  ?stw skos:prefLabel ?stwLabelLang .
-  filter(lang(?stwLabelLang) = 'en')
-  bind(str(?stwLabelLang) as ?stwLabel)
 }
 order by desc(?relation) ?wdLabel
+
 
