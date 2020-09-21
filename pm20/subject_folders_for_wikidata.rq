@@ -1,6 +1,9 @@
 # Extract information for creating subject folder items in Wikidata
 #
 PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
@@ -67,7 +70,11 @@ where {
   # Look up linked Wikidata items
   service <https://query.wikidata.org/sparql> {
     ?wdSubject wdt:P8484 ?subjectCode .
-    ?wdCountry wdt:P8483 ?countryCode .
+
+    # only exact matching countries
+    ?wdCountry p:P8483 ?statement .
+    ?statement pq:P4390 wd:Q39893449 ;
+               ps:P8483 ?countryCode .
   }
   # concatenated fields
   bind(concat(?countryLabelDe, ' : ', ?subjectLabelDe) as ?labelDe)
@@ -78,4 +85,3 @@ where {
   bind(strafter(str(?wdSubject), str(wd:)) as ?subjectQid)
 }
 order by ?notationLong
-
