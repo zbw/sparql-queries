@@ -1,0 +1,18 @@
+# Get PM20 subject category by subject code
+#
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select *
+where {
+  values ( ?code ) {
+    ( 'n' )
+  }
+  # class PM20 subject category
+  ?item wdt:P31 wd:Q92707903 ;
+        wdt:P8484 ?code .
+  ?item rdfs:label ?label .
+  filter(lang(?label) = 'de')
+}
+
