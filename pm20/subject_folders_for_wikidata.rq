@@ -85,3 +85,5 @@ where {
   bind(strafter(str(?wdSubject), str(wd:)) as ?subjectQid)
 }
 order by ?notationLong
+limit 1000
+
