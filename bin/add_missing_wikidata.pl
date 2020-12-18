@@ -392,7 +392,7 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
   if ( $mode eq 'create' ) {
 
     # new item
-    print $fh "\nCREATE\n";
+    print $fh "CREATE\n";
 
     # output fields
     foreach my $field (qw/ label descr alias /) {
@@ -439,7 +439,7 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
     my $qid        = $config->{properties}{$property}{qid} || 'qid';
     my $value_type = $prop_cfg->{value_type};
     my $value      = $entry->{ $prop_cfg->{var_name} }{value};
-    next if $value eq '';
+    next if not $value or $value eq '';
 
     # add optional qualifier statements
     my $qualifier_statements =
