@@ -1,0 +1,11 @@
+# List dataset providers and the total datasets they provide
+Select ?provider (Count(*) as ?datasetsPerProvider)
+Where {
+  Graph ?g {
+  ?s a bib:Dataset;
+     edm:provider ?providerAgent .
+
+  ?providerAgent rdfs:label ?provider.
+  }
+}
+Group by ?provider

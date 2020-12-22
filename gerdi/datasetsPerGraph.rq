@@ -1,0 +1,8 @@
+# List the number of datasets in the collection per named graph
+Prefix bib:<http://id.loc.gov/ontologies/bibframe/>
+
+Select (Count(*) As ?totalDatasets) ?graph
+Where {
+  Graph ?graph { ?s a bib:Dataset . }
+}
+Group By ?graph

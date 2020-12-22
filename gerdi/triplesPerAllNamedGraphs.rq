@@ -1,0 +1,4 @@
+# List the triples count for all named graphs
+Select Distinct ?g (count(*) as ?count) {
+    Graph ?g {?s ?p ?o}
+} Group By ?g

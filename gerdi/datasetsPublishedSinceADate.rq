@@ -1,0 +1,14 @@
+# What is the number of dataset published since a certain date (e.g., 2018)?
+Prefix bib:<http://id.loc.gov/ontologies/bibframe/>
+Prefix dcterms: <http://purl.org/dc/terms/>
+Prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+Select (Count(*) as ?dsPublished)
+Where {
+  Graph ?graph {
+  	?s a bib:Dataset;
+		dcterms:date ?date .
+
+  	Filter (?date > "2018-01-01"^^xsd:date)
+	}
+}
