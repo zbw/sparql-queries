@@ -1,0 +1,6 @@
+# The count of publications being linked
+Prefix bib: <http://id.loc.gov/ontologies/bibframe/>
+Select (Count(?s) As ?totalPublications)
+WHERE {
+	GRAPH ?graph { ?s a bib:Publication . }
+}

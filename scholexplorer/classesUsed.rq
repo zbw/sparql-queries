@@ -1,0 +1,5 @@
+# List the used classes in the RDF representation of the datasets
+Select Distinct ?usedClasses
+Where {
+  Graph ?graph { ?s a ?usedClasses .}
+}

@@ -1,0 +1,5 @@
+# List the used properties in the RDF representation of the datasets
+Select Distinct ?usedProperties
+Where {
+  Graph ?graph { ?s ?usedProperties ?o .}
+}
