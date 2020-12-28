@@ -1,4 +1,0 @@
-# List the named graphs in the collection
-SELECT Distinct ?namedGraph {
-    GRAPH ?namedGraph {}
-}
