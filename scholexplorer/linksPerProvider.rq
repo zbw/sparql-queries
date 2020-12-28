@@ -1,0 +1,9 @@
+# Display the link count based on provider
+PREFIX cito: <http://purl.org/spar/cito/>
+PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+Select (Count(*) As ?links) ?linkProvider
+Where {
+  Graph ?graph { ?s a cito:Citation ;
+                    edm:provider ?linkProvider . }
+}
+Group By ?linkProvider

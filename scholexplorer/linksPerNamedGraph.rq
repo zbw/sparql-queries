@@ -1,0 +1,7 @@
+# List the number of links per named graph
+PREFIX cito: <http://purl.org/spar/cito/>
+Select (Count(*) As ?totalLinks) ?graph
+Where {
+  Graph ?graph { ?s a cito:Citation . }
+}
+Group By ?graph

@@ -1,0 +1,17 @@
+# List dataset titles that contain a certain term (such as "GDP", for example)
+PREFIX bib: <http://id.loc.gov/ontologies/bibframe/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+Select ?title
+Where {
+  Graph ?graph {
+  ?s a bib:Dataset;
+	dcterms:title ?title;
+    dcterms:subject ?dsSubject .
+
+  Filter (regex(?dsSubject, "GDP"))
+  }
+}
