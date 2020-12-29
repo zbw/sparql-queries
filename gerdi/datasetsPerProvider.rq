@@ -1,4 +1,9 @@
 # List dataset providers and the total datasets they provide
+Prefix dcterms: <http://purl.org/dc/terms/>
+Prefix bib:<http://id.loc.gov/ontologies/bibframe/>
+Prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+Prefix edm: <http://www.europeana.eu/schemas/edm/>
+
 Select ?provider (Count(*) as ?datasetsPerProvider)
 Where {
   Graph ?g {
