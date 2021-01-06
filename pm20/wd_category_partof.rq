@@ -11,6 +11,7 @@ where {
   service <https://query.wikidata.org/sparql> {
     ?wd wdt:P31 wd:Q92707903 ;
         wdt:P8484 ?subjectCode .
+    bind(replace(?subjectCode, '_', ' ') as ?notation)
     # filter out items with partOf statements
     filter(not exists {
         ?wd wdt:P361 [] .
@@ -19,9 +20,10 @@ where {
   # get broader relations from pm20
   graph <http://zbw.eu/beta/je/ng> {
     ?cat a skos:Concept ;
-         skos:notation ?subjectCode ;
+         skos:notation ?notation ;
          skos:broader ?broader .
-    ?broader skos:notation ?broaderSubjectCode .
+    ?broader skos:notation ?broaderNotation .
+    bind(replace(?broaderNotation, ' ', '_') as ?broaderSubjectCode)
   }
   # look up according WD category items
   optional {
@@ -32,5 +34,8 @@ where {
   }
   bind(if(!bound(?wdBroader) && strlen(?subjectCode) = 1, 'Q92732036', strafter(str(?wdBroader), str(wd:))) as ?partOf)
   bind(strafter(str(?wd), str(wd:)) as ?qid)
+  #
+  # restrict to items with already existing broader items
+  filter(bound(?wdBroader))
 }
 

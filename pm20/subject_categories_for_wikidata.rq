@@ -49,3 +49,5 @@ where {
   }
 }
 order by ?notationLong
+limit 100
+
