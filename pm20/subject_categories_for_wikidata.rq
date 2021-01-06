@@ -1,14 +1,15 @@
 # Extract information for creating category items in Wikidata
 #
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select ?notationLong ?labelDe ?labelEn
 ('Systematikstelle des Pressearchiv 20. Jahrhundert' as ?descrDe)
 ('subject category of the 20th Century Press Archives' as ?descrEn)
-(concat(?subjectCode, ' ', ?labelDe) as ?aliasDe)
-(concat(?subjectCode, ' ', ?labelEn) as ?aliasEn)
+(concat(?notation, ' ', ?labelDe) as ?aliasDe)
+(concat(?notation, ' ', ?labelEn) as ?aliasEn)
 ?subjectCode
 ('Q92707903' as ?classQid)
 where {
@@ -16,7 +17,9 @@ where {
   graph <http://zbw.eu/beta/je/ng> {
     ?cat a skos:Concept ;
       zbwext:notationLong ?notationLong ;
-      skos:notation ?subjectCode .
+      skos:notation ?notation .
+    bind(replace(?notation, ' ', '_') as ?subjectCode)
+    #
     ?cat skos:prefLabel ?labelLangDe .
     filter(lang(?labelLangDe) = 'de')
     bind(str(?labelLangDe) as ?labelDe)
@@ -25,6 +28,9 @@ where {
       filter(lang(?labelLangEn) = 'en')
       bind(str(?labelLangEn) as ?labelEn)
     }
+    optional {
+      ?cat zbwext:folderCount ?folderCount .
+    }
     # restriction to real notations (no keywords)
     filter(regex(?notationLong, "^[a-z]"))
 
@@ -32,8 +38,8 @@ where {
     filter(!regex(?subjectCode, "^[a-z]0"))
     filter(!strends(?notationLong, '-'))
 
-    # temporary restriction to upper levels
-    filter(strlen(?notationLong) <= 5)
+    # temporary restriction
+    filter(bound(?folderCount))
   #
   # filter out categories already existing in WD
   } minus {
@@ -43,4 +49,3 @@ where {
   }
 }
 order by ?notationLong
-
