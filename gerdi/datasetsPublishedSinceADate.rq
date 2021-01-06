@@ -1,6 +1,7 @@
-# What is the number of dataset published since a certain date (e.g., 2018)?
+# What is the number of datasets published since a certain date (e.g., 2018)?
 Prefix bib:<http://id.loc.gov/ontologies/bibframe/>
 Prefix dcterms: <http://purl.org/dc/terms/>
+Prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 Prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
 Select (Count(*) as ?dsPublished)
@@ -9,6 +10,6 @@ Where {
   	?s a bib:Dataset;
 		dcterms:date ?date .
 
-  	Filter (?date > "2018-01-01"^^xsd:date)
+  	Filter (?date >= "2018-01-01"^^xsd:date)
 	}
 }

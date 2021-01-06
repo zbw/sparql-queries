@@ -1,10 +1,8 @@
 # List the distinct subject terms used in the collection
 
-PREFIX bib: <http://id.loc.gov/ontologies/bibframe/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
-PREFIX dcterms: <http://purl.org/dc/terms/>
+Prefix bib:<http://id.loc.gov/ontologies/bibframe/>
+Prefix dcterms: <http://purl.org/dc/terms/>
+Prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 Select Distinct ?dsSubject
 Where {
