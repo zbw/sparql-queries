@@ -1,0 +1,13 @@
+# List the distinct subject terms used in the collection
+
+Prefix bib:<http://id.loc.gov/ontologies/bibframe/>
+Prefix dcterms: <http://purl.org/dc/terms/>
+Prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+Select Distinct ?dsSubject
+Where {
+  Graph ?graph {
+  ?s a bib:Dataset;
+     dcterms:subject ?dsSubject .
+  }
+}

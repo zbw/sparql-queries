@@ -1,0 +1,12 @@
+# What is the distribution of datasets published in the collection?
+Prefix bib:<http://id.loc.gov/ontologies/bibframe/>
+Prefix dcterms: <http://purl.org/dc/terms/>
+Prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+Select ?date (Count(*) as ?dsPublished)
+Where {
+  Graph ?graph {
+    ?s a bib:Dataset;
+      dcterms:date ?date .
+  }
+} Group By ?date

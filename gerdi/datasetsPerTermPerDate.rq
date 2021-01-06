@@ -1,0 +1,19 @@
+# List "time series" datasets published in since 2016 and their provider
+Prefix dcterms: <http://purl.org/dc/terms/>
+Prefix edm: <http://www.europeana.eu/schemas/edm/>
+Prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+Prefix bib:<http://id.loc.gov/ontologies/bibframe/>
+
+Select ?title ?providerLabel ?publicationDate
+Where {
+  Graph ?graph { ?s a bib:Dataset ;
+                    edm:provider ?aProvider ;
+                    dcterms:subject ?subjectTerm ;
+                    dcterms:title ?title ;
+                    dcterms:date ?publicationDate.
+
+    			?aProvider rdfs:label ?providerLabel .
+    	Filter(regex(?subjectTerm, "time series"))
+    	Filter(YEAR(?publicationDate) >= 2016).
+  }
+}

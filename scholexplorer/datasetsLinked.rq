@@ -1,0 +1,6 @@
+# The count of datasets being linked
+Prefix bib: <http://id.loc.gov/ontologies/bibframe/>
+Select (Count(?s) As ?totalDatasets)
+Where {
+	Graph ?graph { ?s a bib:Dataset . }
+}
