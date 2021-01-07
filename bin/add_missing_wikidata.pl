@@ -240,8 +240,15 @@ Readonly my %CONFIG => (
         value_type => 'item',
       },
       P8484 => {
+        query    => path('/opt/sparql-queries/pm20/wd_category_longnotation.rq'),
         var_name   => 'subjectCode',
         value_type => 'literal',
+        qualifiers => {
+          'P1545' => {
+            var_name   => 'notationLong',
+            value_type => 'literal',
+          },
+        },
       },
     },
   },
