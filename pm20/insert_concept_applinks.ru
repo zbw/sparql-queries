@@ -12,13 +12,12 @@ insert {
 }
 where {
   graph ?g {
-    bind('http://webopac.hwwa.de/PresseMappe20/Digiview_MENU.cfm?T=' as ?linksub1)
-    values ( ?vocab ?countProperty ?linksub2 )
+    values ( ?vocab ?countProperty ?linksub )
     {
-      ( 'ag' zbwext:shFolderCount 'S&G=' )
-      ( 'je' zbwext:folderCount 'S&S=' )
-      ( 'ag' zbwext:waFolderCount 'W&G=' )
-      ( 'ip' zbwext:folderCount 'W&W=' )
+      ( 'ag' zbwext:shFolderCount 'https://pm20.zbw.eu/category/geo/i/' )
+      ( 'je' zbwext:folderCount 'https://pm20.zbw.eu/category/subject/i/' )
+      ( 'ag' zbwext:waFolderCount 'http://webopac.hwwa.de/PresseMappe20/Digiview_MENU.cfm?T=W&G=' )
+      ( 'ip' zbwext:folderCount 'http://webopac.hwwa.de/PresseMappe20/Digiview_MENU.cfm?T=W&W=' )
     }
     ?concept ?countProperty ?value .
     filter(?value > 0)
@@ -30,8 +29,7 @@ where {
     #
     # create app link
     bind(strafter(str(?concept), concat('http://zbw.eu/beta/pm20voc/', ?vocab, '/')) as ?id)
-    bind(concat('http://zbw.eu/beta/pm20voc/', ?vocab, '/') as ?temp)
-    bind(uri(concat(?linksub1, ?linksub2, ?id)) as ?appLink)
+    bind(uri(concat(?linksub, ?id)) as ?appLink)
   }
 }
 
