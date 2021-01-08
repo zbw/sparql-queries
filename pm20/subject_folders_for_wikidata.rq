@@ -41,7 +41,8 @@ where {
     graph <http://zbw.eu/beta/je/ng> {
       ?subject a skos:Concept ;
                zbwext:notationLong ?subjectNtaLong ;
-               skos:notation ?subjectCode .
+               skos:notation ?notation .
+      bind(replace(?notation, ' ', '_') as ?subjectCode)
       ?subject skos:prefLabel ?subjectLabelLangDe .
       filter(lang(?subjectLabelLangDe) = 'de')
       bind(str(?subjectLabelLangDe) as ?subjectLabelDe)
@@ -56,9 +57,6 @@ where {
       # filter out special topics for SM
       filter(!regex(?subjectCode, "^[a-z]0"))
       filter(!strends(?subjectNtaLong, '-'))
-      #
-      # temporary restriction to upper levels
-      filter(strlen(?subjectNtaLong) <= 5)
     }
   } minus {
     # filter out folders already existing in WD
@@ -85,5 +83,4 @@ where {
   bind(strafter(str(?wdSubject), str(wd:)) as ?subjectQid)
 }
 order by ?notationLong
-limit 1000
 
