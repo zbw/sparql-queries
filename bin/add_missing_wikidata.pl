@@ -253,6 +253,24 @@ Readonly my %CONFIG => (
     },
   },
 
+  pm20_geo_category => {
+    source     => 'pm20',
+    label_type => 'category',
+    properties => {
+      P8483 => {
+        query    => path('/opt/sparql-queries/pm20/wd_geo_category_longnotation.rq'),
+        var_name   => 'geoCode',
+        value_type => 'literal',
+        qualifiers => {
+          'P1545' => {
+            var_name   => 'notationLong',
+            value_type => 'literal',
+          },
+        },
+      },
+    },
+  },
+
   pm20_subject_folder => {
     source     => 'pm20',
     label_type => 'subject_folder',
