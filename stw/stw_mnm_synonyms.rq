@@ -12,7 +12,7 @@ where {
        skos:broader ?thsys .
   ?thsys a zbwext:Thsys ;
          skos:notation ?nta .
-  filter(strstarts(?nta, 'B.'))
+  filter(strstarts(?nta, 'P.0'))
   {
     # include all labels from STW
     {
