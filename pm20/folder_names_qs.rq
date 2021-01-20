@@ -16,8 +16,8 @@ select ?qsStatement ?item ?itemLabel ?pm20 (?prefLabel as ?pm20Label)
 where {
   # get ids and labels from WD endpoint
   service <https://query.wikidata.org/sparql> {
+    # do not create for sh, because that would be redundant (labels)
     values ( ?type ) {
-      ( 'sh' )
       ( 'wa' )
       ( 'pe' )
 #      ( 'co' )
