@@ -19,7 +19,7 @@ where {
     #
     # skip all items where one of the counts already exists
     filter(not exists {
-        ?statement (pq:P3740 | pq:5592) [] .
+        ?statement (pq:P3740) [] .
       })
     optional {
       ?wd rdfs:label ?label .
@@ -45,7 +45,7 @@ where {
   #
   # QS statement (QS does not work for unknown values!)
   bind(concat(strafter(str(?wd), str(wd:)),'|P4293|"', ?pm20Id,
-      '"|P3740|', ?numberWorks, '|P5592|', ?accessibleOnline) as ?qsStatement)
+      '"|P3740|', ?numberWorks) as ?qsStatement)
   #
   # identifier for the claim connecting the item with the property pm20Id
   bind(strafter(str(?statement), str(wds:)) as ?claimGuid)

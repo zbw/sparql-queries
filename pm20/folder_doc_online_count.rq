@@ -1,0 +1,52 @@
+# Document counts (free and total) for folders connected to WD items
+#
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?qsStatement ?wd ?wdLabel ?pm20 (?pm20Id as ?pm20Label) ?numberWorks ?accessibleOnline
+where {
+  service <http://query.wikidata.org/sparql> {
+    #    bind( wd:Q80596 as ?wd)
+    ?wd p:P4293 ?statement .
+    ?statement ps:P4293 ?pm20Id .
+    filter(isLiteral(?pm20Id))
+    #
+    # skip all items where one of the counts already exists
+    filter(not exists {
+        ?statement (pq:P5592) [] .
+      })
+    optional {
+      ?wd rdfs:label ?label .
+      filter(lang(?label) = 'en')
+    }
+    bind(coalesce(str(?label), strafter(str(?wd),'/entity/')) as ?wdLabel)
+  }
+  bind(uri(concat('http://purl.org/pressemappe20/folder/', $pm20Id)) as ?pm20)
+  #
+  # get the document counts if available, set if not
+  optional {
+    ?pm20 zbwext:totalDocCount ?total .
+  }
+  optional {
+    ?pm20 zbwext:freeDocCount ?free .
+  }
+  # If a person folder was created after 1948, no content at all is online.
+  # Therefore we can conclude that the number of accessible documents is 0.
+  # We don't know how many documents exist on paper or microfilm,
+  # so the total number of documents is unknown (somevalue).
+  bind(if(bound(?free), str(?free), '0') as ?accessibleOnline)
+  bind(if(bound(?total), str(?total), 'somevalue') as ?numberWorks)
+  #
+  # QS statement (QS does not work for unknown values!)
+  bind(concat(strafter(str(?wd), str(wd:)),'|P4293|"', ?pm20Id,
+      '"|P5592|', ?accessibleOnline) as ?qsStatement)
+  #
+  # identifier for the claim connecting the item with the property pm20Id
+  bind(strafter(str(?statement), str(wds:)) as ?claimGuid)
+}
