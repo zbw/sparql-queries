@@ -24,6 +24,7 @@ where {
         dct:identifier ?pm20Id ;
         schema:industry ?industry ;
         dc:type ?type .
+  filter(isLiteral(?pm20Id))
   #
   optional {
     ?pm20 skos:notation ?notation .
@@ -51,6 +52,7 @@ where {
   }
   optional {
     ?pm20 gndo:gndIdentifier ?gndId .
+    filter(isLiteral(?gndId))
     bind (uri(concat('https://d-nb.info/gnd/', ?gndId)) as ?gnd)
     bind(?gndId as ?gndLabel)
   }

@@ -21,6 +21,7 @@ where {
         skos:prefLabel ?pm20Label ;
         dct:identifier ?pm20Id ;
         dct:temporal ?clip .
+  filter(isLiteral(?pm20Id))
   #
   optional {
     ?pm20 zbwext:totalDocCount ?docCount .
@@ -37,6 +38,7 @@ where {
   }
   optional {
     ?pm20 gndo:gndIdentifier ?gndId .
+    filter(isLiteral(?gndId))
     bind (uri(concat('https://d-nb.info/gnd/', ?gndId)) as ?gnd)
     bind(?gndId as ?gndLabel)
   }
