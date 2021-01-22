@@ -1,0 +1,57 @@
+# all companies/organizations with metadata
+#
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+select (str(?docCount) as ?docs) ?pm20 ?pm20Label ?fromTo ?location ?notation ?clip (group_concat(distinct ?industry;
+    separator='; ') as ?industries) ?wd ?wdLabel
+where {
+  ?pm20 a zbwext:CompanyFolder ;
+        skos:prefLabel ?pm20Label ;
+        dct:identifier ?pm20Id ;
+        schema:industry ?industry ;
+        dc:type ?type .
+  #
+  optional {
+    ?pm20 skos:notation ?notation .
+  }
+  # restrict by country notation (see
+  # http://zbw.eu/beta/skosmos/pm20ag/en/page/157538)
+  ##filter(strstarts(?notation, 'A9') || strstarts(?notation, 'A10')) # Germany
+  ##filter(strstarts(?notation, 'A22')) # UK
+  ##filter(strstarts(?notation, 'A28')) # France
+  #
+  optional {
+    ?pm20 schema:location ?location .
+  }
+  optional {
+    ?pm20 dct:temporal ?clip .
+  }
+  optional {
+    ?pm20 zbwext:totalDocCount ?docCount .
+  }
+  # only companies with documents
+  ##filter(?docCount > 0)
+  #
+  optional {
+    ?pm20 zbwext:fromTo ?fromTo .
+  }
+  optional {
+    graph <http://zbw.eu/beta/wikidata/ng> {
+      optional {
+        ?wd wdt:P4293 ?pm20Id .
+        bind(strafter(str(?wd), str(wd:)) as ?wdLabel)
+      }
+    }
+  }
+}
+group by ?pm20 ?pm20Label ?fromTo ?docCount ?notation ?clip ?location ?wd ?wdLabel
+order by ?pm20Label
+

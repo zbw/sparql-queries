@@ -1,0 +1,57 @@
+# all persons with metadata
+#
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct (str(?docCount) as ?docs) ?pm20 ?pm20Label ?life
+(group_concat(distinct ?location;
+    separator='; ') as ?locations)
+?occupation ?clip ?wd ?wdLabel ?wp ?wpLabel
+where {
+  # metadata often is monolingual
+  values (?language) {
+    ('de')
+  }
+  ?pm20 a zbwext:PersonFolder ;
+        skos:prefLabel ?pm20Label ;
+        dcterms:identifier ?pm20Id ;
+        dcterms:temporal ?clip .
+  #
+  optional {
+    ?pm20 zbwext:totalDocCount ?docCount .
+  }
+  optional {
+    ?pm20 gndo:dateOfBirthAndDeath ?life .
+  }
+  optional {
+    ?pm20 zbwext:activity/schema:location ?location .
+    filter(lang(?location) = ?language)
+  }
+  optional {
+    ?pm20 schema:hasOccupation ?occupation .
+  }
+  optional {
+    graph <http://zbw.eu/beta/wikidata/ng> {
+      optional {
+        ?wd wdt:P4293 ?pm20Id .
+        bind(strafter(str(?wd), str(wd:)) as ?wdLabel)
+      }
+      optional {
+        ?wd zbwext:wdPageCount ?wpCnt .
+      }
+      optional {
+        ?wp schema:about ?wd ;
+            schema:inLanguage "de" .
+        bind('de' as ?wpLabel)
+      }
+    }
+  }
+}
+group by ?pm20 ?pm20Label ?life ?occupation ?clip ?wd ?wdLabel ?wpCnt ?wp ?wpLabel ?docCount
+order by ?pm20Label
+
