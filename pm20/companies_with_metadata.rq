@@ -65,6 +65,6 @@ where {
     }
   }
 }
-group by ?pm20 ?pm20Label ?fromTo ?docCount ?notation ?clip ?location ?gnd ?gndLabel ?wd ?wdLabel
+group by ?pm20 ?pm20Label ?fromTo ?docCount ?notation ?location ?gnd ?gndLabel ?wd ?wdLabel
 order by ?pm20Label ?clip
 
