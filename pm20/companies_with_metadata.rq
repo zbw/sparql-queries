@@ -13,6 +13,10 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 select (str(?docCount) as ?docs) ?pm20 ?pm20Label ?fromTo ?location ?notation ?clip (group_concat(distinct ?industry;
     separator='; ') as ?industries) ?wd ?wdLabel
 where {
+  # TODO currently only dummy
+  values ( ?language ) {
+    ( 'de' )
+  }
   ?pm20 a zbwext:CompanyFolder ;
         skos:prefLabel ?pm20Label ;
         dct:identifier ?pm20Id ;

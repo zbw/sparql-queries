@@ -13,9 +13,9 @@ select distinct (str(?docCount) as ?docs) ?pm20 ?pm20Label ?life
     separator='; ') as ?locations)
 ?occupation ?clip ?wd ?wdLabel ?wp ?wpLabel
 where {
-  # metadata often is monolingual
-  values (?language) {
-    ('de')
+  # TODO currently only dummy
+  values ( ?language ) {
+    ( 'de' )
   }
   ?pm20 a zbwext:PersonFolder ;
         skos:prefLabel ?pm20Label ;
