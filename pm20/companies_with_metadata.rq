@@ -12,7 +12,8 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select (str(?docCount) as ?docs) ?pm20 ?pm20Label ?fromTo ?location (group_concat(distinct ?industry;
-    separator='; ') as ?industries) ?notation ?clip ?gnd ?gndLabel ?wd ?wdLabel
+    separator='; ') as ?industries) ?notation (group_concat(distinct ?clip;
+    separator='; ') as ?clips) ?gnd ?gndLabel ?wd ?wdLabel
 where {
   # TODO currently only dummy
   values ( ?language ) {
@@ -63,5 +64,5 @@ where {
   }
 }
 group by ?pm20 ?pm20Label ?fromTo ?docCount ?notation ?clip ?location ?gnd ?gndLabel ?wd ?wdLabel
-order by ?pm20Label
+order by ?pm20Label ?clip
 
