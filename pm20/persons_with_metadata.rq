@@ -11,7 +11,7 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 select distinct (str(?docCount) as ?docs) ?pm20 ?pm20Label ?life
 (group_concat(distinct ?location;
     separator='; ') as ?locations)
-?occupation ?clip ?gnd ?gndLabel ?wd ?wdLabel ?wp ?wpLabel
+?occupation ?clip ?gnd ?gndLabel ?wd ?wdLabel
 where {
   # TODO currently only dummy
   values ( ?language ) {
@@ -48,14 +48,9 @@ where {
         ?wd wdt:P4293 ?pm20Id .
         bind(strafter(str(?wd), str(wd:)) as ?wdLabel)
       }
-      optional {
-        ?wp schema:about ?wd ;
-            schema:inLanguage "de" .
-        bind('de' as ?wpLabel)
-      }
     }
   }
 }
-group by ?pm20 ?pm20Label ?life ?occupation ?clip ?wd ?wdLabel ?gnd ?gndLabel ?wp ?wpLabel ?docCount
+group by ?pm20 ?pm20Label ?life ?occupation ?clip ?wd ?wdLabel ?gnd ?gndLabel ?docCount
 order by ?pm20Label
 
