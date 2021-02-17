@@ -44,7 +44,7 @@ where {
   #
   # restrict to certain subthes/notation range
   ?stw skos:broader* ?thsys .
-  ?thsys skos:notation ?notation
+  ?thsys skos:notation ?notation .
   ##filter(strstarts(?notation, "P.0"))
   #
   # add labels
