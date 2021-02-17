@@ -1,0 +1,60 @@
+# Create input for OpenRefine for STW descriptors
+#
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select ?id ?name ?description
+where {
+  select distinct ?id ?name (?name as ?item) (concat(?descrElem, ' [', group_concat(str(?prefSysLang);
+        separator = '; '), '] ') as ?description) (min(str(?prefSysLang)) as ?firstSys)
+  where {
+    ?stw a zbwext:Descriptor ;
+        skos:broader ?thsys ;
+        skos:prefLabel ?prefLang .
+    bind(strafter(str(?stw), 'http://zbw.eu/stw/descriptor/') as ?id)
+    filter( not exists {
+      # exclude descriptors already mapped to Wikidata
+      service <https://query.wikidata.org/sparql> {
+        ?wd wdt:P3911 ?id .
+      }
+    })
+    ?thsys a zbwext:Thsys ;
+          skos:notation ?nta ;
+          skos:prefLabel ?prefSysLang .
+    filter(lang(?prefLang) = 'en')
+    filter(lang(?prefSysLang) = 'en')
+    #
+    # selection by notation (G already covered by m-n-m #507)
+    # (W already covered by m-n-m #1259)
+    # (B covered by m-n-m #2917 - update?)
+    # CAUTION: filter moved to "having" clause below!
+    ##filter(strstarts(?nta, 'B.))
+    #
+    # build descriptor part of the description
+    {
+      select ?stw ( group_concat(str(?label);
+          separator = ' | ') as ?descrElem)
+      where {
+        {
+          ?stw skos:prefLabel ?label .
+          filter(lang(?label) = 'de')
+        } union {
+          ?stw skos:altLabel ?label .
+        } union {
+          ?stw skos:scopeNote ?label
+        } union {
+          ?stw skos:historyNote ?label
+        } union {
+          ?stw skos:editorialNote ?label
+        }
+      }
+      group by ?stw
+    }
+    bind(str(?prefLang) as ?name)
+  }
+  group by ?id ?name ?descrElem
+
+  having (strstarts(?firstSys, 'P.0'))
+}
+order by ?firstSys ?name
+
