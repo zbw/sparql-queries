@@ -39,8 +39,15 @@ where {
     #bind(concat(if(bound(?wdLabelEn), str(?wdLabelEn), ''), ' | ', if(bound(?wdLabelDe), str(?wdLabelDe), '')) as ?wdLabel)
     bind(concat(if(bound(?wdLabelDe), str(?wdLabelDe), ''), ' | ', if(bound(?wdLabelEn), str(?wdLabelEn), '')) as ?wdLabel)
   }
-  # look up STW descriptors and labels
+  # look up STW descriptors
   bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw)
+  #
+  # restrict to certain subthes/notation range
+  ?stw skos:broader* ?thsys .
+  ?thsys skos:notation ?notation
+  ##filter(strstarts(?notation, "P.0"))
+  #
+  # add labels
   ?stw skos:prefLabel ?stwLabelDe .
   filter(lang(?stwLabelDe) = 'de')
   ?stw skos:prefLabel ?stwLabelEn .
@@ -48,3 +55,4 @@ where {
   bind(concat(if(bound(?stwLabelDe), str(?stwLabelDe), ''), ' | ', if(bound(?stwLabelEn), str(?stwLabelEn), '')) as ?stwLabel)
 }
 order by ?wdLabel str(?skosRelation) ?stwLabelLang
+
