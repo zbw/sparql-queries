@@ -8,10 +8,10 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select distinct (str(?docCount) as ?docs) ?pm20 ?pm20Label ?life
+select distinct ?pm20 ?pm20Label ?life
 (group_concat(distinct ?location;
     separator='; ') as ?locations)
-?occupation ?clip ?gnd ?gndLabel ?wd ?wdLabel
+?occupation ?doc (str(?docCount) as ?docLabel) ?clip ?gnd ?gndLabel ?wd ?wdLabel
 where {
   # TODO currently only dummy
   values ( ?language ) {
@@ -50,7 +50,8 @@ where {
       }
     }
   }
+  bind(if(bound(?docCount), uri(concat('https://pm20.zbw.eu/dfgview/', $pm20Id)), '') as ?doc)
 }
-group by ?pm20 ?pm20Label ?life ?occupation ?clip ?wd ?wdLabel ?gnd ?gndLabel ?docCount
+group by ?pm20 ?pm20Label ?life ?occupation ?clip ?wd ?wdLabel ?gnd ?gndLabel ?doc ?docCount
 order by ?pm20Label
 

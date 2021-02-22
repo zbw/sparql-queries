@@ -11,8 +11,8 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select (str(?docCount) as ?docs) ?pm20 ?pm20Label ?fromTo ?location (group_concat(distinct ?industry;
-    separator='; ') as ?industries) ?notation (group_concat(distinct ?clip;
+select ?pm20 ?pm20Label ?fromTo ?location (group_concat(distinct ?industry;
+    separator='; ') as ?industries) ?notation ?doc (str(?docCount) as ?docLabel) (group_concat(distinct ?clip;
     separator='; ') as ?clips) ?gnd ?gndLabel ?wd ?wdLabel
 where {
   # TODO currently only dummy
@@ -64,7 +64,9 @@ where {
       }
     }
   }
+  bind(if(bound(?docCount), uri(concat('https://pm20.zbw.eu/dfgview/', $pm20Id)), '') as ?doc)
+
 }
-group by ?pm20 ?pm20Label ?fromTo ?docCount ?notation ?location ?gnd ?gndLabel ?wd ?wdLabel
+group by ?pm20 ?pm20Label ?fromTo ?doc ?docCount ?notation ?location ?gnd ?gndLabel ?wd ?wdLabel
 order by ?pm20Label ?clip
 
