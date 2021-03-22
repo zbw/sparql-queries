@@ -38,7 +38,7 @@ where {
            skos:broader ?thsys .
       #      
       # restrict to subthesaurus
-      filter(strstarts(?nta, 'G'))
+      filter(strstarts(?nta, 'P.1'))
     }
 ##    group by ?stw
   } minus {
@@ -80,4 +80,4 @@ where {
   bind(strafter(str(?stw), str(stw:)) as ?stwId)
 }
 group by ?stw ?stwId ?prefLabelDe ?prefLabelEn ?thsys_de ?thsys_en ?gndId
-order by min(?nta) str(?prefLabelDe)
+order by min(?nta) str(?prefLabelEn)
