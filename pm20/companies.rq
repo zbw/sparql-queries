@@ -9,7 +9,7 @@ PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX schema: <http://schema.org/>
 #
 SELECT ?type ?pm20 ?pm20Label ?fromTo ?notation (group_concat(distinct ?industry;
-    separator='; ') as ?industries) (str(?docCount) as ?docs) (str(?repCount) as ?reports)
+    separator='; ') as ?industries) ?doc (str(?docCount) as ?docLabel) (str(?repCount) as ?reports)
 WHERE {
   # TODO currently only dummy
   values ( ?language ) {
@@ -20,6 +20,7 @@ WHERE {
         schema:industry ?industry ;
         skos:notation ?notation ;
         dc:type ?type ;
+        dct:identifier ?pm20Id ;
         zbwext:freeDocCount ?docCount .
   # only companies with documents
   filter(?docCount > 0)
@@ -38,7 +39,9 @@ WHERE {
   }
   # only companies with business reports
   ##filter(?repCount > 0)
+  #
+  bind(uri(concat('https://pm20.zbw.eu/dfgview/', $pm20Id)) as ?doc)
 }
-group by ?pm20 ?pm20Label ?fromTo ?type ?docCount ?repCount ?notation
+group by ?pm20 ?pm20Label ?fromTo ?type ?doc ?docCount ?repCount ?notation
 order by ?pm20Label
 
