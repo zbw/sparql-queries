@@ -8,10 +8,15 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX schema: <http://schema.org/>
 PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 #
-select distinct ?pm20 ?pm20Label ?life ?nationality
+select distinct ?pm20 ?pm20Label ?life
+(group_concat(distinct ?nationality; separator='; ') as ?nationalities)
 (group_concat(distinct ?activity; separator='; ') as ?activities)
-(group_concat(distinct ?location; separator='; ') as ?locations) (str(?docCount) as ?count)
+(group_concat(distinct ?location; separator='; ') as ?locations)
+?doc (str(?docCount) as ?docLabel)
 where {
+  values ( ?lang ) {
+    ('de')
+  }
   {
     ?pm20 a zbwext:PersonFolder ;
           skos:prefLabel ?pm20Label ;
@@ -26,13 +31,18 @@ where {
   optional {
     ?pm20 schema:nationality ?nationality .
   }
+  filter (lang(?nationality) = ?lang)
   optional {
     ?pm20 zbwext:activity/schema:about ?activity .
   }
+  filter (lang(?activity) = ?lang)
   optional {
     ?pm20 zbwext:activity/schema:location ?location .
   }
+  filter (lang(?location) = ?lang)
+  bind(uri(concat('https://pm20.zbw.eu/dfgview/', $pm20Id)) as ?doc)
 }
-group by ?pm20 ?pm20Label ?life ?nationality ?docCount
-order by desc(?docCount)
+group by ?pm20 ?pm20Label ?life ?doc ?docCount
+##order by desc(?docCount)
+order by asc(?pm20Label)
 
