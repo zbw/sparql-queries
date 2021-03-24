@@ -14,8 +14,8 @@ select distinct ?pm20 ?pm20Label ?life
 (group_concat(distinct ?location; separator='; ') as ?locations)
 ?doc (str(?docCount) as ?docLabel)
 where {
-  values ( ?lang ) {
-    ('de')
+  values ( ?language ) {
+    ( 'de' )
   }
   {
     ?pm20 a zbwext:PersonFolder ;
@@ -31,15 +31,15 @@ where {
   optional {
     ?pm20 schema:nationality ?nationality .
   }
-  filter (lang(?nationality) = ?lang)
+  filter (lang(?nationality) = ?language)
   optional {
     ?pm20 zbwext:activity/schema:about ?activity .
   }
-  filter (lang(?activity) = ?lang)
+  filter (lang(?activity) = ?language)
   optional {
     ?pm20 zbwext:activity/schema:location ?location .
   }
-  filter (lang(?location) = ?lang)
+  filter (lang(?location) = ?language)
   bind(uri(concat('https://pm20.zbw.eu/dfgview/', $pm20Id)) as ?doc)
 }
 group by ?pm20 ?pm20Label ?life ?doc ?docCount
