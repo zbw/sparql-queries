@@ -9,25 +9,37 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select distinct ?pm20 ?pm20Label ?fromTo ?countryOfOrigin ?occupation ?locationOfActivity ?item ?workLocation ?workLocationLabel
+select distinct ?pm20 ?pm20Label ?fromTo (str(?nationality) as ?countryOfOrigin)
+?occupation (group_concat(?locationOfActivity;
+    separator='; ') as ?locationsOfActivity) ?item ?workLocation ?workLocationLabel
 where {
+  # also change in service subquery!
+  values ( ?language ) {
+    ( 'de' )
+  }
   service <https://query.wikidata.org/sparql> {
+    # also change in main query!
+    values ( ?language ) {
+      ( 'de' )
+    }
     ?item wdt:P4293 ?pm20Id ;
           wdt:P31 wd:Q5 .
     bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
     optional {
       ?item wdt:P937 ?workLocation .
       ?workLocation rdfs:label ?labelLang .
-      filter(lang(?labelLang) = 'de')
-      bind(str(?labelLang) as ?workLocationLabel)
     }
+    filter(lang(?labelLang) = ?language)
+    bind(str(?labelLang) as ?workLocationLabel)
   }
   ?pm20 a zbwext:PersonFolder ;
         zbwext:activity [ schema:about 'Kolonialwesen'@de ;
-                          schema:location ?locationOfActivity ] ;
+      schema:location ?locationOfActivity ] ;
       skos:prefLabel ?pm20Label .
+  filter(lang(?locationOfActivity) = ?language)
   optional {
-    ?pm20 schema:nationality ?countryOfOrigin .
+    ?pm20 schema:nationality ?nationality .
+    filter(lang(?nationality) = ?language)
   }
   # filter(?countryOfOrigin = 'Deutschland' || ?locationOfActivity = 'Deutschland')
   optional {
@@ -37,5 +49,6 @@ where {
     ?pm20 gndo:dateOfBirthAndDeath ?fromTo .
   }
 }
+group by ?pm20 ?pm20Label ?fromTo ?nationality ?occupation ?item ?workLocation ?workLocationLabel
 order by ?pm20Label
 

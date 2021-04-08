@@ -13,7 +13,6 @@ select distinct ?pm20 ?pm20Label ?life
     separator='; ') as ?locations)
 ?occupation ?doc (str(?docCount) as ?docLabel) ?clip ?gnd ?gndLabel ?wd ?wdLabel
 where {
-  # TODO currently only dummy
   values ( ?language ) {
     ( 'de' )
   }
