@@ -7,12 +7,12 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX schema: <http://schema.org/>
+PREFIX gn: <http://www.geonames.org/ontology#>
 #
-SELECT ?type ?pm20 ?pm20Label ?fromTo (group_concat(distinct ?broaderLocation;
-    separator='; ') as ?broaderLocations) (group_concat(distinct ?industry;
-    separator='; ') as ?industries) ?reports
+SELECT ?type ?pm20 ?pm20Label ?fromTo ?notation (group_concat(distinct str(?industry);
+    separator='; ') as ?industries) (group_concat(distinct ?countryCode;
+    separator='; ') as ?countries) ?reports (str(?repCount) as ?reportsLabel)
 WHERE {
-  # TODO currently only dummy
   values ( ?language ) {
     ( 'de' )
   }
@@ -20,18 +20,28 @@ WHERE {
         skos:prefLabel ?pm20Label ;
         zbwext:broaderLocation ?broaderLocation ;
         schema:industry ?industry ;
-        dc:type ?type ;
+        dc:type ?typeLang ;
+        dct:identifier ?pm20Id ;
         zbwext:freeDocCount ?docCount .
-  filter(?docCount > 0)
+  filter(lang(?typeLang) = ?language)
+  filter(lang(?industry) = ?language)
+  bind(str(?typeLang) as ?type)
+  #
   optional {
     ?pm20 zbwext:fromTo ?fromTo .
   }
-  #  optional {
+  optional {
+    ?pm20 skos:notation ?notation ;
+  }
+  optional {
+    ?pm20 gn:countryCode ?countryCode .
+  }
+
+  # only companies with reports
   ?pm20 zbwext:reportCount ?repCount .
   filter(?repCount > 0)
-  bind(str(?repCount) as ?reports)
-  #  }
+  bind(uri(concat('https://pm20.zbw.eu/dfgview/', $pm20Id)) as ?reports)
 }
-group by ?pm20 ?pm20Label ?fromTo ?type ?reports
+group by ?pm20 ?pm20Label ?fromTo ?notation ?type ?reports ?repCount
 order by ?pm20Label
 

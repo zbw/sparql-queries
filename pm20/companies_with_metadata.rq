@@ -2,6 +2,7 @@
 #
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX gn: <http://www.geonames.org/ontology#>
 PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -11,21 +12,25 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?pm20 ?pm20Label ?fromTo ?location (group_concat(distinct ?industry;
+select distinct ?pm20 ?pm20Label ?fromTo (group_concat(distinct ?location;
+    separator='; ') as ?locations) (group_concat(distinct ?countryCode;
+    separator='; ') as ?countries) (group_concat(distinct ?industry;
     separator='; ') as ?industries) ?notation ?doc (str(?docCount) as ?docLabel) (group_concat(distinct ?clip;
     separator='; ') as ?clips) ?gnd ?gndLabel ?wd ?wdLabel
 where {
-  # TODO currently only dummy
   values ( ?language ) {
     ( 'de' )
   }
   ?pm20 a zbwext:CompanyFolder ;
         skos:prefLabel ?pm20Label ;
         dct:identifier ?pm20Id ;
-        schema:industry ?industry ;
         dc:type ?type .
   filter(isLiteral(?pm20Id))
   #
+  optional {
+    ?pm20 schema:industry ?industry .
+    filter(lang(?industry) = ?language)
+  }
   optional {
     ?pm20 skos:notation ?notation .
   }
@@ -37,6 +42,10 @@ where {
   #
   optional {
     ?pm20 schema:location ?location .
+    filter(lang(?location) = ?language)
+  }
+  optional {
+    ?pm20 gn:countryCode ?countryCode .
   }
   optional {
     ?pm20 dct:temporal ?clip .
@@ -67,6 +76,6 @@ where {
   bind(if(bound(?docCount), uri(concat('https://pm20.zbw.eu/dfgview/', $pm20Id)), '') as ?doc)
 
 }
-group by ?pm20 ?pm20Label ?fromTo ?doc ?docCount ?notation ?location ?gnd ?gndLabel ?wd ?wdLabel
+group by ?pm20 ?pm20Label ?fromTo ?doc ?docCount ?notation ?gnd ?gndLabel ?wd ?wdLabel
 order by ?pm20Label ?clip
 
