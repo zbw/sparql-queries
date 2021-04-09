@@ -5,14 +5,17 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select ?count (str(count(distinct ?pm20)) as ?countLabel) ?value
 where {
-  values ( ?sub ?property ) {
-    ( zbwext:activity schema:about )
+  values ( ?language ?sub ?property ) {
+    ( "de" zbwext:activity schema:about )
   }
   ?pm20 a zbwext:Pm20Folder ;
-        ?sub [ ?property ?value ].
+        ?sub [ ?property ?valueLang ].
+  filter(lang(?valueLang) = ?language)
+  bind(str(?valueLang) as ?value)
+  #
   bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query',
           '&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/folder_by_value_sub.rq',
-          '&sub=', str(?sub), '&property=', str(?property), '&value="', ?value, '"')) as ?count)
+          '&language=', ?language, '&sub=', str(?sub), '&property=', str(?property), '&value="', ?value, '"')) as ?count)
 }
 group by ?value ?count
 order by desc(count(?value))
