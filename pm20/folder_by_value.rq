@@ -14,7 +14,6 @@ where {
   ?pm20 a zbwext:Pm20Folder ;
     ?property ?valueLang ;
     skos:prefLabel ?pm20Label .
-  filter(lang(?pm20Label) = ?language)
 }
 order by ?pm20Label
 
