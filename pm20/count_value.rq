@@ -1,6 +1,7 @@
 # Count values of a certain property for PM20 folders
 #
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX gn: <http://www.geonames.org/ontology#>
 PREFIX schema: <http://schema.org/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #

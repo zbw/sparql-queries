@@ -1,6 +1,7 @@
 # List folders by property value
 #
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX gn: <http://www.geonames.org/ontology#>
 PREFIX schema: <http://schema.org/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
