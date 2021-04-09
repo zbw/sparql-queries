@@ -6,18 +6,14 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select ?count (str(count(distinct ?pm20)) as ?countLabel) ?value
 where {
-  values ( ?language ?property ) {
-    ( "de" schema:nationality )
+  values ( ?property ) {
+    ( schema:nationality )
   }
   ?pm20 a zbwext:Pm20Folder ;
-    ?property ?valueLang .
-  filter(lang(?valueLang) = ?language)
-  bind(str(?valueLang) as ?value)
-  #
+    ?property ?value .
   bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query',
-        '&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/folder_by_value.rq',
-        '&language=', ?language, '&property=',
-        str(?property), '&value=', ?value)) as ?count)
+        '&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/folder_by_value.rq&property=',
+        str(?property), '&value="', ?value, '"')) as ?count)
 }
 group by ?value ?count
 order by desc(count(?value))
