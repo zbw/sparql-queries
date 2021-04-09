@@ -15,8 +15,9 @@ where {
   bind(str(?valueLang) as ?value)
   #
   bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query',
-        '&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/folder_by_value.rq&property=',
-        str(?property), '&value="', ?value, '"@', ?language)) as ?count)
+        '&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/folder_by_value.rq',
+        '&language=', ?language, '&property=',
+        str(?property), '&value=', ?value)) as ?count)
 }
 group by ?value ?count
 order by desc(count(?value))
