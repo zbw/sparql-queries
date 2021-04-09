@@ -11,7 +11,7 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 select ?pm20 ?pm20Label ?code ?country
 where {
   values ( ?language ?code ?country ) {
-    ( "de" "CH" )
+    ( "de" "CH" "Schweiz" )
   }
   ?pm20 a zbwext:Pm20Folder ;
     gn:countryCode ?code ;
