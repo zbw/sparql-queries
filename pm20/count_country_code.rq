@@ -16,6 +16,9 @@ where {
     where {  
       ?pm20 a zbwext:Pm20Folder ;
             gn:countryCode ?code .
+      #
+      # restrict to folders with online documents
+      ?pm20 zbwext:freeDocCount [] .
     }
     group by ?code
   }

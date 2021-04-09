@@ -39,6 +39,8 @@ Query | Description
 
 ### Controlled vocabularies (parameterized queries)
 
+All links are restricted to folders for which online documents are accessible.
+
 #### Person folders
 
 List | Description

@@ -16,6 +16,9 @@ where {
   ?pm20 a zbwext:Pm20Folder ;
     gn:countryCode ?code ;
     skos:prefLabel ?pm20Label .
+  #
+  # restrict to folders with online documents
+  ?pm20 zbwext:freeDocCount [] .
 }
 order by ?pm20Label
 
