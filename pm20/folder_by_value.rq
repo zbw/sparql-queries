@@ -1,18 +1,18 @@
 # List folders by property value
 #
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
-PREFIX gn: <http://www.geonames.org/ontology#>
 PREFIX schema: <http://schema.org/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
 select ?pm20 ?pm20Label ?property ?value
 where {
-  values ( ?property ?value ) {
-    ( schema:nationality "Schweiz" )
+  values ( ?language ?property ?value ) {
+    ( "de" schema:nationality "Schweiz" )
   }
+  bind(strlang(?value, ?language) as ?valueLang)
   ?pm20 a zbwext:Pm20Folder ;
-    ?property ?value ;
+    ?property ?valueLang ;
     skos:prefLabel ?pm20Label .
 }
 order by ?pm20Label
