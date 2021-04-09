@@ -1,0 +1,21 @@
+# List folders by ISO 3166-1 alpha-2 country code
+# (currently only applies to CompanyFolder)
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?pm20 ?pm20Label ?code ?country
+where {
+  values ( ?language ?code ?country ) {
+    ( "de" "CH" )
+  }
+  ?pm20 a zbwext:Pm20Folder ;
+    gn:countryCode ?code ;
+    skos:prefLabel ?pm20Label .
+}
+order by ?pm20Label
+
