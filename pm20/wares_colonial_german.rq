@@ -5,20 +5,30 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select ?geoNta ?wareNta ?pm20 ?pm20Label (str(?docCount) as ?docs)
+select ?geoNta ?wareNta ?pm20 ?pm20Label ?docs (str(?docCount) as ?docsLabel)
 where {
+  # English labels are missing for many wares!
+  values ( ?language ) {
+    ( 'de' )
+  }
   ?pm20 a zbwext:WareFolder ;
-        skos:prefLabel ?pm20Label ;
+        skos:prefLabel ?pm20LabelLang ;
         zbwext:country ?country ;
         zbwext:ware ?ware ;
+        zbwext:viewUrl ?docs ;
         zbwext:freeDocCount ?docCount .
+  filter(lang(?pm20LabelLang) = 'de')
+  bind(str(?pm20LabelLang) as ?pm20Label)
+  #
   graph <http://zbw.eu/beta/ip/ng> {
-    ?ware skos:notation ?wareNta .
+    ?ware skos:notation ?wareNta ;
+          zbwext:notationLong ?wareNtaLong .
   }
   graph <http://zbw.eu/beta/ag/ng> {
-    ?country skos:notation ?geoNta .
+    ?country skos:notation ?geoNta ;
+             zbwext:notationLong ?geoNtaLong .
     filter(?geoNta in ('A11','B103','C58','C65','C87','C110','D10','D60'))
   }
 }
-order by ?geoNta ?wareNta
+order by ?geoNtaLong ?wareNtaLong
 

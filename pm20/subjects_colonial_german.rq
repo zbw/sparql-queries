@@ -5,18 +5,27 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select ?geoNta ?subjectNta ?pm20 ?pm20Label (str(?docCount) as ?docs)
+select ?geoNta ?subjectNta ?pm20 ?pm20Label ?docs (str(?docCount) as ?docsLabel)
 where {
+  values ( ?language ) {
+    ( 'de' )
+  }
   ?pm20 a zbwext:SubjectFolder ;
-        skos:prefLabel ?pm20Label ;
+        skos:prefLabel ?pm20LabelLang ;
         zbwext:country ?country ;
         zbwext:subject ?subject ;
+        zbwext:viewUrl ?docs ;
         zbwext:freeDocCount ?docCount .
+  filter(lang(?pm20LabelLang) = ?language)
+  bind(str(?pm20LabelLang) as ?pm20Label)
+  #
   graph <http://zbw.eu/beta/je/ng> {
-    ?subject skos:notation ?subjectNta .
+    ?subject skos:notation ?subjectNta ;
+             zbwext:notationLong ?subjectNtaLong .
   }
   graph <http://zbw.eu/beta/ag/ng> {
-    ?country skos:notation ?geoNta .
+    ?country skos:notation ?geoNta ;
+             zbwext:notationLong ?geoNtaLong .
   }
   # all German colonies + Deutsche Kolonien (in general)
   filter( ?geoNta in ('A11','B103','C58','C65','C87','C110','D10','D60' )
@@ -25,19 +34,18 @@ where {
           # Kolonialpolitik
            strstarts(?subjectNta, 'g5')
           # Förderung des Rohstoffbezuges aus den Kolonien
-        || strstarts(?subjectNta, 'n1 SM 002')
+        || strstarts(?subjectNta, 'n1 SM2')
           # Forschung und Lehre über Kolonien und Ausland
-        || strstarts(?subjectNta, 'k1 SM 012')
+        || strstarts(?subjectNta, 'k1 SM12')
           # Kolonialschulwesen (im Mutterland)
-        || strstarts(?subjectNta, 'k2 SM 005')
+        || strstarts(?subjectNta, 'k2 SM5')
           # Ausländische und koloniale Arbeiter
-        || strstarts(?subjectNta, 'n 15 SM 011')
+        || strstarts(?subjectNta, 'n15 SM11')
           # Auslandbanken und Kolonialbanken
-        || strstarts(?subjectNta, 'n 24 SM 012')
+        || strstarts(?subjectNta, 'n24 SM12')
        ) )
       # Zentralstelle Kolonialinstitut
-    || ( ?geoNta in ('A9') && strstarts(?subjectNta, 'k SM 0501'))
+    || ( ?geoNta in ('A9') && strstarts(?subjectNta, 'k SM501'))
   )
 }
-order by ?geoNta ?subjectNta
-
+order by ?geoNtaLong ?subjectNtaLong
