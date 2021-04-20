@@ -7,7 +7,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX schema: <http://schema.org/>
-PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX frapo: <http://purl.org/cerif/frapo/>
 #
 SELECT ?type ?pm20 ?pm20Label ?fromTo ?notation (group_concat(distinct str(?industry);
     separator='; ') as ?industries) (group_concat(distinct ?countryCode;
@@ -45,7 +45,7 @@ WHERE {
     ?pm20 zbwext:reportCount ?repCount .
   }
   optional {
-    ?pm20 gn:countryCode ?countryCode .
+    ?pm20 frapo:hasCountryCode ?countryCode .
   }
   # only companies with business reports
   ##filter(?repCount > 0)
