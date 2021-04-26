@@ -2,7 +2,7 @@
 # (currently only applies to CompanyFolder)
 #
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
-PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX frapo: <http://purl.org/cerif/frapo/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -11,10 +11,10 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 select ?pm20 ?pm20Label ?code ?country
 where {
   values ( ?language ?code ?country ) {
-    ( "de" "CH" "Schweiz" )
+( "de" "CA" "Kanada" )
   }
   ?pm20 a zbwext:Pm20Folder ;
-    gn:countryCode ?code ;
+    frapo:hasCountryCode ?code ;
     skos:prefLabel ?pm20Label .
   #
   # restrict to folders with online documents

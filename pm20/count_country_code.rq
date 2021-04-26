@@ -2,7 +2,7 @@
 # (currently only applies to CompanyFolder)
 #
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
-PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX frapo: <http://purl.org/cerif/frapo/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -15,7 +15,7 @@ where {
     select (count(distinct ?pm20) as ?cnt) ?code
     where {  
       ?pm20 a zbwext:Pm20Folder ;
-            gn:countryCode ?code .
+            frapo:hasCountryCode ?code .
       #
       # restrict to folders with online documents
       ?pm20 zbwext:freeDocCount [] .
@@ -39,4 +39,5 @@ where {
         '&language=', ?language, '&code=', ?code , '&country=', ?country)) as ?count)
 }
 order by desc(?cnt)
+
 
