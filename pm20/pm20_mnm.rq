@@ -1,0 +1,15 @@
+# Create input for Wikidata Mix'n'match for PM20 companies
+#
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select ?id ?name ?description
+where {
+  ?pm20 a zbwext:CompanyFolder ;
+    dct:identifier ?id ;
+    skos:prefLabel ?prefLabel ;
+    zbwext:adjustedLabel ?name ;
+    zbwext:totoalDocumentCount ?docCount .
+  bind(concat('{', str(?docCount), '} ', '(', $prefLabel, ')') as ?description)
+}
+ 
