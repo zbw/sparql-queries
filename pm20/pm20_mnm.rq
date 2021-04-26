@@ -1,15 +1,49 @@
 # Create input for Wikidata Mix'n'match for PM20 companies
 #
-PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX frapo: <http://purl.org/cerif/frapo/>
+PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select ?id ?name ?description
 where {
-  ?pm20 a zbwext:CompanyFolder ;
-    dct:identifier ?id ;
-    skos:prefLabel ?prefLabel ;
-    zbwext:adjustedLabel ?name ;
-    zbwext:totoalDocumentCount ?docCount .
-  bind(concat('{', str(?docCount), '} ', '(', $prefLabel, ')') as ?description)
+  {
+    select ?id ?name ?docCount ?prefLabel ?fromTo
+    (group_concat(distinct ?location; separator = '; ') as ?locations) (group_concat(distinct ?industry; separator='; ') as ?industries)
+    where {
+      values ( ?lang ) {
+        ( 'en' )
+      }
+      ?pm20 a zbwext:CompanyFolder ;
+        dct:identifier ?id ;
+        skos:prefLabel ?prefLabel ;
+        zbwext:adjustedLabel ?name ;
+        frapo:hasCountryCode ?country ;
+        zbwext:totalDocCount ?docCount .
+      #
+      # this is the filter for defining the separate mnm catalogs (parts)
+      filter(?country in ('CA'))
+      #
+      optional {
+        ?pm20 zbwext:fromTo ?fromTo .
+      }
+      optional {
+        ?pm20 schema:location ?location .
+        filter(lang(?location) = ?lang)
+      }
+      optional {
+        ?pm20 schema:industry ?industry .
+        filter(lang(?industry) = ?lang)
+      }
+      optional {
+        ?pm20 skos:note ?note .
+      }
+    }
+    group by ?id ?name ?docCount ?prefLabel ?fromTo
+  }
+  bind(concat('{', str(?docCount), '} ', if(bound(?fromTo), concat(?fromTo, ', '), ''), if(bound(?locations), ?locations, ''), 
+      ' (', $prefLabel, ' - ', if(bound(?industries), ?industries, ''), ') ', if(bound(?note), ?note, '')) as ?description)
 }
- 
+order by desc(?docCount)
+
