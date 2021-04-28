@@ -10,11 +10,14 @@ select ?id ?name ?description
 where {
   {
     select ?id ?name ?docCount ?prefLabel ?fromTo
-    (group_concat(distinct ?location; separator = '; ') as ?locations) (group_concat(distinct ?industry; separator='; ') as ?industries)
+    (group_concat(distinct ?location; separator = '; ') as ?locations)
+    (group_concat(distinct ?industry; separator='; ') as ?industries)
+    (group_concat(distinct ?note; separator='; ') as ?notes)
     where {
       values ( ?lang ) {
         ( 'en' )
       }
+      # query restricts result to folders with documents
       ?pm20 a zbwext:CompanyFolder ;
         dct:identifier ?id ;
         skos:prefLabel ?prefLabel ;
@@ -23,7 +26,8 @@ where {
         zbwext:totalDocCount ?docCount .
       #
       # this is the filter for defining the separate mnm catalogs (parts)
-      filter(?country in ('CA'))
+      ##filter(?country in ('GB', 'US', 'CA'))
+      filter(?country in ('NL', 'ID', 'AO'))
       #
       optional {
         ?pm20 zbwext:fromTo ?fromTo .
@@ -42,8 +46,8 @@ where {
     }
     group by ?id ?name ?docCount ?prefLabel ?fromTo
   }
-  bind(concat('{', str(?docCount), '} ', if(bound(?fromTo), concat(?fromTo, ', '), ''), if(bound(?locations), ?locations, ''), 
-      ' (', $prefLabel, ' - ', if(bound(?industries), ?industries, ''), ') ', if(bound(?note), ?note, '')) as ?description)
+  bind(concat('{', str(?docCount), '} ', if(bound(?fromTo), concat(?fromTo, ', '), ''), if(bound(?locations), ?locations, ''),
+      ' (', if(bound(?industries), ?industries, ''), '): ', $prefLabel, ' -. ', if(bound(?notes), ?notes, '')) as ?description)
 }
-order by desc(?docCount)
+order by desc(?docCount) ?name
 
