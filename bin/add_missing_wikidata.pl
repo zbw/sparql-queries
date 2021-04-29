@@ -5,7 +5,6 @@
 
 use strict;
 use warnings;
-use open ":encoding(utf8)";
 
 binmode STDOUT, ":utf8";
 
@@ -85,8 +84,8 @@ Readonly my %CONFIG => (
     source_title => 'pm20Label',
     source_id    => 'pm20Id',
     label        => {
-      de => 'pm20Label',
-      en => 'pm20Label',
+      de => 'adjustedLabel',
+      en => 'adjustedLabel',
     },
     descr => {
       de => 'descrDe',
@@ -342,7 +341,7 @@ if ( $mode eq 'enhance'
   die "usage: $0 $type $mode [", join( '|', @valid_properties ), "]\n";
 }
 
-# output file derived from query file, plus date for repeated runs
+# output file name derived from query file, plus date for repeated runs
 my $prop_cfg;
 my ( $queryfile, $outfile, $query );
 if ( $mode eq 'create' ) {
@@ -454,7 +453,7 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
 
       print $fh 'LAST|'
         . $property . '|'
-        . prepare_value( $value_type, $value )
+        . prepare_value( $value_type, $value, $property )
         . get_qualifier_statements( $prop_cfg, $entry )
         . $reference_statement . "\n";
     }
@@ -492,6 +491,7 @@ print "$count statements written to $outfile\n";
 sub prepare_value {
   my $value_type = shift or confess "param missing";
   my $value      = shift or confess "param missing";
+  my $property   = shift;
 
   if ( $value_type eq 'item' ) {
     ## use unquoted value
