@@ -4,29 +4,45 @@
 # create input files for mix-n-match
 
 
-PART=p0
+if [ "$#" -ne 2 ]; then
+  echo "usage: $0 {dataset} {part}"
+  exit 2
+fi
 
-DIR=../stw
+DATASET=$1
+PART=$2
 
-QUERY=$DIR/stw_mnm.rq
-OUTPUT=$DIR/results/stw_${PART}_mnm.tsv
-if [ -f $OUTPUT ]; then
-  echo ERROR: $OUTPUT exists
+DIR=../$DATASET
+
+# main mnm file
+query=$DIR/${DATASET}_mnm.rq
+output=$DIR/results/${DATASET}_${PART}_mnm.tsv
+if [ -f $output ]; then
+  echo ERROR: $output exists
+  exit
+fi
+if [ ! -f $query ]; then
+  echo ERROR: $query missing
   exit
 fi
 
-/usr/bin/curl --silent -H "Content-type: application/sparql-query" -H "Accept: text/tab-separated-values; charset=utf-8" --data-binary @$QUERY http://zbw.eu/beta/sparql/stw/query  | tail -n +2 | sed 's/^"//' | sed 's/"$//' | sed 's/"\t"/\t/g' > $OUTPUT
+echo "id	name	description" > $output
+/usr/bin/curl --silent -H "Content-type: application/sparql-query" -H "Accept: text/tab-separated-values; charset=utf-8" --data-binary @$query http://zbw.eu/beta/sparql/${DATASET}/query  | tail -n +2 | sed 's/^"//' | sed 's/"$//' | sed 's/"\t"/\t/g' |sed 's/\\"/"/g' >> $output
 
-echo "see $OUTPUT"
+echo "see $output"
 
-
-QUERY=$DIR/stw_mnm_synonyms.rq
-OUTPUT=$DIR/results/stw_${PART}_mnm_synonyms.tsv
-if [ -f $OUTPUT ]; then
-  echo ERROR: $OUTPUT exists
+# supplemental synonyms file
+query=$DIR/${DATASET}_mnm_synonyms.rq
+output=$DIR/results/${DATASET}_${PART}_mnm_synonyms.tsv
+if [ -f $output ]; then
+  echo ERROR: $output exists
+  exit
+fi
+if [ ! -f $query ]; then
+  echo ERROR: $query missing
   exit
 fi
 
-/usr/bin/curl --silent -H "Content-type: application/sparql-query" -H "Accept: text/tab-separated-values; charset=utf-8" --data-binary @$QUERY http://zbw.eu/beta/sparql/stw/query  | tail -n +2 | sed 's/^"//' | sed 's/"$//' | sed 's/"\t"/\t/g' > $OUTPUT
+/usr/bin/curl --silent -H "Content-type: application/sparql-query" -H "Accept: text/tab-separated-values; charset=utf-8" --data-binary @$query http://zbw.eu/beta/sparql/${DATASET}/query  | tail -n +2 | sed 's/^"//' | sed 's/"$//' | sed 's/"\t"/\t/g' > $output
 
-echo "see $OUTPUT"
+echo "see $output"
