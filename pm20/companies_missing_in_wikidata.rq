@@ -9,7 +9,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?pm20 ?pm20Label ?adjustedLabel ?incepted ?abandoned ?gndId
+select ?pm20 ?pm20Label (?adjustedLabel as ?wdLabel) ?incepted ?abandoned ?gndId
 ?pm20Id
 (group_concat(distinct ?classQid; separator='; ') as ?classQids)
 (group_concat(distinct ?typeDe; separator='; ') as ?descrDe)
