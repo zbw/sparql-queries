@@ -19,7 +19,27 @@ where {
   values ( ?orgType ?classQid ?typeEn ) {
     ( 'Unternehmen'@de 'Q4830453' 'business' )
     ( 'Kolonialgesellschaft'@de 'Q1700154' 'colonial society' )
-    ( 'Verein'@de 'Q48204' 'association' )
+    ( 'Verein'@de 'Q988108' 'association' )
+    ( 'Körperschaft des öffentlichen Rechts'@de 'Q15734684' 'Körperschaft des öffentlichen Rechts' )
+    ( 'Konzern'@de 'Q206361' 'concern' )
+    ( 'Dachgesellschaft'@de 'Q219577' 'holding company' )
+    ( 'Zentralbank'@de 'Q66344' 'central bank' )
+    ( 'Kammern, Verbände'@de 'Q15911314' 'chamber, association' )
+    ( 'Ausseruniversitäre Forschungseinrichtungen'@de 'Q31855' 'research institute' )
+    ( 'Fachgesellschaften und Berufsverbände'@de 'Q1391145' 'professional society' )
+    ( 'Internationale Organisationen'@de 'Q484652' 'international organization' )
+    ( 'Unternehmenskartell'@de 'Q179216' 'cartel' )
+    ( 'Hochschulen und deren Einrichtungen'@de 'Q38723' 'university, university institute' )
+    ( 'Regiebetrieb, Eigenbetrieb'@de 'Q40890107' 'municipal enterprise' )
+    ( 'Tochergesellschaft'@de 'Q658255' 'subsidiary' )
+    ( 'Weitere Institutionen'@de 'Q178706' 'institution' )
+    ( 'Gewerkschaft'@de 'Q178790' 'union' )
+    ( 'Institution'@de 'Q178706' 'institution' )
+    ( 'Bibliotheken und Archive'@de 'Q1030034' 'libraries and archives' )
+    ( 'Stiftung'@de 'Q18631232' 'foundation' )
+    ( 'Verlage und Datenbankanbieter'@de 'Q2085381' 'publisher ' )
+    ( 'Kongresse, Tagungen'@de 'Q625994' 'convention' )
+    ( 'Public Private Partnership'@de 'Q221096' 'public private partnership' )
   }
   #
   # determine for which entries we want to create items
