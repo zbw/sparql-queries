@@ -52,9 +52,11 @@ where {
         zbwext:adjustedLabel ?adjustedLabel ;
         frapo:hasCountryCode ?country ;
         zbwext:totalDocCount ?docCount .
-    # this is the filter for defining the separate mnm catalogs (parts)
-    #filter(?country in ('GB', 'US', 'CA'))
-    filter(?country in ('NL', 'ID', 'AO'))
+    #
+    # this is the filter for defining the separate mnm catalogs (parts) 
+    filter(?country not in ('NL', 'ID', 'AO'))
+    filter(?country in ('GB', 'US', 'CA', 'AU', 'ZA', 'IE', 'MY', 'ZW'))
+
   } minus {
     # minus all entries which are linked to WD items
     service <https://query.wikidata.org/sparql> {
@@ -63,7 +65,6 @@ where {
   }
   filter(lang(?orgType) = 'de')
   bind(str(?orgType) as ?typeDe)
-  # remove entries with suspect labels including '()'
   #
   # now get further information to add to WD
   #

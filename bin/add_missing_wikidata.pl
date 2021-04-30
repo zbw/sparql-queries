@@ -548,6 +548,9 @@ sub quote {
   my $q = '"';
 
   my $quoted = $text;
+
+  # there seems to be no way of encoding double-quotes in
+  # QS2 tab-separated input, so we transform them to single-quotes
   $quoted =~ s/$q/'/g;
 
   $quoted = "$q$quoted$q";
