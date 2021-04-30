@@ -590,31 +590,8 @@ sub adjust_label {
     }
   }
 
-  # for companies
-  if ( $label_type eq 'co' ) {
-    ## cut off legal form
-    $label =~ s/(.*) Ltd\.$/$1/g;
-    $label =~ s/(.*) Ltd$/$1/g;
-    $label =~ s/(.*) Limited$/$1/g;
-    $label =~ s/(.*) A\.G\.$/$1/g;
-    $label =~ s/(.*) AG$/$1/g;
-    $label =~ s/(.*) Aktiengesellschaft$/$1/g;
-    $label =~ s/(.*) \& Co\.$/$1/ig;
-    $label =~ s/(.*) \& Co$/$1/ig;
-    $label =~ s/(.*) Co\.$/$1/ig;
-    $label =~ s/(.*) Co$/$1/ig;
-    $label =~ s/(.*) Corpi\.$/$1/ig;
-    $label =~ s/(.*) mbh$/$1/ig;
-    $label =~ s/(.*) Gmbh$/$1/ig;
-    $label =~ s/(.*) e.V.$/$1/ig;
-    $label =~ s/(.*) plc\.$/$1/g;
-    $label =~ s/(.*) plc$/$1/g;
-    $label =~ s/(.*) SA$/$1/g;
-    $label =~ s/(.*) S\.A\.$/$1/g;
-    $label =~ s/(.*) NV$/$1/g;
-    $label =~ s/(.*) N\.V\.$/$1/g;
-    $label =~ s/(.*) Co\.,$/$1/g;
-  }
+  # for companies, use already computed adjustedLabel
+
   return $label;
 }
 
