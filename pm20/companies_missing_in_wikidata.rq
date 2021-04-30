@@ -9,11 +9,12 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?pm20 ?pm20Label (?adjustedLabel as ?wdLabel) ?incepted ?abandoned ?gndId
+select ?pm20 ?pm20Label ?adjustedLabel ?incepted ?abandoned ?gndId
 ?pm20Id
-(group_concat(distinct ?classQid; separator='; ') as ?classQids)
+(group_concat(distinct ?classQid; separator='|') as ?classQids)
 (group_concat(distinct ?typeDe; separator='; ') as ?descrDe)
 (group_concat(distinct ?typeEn; separator='; ') as ?descrEn)
+(group_concat(distinct ?altLabel; separator='|') as ?altLabels)
 where {
   # organization type mappings
   values ( ?orgType ?classQid ?typeEn ) {
@@ -74,6 +75,9 @@ where {
   }
   optional {
     ?pm20 gndo:gndIdentifier ?gndId .
+  }
+  optional {
+    ?pm20 skos:altLabel ?altLabel .
   }
 }
 group by ?docCount ?pm20 ?pm20Label ?adjustedLabel ?incepted ?abandoned ?gndId ?pm20Id
