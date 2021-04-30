@@ -3,6 +3,8 @@
 
 # Transform a sparql result to QS create statements
 
+# TODO remove Dutch label output
+
 use strict;
 use warnings;
 
@@ -91,9 +93,13 @@ Readonly my %CONFIG => (
       de => 'descrDe',
       en => 'descrEn',
     },
+    alias => {
+      de => 'altLabels',
+      en => 'altLabels',
+    },
     properties => {
       P31 => {
-        var_name   => 'classQid',
+        var_name   => 'classQids',
         value_type => 'item',
       },
       P571 => {
@@ -231,15 +237,16 @@ Readonly my %CONFIG => (
         var_name   => 'classQid',
         value_type => 'item',
       },
-      # partOf is not set in create mode query, because broader items not 
+
+      # partOf is not set in create mode query, because broader items not
       # necessarily exist, when the narrower item is to be created
       P361 => {
-        query    => path('/opt/sparql-queries/pm20/wd_category_partof.rq'),
+        query      => path('/opt/sparql-queries/pm20/wd_category_partof.rq'),
         var_name   => 'partOf',
         value_type => 'item',
       },
       P8484 => {
-        query    => path('/opt/sparql-queries/pm20/wd_category_longnotation.rq'),
+        query => path('/opt/sparql-queries/pm20/wd_category_longnotation.rq'),
         var_name   => 'subjectCode',
         value_type => 'literal',
         qualifiers => {
@@ -257,7 +264,8 @@ Readonly my %CONFIG => (
     label_type => 'category',
     properties => {
       P8483 => {
-        query    => path('/opt/sparql-queries/pm20/wd_geo_category_longnotation.rq'),
+        query =>
+          path('/opt/sparql-queries/pm20/wd_geo_category_longnotation.rq'),
         var_name   => 'geoCode',
         value_type => 'literal',
         qualifiers => {
@@ -356,7 +364,7 @@ if ( $mode eq 'create' ) {
     $query     = $queryfile->slurp;
   } else {
     $queryfile = $src_cfg->{default_property_query};
-    $query     = adapt_default_query( $queryfile->slurp, $property );
+    $query = adapt_default_query( $queryfile->slurp, $property );
   }
 
   $outfile =
@@ -435,6 +443,13 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
       }
     }
 
+    # TODO remove!!!
+    # q&d Hack for labels according to non-de/en languages
+    print $fh 'LAST|Lnl|' . quote( $entry->{adjustedLabel}{value} ) . "\n";
+    if ( $entry->{altLabels}{value} ) {
+      print $fh 'LAST|Anl|' . quote( $entry->{altLabels}{value} ) . "\n";
+    }
+
     # output source property (without reference)
     # (if a source should be given)
     if ( $config->{source_id} ) {
@@ -451,11 +466,17 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
       my $value      = $entry->{ $prop_cfg->{var_name} }{value};
       next unless $value;
 
-      print $fh 'LAST|'
-        . $property . '|'
-        . prepare_value( $value_type, $value, $property )
-        . get_qualifier_statements( $prop_cfg, $entry )
-        . $reference_statement . "\n";
+      # in some cases, a value may consist of separate subfields
+      # TODO code duplicated!
+      my @prepared_values =
+        ( prepare_values( $value_type, $value, $property ) );
+      foreach my $prepared_value (@prepared_values) {
+        print $fh 'LAST|'
+          . $property . '|'
+          . $prepared_value
+          . get_qualifier_statements( $prop_cfg, $entry )
+          . $reference_statement . "\n";
+      }
     }
   } else {
 
@@ -471,11 +492,16 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
       ? get_qualifier_statements( $prop_cfg->{qualifiers}, $entry )
       : '';
 
-    print $fh $entry->{$qid}{value} . '|'
-      . $property . '|'
-      . prepare_value( $value_type, $value )
-      . get_qualifier_statements( $prop_cfg, $entry )
-      . $reference_statement . "\n";
+    # in some cases, a value may consist of separate subfields
+    # TODO code duplicated!
+    my @prepared_values = ( prepare_values( $value_type, $value, $property ) );
+    foreach my $prepared_value (@prepared_values) {
+      print $fh 'LAST|'
+        . $property . '|'
+        . $prepared_value
+        . get_qualifier_statements( $prop_cfg, $entry )
+        . $reference_statement . "\n";
+    }
   }
 
   # Limit the numer of results
@@ -488,25 +514,31 @@ print "$count statements written to $outfile\n";
 
 #####################
 
-sub prepare_value {
+sub prepare_values {
   my $value_type = shift or confess "param missing";
   my $value      = shift or confess "param missing";
   my $property   = shift;
 
+  # TODO allow multiple values for other item types than item
+
+  my @values;
   if ( $value_type eq 'item' ) {
-    ## use unquoted value
+    ## split possible multiple values from group_concat
+    ## use unquoted values
+    @values = split( /\|/, $value );
   } elsif ( $value_type eq 'literal' ) {
-    $value = quote($value);
+    @values = ( quote($value) );
   } elsif ( $value_type eq 'quantity' ) {
     ## no modification of value
+    @values = ($value);
   } elsif ( $value_type eq 'date' ) {
-    $value = format_date($value);
+    @values = ( format_date($value) );
   } elsif ( $value_type eq 'monolingual-text' ) {
-    $value = quote( $value, $config->{properties}{$property}{lang} );
+    @values = ( quote( $value, $config->{properties}{$property}{lang} ) );
   } else {
     die "Error: Unknown value_type [$value_type]\n";
   }
-  return $value;
+  return @values;
 }
 
 sub quote {
@@ -515,7 +547,10 @@ sub quote {
 
   my $q = '"';
 
-  my $quoted = "$q$text$q";
+  my $quoted = $text;
+  $quoted =~ s/$q/'/g;
+
+  $quoted = "$q$quoted$q";
 
   if ($lang) {
     $quoted = "$lang:$quoted";
