@@ -26,8 +26,8 @@ where {
         zbwext:totalDocCount ?docCount .
       #
       # this is the filter for defining the separate mnm catalogs (parts)
-      ##filter(?country in ('GB', 'US', 'CA'))
-      filter(?country in ('NL', 'ID', 'AO'))
+      filter(?country not in ('NL', 'ID', 'AO'))
+      filter(?country in ('GB', 'US', 'CA', 'AU', 'ZA', 'IE', 'MY', 'ZW'))
       #
       optional {
         ?pm20 zbwext:fromTo ?fromTo .
