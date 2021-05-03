@@ -2,20 +2,24 @@
 #
 PREFIX hint: <http://www.bigdata.com/queryHints#>
 PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?pm20 ?wp ?qsStatement
+select ?pm20 ?pm20Label ?wp ?wpLabel  ?wd ?wdx ?qsStatement
 where {
   # times out with optimizer
   hint:Query hint:optimizer "None" .
   #
   service <http://zbw.eu/beta/sparql/pm20/query> {
     ?pm20 a zbwext:CompanyFolder ;
+          skos:prefLabel ?pm20Label ;
             zbwext:wpLinkOrig ?wp .
     bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/') as ?pm20New)
   }
-  ?wp schema:about ?wd .
+  ?wp schema:about ?wd ;
+      schema:name ?wpLabel .
   
 ##  # for now, exclude ALL already linked PM20 folders
 ##  filter(not exists {
@@ -28,8 +32,14 @@ where {
   }
   filter(!bound(?pm20Id))
   
+  optional {
+    ?wdx wdt:P4293 ?pm20New .
+    filter(?pm20 != ?pm20New)
+  }
+  
   # construct statement
   bind(strafter(str(?wd), 'http://www.wikidata.org/entity/') as ?wdId)
-  bind(concat(?wdId,'|P4293|"', ?pm20New, '"') as ?qsStatement)
+  bind(concat(?wdId,'|P4293|"', ?pm20New, '"|P4390|Q39894604') as ?qsStatement)
 }
+order by ?pm20Label
 
