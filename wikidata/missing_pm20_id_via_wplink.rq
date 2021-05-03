@@ -1,0 +1,35 @@
+# Create qs statements for adding P4293 statements to items linked via WP pagelinks from PM20
+#
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX schema: <http://schema.org/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?pm20 ?wp ?qsStatement
+where {
+  # times out with optimizer
+  hint:Query hint:optimizer "None" .
+  #
+  service <http://zbw.eu/beta/sparql/pm20/query> {
+    ?pm20 a zbwext:CompanyFolder ;
+            zbwext:wpLinkOrig ?wp .
+    bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/') as ?pm20New)
+  }
+  ?wp schema:about ?wd .
+  
+  # for now, exclude ALL already linked PM20 folders
+  filter(not exists {
+    ?wdx wdt:P4293 ?pm20New .
+    })
+  
+  # alternatively, exclude only the already site-linked items
+  optional {
+    ?wd wdt:P4293 ?pm20Id .
+  }
+  filter(!bound(?pm20Id))
+  
+  # construct statement
+  bind(strafter(str(?wd), 'http://www.wikidata.org/entity/') as ?wdId)
+  bind(concat(?wdId,'|P4293|"', ?pm20New, '"') as ?qsStatement)
+}
+
