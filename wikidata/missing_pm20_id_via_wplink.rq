@@ -17,10 +17,10 @@ where {
   }
   ?wp schema:about ?wd .
   
-  # for now, exclude ALL already linked PM20 folders
-  filter(not exists {
-    ?wdx wdt:P4293 ?pm20New .
-    })
+##  # for now, exclude ALL already linked PM20 folders
+##  filter(not exists {
+##    ?wdx wdt:P4293 ?pm20New .
+##    })
   
   # alternatively, exclude only the already site-linked items
   optional {
