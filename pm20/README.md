@@ -9,6 +9,7 @@ Query | Description
 [count_folder_type](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/count_folder_type.rq) | Count pm20 ids in total, with docs and with link in WD, by folder type ([results](results/count_folder_type.tsv))
 [folder_names_qs](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/folder_names_qs.rq) | Folder names qs input for folders connected to WD items
 [pm20_mnm](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/pm20_mnm.rq) | Create Mix-n-match input (for co)
+[pm20_mnm_search](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/pm20_mnm_search.rq) | Create list of search statements in parallel to Wikidata Mix'n'match catalog for PM20 companies (excluding entries which are already exactly linked)
 **Persons** |
 [persons](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/persons.rq) | All persons
 **Organizations** |
