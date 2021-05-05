@@ -82,6 +82,7 @@ Readonly my %CONFIG => (
     source     => 'pm20',
     label_type => 'co',
     query => path('/opt/sparql-queries/pm20/companies_missing_in_wikidata.rq'),
+    html  => path('/var/www/html/beta/tmp/pm20_qs_create.html'),
     source_type  => 'zbwext:CompanyFolder',
     source_title => 'pm20Label',
     source_id    => 'pm20Id',
@@ -376,6 +377,13 @@ if ( -f $outfile ) {
   die "Error: $outfile exists\n";
 }
 
+# optional html output
+my $html;
+if ($config->{html} and $mode eq 'create') {
+  $html = $config->{html}->openw_utf8;
+  html_add_header( $html, $type );
+}
+
 # initialize rest client
 my $client = REST::Client->new( timeout => 600 );
 
@@ -406,10 +414,12 @@ my $count = 0;
 my $fh    = $outfile->openw_utf8;
 foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
 
+  my $id = $entry->{ $config->{source_id} }{value};
+
   # set record specific reference statement
   my $reference_statement = '';
   if ( $config->{source_id} ) {
-    my $entry_source_id = quote( $entry->{ $config->{source_id} }{value} );
+    my $entry_source_id = quote($id);
     my $entry_source_title =
       quote( $entry->{ $config->{source_title} }{value} );
     $reference_statement =
@@ -424,7 +434,10 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
   if ( $mode eq 'create' ) {
 
     # new item
-    print $fh "CREATE\n";
+    my $block = "CREATE\n";
+
+    # TODO q&d - this works only for companies
+    my $label = $entry->{adjustedLabel}{value};
 
     # output fields
     foreach my $field (qw/ label descr alias /) {
@@ -439,23 +452,23 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
         if ( $field eq 'label' ) {
           $value = adjust_label( $value, $config->{label_type} );
         }
-        print $fh "LAST|$abbrev$lang|" . quote($value) . "\n";
+        $block .= "LAST|$abbrev$lang|" . quote($value) . "\n";
       }
     }
 
     # TODO remove!!!
     # q&d Hack for labels according to non-de/en languages
-    print $fh 'LAST|Lnl|' . quote( $entry->{adjustedLabel}{value} ) . "\n";
+    $block .= 'LAST|Lnl|' . quote( $entry->{adjustedLabel}{value} ) . "\n";
     if ( $entry->{altLabels}{value} ) {
-      print $fh 'LAST|Anl|' . quote( $entry->{altLabels}{value} ) . "\n";
+      $block .= 'LAST|Anl|' . quote( $entry->{altLabels}{value} ) . "\n";
     }
 
     # output source property (without reference)
     # (if a source should be given)
     if ( $config->{source_id} ) {
-      print $fh 'LAST|'
+      $block .= 'LAST|'
         . $src_cfg->{source_property} . '|'
-        . quote( $entry->{ $config->{source_id} }{value} ) . "\n";
+        . quote( $id ) . "\n";
     }
 
     # output properties
@@ -471,12 +484,19 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
       my @prepared_values =
         ( prepare_values( $value_type, $value, $property ) );
       foreach my $prepared_value (@prepared_values) {
-        print $fh 'LAST|'
+        $block .= 'LAST|'
           . $property . '|'
           . $prepared_value
           . get_qualifier_statements( $prop_cfg, $entry )
           . $reference_statement . "\n";
       }
+    }
+    print $fh "$block\n";
+    if ($html) {
+      my $url = "http://purl.org/pressemappe20/folder/$id";
+      print $html
+          "\n<h3><a href='$url'>$label</a></h3>\n\n<pre class='force-select'>\n";
+      print $html "$block\n</pre>\n\n";
     }
   } else {
 
@@ -509,8 +529,12 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
   $count++;
   last if $count >= $LIMIT;
 }
-
 print "$count statements written to $outfile\n";
+if ($html) {
+  print $html "\n</body></html>\n";
+  $html->close;
+  print "http://zbw.eu/beta/tmp/pm20_qs_create.html\n";
+}
 
 #####################
 
@@ -629,5 +653,28 @@ sub get_qualifier_statements {
     }
   }
   return $statements;
+}
+
+sub html_add_header {
+  my $html = shift or die "param missing";
+  my $type = shift or die "param missing";
+
+  my $title = "QS: Create item from $type";
+  print $html <<"EOF";
+<!DOCTYPE html>
+<html><head><title>$title</title><style>
+.force-select {
+  -webkit-user-select: all;  /* Chrome 49+ */
+  -moz-user-select: all;     /* Firefox 43+ */
+  -ms-user-select: all;      /* No support yet */
+  user-select: all;          /* Likely future */
+}
+</style></head><body>
+<h1>$title</h1>
+<p>In sync with Mix-n-match catalog <a
+href="https://tools.wmflabs.org/mix-n-match/#/catalog/4414">PM20 companies (en)</a>
+</p>
+
+EOF
 }
 
