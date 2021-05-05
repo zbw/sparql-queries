@@ -67,8 +67,8 @@ where {
       optional {
         ?statement pq:P4390 ?relType .
       }
-      # filter out empty, exact and narrow relations
-      filter(!bound(?relType) || (?relType=wd:Q39893449) || (?relType=wd:Q39893967))
+      # let related matches pass
+      filter(!bound(?relType) || ?relType!=wd:Q39894604)
     }
   }
   filter(!bound(?wd))
