@@ -2,8 +2,7 @@
 # nbt, 15.11.2018
 
 # Transform a sparql result to QS create statements
-
-# TODO remove Dutch label output
+# mode 'html' creates a list of QS inserts as html file
 
 use strict;
 use warnings;
@@ -337,11 +336,11 @@ my ( $config, $src_cfg );
 my $type     = $ARGV[0];
 my $mode     = $ARGV[1] || 'create';
 my $property = $ARGV[2];
-if ( $type and exists $CONFIG{$type} and $mode =~ m/^(create|enhance)$/ ) {
+if ( $type and exists $CONFIG{$type} and $mode =~ m/^(html|create|enhance)$/ ) {
   $config  = $CONFIG{$type};
   $src_cfg = $SOURCE_CONFIG{ $config->{source} };
 } else {
-  die "usage: $0 [", join( '|', keys %CONFIG ), "] {create|enhance pid}\n";
+  die "usage: $0 [", join( '|', keys %CONFIG ), "] {html|create|enhance pid}\n";
 }
 my @valid_properties = keys $config->{properties};
 if ( $mode eq 'enhance'
@@ -353,12 +352,12 @@ if ( $mode eq 'enhance'
 # output file name derived from query file, plus date for repeated runs
 my $prop_cfg;
 my ( $queryfile, $outfile, $query );
-if ( $mode eq 'create' ) {
+if ( $mode eq 'html' or $mode eq 'create' ) {
   $queryfile = $config->{query};
   $query     = $queryfile->slurp;
   $outfile   = $queryfile->parent->child('results')
     ->child( $queryfile->basename('.rq') . ".${TODAY}.qs.txt" );
-} else {
+} elsif ( $mode eq 'enhance' ) {
   $prop_cfg = $config->{properties}{$property};
   if ( $prop_cfg->{query} ) {
     $queryfile = $prop_cfg->{query};
@@ -373,15 +372,24 @@ if ( $mode eq 'create' ) {
     ->child(
     $property . '_' . $queryfile->basename('.rq') . ".${TODAY}.qs.txt" );
 }
-if ( -f $outfile ) {
-  die "Error: $outfile exists\n";
-}
 
-# optional html output
-my $html;
-if ($config->{html} and $mode eq 'create') {
-  $html = $config->{html}->openw_utf8;
-  html_add_header( $html, $type );
+# output files
+my ( $html, $fh );
+if ( $mode eq 'html' ) {
+  if ( $config->{html} ) {
+    $html = $config->{html}->openw_utf8;
+    html_add_header( $html, $type );
+  } else {
+    die "Error: no html output defined for $type\n";
+  }
+}
+if ( $mode ne 'html' ) {
+  if ( -f $outfile ) {
+    ## avoid accidental override
+    die "Error: $outfile exists\n";
+  } else {
+    $fh = $outfile->openw_utf8;
+  }
 }
 
 # initialize rest client
@@ -411,7 +419,6 @@ if ($@) {
 }
 
 my $count = 0;
-my $fh    = $outfile->openw_utf8;
 foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
 
   my $id = $entry->{ $config->{source_id} }{value};
@@ -431,13 +438,10 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
       . $RETRIEVED;
   }
 
-  if ( $mode eq 'create' ) {
+  if ( $mode eq 'html' or $mode eq 'create' ) {
 
     # new item
     my $block = "CREATE\n";
-
-    # TODO q&d - this works only for companies
-    my $label = $entry->{adjustedLabel}{value};
 
     # output fields
     foreach my $field (qw/ label descr alias /) {
@@ -458,17 +462,15 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
 
     # TODO remove!!!
     # q&d Hack for labels according to non-de/en languages
-    $block .= 'LAST|Lnl|' . quote( $entry->{adjustedLabel}{value} ) . "\n";
-    if ( $entry->{altLabels}{value} ) {
-      $block .= 'LAST|Anl|' . quote( $entry->{altLabels}{value} ) . "\n";
-    }
+    ##$block .= 'LAST|Lnl|' . quote( $entry->{adjustedLabel}{value} ) . "\n";
+    ##if ( $entry->{altLabels}{value} ) {
+    ##  $block .= 'LAST|Anl|' . quote( $entry->{altLabels}{value} ) . "\n";
+    ##}
 
     # output source property (without reference)
     # (if a source should be given)
     if ( $config->{source_id} ) {
-      $block .= 'LAST|'
-        . $src_cfg->{source_property} . '|'
-        . quote( $id ) . "\n";
+      $block .= 'LAST|' . $src_cfg->{source_property} . '|' . quote($id) . "\n";
     }
 
     # output properties
@@ -491,12 +493,17 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
           . $reference_statement . "\n";
       }
     }
-    print $fh "$block\n";
-    if ($html) {
+    if ( $mode eq 'html' ) {
       my $url = "http://purl.org/pressemappe20/folder/$id";
+      ## TODO q&d - this works only for companies
+      my $label =
+        $entry->{adjustedLabel}{value} . ' {' . $entry->{docCount}{value} . '}';
       print $html
-          "\n<h3><a href='$url'>$label</a></h3>\n\n<pre class='force-select'>\n";
+        "\n<h3><a href='$url'>$label</a></h3>\n\n<pre class='force-select'>\n";
       print $html "$block\n</pre>\n\n";
+    }
+    if ( $mode eq 'create' ) {
+      print $fh "$block\n";
     }
   } else {
 
@@ -529,11 +536,13 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
   $count++;
   last if $count >= $LIMIT;
 }
-print "$count statements written to $outfile\n";
-if ($html) {
+print "$count statements written to output file:\n";
+if ( $mode eq 'html' ) {
   print $html "\n</body></html>\n";
   $html->close;
   print "http://zbw.eu/beta/tmp/pm20_qs_create.html\n";
+} else {
+  print "$outfile\n";
 }
 
 #####################
