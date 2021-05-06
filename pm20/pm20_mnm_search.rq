@@ -12,10 +12,10 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?id ?name ?search ("search" as ?searchLabel) ?description
+select ?id ?pm20 (?name as ?pm20Label) ?search ("search" as ?searchLabel) ?description
 where {
   {
-    select ?id ?name ?docCount ?prefLabel ?fromTo
+    select ?pm20 ?id ?name ?docCount ?prefLabel ?fromTo
     (group_concat(distinct ?location; separator = '; ') as ?locations)
     (group_concat(distinct ?industry; separator='; ') as ?industries)
     (group_concat(distinct ?note; separator='; ') as ?notes)
@@ -50,7 +50,7 @@ where {
         ?pm20 skos:note ?note .
       }
     }
-    group by ?id ?name ?docCount ?prefLabel ?fromTo
+    group by ?pm20 ?id ?name ?docCount ?prefLabel ?fromTo
   }
   bind(concat('{', str(?docCount), '} ', if(bound(?fromTo), concat(?fromTo, ', '), ''), if(bound(?locations), ?locations, ''),
       ' (', if(bound(?industries), ?industries, ''), '): ', $prefLabel, ' -. ', if(bound(?notes), ?notes, '')) as ?description)
