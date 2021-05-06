@@ -14,7 +14,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select ?pm20 ?pm20Label ?adjustedLabel ?incepted ?abandoned ?gndId
-?pm20Id
+?pm20Id ?docCount
 (group_concat(distinct ?classQid; separator='|') as ?classQids)
 (group_concat(distinct ?typeDe; separator='; ') as ?descrDe)
 (group_concat(distinct ?typeEn; separator='; ') as ?descrEn)
@@ -95,5 +95,5 @@ where {
   }
 }
 group by ?docCount ?pm20 ?pm20Label ?adjustedLabel ?incepted ?abandoned ?gndId ?pm20Id
-order by desc(?docCount) ?name
+order by desc(?docCount) ?pm20Label
 
