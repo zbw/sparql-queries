@@ -12,7 +12,8 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?id ?pm20 (?name as ?pm20Label) ?search ("search" as ?searchLabel) ?description
+select ?id ?pm20 (?name as ?pm20Label) ?wdSearch ("wd" as ?wdSearchLabel)
+?wpSearch ("wp" as ?wpSearchLabel) ?qs ("qs" as ?qsLabel) ?description
 where {
   {
     select ?pm20 ?id ?name ?docCount ?prefLabel ?fromTo
@@ -52,12 +53,6 @@ where {
     }
     group by ?pm20 ?id ?name ?docCount ?prefLabel ?fromTo
   }
-  bind(concat('{', str(?docCount), '} ', if(bound(?fromTo), concat(?fromTo, ', '), ''), if(bound(?locations), ?locations, ''),
-      ' (', if(bound(?industries), ?industries, ''), '): ', $prefLabel, ' -. ', if(bound(?notes), ?notes, '')) as ?description)
-
-  # create search link
-  bind(replace(?name, " ", "+") as ?name_enc)
-  bind(uri(concat("https://startpage.com/search?q=", ?name_enc, "+site:wikipedia.org")) as ?search)
 
   # exclude alreday exactly linked entries
   optional {
@@ -72,6 +67,16 @@ where {
     }
   }
   filter(!bound(?wd))
+
+  # info
+  bind(concat('{', str(?docCount), '} ', if(bound(?fromTo), concat(?fromTo, ', '), ''), if(bound(?locations), ?locations, ''),
+      ' (', if(bound(?industries), ?industries, ''), '): ', $prefLabel, ' -. ', if(bound(?notes), ?notes, '')) as ?description)
+
+  # create search and qs links
+  bind(replace(replace(replace(?name, " ", "+"), "&", "%26"), "'", "%27") as ?name_enc)
+  bind(uri(concat("https://startpage.com/search?q=", ?name_enc, "+site:wikidata.org")) as ?wdSearch)
+  bind(uri(concat("https://startpage.com/search?q=", ?name_enc, "+site:wikipedia.org")) as ?wpSearch)
+  bind(uri(concat('https://zbw.eu/beta/tmp/pm20_qs_create.html#', replace(?id, "/", "_"))) as ?qs)
 }
 order by desc(?docCount) ?name
 
