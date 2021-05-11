@@ -1,0 +1,68 @@
+# Number of PM20 companies per wiki language (used to match company names)
+# and percentage of already matched entries
+#
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX frapo: <http://purl.org/cerif/frapo/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?wikiLang ?catalog ('M-n-m' as ?catalogLabel)
+(str(count(distinct ?id)) as ?pm20CompanyCount) (str(sum(?directlyLinked)) as ?directLinks)
+(concat(str(round(sum(?directlyLinked) / count(distinct ?id)*1000)/10), ' %') as ?percentage)
+(str(sum(?new)) as ?itemsCreated)
+where {
+  hint:Query hint:optimizer "None" .
+  #
+  # existing Mix-n-match catalogs
+  values ( ?wikiLang ?catalogId ) {
+    ( 'nl' '4397' )
+    ( 'en' '4414' )
+    ( 'fr' undef )
+    ( 'de' undef )
+    ( 'und' undef )
+  }
+  # base set of entries from PM20
+  service <http://zbw.eu/beta/sparql/pm20/query> {
+    # query restricts result to folders with documents
+    ?pm20 a zbwext:CompanyFolder ;
+          dct:identifier ?id ;
+          zbwext:adjustedLabel ?name ;
+          frapo:hasCountryCode ?country ;
+          zbwext:totalDocCount ?docCount .
+    #
+    # this is the filter for defining the separate mnm catalogs (parts)
+    bind(
+      if(?country in ('NL', 'ID', 'AO'), 'nl', 
+        if(?country in ('GB', 'US', 'CA', 'AU', 'ZA', 'IE', 'MY', 'ZW'), 'en', 
+          if(?country in ('FR', 'VN', 'BE', 'CD', 'LU', 'DZ'), 'fr',
+            if(?country in ('DE', 'AT', 'CH', 'HU', 'TZ', 'PL', 'CZ', 'WS'), 'de',
+              'und')))) as ?wikiLang)
+  }
+  # mark already directly linked entries
+  optional {
+    ?statement ps:P4293 ?id .
+    ?wd p:P4293 ?statement .
+    optional {
+      ?statement pq:P4390 ?relType .
+    }
+    # let related matches pass
+    filter(!bound(?relType) || ?relType!=wd:Q39894604)
+  }
+  bind(if(bound(?wd), 1, 0) as ?directlyLinked)
+  #
+  # check if the item was created after start of the companies' linking phase
+  # at 2021-04-26, first new item Q106647030
+  bind(xsd:integer(strafter(str(?wd), concat(str(wd:), 'Q'))) as ?qidNum)
+  bind(if(?qidNum >= 106647030, 1, 0) as ?new)
+  #
+  bind(uri(concat('https://mix-n-match.toolforge.org/#/catalog/', ?catalogId)) as ?catalog)
+}
+group by ?wikiLang ?catalog
+order by ?wikiLang
+
