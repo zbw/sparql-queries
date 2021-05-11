@@ -493,16 +493,18 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
           . $reference_statement . "\n";
       }
     }
+    my $label =
+      $entry->{adjustedLabel}{value} . ' {' . $entry->{docCount}{value} . '}';
     if ( $mode eq 'html' ) {
       my $url = "http://purl.org/pressemappe20/folder/$id";
+      (my $name = $id ) =~ s/\//_/g;
       ## TODO q&d - this works only for companies
-      my $label =
-        $entry->{adjustedLabel}{value} . ' {' . $entry->{docCount}{value} . '}';
       print $html
-        "\n<h3><a href='$url'>$label</a></h3>\n\n<pre class='force-select'>\n";
+        "\n<h3 id='$name'><a href='$url'># $label</a></h3>\n\n<pre class='force-select'>\n";
       print $html "$block\n</pre>\n\n";
     }
     if ( $mode eq 'create' ) {
+      print $fh "\n# $label\n\n";
       print $fh "$block\n";
     }
   } else {
