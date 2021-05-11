@@ -503,7 +503,7 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
       my $url = "http://purl.org/pressemappe20/folder/$id";
       ( my $name = $id ) =~ s/\//_/g;
       ## TODO q&d - this works only for companies
-      print $html "\n<h3 id='$name'><a href='$url'># $label</a></h3>\n\n"
+      print $html "\n<h3 id='$name'><a href='$url'># $label</a></h3>\n\n";
       print $html "<pre class='force-select'>\n$block\n</pre>\n\n";
     }
     if ( $mode eq 'create' ) {
