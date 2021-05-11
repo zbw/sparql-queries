@@ -452,11 +452,15 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
         my $value = $entry->{ $config->{$field}{$lang} }{value};
         next unless $value;
 
-        # transform label according to Wikidata rules
-        if ( $field eq 'label' ) {
-          $value = adjust_label( $value, $config->{label_type} );
+        # multiple values should occur only for aliases
+        my @split_val = split( /\|/, $value );
+        foreach my $val (@split_val) {
+          ## transform label according to Wikidata rules
+          if ( $field eq 'label' ) {
+            $value = adjust_label( $val, $config->{label_type} );
+          }
+          $block .= "LAST|$abbrev$lang|" . quote($val) . "\n";
         }
-        $block .= "LAST|$abbrev$lang|" . quote($value) . "\n";
       }
     }
 
@@ -497,11 +501,10 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
       $entry->{adjustedLabel}{value} . ' {' . $entry->{docCount}{value} . '}';
     if ( $mode eq 'html' ) {
       my $url = "http://purl.org/pressemappe20/folder/$id";
-      (my $name = $id ) =~ s/\//_/g;
+      ( my $name = $id ) =~ s/\//_/g;
       ## TODO q&d - this works only for companies
-      print $html
-        "\n<h3 id='$name'><a href='$url'># $label</a></h3>\n\n<pre class='force-select'>\n";
-      print $html "$block\n</pre>\n\n";
+      print $html "\n<h3 id='$name'><a href='$url'># $label</a></h3>\n\n"
+      print $html "<pre class='force-select'>\n$block\n</pre>\n\n";
     }
     if ( $mode eq 'create' ) {
       print $fh "\n# $label\n\n";
