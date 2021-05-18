@@ -14,8 +14,9 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select ?wikiLang ?catalog ('M-n-m' as ?catalogLabel)
 (str(count(distinct ?id)) as ?pm20CompanyCount) (str(sum(?directlyLinked)) as ?directLinks)
-(concat(str(round(sum(?directlyLinked) / count(distinct ?id)*1000)/10), ' %') as ?percentage)
+(concat(str(round(sum(?directlyLinked) / count(distinct ?id)*1000)/10), ' %') as ?percentageDone)
 (str(sum(?new)) as ?itemsCreated)
+(concat(str(round(sum(?new) / count(distinct ?id)*1000)/10), ' %') as ?percentageCreated)
 where {
   hint:Query hint:optimizer "None" .
   #
@@ -51,12 +52,12 @@ where {
     optional {
       ?statement pq:P4390 ?relType .
     }
-    # let related matches pass
+    # don't take into account related matches (mapping relation type)
     filter(!bound(?relType) || ?relType!=wd:Q39894604)
   }
   bind(if(bound(?wd), 1, 0) as ?directlyLinked)
   #
-  # check if the item was created after start of the companies' linking phase
+  # check if the item was created after start of the PM20 companies' linking phase
   # at 2021-04-26, first new item Q106647030
   bind(xsd:integer(strafter(str(?wd), concat(str(wd:), 'Q'))) as ?qidNum)
   bind(if(?qidNum >= 106647030, 1, 0) as ?new)
