@@ -11,6 +11,7 @@ binmode STDOUT, ":utf8";
 
 use Carp;
 use Data::Dumper;
+use DateTime;
 use JSON qw'decode_json encode_json';
 use Path::Tiny;
 use Readonly;
@@ -673,6 +674,7 @@ sub html_add_header {
   my $html = shift or die "param missing";
   my $type = shift or die "param missing";
 
+  my $now = DateTime->now( time_zone => 'Europe/Berlin' )->datetime(' ');
   my $title = "QS: Create item from $type";
   print $html <<"EOF";
 <!DOCTYPE html>
@@ -685,6 +687,7 @@ sub html_add_header {
 }
 </style></head><body>
 <h1>$title</h1>
+<h2>(as of $now)</h2>
 <p>In sync with Mix-n-match catalog <a
 href="https://tools.wmflabs.org/mix-n-match/#/catalog/4414">PM20 companies (en)</a>
 </p>
