@@ -1,0 +1,20 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sioc: <http://rdfs.org/sioc/ns#>
+
+#
+# What are the top 5 most popular subjects for this collection?
+#
+Select ?subjectLabel (Count(*) As ?totalSubjects)
+Where {
+  	GRAPH <http://zbw.eu/scholarly-resources/blog-post/> {
+          	?blogPost a sioc:BlogPost ;
+               dcterms:title ?title ;
+               dcterms:subject ?subject .
+
+            ?subject rdfs:label ?subjectLabel .
+          }
+} Group By (?subjectLabel)
+Order By Desc (?totalSubjects)
+Limit 5
