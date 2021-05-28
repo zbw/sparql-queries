@@ -21,8 +21,8 @@ where {
     (group_concat(distinct ?industry; separator='; ') as ?industries)
     (group_concat(distinct ?note; separator='; ') as ?notes)
     where {
-      values ( ?lang ) {
-        ( 'en' )
+      values ( ?language ?filterLang ) {
+        ( 'de' 'de' )
       }
       # query restricts result to folders with documents
       ?pm20 a zbwext:CompanyFolder ;
@@ -33,19 +33,24 @@ where {
         zbwext:totalDocCount ?docCount .
       #
       # this is the filter for defining the separate mnm catalogs (parts)
-      filter(?country not in ('NL', 'ID', 'AO'))
-      filter(?country in ('GB', 'US', 'CA', 'AU', 'ZA', 'IE', 'MY', 'ZW'))
+      bind(
+        if(?country in ('NL', 'ID', 'AO'), 'nl',
+          if(?country in ('GB', 'US', 'CA', 'AU', 'ZA', 'IE', 'MY', 'ZW'), 'en',
+            if(?country in ('FR', 'VN', 'BE', 'CD', 'LU', 'DZ'), 'fr',
+              if(?country in ('DE', 'AT', 'CH', 'HU', 'TZ', 'PL', 'CZ', 'WS'), 'de',
+                'und')))) as ?wikiLang)
+      filter(?wikiLang = ?filterLang)
       #
       optional {
         ?pm20 zbwext:fromTo ?fromTo .
       }
       optional {
         ?pm20 schema:location ?location .
-        filter(lang(?location) = ?lang)
+        filter(lang(?location) = ?language)
       }
       optional {
         ?pm20 schema:industry ?industry .
-        filter(lang(?industry) = ?lang)
+        filter(lang(?industry) = ?language)
       }
       optional {
         ?pm20 skos:note ?note .
