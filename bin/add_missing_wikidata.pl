@@ -115,7 +115,7 @@ Readonly my %CONFIG => (
         pid        => 'P1448',
         var_name   => 'pm20Label',
         value_type => 'monolingual-text',
-        lang       => 'en',
+        lang       => 'de',
       },
       P227 => {
         var_name   => 'gndId',
