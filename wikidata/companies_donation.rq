@@ -25,7 +25,7 @@ where {
     ( 'nl' '4397' )
     ( 'en' '4414' )
     ( 'fr' undef )
-    ( 'de' undef )
+    ( 'de' '4492' )
     ( 'und' undef )
   }
   # base set of entries from PM20
