@@ -58,8 +58,13 @@ where {
         zbwext:totalDocCount ?docCount .
     #
     # this is the filter for defining the separate mnm catalogs (parts) 
-    filter(?country not in ('NL', 'ID', 'AO'))
-    filter(?country in ('GB', 'US', 'CA', 'AU', 'ZA', 'IE', 'MY', 'ZW'))
+    bind(
+      if(?country in ('NL', 'ID', 'AO'), 'nl',
+        if(?country in ('GB', 'US', 'CA', 'AU', 'ZA', 'IE', 'MY', 'ZW'), 'en',
+          if(?country in ('FR', 'VN', 'BE', 'CD', 'LU', 'DZ'), 'fr',
+            if(?country in ('DE', 'AT', 'CH', 'HU', 'TZ', 'PL', 'CZ', 'WS'), 'de',
+              'und')))) as ?wikiLang)
+    filter(?wikiLang = 'de')
   }
 
   # minus all entries which are linked to WD items
