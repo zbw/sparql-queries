@@ -79,7 +79,7 @@ where {
 
   # create search and qs links
   bind(replace(replace(replace(?name, " ", "+"), "&", "%26"), "'", "%27") as ?name_enc)
-  bind(uri(concat("https://startpage.com/search?q=", ?name_enc, "+site:wikidata.org")) as ?wdSearch)
+  bind(uri(concat("https://duckduckgo.com/?q=", ?name_enc, "+site:wikidata.org")) as ?wdSearch)
   bind(uri(concat("https://startpage.com/search?q=", ?name_enc, "+site:wikipedia.org")) as ?wpSearch)
   bind(uri(concat('https://zbw.eu/beta/tmp/pm20_qs_create.html#', replace(?id, "/", "_"))) as ?qs)
 }
