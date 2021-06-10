@@ -1,0 +1,51 @@
+# Plain list of synonyms by id for Mix-n-match (for co)
+#
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX frapo: <http://purl.org/cerif/frapo/>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext:  <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct ?id (lcase(?label) as ?synonym)
+where {
+  values ( ?language ?filterLang ) {
+    ( 'de' 'fr')
+  }
+  # query restricts result to folders with documents
+  ?pm20 a zbwext:CompanyFolder ;
+        dct:identifier ?id ;
+        zbwext:adjustedLabel ?name ;
+        frapo:hasCountryCode ?country ;
+        zbwext:totalDocCount ?docCount .
+  #
+  # this is the filter for defining the separate mnm catalogs (parts)
+  bind(
+    if(?country in ('NL', 'ID', 'AO'), 'nl',
+      if(?country in ('GB', 'US', 'CA', 'AU', 'ZA', 'IE', 'MY', 'ZW'), 'en',
+        if(?country in ('FR', 'VN', 'BE', 'CD', 'LU', 'DZ'), 'fr',
+          if(?country in ('DE', 'AT', 'CH', 'HU', 'TZ', 'PL', 'CZ', 'WS'), 'de',
+            'und')))) as ?wikiLang)
+  filter(?wikiLang = ?filterLang)
+  {
+    # include all (not adjusted) labels
+    # (this leaves out the names of companies with an own GND)
+    {
+      ?pm20 skos:prefLabel ?prefLabel ;
+    }
+    union
+    {
+      ?pm20 skos:altLabel ?label ;
+    }
+    union
+    {
+      ?pm20 skos:altLabel ?label ;
+    }
+    union
+    {
+      ?pm20 zbwext:includesInstitutionNamed/schema:name ?label ;
+    }
+  }
+  filter(?label != ?name)
+}
+order by ?id ?synonym
+
