@@ -16,7 +16,7 @@ where {
         zbwext:adjustedLabel ?name ;
         zbwext:totalDocCount ?docCount .
   filter(strstarts(?name, ?nameStart))
-  bind(concat(?mainQid, '|P4293|"', ?id, '"|Q4390|Q39893967') as ?qsStatement)
+  bind(concat(?mainQid, '|P4293|"', ?id, '"|P4390|Q39893967|P1810|"', ?name, '"') as ?qsStatement)
 }
 order by ?name
 
