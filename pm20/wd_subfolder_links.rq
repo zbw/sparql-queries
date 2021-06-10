@@ -1,0 +1,22 @@
+# Create pm20 links in Wikidata for subfolders of large institutions
+# (does not check if links exist already - if so, manual cleanup required)
+#
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?qsStatement
+where {
+  values ( ?mainQid ?nameStart ) {
+    ( 'Q806950' 'Banque de France (' )
+  }
+  ?pm20 a zbwext:CompanyFolder ;
+        dct:identifier ?id ;
+        skos:prefLabel ?prefLabel ;
+        zbwext:adjustedLabel ?name ;
+        zbwext:totalDocCount ?docCount .
+  filter(strstarts(?name, ?nameStart))
+  bind(concat(?mainQid, '|P4293|"', ?id, '"|Q4390|Q39893967') as ?qsStatement)
+}
+order by ?name
+
