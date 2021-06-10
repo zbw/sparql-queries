@@ -22,7 +22,7 @@ where {
     (group_concat(distinct ?note; separator='; ') as ?notes)
     where {
       values ( ?language ?filterLang ) {
-        ( 'de' 'de' )
+        ( 'de' 'fr' )
       }
       # query restricts result to folders with documents
       ?pm20 a zbwext:CompanyFolder ;
