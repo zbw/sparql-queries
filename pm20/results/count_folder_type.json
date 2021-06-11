@@ -5,21 +5,21 @@
     "bindings": [
       { 
         "type": { "type": "literal" , "value": "co" } ,
-        "totalCount": { "type": "literal" , "value": "38745" } ,
+        "totalCount": { "type": "literal" , "value": "38748" } ,
         "withDocs": { "type": "literal" , "value": "8301" } ,
-        "withWd": { "type": "literal" , "value": "5277" } ,
-        "withWdAndDocs": { "type": "literal" , "value": "4528" } ,
-        "percentage": { "type": "literal" , "value": "54.5 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2021-05-27 || 38745 || 8301 || 5277 || 4528 || 54.5 %" }
+        "withWd": { "type": "literal" , "value": "7972" } ,
+        "withWdAndDocs": { "type": "literal" , "value": "7220" } ,
+        "percentage": { "type": "literal" , "value": "87.0 %" } ,
+        "statsLine": { "type": "literal" , "value": "| 2021-06-11 || 38748 || 8301 || 7972 || 7220 || 87.0 %" }
       } ,
       { 
         "type": { "type": "literal" , "value": "pe" } ,
         "totalCount": { "type": "literal" , "value": "16657" } ,
         "withDocs": { "type": "literal" , "value": "5284" } ,
-        "withWd": { "type": "literal" , "value": "9883" } ,
+        "withWd": { "type": "literal" , "value": "9884" } ,
         "withWdAndDocs": { "type": "literal" , "value": "5284" } ,
         "percentage": { "type": "literal" , "value": "100.0 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2021-05-27 || 16657 || 5284 || 9883 || 5284 || 100.0 %" }
+        "statsLine": { "type": "literal" , "value": "| 2021-06-11 || 16657 || 5284 || 9884 || 5284 || 100.0 %" }
       } ,
       { 
         "type": { "type": "literal" , "value": "sh" } ,
@@ -28,7 +28,7 @@
         "withWd": { "type": "literal" , "value": "9201" } ,
         "withWdAndDocs": { "type": "literal" , "value": "9068" } ,
         "percentage": { "type": "literal" , "value": "100.0 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2021-05-27 || 9201 || 9068 || 9201 || 9068 || 100.0 %" }
+        "statsLine": { "type": "literal" , "value": "| 2021-06-11 || 9201 || 9068 || 9201 || 9068 || 100.0 %" }
       } ,
       { 
         "type": { "type": "literal" , "value": "wa" } ,
@@ -37,7 +37,7 @@
         "withWd": { "type": "literal" , "value": "8" } ,
         "withWdAndDocs": { "type": "literal" , "value": "8" } ,
         "percentage": { "type": "literal" , "value": "0.3 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2021-05-27 || 2891 || 2890 || 8 || 8 || 0.3 %" }
+        "statsLine": { "type": "literal" , "value": "| 2021-06-11 || 2891 || 2890 || 8 || 8 || 0.3 %" }
       }
     ]
   }
