@@ -689,7 +689,7 @@ sub html_add_header {
 <h1>$title</h1>
 <h2>(as of $now)</h2>
 <p>In sync with Mix-n-match catalog <a
-href="https://tools.wmflabs.org/mix-n-match/#/catalog/4492">PM20 companies (de)</a>
+href="https://tools.wmflabs.org/mix-n-match/#/catalog/4521">PM20 companies (fr)</a>
 </p>
 
 EOF

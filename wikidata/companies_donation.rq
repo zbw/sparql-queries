@@ -24,7 +24,7 @@ where {
   values ( ?wikiLang ?catalogId ) {
     ( 'nl' '4397' )
     ( 'en' '4414' )
-    ( 'fr' undef )
+    ( 'fr' '4521' )
     ( 'de' '4492' )
     ( 'und' undef )
   }
