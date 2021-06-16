@@ -104,12 +104,14 @@ Readonly my %CONFIG => (
         value_type => 'item',
       },
       P571 => {
-        var_name   => 'incepted',
-        value_type => 'date',
+        var_name        => 'incepted',
+        value_type      => 'date',
+        source_property => 'schema:foundingDate',
       },
       P576 => {
-        var_name   => 'abandoned',
-        value_type => 'date',
+        var_name        => 'abandoned',
+        value_type      => 'date',
+        source_property => 'schema:dissolutionDate',
       },
       P1448 => {
         pid        => 'P1448',
@@ -118,8 +120,9 @@ Readonly my %CONFIG => (
         lang       => 'fr',
       },
       P227 => {
-        var_name   => 'gndId',
-        value_type => 'literal',
+        var_name        => 'gndId',
+        value_type      => 'literal',
+        source_property => 'gndo:gndIdentifier',
       },
       P112 => {
         endpoint => 'https://query.wikidata.org/sparql',
@@ -514,9 +517,10 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
   } else {
 
     # only one property
-    my $qid        = $config->{properties}{$property}{qid} || 'qid';
+    my $qid = $config->{properties}{$property}{qid} || 'qid';
     my $value_type = $prop_cfg->{value_type};
-    my $value      = $entry->{ $prop_cfg->{var_name} }{value};
+    my $value =
+      $entry->{ $prop_cfg->{var_name} }{value} || $entry->{value}{value};
     next if not $value or $value eq '';
 
     # add optional qualifier statements
