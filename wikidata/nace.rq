@@ -1,0 +1,24 @@
+# List of items with NACE codes
+#
+PREFIX wd: <http://www.wikidata.org/entity/> 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX v: <http://www.wikidata.org/prop/statement/>
+PREFIX q: <http://www.wikidata.org/prop/qualifier/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select distinct ?naceCode ?wd (str(?label) as ?wdLabel)
+where {
+  values ( ?language ) {
+    ( 'de' ) 
+  }
+  ?wd wdt:P4496 ?naceCode ;
+      rdfs:label ?label .
+
+  # restrict languages
+  filter (lang(?label) = ?language)
+}
+order by ?naceCode
+
