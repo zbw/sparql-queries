@@ -117,7 +117,7 @@ Readonly my %CONFIG => (
         pid        => 'P1448',
         var_name   => 'pm20Label',
         value_type => 'monolingual-text',
-        lang       => 'fr',
+        lang       => 'de',
       },
       P227 => {
         var_name        => 'gndId',
@@ -693,7 +693,7 @@ sub html_add_header {
 <h1>$title</h1>
 <h2>(as of $now)</h2>
 <p>In sync with Mix-n-match catalog <a
-href="https://tools.wmflabs.org/mix-n-match/#/catalog/4521">PM20 companies (fr)</a>
+href="https://tools.wmflabs.org/mix-n-match/#/catalog/4542">PM20 companies (div)</a>
 </p>
 
 EOF

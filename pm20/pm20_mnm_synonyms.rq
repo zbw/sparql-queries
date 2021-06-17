@@ -9,7 +9,7 @@ PREFIX zbwext:  <http://zbw.eu/namespaces/zbw-extensions/>
 select distinct ?id (lcase(?label) as ?synonym)
 where {
   values ( ?language ?filterLang ) {
-    ( 'de' 'fr')
+    ( 'de' 'und')
   }
   # query restricts result to folders with documents
   ?pm20 a zbwext:CompanyFolder ;
