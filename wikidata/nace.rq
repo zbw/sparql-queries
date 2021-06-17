@@ -16,9 +16,14 @@ where {
   }
   ?wd wdt:P4496 ?naceCode ;
       rdfs:label ?label .
-
+  #
   # restrict languages
   filter (lang(?label) = ?language)
+  #
+  # restrict to (subtypes of) economic activity
+  filter(exists {
+    ?wd wdt:P31/wdt:P279* wd:Q8187769 .
+  })
 }
 order by ?naceCode
 
