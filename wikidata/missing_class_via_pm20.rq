@@ -6,7 +6,7 @@ PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 PREFIX hint: <http://www.bigdata.com/queryHints#>
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
-PREFIX ps: <https://w3id.org/payswarm#>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wd: <http://www.wikidata.org/entity/>
@@ -23,11 +23,33 @@ where {
           skos:prefLabel ?pm20Label ;
           dct:identifier ?pm20Id ;
           dc:type ?orgType .
+    filter(lang(?orgType) = 'de')
   }
+  #
   values ( ?orgType ?classQid ?descrEn ) {
-    ( 'Unternehmen' 'Q4830453' 'business' )
-    ( 'Kolonialgesellschaft' 'Q1700154' 'colonial society' )
-    ( 'Verein' 'Q48204' 'association' )
+    ( 'Unternehmen'@de 'Q4830453' 'business' )
+    ( 'Kolonialgesellschaft'@de 'Q1700154' 'colonial society' )
+    ( 'Verein'@de 'Q988108' 'association' )
+    ( 'Körperschaft des öffentlichen Rechts'@de 'Q15734684' 'Körperschaft des öffentlichen Rechts' )
+    ( 'Konzern'@de 'Q206361' 'concern' )
+    ( 'Dachgesellschaft'@de 'Q219577' 'holding company' )
+    ( 'Zentralbank'@de 'Q66344' 'central bank' )
+    ( 'Kammern, Verbände'@de 'Q15911314' 'chamber, association' )
+    ( 'Ausseruniversitäre Forschungseinrichtungen'@de 'Q31855' 'research institute' )
+    ( 'Fachgesellschaften und Berufsverbände'@de 'Q1391145' 'professional society' )
+    ( 'Internationale Organisationen'@de 'Q484652' 'international organization' )
+    ( 'Unternehmenskartell'@de 'Q179216' 'cartel' )
+    ( 'Hochschulen und deren Einrichtungen'@de 'Q38723' 'university, university institute' )
+    ( 'Regiebetrieb, Eigenbetrieb'@de 'Q40890107' 'municipal enterprise' )
+    ( 'Tochergesellschaft'@de 'Q658255' 'subsidiary' )
+    ( 'Weitere Institutionen'@de 'Q178706' 'institution' )
+    ( 'Gewerkschaft'@de 'Q178790' 'union' )
+    ( 'Institution'@de 'Q178706' 'institution' )
+    ( 'Bibliotheken und Archive'@de 'Q1030034' 'libraries and archives' )
+    ( 'Stiftung'@de 'Q18631232' 'foundation' )
+    ( 'Verlage und Datenbankanbieter'@de 'Q2085381' 'publisher ' )
+    ( 'Kongresse, Tagungen'@de 'Q625994' 'convention' )
+    ( 'Public Private Partnership'@de 'Q221096' 'public private partnership' )
   }
   # all WD items for this subset
   ?wd wdt:P4293 ?pm20Id .
@@ -49,7 +71,7 @@ where {
   bind(strafter(str(?wd), 'http://www.wikidata.org/entity/') as ?wdId)
   optional {
     ?wd rdfs:label ?wdLabelLang .
-    filter(lang(?wdLabelLang) = 'de')
+    filter(lang(?wdLabelLang) = 'en')
     bind(str(?wdLabelLang) as ?wdLabel)
   }
   bind(substr(str(now()), 0, 11) as ?today)
