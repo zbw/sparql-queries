@@ -33,6 +33,7 @@ Query | Description
 [missing_class_via_pm20](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/missing_class_via_pm20.rq) | Get missing class for WD items from PM20 organizations
 [pm20_folder_doc_counts](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_folder_doc_counts.rq) | Get document counts (free and total) for folders connected to WD items
 [pm20_subject_category_by_code](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_subject_category_by_code.rq) | Get PM20 subject category by subject code
+[multiple_pm20_co](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/multiple_pm20_co.rq) | Items with multiple PM20 co entries (narrow match excluded)
 
 
 ### "Power queries"
