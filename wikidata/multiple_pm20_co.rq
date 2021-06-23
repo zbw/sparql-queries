@@ -11,19 +11,23 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 select ?count ?wd ?wdLabel 
 where {
   {
-    select ?wd (count(?wd) as ?count)
+    select ?wd (count(?statement) as ?count)
     where {
       hint:Query hint:optimizer "None" .
       #
       # all WD items for this subset
-      ?wd wdt:P4293 ?pm20Id .
+      ?wd p:P4293 ?statement .
+      ?statement ps:P4293 ?pm20Id .
       filter(strstarts(?pm20Id, 'co/'))
       #
       # exclude narrow matches
-      ?wd p:P4293 ?statement .
       filter(not exists {
-          ?statement pq:P4390 wd:Q39893967 ;
-                     ps:P4293 ?pm20Id .
+          ?statement pq:P4390 wd:Q39893967 .
+        }
+      )
+      # exclude related matches
+      filter(not exists {
+          ?statement pq:P4390 wd:Q39894604 ;
         }
       )
     }
