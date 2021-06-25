@@ -64,7 +64,7 @@ where {
           if(?country in ('FR', 'VN', 'BE', 'CD', 'LU', 'DZ'), 'fr',
             if(?country in ('DE', 'AT', 'CH', 'HU', 'TZ', 'PL', 'CZ', 'WS'), 'de',
               'und')))) as ?wikiLang)
-    filter(?wikiLang = 'und')
+    ##filter(?wikiLang = 'und')
   }
 
   # minus all entries which are linked to WD items
