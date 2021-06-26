@@ -1,0 +1,34 @@
+# Items by pm20 folder id
+#
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+select ?pm20Id ?wd ?wdLabel ?relLabel
+where {
+  values ( ?pm20Id) {
+    ( 'co/072129' )
+  }
+  # get relevant statements
+  ?statement ps:P4293 ?pm20Id .
+  optional {
+    ?statement pq:P4390 ?rel .
+    ?rel rdfs:label ?relLabelLang .
+    filter(lang(?relLabelLang) = 'en')
+    bind(str(?relLabelLang) as ?relLabel)
+  }
+  # get the item
+  ?wd p:P4293 ?statement .
+  #
+  # get some label
+  bind(strafter(str(?wd), 'http://www.wikidata.org/entity/') as ?wdId)
+  optional {
+    ?wd rdfs:label ?wdLabelLang .
+    filter(lang(?wdLabelLang) = 'en')
+  }
+  bind(coalesce(str(?wdLabelLang), ?wdId) as ?wdLabel)
+}
+order by ?relLabel
