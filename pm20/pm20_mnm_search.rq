@@ -13,7 +13,8 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select ?id ?pm20 (?name as ?pm20Label) ?wdSearch ("wd" as ?wdSearchLabel)
-?wpSearch ("wp" as ?wpSearchLabel) ?qs ("qs" as ?qsLabel) ?description
+?wpSearch ("wp" as ?wpSearchLabel) ?qs ("qs" as ?qsLabel)
+?item ('id' as ?itemLabel) ?description
 where {
   {
     select ?pm20 ?id ?name ?docCount ?prefLabel ?fromTo
@@ -82,6 +83,11 @@ where {
   bind(uri(concat("https://duckduckgo.com/?q=", ?name_enc, "+site:wikidata.org")) as ?wdSearch)
   bind(uri(concat("https://startpage.com/search?q=", ?name_enc, "+site:wikipedia.org")) as ?wpSearch)
   bind(uri(concat('https://zbw.eu/beta/tmp/pm20_qs_create.html#', replace(?id, "/", "_"))) as ?qs)
+  #
+  # link to existing items with this id
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql',
+        '&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/item_by_pm20_id.rq',
+        '&pm20Id="', ?id, '"')) as ?item)
 }
 order by desc(?docCount) ?name
 
