@@ -5,12 +5,12 @@
     "bindings": [
       { 
         "type": { "type": "literal" , "value": "co" } ,
-        "totalCount": { "type": "literal" , "value": "38745" } ,
-        "withDocs": { "type": "literal" , "value": "8301" } ,
-        "withWd": { "type": "literal" , "value": "9050" } ,
-        "withWdAndDocs": { "type": "literal" , "value": "8300" } ,
-        "percentage": { "type": "literal" , "value": "100.0 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2021-06-28 || 38745 || 8301 || 9050 || 8300 || 100.0 %" }
+        "totalCount": { "type": "literal" , "value": "38794" } ,
+        "withDocs": { "type": "literal" , "value": "8354" } ,
+        "withWd": { "type": "literal" , "value": "9051" } ,
+        "withWdAndDocs": { "type": "literal" , "value": "8306" } ,
+        "percentage": { "type": "literal" , "value": "99.4 %" } ,
+        "statsLine": { "type": "literal" , "value": "| 2021-06-28 || 38794 || 8354 || 9051 || 8306 || 99.4 %" }
       } ,
       { 
         "type": { "type": "literal" , "value": "pe" } ,
