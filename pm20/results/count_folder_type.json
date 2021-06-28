@@ -7,10 +7,10 @@
         "type": { "type": "literal" , "value": "co" } ,
         "totalCount": { "type": "literal" , "value": "38794" } ,
         "withDocs": { "type": "literal" , "value": "8354" } ,
-        "withWd": { "type": "literal" , "value": "9099" } ,
-        "withWdAndDocs": { "type": "literal" , "value": "8353" } ,
+        "withWd": { "type": "literal" , "value": "9100" } ,
+        "withWdAndDocs": { "type": "literal" , "value": "8354" } ,
         "percentage": { "type": "literal" , "value": "100.0 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2021-06-28 || 38794 || 8354 || 9099 || 8353 || 100.0 %" }
+        "statsLine": { "type": "literal" , "value": "| 2021-06-28 || 38794 || 8354 || 9100 || 8354 || 100.0 %" }
       } ,
       { 
         "type": { "type": "literal" , "value": "pe" } ,
