@@ -8,6 +8,7 @@ use strict;
 use warnings;
 
 binmode STDOUT, ":utf8";
+use utf8;
 
 use Carp;
 use Data::Dumper;
@@ -366,7 +367,7 @@ if ( $mode eq 'html' or $mode eq 'create' ) {
   $prop_cfg = $config->{properties}{$property};
   if ( $prop_cfg->{query} ) {
     $queryfile = $prop_cfg->{query};
-    $query     = $queryfile->slurp;
+    $query     = $queryfile->slurp_utf8;
   } else {
     $queryfile = $src_cfg->{default_property_query};
     $query = adapt_default_query( $queryfile->slurp, $property );
@@ -409,7 +410,7 @@ $client->POST(
   $endpoint,
   $query,
   {
-    'Content-type' => 'application/sparql-query',
+    'Content-type' => 'application/sparql-query; charset=utf-8',
     'Accept'       => 'application/sparql-results+json'
   }
 );
@@ -669,7 +670,7 @@ sub get_qualifier_statements {
       my $value_type = $qual_cfg->{value_type};
       next unless $value;
       $statements .=
-        '|' . $qualifier . '|' . prepare_value( $value_type, $value );
+        '|' . $qualifier . '|' . prepare_values( $value_type, $value );
     }
   }
   return $statements;
