@@ -533,7 +533,7 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
     # TODO code duplicated!
     my @prepared_values = ( prepare_values( $value_type, $value, $property ) );
     foreach my $prepared_value (@prepared_values) {
-      print $fh 'LAST|'
+      print $fh $entry->{$qid}{value} . '|'
         . $property . '|'
         . $prepared_value
         . get_qualifier_statements( $prop_cfg, $entry )
