@@ -45,6 +45,7 @@ where {
     ( 'Verlage und Datenbankanbieter'@de 'Q2085381' 'publisher ' )
     ( 'Kongresse, Tagungen'@de 'Q625994' 'convention' )
     ( 'Public Private Partnership'@de 'Q221096' 'public private partnership' )
+    ( 'Arbeitsgemeinschaft'@de 'Q15783838' 'working group' )
   }
   #
   # determine for which entries we want to create items
