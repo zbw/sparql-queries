@@ -66,6 +66,5 @@ where {
   bind(if(bound(?fromTo) && ?roleName != 'Founder'@en && strafter(?fromTo, '-') && regex(?fromTo, '^[0-9]{4}-[0-9]{4}$'), strafter(?fromTo, '-'), '') as ?to)
   #
   bind(strafter(str(?companyItem), str(wd:)) as ?qid)
-filter(?founderQid != '')
 }
 

@@ -525,12 +525,6 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
       $entry->{ $prop_cfg->{var_name} }{value} || $entry->{value}{value};
     next if not $value or $value eq '';
 
-    # add optional qualifier statements
-    my $qualifier_statements =
-      $prop_cfg->{qualifiers}
-      ? get_qualifier_statements( $prop_cfg->{qualifiers}, $entry )
-      : '';
-
     # in some cases, a value may consist of separate subfields
     # TODO code duplicated!
     my @prepared_values = ( prepare_values( $value_type, $value, $property ) );
@@ -670,7 +664,7 @@ sub get_qualifier_statements {
       my $value_type = $qual_cfg->{value_type};
       next unless $value;
       $statements .=
-        '|' . $qualifier . '|' . prepare_values( $value_type, $value );
+        '|' . $qualifier . '|' . ( prepare_values( $value_type, $value ) )[0];
     }
   }
   return $statements;
