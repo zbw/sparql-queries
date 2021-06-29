@@ -102,6 +102,7 @@ Readonly my %CONFIG => (
       P31 => {
         var_name   => 'classQids',
         value_type => 'item',
+        query      => path('/opt/sparql-queries/pm20/wd_p31.rq'),
       },
       P571 => {
         var_name        => 'incepted',

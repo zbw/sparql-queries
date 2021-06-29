@@ -5,11 +5,12 @@ PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
 PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select distinct ?name ?qs
+select distinct ?pm20Id ?pm20Label ?name (?wdId as ?qid) (?classQid as ?classQids) ?qs
 where {
   # organization type mappings
   values ( ?orgType ?classQid ?typeEn ) {
@@ -39,6 +40,7 @@ where {
     ( 'Arbeitsgemeinschaft'@de 'Q15783838' 'working group' )
   }
   #
+  # get items missing a class
   service <https://query.wikidata.org/sparql> {
     ?wd p:P4293 ?statement .
     ?statement ps:P4293 ?pm20Id .
@@ -58,11 +60,12 @@ where {
   # query restricts result to folders with documents
   ?pm20 a zbwext:CompanyFolder ;
         dct:identifier ?pm20Id ;
+        skos:prefLabel ?pm20Label ;
         zbwext:adjustedLabel ?name ;
         dc:type ?orgType .
   #
   # create qs links
-  bind(concat(?wdId, '|P31|', ?classQid) as ?qs)
+  ##bind(concat(?wdId, '|P31|', ?classQid) as ?qs)
 }
 order by ?orgType
 
