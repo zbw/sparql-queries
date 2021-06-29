@@ -1,0 +1,43 @@
+# Get the connections between companies
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#
+select distinct ?pm20Id ?pm20Label ?qid ?follows ?successorPm20Id ?successorQid
+#select *
+where {
+  hint:Query hint:optimizer "None" .
+  #
+  # org1 -> org2
+  # all companies with relations from PM20
+  service <http://zbw.eu/beta/sparql/pm20/query> {
+    ?pm20 a zbwext:CompanyFolder ;
+          skos:prefLabel ?pm20Label ;
+          dct:identifier ?pm20Id .
+    ?pm20 gndo:succeedingCorporateBody/schema:url ?successorUrl .
+    bind(strafter(?successorUrl, 'folder/') as ?successorPm20Id)
+  }
+  # "main" items - exclude items linked with mapping relations
+  ?statement ps:P4293 ?pm20Id .
+  ?wd p:P4293 ?statement .
+  filter (not exists {
+    ?statement pq:P4390 [] .
+    })
+  #
+  # related items - - exclude items linked with mapping relations
+  ?statement2 ps:P4293 ?successorPm20Id .
+  ?wd2 p:P4293 ?statement2 .
+  bind(strafter(str(?wd), str(wd:)) as ?qid)
+  bind(strafter(str(?wd2), str(wd:)) as ?successorQid)
+}
+
