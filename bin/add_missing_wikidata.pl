@@ -164,6 +164,13 @@ Readonly my %CONFIG => (
           },
         },
       },
+      P156 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_predecessor.rq'),
+        var_name => 'follows',
+        value_type => 'item',
+        inverse    => 'P155',
+      },
     },
   },
 

@@ -13,7 +13,7 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select distinct ?pm20Id ?pm20Label ?qid ?follows ?successorPm20Id ?successorQid
+select distinct ?pm20Id ?pm20Label ?qid ?follows ?predecessorPm20Id ?predecessorQid
 #select *
 where {
   hint:Query hint:optimizer "None" .
@@ -24,8 +24,8 @@ where {
     ?pm20 a zbwext:CompanyFolder ;
           skos:prefLabel ?pm20Label ;
           dct:identifier ?pm20Id .
-    ?pm20 gndo:succeedingCorporateBody/schema:url ?successorUrl .
-    bind(strafter(?successorUrl, 'folder/') as ?successorPm20Id)
+    ?pm20 gndo:precedingCorporateBody/schema:url ?predecessorUrl .
+    bind(strafter(?predecessorUrl, 'folder/') as ?predecessorPm20Id)
   }
   # "main" items - exclude items linked with mapping relations
   ?statement ps:P4293 ?pm20Id .
@@ -35,9 +35,9 @@ where {
     })
   #
   # related items - - exclude items linked with mapping relations
-  ?statement2 ps:P4293 ?successorPm20Id .
+  ?statement2 ps:P4293 ?predecessorPm20Id .
   ?wd2 p:P4293 ?statement2 .
   bind(strafter(str(?wd), str(wd:)) as ?qid)
-  bind(strafter(str(?wd2), str(wd:)) as ?successorQid)
+  bind(strafter(str(?wd2), str(wd:)) as ?predecessorQid)
 }
 
