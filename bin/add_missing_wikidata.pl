@@ -171,6 +171,13 @@ Readonly my %CONFIG => (
         value_type => 'item',
         inverse    => 'P156',
       },
+      P749 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_parent.rq'),
+        var_name => 'parentQid',
+        value_type => 'item',
+        inverse    => 'P355',
+      },
     },
   },
 
