@@ -541,6 +541,18 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
         . $prepared_value
         . get_qualifier_statements( $prop_cfg, $entry )
         . $reference_statement . "\n";
+
+      # special case: produce inverse statements
+      # - value must by of type item
+      # - currently no qualifiers
+      if ( $prop_cfg->{inverse} ) {
+        my $inverse_property = $prop_cfg->{inverse};
+        print $fh $prepared_value . '|'
+          . $inverse_property . '|'
+          . $entry->{$qid}{value}
+          . $reference_statement . "\n";
+      print Dumper $prop_cfg; exit;
+      }
     }
   }
 
