@@ -15,7 +15,9 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select distinct ?pm20 ?pm20Label ?predecessor ?predecessorLabel ?qid
 ?wd ('wd' as ?wdLabel) ?predecessorQid  ?wd2 ('wd2' as ?wd2Label)
-#select *
+### Identify ?predecessorPm20Ids with multiple unqualified links to items
+### (remove after checking duplicate warning at sample)
+###select ?pm20 ?pm20Label ?predecessorPm20Id (count(distinct ?wd2) as ?count) (sample(?wd2) as ?sample)
 where {
   hint:Query hint:optimizer "None" .
   #
@@ -45,5 +47,7 @@ where {
   bind(strafter(str(?wd), str(wd:)) as ?qid)
   bind(strafter(str(?wd2), str(wd:)) as ?predecessorQid)
 }
+###group by ?pm20 ?pm20Label ?predecessorPm20Id
+###having (?count > 1)
 order by ?pm20Id ?predecessorPm20Id
 
