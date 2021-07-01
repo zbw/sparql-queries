@@ -13,7 +13,7 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select distinct ?pm20 ?pm20Label ?fromTo ?predecessor ?predecessorLabel ?pFromTo
+select distinct ?pm20Id ?pm20 ?pm20Label ?fromTo ?predecessor ?predecessorLabel ?pFromTo
 ?qid ?wd ('wd' as ?wdLabel) ?predecessorQid  ?wd2 ('wd2' as ?wd2Label)
 ### Identify ?predecessorPm20Ids with multiple unqualified links to items
 ### (remove after checking duplicate warning at sample)

@@ -164,12 +164,12 @@ Readonly my %CONFIG => (
           },
         },
       },
-      P156 => {
+      P155 => {
         endpoint => 'https://query.wikidata.org/sparql',
         query    => path('/opt/sparql-queries/wikidata/pm20_company_predecessor.rq'),
         var_name => 'predecessorQid',
         value_type => 'item',
-        inverse    => 'P155',
+        inverse    => 'P156',
       },
     },
   },
@@ -551,7 +551,6 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
           . $inverse_property . '|'
           . $entry->{$qid}{value}
           . $reference_statement . "\n";
-      print Dumper $prop_cfg; exit;
       }
     }
   }
