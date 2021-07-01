@@ -13,8 +13,8 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select distinct ?pm20 ?pm20Label ?predecessor ?predecessorLabel ?qid
-?wd ('wd' as ?wdLabel) ?predecessorQid  ?wd2 ('wd2' as ?wd2Label)
+select distinct ?pm20 ?pm20Label ?fromTo ?predecessor ?predecessorLabel ?pFromTo
+?qid ?wd ('wd' as ?wdLabel) ?predecessorQid  ?wd2 ('wd2' as ?wd2Label)
 ### Identify ?predecessorPm20Ids with multiple unqualified links to items
 ### (remove after checking duplicate warning at sample)
 ###select ?pm20 ?pm20Label ?predecessorPm20Id (count(distinct ?wd2) as ?count) (sample(?wd2) as ?sample)
@@ -25,11 +25,13 @@ where {
   service <http://zbw.eu/beta/sparql/pm20/query> {
     ?pm20 a zbwext:CompanyFolder ;
           skos:prefLabel ?pm20Label ;
-          dct:identifier ?pm20Id .
+          dct:identifier ?pm20Id ;
+          zbwext:fromTo ?fromTo .
     ?pm20 gndo:precedingCorporateBody/schema:url ?predecessorUrl .
     bind(strafter(?predecessorUrl, 'folder/') as ?predecessorPm20Id)
     bind(uri(?predecessorUrl) as ?predecessor)
-    ?predecessor skos:prefLabel ?predecessorLabel .
+    ?predecessor skos:prefLabel ?predecessorLabel ;
+                 zbwext:fromTo ?pFromTo .
   }
   # "main" items - exclude items linked with mapping relations
   ?statement ps:P4293 ?pm20Id .
