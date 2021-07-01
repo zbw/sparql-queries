@@ -1,4 +1,4 @@
-# Get the connections between companies
+# Get the predecessors of companies
 #
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX dct: <http://purl.org/dc/terms/>
@@ -7,37 +7,43 @@ PREFIX hint: <http://www.bigdata.com/queryHints#>
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
 PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
-PREFIX schema: <http://schema.org/>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select distinct ?pm20Id ?pm20Label ?qid ?follows ?predecessorPm20Id ?predecessorQid
+select distinct ?pm20 ?pm20Label ?predecessor ?predecessorLabel ?qid
+?wd ('wd' as ?wdLabel) ?predecessorQid  ?wd2 ('wd2' as ?wd2Label)
 #select *
 where {
   hint:Query hint:optimizer "None" .
   #
-  # org1 -> org2
-  # all companies with relations from PM20
+  # all companies with predecessors from PM20
   service <http://zbw.eu/beta/sparql/pm20/query> {
     ?pm20 a zbwext:CompanyFolder ;
           skos:prefLabel ?pm20Label ;
           dct:identifier ?pm20Id .
     ?pm20 gndo:precedingCorporateBody/schema:url ?predecessorUrl .
     bind(strafter(?predecessorUrl, 'folder/') as ?predecessorPm20Id)
+    bind(uri(?predecessorUrl) as ?predecessor)
+    ?predecessor skos:prefLabel ?predecessorLabel .
   }
   # "main" items - exclude items linked with mapping relations
   ?statement ps:P4293 ?pm20Id .
   ?wd p:P4293 ?statement .
   filter (not exists {
-    ?statement pq:P4390 [] .
+      ?statement pq:P4390 [] .
     })
   #
-  # related items - - exclude items linked with mapping relations
+  # predecessor items - exclude items linked with mapping relations
   ?statement2 ps:P4293 ?predecessorPm20Id .
   ?wd2 p:P4293 ?statement2 .
+  filter (not exists {
+      ?statement2 pq:P4390 [] .
+    })
   bind(strafter(str(?wd), str(wd:)) as ?qid)
   bind(strafter(str(?wd2), str(wd:)) as ?predecessorQid)
 }
+order by ?pm20Id ?predecessorPm20Id
 
