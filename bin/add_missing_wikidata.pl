@@ -178,6 +178,12 @@ Readonly my %CONFIG => (
         value_type => 'item',
         inverse    => 'P355',
       },
+      P1566 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_location.rq'),
+        var_name => 'geoQid',
+        value_type => 'item',
+      },
     },
   },
 
