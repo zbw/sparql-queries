@@ -53,9 +53,19 @@ where {
   bind(strafter(str(?wd), str(wd:)) as ?qid)
   bind(strafter(str(?wd2), str(wd:)) as ?predecessorQid)
   #
-  # exclude items with already existing predecessor relation
+  # exclude items with already existing follows | replaces relation
   filter(not exists {
       ?wd wdt:P155 ?wd2 .
+    })
+  filter(not exists {
+      ?wd wdt:P1365 ?wd2 .
+    })
+  # exclude items with the *reverse* relation (probably errors)
+  filter(not exists {
+      ?wd wdt:P156 ?wd2 .
+    })
+  filter(not exists {
+      ?wd wdt:P1366 ?wd2 .
     })
 }
 ###group by ?pm20 ?pm20Label ?predecessorPm20Id
