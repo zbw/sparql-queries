@@ -1,4 +1,5 @@
 # Get the location of the company seat
+# (for multiple geo items per geonames id, use that with the lowest item number)
 #
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX dct: <http://purl.org/dc/terms/>
@@ -13,11 +14,11 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?pm20Id ?pm20 ?pm20Label ?qid ?geoQid ?gnId
+select ?pm20Id ?pm20 ?pm20Label ?qid ?gnId (concat('Q', str( min(?geoId) )) as ?geoQid)
 where {
   hint:Query hint:optimizer "None" .
   #
-  # all companies with parents from PM20
+  # all companies with geonames locations from PM20
   service <http://zbw.eu/beta/sparql/pm20/query> {
     ?pm20 a zbwext:CompanyFolder ;
           skos:prefLabel ?pm20Label ;
@@ -40,9 +41,10 @@ where {
   #
   optional {
     ?geoWd wdt:P1566 ?gnId .
-    bind(strafter(str(?geoWd), str(wd:)) as ?geoQid)
+    bind(xsd:integer(strafter(str(?geoWd), 'http://www.wikidata.org/entity/Q')) as ?geoId)
   }
-  filter(bound(?geoQid))
+  filter(bound(?geoId))
 }
-order by ?pm20Id ?parentPm20Id
+group by ?pm20Id ?pm20 ?pm20Label ?qid ?gnId
+order by ?pm20Id $geoId
 
