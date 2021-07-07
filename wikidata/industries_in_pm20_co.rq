@@ -1,0 +1,40 @@
+# Industries for items with pm20 folder
+#
+PREFIX wd: <http://www.wikidata.org/entity/> 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select (str(count(distinct ?wd)) as ?cnt) ?industry ?industryLabel ?naceCode 
+where {
+  # only pm20 companies with documents,
+  # direct matches
+  ?wd p:P4293 ?statement.
+  ?statement ps:P4293 ?pm20Id ;
+             pq:P5592 ?docCount .
+  filter(strstarts(?pm20Id, 'co/'))
+  filter(not exists {
+      ?statement pq:P4390 [] .
+    })
+  #
+  # connections to industry
+  optional {
+    ?wd wdt:P452 ?industry .
+    optional {
+      ?industry wdt:P4496 ?naceCode .
+    }
+  }
+  # how many companies are completely without industry?
+  ##filter(not exists {
+  ##    ?wd wdt:P452 [] .
+  ##  })
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+group by ?industry ?industryLabel ?naceCode
+order by desc(count(?wd))
+
