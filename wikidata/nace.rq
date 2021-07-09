@@ -1,5 +1,7 @@
 # List of items with NACE codes
 #
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
 PREFIX wd: <http://www.wikidata.org/entity/> 
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX wikibase: <http://wikiba.se/ontology#>
@@ -9,21 +11,25 @@ PREFIX q: <http://www.wikidata.org/prop/qualifier/>
 PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-select distinct ?naceCode ?wd (str(?label) as ?wdLabel)
+select distinct ?naceCode ?wd ?wdLabel (str(count(?company)) as ?companyCount)
 where {
-  values ( ?language ) {
-    ( 'de' ) 
-  }
-  ?wd wdt:P4496 ?naceCode ;
-      rdfs:label ?label .
+  hint:Query hint:optimizer "None" .
   #
-  # restrict languages
-  filter (lang(?label) = ?language)
+  ?wd wdt:P4496 ?naceCode .
   #
   # restrict to (subtypes of) economic activity
-  filter(exists {
-    ?wd wdt:P31/wdt:P279* wd:Q8187769 .
-  })
+##  filter(exists {
+##  filter(not exists {
+##    ?wd wdt:P31/wdt:P279* wd:Q8187769 .
+##  })
+  #
+  # uses as industry (P452) for companies etc.
+  optional {
+    ?company wdt:P452 ?wd .
+  }
+  #
+  service wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,de,fr". }
 }
+group by ?naceCode ?wd ?wdLabel
 order by ?naceCode
 
