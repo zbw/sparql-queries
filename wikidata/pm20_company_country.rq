@@ -1,0 +1,53 @@
+# Get the country of the company seat
+# (for multiple country items per country code, use that with the lowest item number)
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX frapo: <http://purl.org/cerif/frapo/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?pm20Id ?pm20 ?pm20Label ?qid ?countryCode (concat('Q', str( min(?geoId) )) as ?geoQid)
+where {
+  hint:Query hint:optimizer "None" .
+  #
+  # all companies with country from PM20
+  service <http://zbw.eu/beta/sparql/pm20/query> {
+    ?pm20 a zbwext:CompanyFolder ;
+          skos:prefLabel ?pm20Label ;
+          dct:identifier ?pm20Id ;
+          zbwext:totalDocCount ?docCount ;
+          frapo:hasCountryCode ?countryCode .
+    # WD part of the query hits timeout, therefore only use segments
+    ##filter(?countryCode = 'NL')
+    filter(?countryCode = 'GB')
+  }
+  # "main" items - exclude items linked with mapping relations
+  ?statement ps:P4293 ?pm20Id .
+  ?wd p:P4293 ?statement .
+  filter (not exists {
+      ?statement pq:P4390 [] .
+    })
+  bind(strafter(str(?wd), str(wd:)) as ?qid)
+  #
+  # exclude items with already existing country
+  filter(not exists {
+      ?wd wdt:P17 [] .
+    })
+  #
+  optional {
+    ?geoWd wdt:P297 ?countryCode .
+    bind(xsd:integer(strafter(str(?geoWd), 'http://www.wikidata.org/entity/Q')) as ?geoId)
+  }
+  filter(bound(?geoId))
+}
+group by ?pm20Id ?pm20 ?pm20Label ?qid ?countryCode
+order by ?pm20Id $geoId
+
