@@ -27,7 +27,9 @@ where {
           frapo:hasCountryCode ?countryCode .
     # WD part of the query hits timeout, therefore only use segments
     ##filter(?countryCode = 'NL')
-    filter(?countryCode = 'GB')
+    ##filter(?countryCode = 'GB')
+    ##filter(?countryCode = 'DE')
+    ##filter(?countryCode not in ( 'DE', 'GB', 'NL') )
   }
   # "main" items - exclude items linked with mapping relations
   ?statement ps:P4293 ?pm20Id .
