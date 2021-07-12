@@ -1,7 +1,5 @@
 # Get the industry and nace assignment from pm20
-# TODO:
-#   - Map to NACE rev1 (currently wrong assignment via naceCode)
-#   - Split sk/nace, because of non-fitting combinations of sk/na
+# (only folders with documents)
 #
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX dct: <http://purl.org/dc/terms/>
@@ -34,8 +32,9 @@ where {
   }
   optional {
     ?pm20 esco:hasNACECode ?naceCode .
+    bind(concat('.', ?naceCode) as ?ifisNaceCode)
     graph <http://zbw.eu/beta/na/ng> {
-      ?nace skos:notation ?naceCode .
+      ?nace skos:notation ?ifisNaceCode .
       ?nace skos:prefLabel ?naceLabelLang
       filter(lang(?naceLabelLang) = 'de')
       bind(str(?naceLabelLang) as ?naceLabel)
@@ -43,4 +42,5 @@ where {
   }
   #filter(bound(?nace))
 }
+order by ?pm20Id
 
