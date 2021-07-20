@@ -20,7 +20,7 @@ use REST::Client;
 
 # limit setting just stops output (on next run, after import, created items are
 # excluded by query)
-Readonly my $LIMIT     => 2000;
+Readonly my $LIMIT     => 3000;
 Readonly my $NAMED_AS  => '|S1810|';
 Readonly my $TODAY     => `date +%F | tr -d "\n"`;
 Readonly my $RETRIEVED => "|S813|+${TODAY}T00:00:00Z/11";
