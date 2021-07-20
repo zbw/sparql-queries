@@ -8,7 +8,7 @@ PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 #
-select distinct (str(?count) as ?cnt) ?broaderEn ?id ?notation ?labelEn ?labelDe
+select distinct (str(?count) as ?cnt) ?id ?notation ?labelDe ?desc
 where {
   graph <http://zbw.eu/beta/sk/ng> {
     ?s skos:prefLabel ?labelLangEn ;
@@ -36,6 +36,7 @@ where {
     }
     group by ?labelLangEn
   }
+  bind(concat(?labelEn, " (BT: ", ?broaderEn, ")") as ?desc)
 }
 order by ?notation ?broaderEn ?id
 
