@@ -190,6 +190,12 @@ Readonly my %CONFIG => (
         var_name => 'geoQid',
         value_type => 'item',
       },
+      P452 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_nace.rq'),
+        var_name => 'industryQid',
+        value_type => 'item',
+      },
     },
   },
 
