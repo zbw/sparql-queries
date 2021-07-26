@@ -20,7 +20,7 @@ use REST::Client;
 
 # limit setting just stops output (on next run, after import, created items are
 # excluded by query)
-Readonly my $LIMIT     => 3000;
+Readonly my $LIMIT     => 2000;
 Readonly my $NAMED_AS  => '|S1810|';
 Readonly my $TODAY     => `date +%F | tr -d "\n"`;
 Readonly my $RETRIEVED => "|S813|+${TODAY}T00:00:00Z/11";
@@ -191,8 +191,11 @@ Readonly my %CONFIG => (
         value_type => 'item',
       },
       P452 => {
-        endpoint => 'https://query.wikidata.org/sparql',
-        query    => path('/opt/sparql-queries/wikidata/pm20_company_nace.rq'),
+        ## derived from NACE code
+        ##endpoint => 'https://query.wikidata.org/sparql',
+        ##query    => path('/opt/sparql-queries/wikidata/pm20_company_nace.rq'),
+        # from mapping SK-WD
+        query    => path('/opt/sparql-queries/pm20/wd_company_industry.rq'),
         var_name => 'industryQid',
         value_type => 'item',
       },
