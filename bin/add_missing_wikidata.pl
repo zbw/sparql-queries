@@ -275,24 +275,9 @@ Readonly my %CONFIG => (
         var_name   => 'classQid',
         value_type => 'item',
       },
-
-      # partOf is not set in create mode query, because broader items not
-      # necessarily exist, when the narrower item is to be created
-      P361 => {
-        query      => path('/opt/sparql-queries/pm20/wd_category_partof.rq'),
-        var_name   => 'partOf',
+      P => {
+        var_name   => 'classQid',
         value_type => 'item',
-      },
-      P8484 => {
-        query => path('/opt/sparql-queries/pm20/wd_category_longnotation.rq'),
-        var_name   => 'subjectCode',
-        value_type => 'literal',
-        qualifiers => {
-          'P1545' => {
-            var_name   => 'notationLong',
-            value_type => 'literal',
-          },
-        },
       },
     },
   },
@@ -367,6 +352,33 @@ Readonly my %CONFIG => (
       },
     },
   },
+
+  pm20_industry => {
+    source     => 'pm20',
+    label_type => 'category',
+    query => path('/opt/sparql-queries/pm20/industries_missing_in_wikidata.rq'),
+    html  => path('/var/www/html/beta/tmp/pm20_qs_create.html'),
+    source_title => 'pm20Label',
+    label        => {
+      de => 'labelDe',
+      en => 'labelEn',
+    },
+    descr => {
+      de => 'descrDe',
+      en => 'descrEn',
+    },
+    properties => {
+      P31 => {
+        var_name   => 'classQid',
+        value_type => 'item',
+      },
+      P1535 => {
+        var_name   => 'usedFor',
+        value_type => 'item',
+      }
+    },
+  },
+
 );
 
 # evaluate commandline arguments
