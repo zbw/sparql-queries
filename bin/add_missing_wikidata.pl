@@ -191,11 +191,11 @@ Readonly my %CONFIG => (
         value_type => 'item',
       },
       P452 => {
+        endpoint => 'https://query.wikidata.org/sparql',
         ## derived from NACE code
-        ##endpoint => 'https://query.wikidata.org/sparql',
         ##query    => path('/opt/sparql-queries/wikidata/pm20_company_nace.rq'),
         # from mapping SK-WD
-        query    => path('/opt/sparql-queries/pm20/wd_company_industry.rq'),
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_industry.rq'),
         var_name => 'industryQid',
         value_type => 'item',
       },
