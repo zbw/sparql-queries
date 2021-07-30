@@ -1,0 +1,37 @@
+# Industries by NACE code for items with pm20 folders (incomplete!)
+#
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select  ?naceCode ?industry ?industryLabel ?cnt (str(count(distinct ?wd)) as ?cntLabel)
+where {
+  # only pm20 companies with documents,
+  # direct matches
+  ?wd p:P4293 ?statement.
+  ?statement ps:P4293 ?pm20Id ;
+             pq:P5592 ?docCount .
+  filter(strstarts(?pm20Id, 'co/'))
+  filter(not exists {
+      ?statement pq:P4390 [] .
+    })
+  #
+  # connections to industry with nace code
+  ?wd wdt:P452 ?industry .
+  ?industry wdt:P4496 ?naceCode .
+  #
+  # link for company list per industry
+  bind(strafter(str(?industry), str(wd:)) as ?industryQid)
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/companies_pm20_by_industry.rq&industryQid=', ?industryQid)) as ?cnt)
+  #
+  service wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,de,fr,es,pt". }
+}
+group by ?industry ?industryLabel ?naceCode ?cnt
+order by ?naceCode
+
