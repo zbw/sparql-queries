@@ -36,6 +36,7 @@ Query | Description
 [pm20_subject_category_by_code](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_subject_category_by_code.rq) | Get PM20 subject category by subject code
 [multiple_pm20_co](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/multiple_pm20_co.rq) | Items with multiple PM20 co entries (narrow match excluded)
 [industries_for_pm20](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/industries_for_pm20.rq) | Industries for items with pm20 company folder
+[industries_for_pm20_by_sk.rq](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/industries_for_pm20_by_sk.rq.rq) | Systematic overview by PM20 industry category system for items with pm20 company folder
 
 
 ### "Power queries"

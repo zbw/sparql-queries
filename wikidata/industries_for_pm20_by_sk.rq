@@ -1,0 +1,143 @@
+# Get the industry by mapping to SK classification
+#
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX esco: <http://data.europa.eu/esco/model#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?main ?industry ?industryLabel
+where {
+  hint:Query hint:optimizer "None" .
+  #
+  values ( ?language ) {
+    ( "en" )
+  }
+  values ( ?notation ?industry ?mainDe ?mainEn ) {
+    ( "SEC-01" undef "Landwirtschaft" "Agriculture" )
+    ( "SEC-01001" <http://www.wikidata.org/entity/Q29584242> undef undef )
+    ( "SEC-01010" <http://www.wikidata.org/entity/Q1283714> undef undef )
+    ( "SEC-01020" <http://www.wikidata.org/entity/Q80962> undef undef )
+    ( "SEC-02" undef "Forstwirtschaft" "Forrestry" )
+    ( "SEC-02000" <http://www.wikidata.org/entity/Q18218474> undef undef )
+    ( "SEC-03" undef "Fischerei" "Fishery" )
+    ( "SEC-03000" <http://www.wikidata.org/entity/Q180538> undef undef )
+    ( "SEC-04" undef "Energie- und Wasserwirtschaft" "Energy and Water Industries" )
+    ( "SEC-04001" <http://www.wikidata.org/entity/Q107594896> undef undef )
+    ( "SEC-04010" <http://www.wikidata.org/entity/Q29584213> undef undef )
+    ( "SEC-04011" <http://www.wikidata.org/entity/Q29584657> undef undef )
+    ( "SEC-04012" <http://www.wikidata.org/entity/Q48767813> undef undef )
+    ( "SEC-04020" <http://www.wikidata.org/entity/Q474883> undef undef )
+    ( "SEC-05" undef "Rohstoffwirtschaft und Bergbau" "Resource Sector and Mining" )
+    ( "SEC-05001" <http://www.wikidata.org/entity/Q100251245> undef undef )
+    ( "SEC-05010" <http://www.wikidata.org/entity/Q44497> undef undef )
+    ( "SEC-05011" <http://www.wikidata.org/entity/Q12089268> undef undef )
+    ( "SEC-05020" <http://www.wikidata.org/entity/Q29584253> undef undef )
+    ( "SEC-06" undef "Industrie" "Industries" )
+    ( "SEC-06001" <http://www.wikidata.org/entity/Q8148> undef undef )
+    ( "SEC-06010" <http://www.wikidata.org/entity/Q1924906> undef undef )
+    ( "SEC-06020" <http://www.wikidata.org/entity/Q107597925> undef undef )
+    ( "SEC-06030" <http://www.wikidata.org/entity/Q107597958> undef undef )
+    ( "SEC-06040" <http://www.wikidata.org/entity/Q1326885> undef undef )
+    ( "SEC-06050" <http://www.wikidata.org/entity/Q107598010> undef undef )
+    ( "SEC-06060" <http://www.wikidata.org/entity/Q207652> undef undef )
+    ( "SEC-06061" <http://www.wikidata.org/entity/Q862571> undef undef )
+    ( "SEC-06070" <http://www.wikidata.org/entity/Q1625796> undef undef )
+    ( "SEC-06080" <http://www.wikidata.org/entity/Q107598107> undef undef )
+    ( "SEC-06090" <http://www.wikidata.org/entity/Q107598157> undef undef )
+    ( "SEC-06100" <http://www.wikidata.org/entity/Q29584265> undef undef )
+    ( "SEC-06110" <http://www.wikidata.org/entity/Q107601662> undef undef )
+    ( "SEC-06120" <http://www.wikidata.org/entity/Q107601756> undef undef )
+    ( "SEC-06130" <http://www.wikidata.org/entity/Q56604576> undef undef )
+    ( "SEC-06140" <http://www.wikidata.org/entity/Q392933> undef undef )
+    ( "SEC-07" undef "Bauwirtschaft" "Construction Industry" )
+    ( "SEC-07001" <http://www.wikidata.org/entity/Q100251750> undef undef )
+    ( "SEC-07010" <http://www.wikidata.org/entity/Q29584305> undef undef )
+    ( "SEC-08" undef "Handwerk" "Trade (Craft)" )
+    ( "SEC-08001" <http://www.wikidata.org/entity/Q2207288> undef undef )
+    ( "SEC-09" undef "Dienstleistungen" "Service Industries" )
+    ( "SEC-09001" <http://www.wikidata.org/entity/Q7406919> undef undef )
+    ( "SEC-10" undef "Handel" "Trade" )
+    ( "SEC-10001" <http://www.wikidata.org/entity/Q601401> undef undef )
+    ( "SEC-10010" <http://www.wikidata.org/entity/Q29584688> undef undef )
+    ( "SEC-10020" <http://www.wikidata.org/entity/Q107602514> undef undef )
+    ( "SEC-10030" <http://www.wikidata.org/entity/Q57262255> undef undef )
+    ( "SEC-10040" <http://www.wikidata.org/entity/Q107602764> undef undef )
+    ( "SEC-10050" <http://www.wikidata.org/entity/Q220695> undef undef )
+    ( "SEC-10060" <http://www.wikidata.org/entity/Q178803> undef undef )
+    ( "SEC-10070" <http://www.wikidata.org/entity/Q126793> undef undef )
+    ( "SEC-11" undef "Gastgewerbe" "Hospitality Industry" )
+    ( "SEC-11000" <http://www.wikidata.org/entity/Q100252087> undef undef )
+    ( "SEC-12" undef "Verkehr und Tourismus" "Transport and Tourism" )
+    ( "SEC-12001" <http://www.wikidata.org/entity/Q107603209> undef undef )
+    ( "SEC-12010" <http://www.wikidata.org/entity/Q3565868> undef undef )
+    ( "SEC-12020" <http://www.wikidata.org/entity/Q516739> undef undef )
+    ( "SEC-12030" <http://www.wikidata.org/entity/Q29584313> undef undef )
+    # manually inserted extra line for "Hafenwirtschaft (W12-031"
+    ( "SEC-12031" <http://www.wikidata.org/entity/Q25382881> undef undef )
+    ( "SEC-12040" <http://www.wikidata.org/entity/Q1757562> undef undef )
+    ( "SEC-12050" <http://www.wikidata.org/entity/Q2072431> undef undef )
+    ( "SEC-12060" <http://www.wikidata.org/entity/Q3997851> undef undef )
+    ( "SEC-12070" <http://www.wikidata.org/entity/Q11630521> undef undef )
+    ( "SEC-13" undef "Post und Telekommunikation" "Postal and Telecommunications Services" )
+    ( "SEC-13001" <http://www.wikidata.org/entity/Q107605278> undef undef )
+    ( "SEC-13010" <http://www.wikidata.org/entity/Q100316952> undef undef )
+    ( "SEC-14" undef "Finanz- und Kreditwesen" "Financial Services and Banking" )
+    ( "SEC-14001" <http://www.wikidata.org/entity/Q29584334> undef undef )
+    ( "SEC-14010" <http://www.wikidata.org/entity/Q29585695> undef undef )
+    ( "SEC-15" undef "Börsen und Wertpapierhandel" "Stock Markets" )
+    ( "SEC-15000" <http://www.wikidata.org/entity/Q475000> undef undef )
+    ( "SEC-16" undef "Versicherungswesen" "Insurance Industry" )
+    ( "SEC-16000" <http://www.wikidata.org/entity/Q43183> undef undef )
+    ( "SEC-17" undef "Immobilienwirtschaft" "Real Estate Services" )
+    ( "SEC-17001" <http://www.wikidata.org/entity/Q29584338> undef undef )
+    ( "SEC-17010" <http://www.wikidata.org/entity/Q2588161> undef undef )
+    ( "SEC-20" undef "Forschungseinrichtungen" "Research Center" )
+    ( "SEC-20000" <http://www.wikidata.org/entity/Q29584345> undef undef )
+    ( "SEC-21" undef "Unternehmensdienstleistungen" "Business Services" )
+    ( "SEC-21001" <http://www.wikidata.org/entity/Q25351891> undef undef )
+    ( "SEC-21010" <http://www.wikidata.org/entity/Q63769412> undef undef )
+    ( "SEC-21020" <http://www.wikidata.org/entity/Q37038> undef undef )
+    ( "SEC-21030" <http://www.wikidata.org/entity/Q58891744> undef undef )
+    ( "SEC-22" undef "Öffentlicher Sektor" "Public Sector" )
+    ( "SEC-22000" <http://www.wikidata.org/entity/Q294217> undef undef )
+    ( "SEC-23" undef "Nonprofit-Sektor" "Nonprofit Sector" )
+    ( "SEC-23001" <http://www.wikidata.org/entity/Q1063076> undef undef )
+    ( "SEC-23010" <http://www.wikidata.org/entity/Q71128408> undef undef )
+    ( "SEC-24" undef "Bildungswesen" "Educational System" )
+    ( "SEC-24001" <http://www.wikidata.org/entity/Q29584231> undef undef )
+    ( "SEC-24010" <http://www.wikidata.org/entity/Q21028957> undef undef )
+    ( "SEC-25" undef "Gesundheitswesen" "Health System" )
+    ( "SEC-25000" <http://www.wikidata.org/entity/Q29584363> undef undef )
+    ( "SEC-26" undef "Sozialwesen" "Social Welfare System" )
+    ( "SEC-26000" <http://www.wikidata.org/entity/Q2306033> undef undef )
+    ( "SEC-27" undef "Freizeitwirtschaft" "Leisure Industries" )
+    ( "SEC-27000" <http://www.wikidata.org/entity/Q59308842> undef undef )
+    ( "SEC-28" undef "Kultursektor" "Cultural Industries" )
+    ( "SEC-28000" <http://www.wikidata.org/entity/Q59285259> undef undef )
+    ( "SEC-29" undef "Medienwirtschaft" "Media Industries" )
+    ( "SEC-29000" <http://www.wikidata.org/entity/Q56611639> undef undef )
+    ( "SEC-30" undef "Informationswirtschaft" "Information Services" )
+    ( "SEC-30000" <http://www.wikidata.org/entity/Q871337> undef undef )
+    ( "SEC-32" undef "Abfallwirtschaft und Recycling" "Waste Management and Recycling" )
+    ( "SEC-32001" <http://www.wikidata.org/entity/Q29584299> undef undef )
+    ( "SEC-98" undef "Internationale Körperschaften" "International Organizations" )
+    ( "SEC-98000" <http://www.wikidata.org/entity/Q107607934> undef undef )
+  }
+  #optional {
+  #  ?industry rdfs:label ?industryLabel .
+  #  filter(lang(?industryLabel) = ?language)
+  #}
+  bind(if(?language = 'en', ?mainEn, ?mainDe) as ?main)
+  #
+  service wikibase:label { bd:serviceParam wikibase:language "en" . }
+}
+order by ?notation
+
