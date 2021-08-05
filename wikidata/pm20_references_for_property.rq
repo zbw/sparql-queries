@@ -26,7 +26,17 @@ where
   #
   bind(uri(concat('http://www.wikidata.org/prop/',?pid)) as ?property)
   ?item ?property ?object .
-  # q&d
+  #
+  # restrict to a selected archive
+  ##?item wdt:P4293 ?pm20Id .
+  ##filter(strstarts(?pm20Id, 'co/'))
+  #
+  # check if the item was created after start of the PM20 companies' linking phase
+  # at 2021-04-26, first new item Q106647030
+  ##bind(xsd:integer(strafter(str(?wd), concat(str(wd:), 'Q'))) as ?qidNum)
+  ##filter(?qidNum < 106647030)
+  #
+  # q&d property label
   bind(uri(concat('http://www.wikidata.org/entity/', ?pid)) as ?prop)
   ?prop rdfs:label ?propLabelEn .
   filter(lang(?propLabelEn) = 'en')
