@@ -4,19 +4,25 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?id ?name (?name as ?item) ?description
+select ?id ?prefLabelDe ?prefLabelEn ?altLabelsDe ?altLabelsEn ?notesAndCategories
 where {
   {
-    select distinct ?id ?name (concat(?descrElem, ' [', group_concat(str(?prefSysLang);
-          separator = '; '), '] ') as ?description) (min(str(?prefSysLang)) as ?firstSys)
+    select distinct ?id ?prefLabelDe ?prefLabelEn ?altLabelsDe ?altLabelsEn
+    (concat(?descrElem, ' [', group_concat(str(?prefSysLang);
+          separator = '; '), '] ') as ?notesAndCategories)
+    (min(str(?prefSysLang)) as ?firstSys)
     where {
       ?stw a zbwext:Descriptor ;
-          skos:broader ?thsys ;
-          skos:prefLabel ?prefLang .
+           skos:broader ?thsys ;
+           skos:prefLabel ?prefLangDe ;
+           skos:prefLabel ?prefLangEn .
       ?thsys a zbwext:Thsys ;
-            skos:notation ?nta ;
-            skos:prefLabel ?prefSysLang .
-      filter(lang(?prefLang) = 'en')
+             skos:notation ?nta ;
+             skos:prefLabel ?prefSysLang .
+      filter(lang(?prefLangDe) = 'de')
+      filter(lang(?prefLangEn) = 'en')
+      bind(str(?prefLangDe) as ?prefLabelDe)
+      bind(str(?prefLangEn) as ?prefLabelEn)
       filter(lang(?prefSysLang) = 'en')
       #
       # selection by notation (G already covered by m-n-m #507)
@@ -26,39 +32,52 @@ where {
       ##filter(strstarts(?nta, 'B.))
       #
       # build descriptor part of the description
-      {
+      optional {
         select ?stw ( group_concat(str(?label);
             separator = ' | ') as ?descrElem)
         where {
           {
-            ?stw skos:prefLabel ?label .
-            filter(lang(?label) = 'de')
-          } union {
-            ?stw skos:altLabel ?label .
-          } union {
             ?stw skos:scopeNote ?label
           } union {
             ?stw skos:historyNote ?label
           } union {
             ?stw skos:editorialNote ?label
           }
+          filter(lang(?label) = 'de')
+        }
+        group by ?stw
+      }
+      # build altLabels
+      optional {
+        select ?stw ( group_concat(str(?label);
+            separator = ' | ') as ?altLabelsDe)
+        where {
+          ?stw skos:altLabel ?label
+          filter(lang(?label) = 'de')
+        }
+        group by ?stw
+      }
+      optional {
+        select ?stw ( group_concat(str(?label);
+            separator = ' | ') as ?altLabelsEn)
+        where {
+          ?stw skos:altLabel ?label
+          filter(lang(?label) = 'en')
         }
         group by ?stw
       }
       bind(strafter(str(?stw), 'http://zbw.eu/stw/descriptor/') as ?id)
-      bind(str(?prefLang) as ?name)
     }
-    group by ?id ?name ?descrElem
-
-    having (strstarts(?firstSys, 'P.0'))
+    group by ?id ?prefLabelDe ?prefLabelEn ?altLabelsDe ?altLabelsEn ?descrElem
+    having (strstarts(?firstSys, 'B.01.01'))
   }
   #
   # exclude descriptors already mapped to Wikidata
   filter( not exists {
-    service <https://query.wikidata.org/sparql> {
-      ?wd wdt:P3911 ?id .
-    }
-  })
+      service <https://query.wikidata.org/sparql> {
+        ?wd wdt:P3911 ?id .
+      }
+    })
 }
-order by ?firstSys ?name
+order by ?firstSys ?prefLabelDe
 
