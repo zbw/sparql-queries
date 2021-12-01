@@ -25,21 +25,23 @@ where {
   }
   bind (strlang(?pref, 'de') as ?prefLabel)
   #
-  {
-    ?gnd gndo:variantNameForTheConferenceOrEvent ?alt .
-  } union {
-    ?gnd gndo:variantNameForTheCorporateBody ?alt .
-  } union {
-    ?gnd gndo:variantNameForTheFamily ?alt .
-  } union {
-    ?gnd gndo:variantNameForThePerson ?alt .
-  } union {
-    ?gnd gndo:variantNameForThePlaceOrGeographicName ?alt .
-  } union {
-    ?gnd gndo:variantNameForTheSubjectHeading ?alt .
-  } union {
-    ?gnd gndo:variantNameForTheWork ?alt .
+  optional {
+    {
+      ?gnd gndo:variantNameForTheConferenceOrEvent ?alt .
+    } union {
+      ?gnd gndo:variantNameForTheCorporateBody ?alt .
+    } union {
+      ?gnd gndo:variantNameForTheFamily ?alt .
+    } union {
+      ?gnd gndo:variantNameForThePerson ?alt .
+    } union {
+      ?gnd gndo:variantNameForThePlaceOrGeographicName ?alt .
+    } union {
+      ?gnd gndo:variantNameForTheSubjectHeading ?alt .
+    } union {
+      ?gnd gndo:variantNameForTheWork ?alt .
+    }
+    bind (strlang(?alt, 'de') as ?altLabel)
   }
-  bind (strlang(?alt, 'de') as ?altLabel)
 }
 
