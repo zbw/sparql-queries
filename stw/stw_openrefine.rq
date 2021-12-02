@@ -4,12 +4,16 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?id ?prefLabelDe ?prefLabelEn ?altLabelsDe ?altLabelsEn ?notesAndCategories
+select ?id ?gndId ?byGnd ?labelsDe ?labelsEn
+(concat(if(bound(?notes), concat(?notes, ' '), ''), ?prefSys) as ?notesAndCategories)
 where {
   {
-    select distinct ?id ?prefLabelDe ?prefLabelEn ?altLabelsDe ?altLabelsEn
-    (concat(?descrElem, ' [', group_concat(str(?prefSysLang);
-          separator = '; '), '] ') as ?notesAndCategories)
+    select distinct ?id ?byGnd ?prefLabelDe
+    (concat(?prefLabelDe, if(bound(?altLabelsDe), concat(' | ', ?altLabelsDe), '')) as ?labelsDe)
+    (concat(?prefLabelEn, if(bound(?altLabelsEn), concat(' | ', ?altLabelsEn), '')) as ?labelsEn)
+    ?notes (max(?gndIdentifier) as ?gndId)
+    (concat('[', group_concat(distinct str(?prefSysLang);
+          separator = '; '), ']') as ?prefSys)
     (min(str(?prefSysLang)) as ?firstSys)
     where {
       ?stw a zbwext:Descriptor ;
@@ -23,7 +27,7 @@ where {
       filter(lang(?prefLangEn) = 'en')
       bind(str(?prefLangDe) as ?prefLabelDe)
       bind(str(?prefLangEn) as ?prefLabelEn)
-      filter(lang(?prefSysLang) = 'en')
+      filter(lang(?prefSysLang) = 'de')
       #
       # selection by notation (G already covered by m-n-m #507)
       # (W already covered by m-n-m #1259)
@@ -31,10 +35,10 @@ where {
       # CAUTION: filter moved to "having" clause below!
       ##filter(strstarts(?nta, 'B.))
       #
-      # build descriptor part of the description
+      # build notes
       optional {
         select ?stw ( group_concat(str(?label);
-            separator = ' | ') as ?descrElem)
+            separator = ' | ') as ?notes)
         where {
           {
             ?stw skos:scopeNote ?label
@@ -66,10 +70,17 @@ where {
         }
         group by ?stw
       }
+      # gnd
+      optional {
+        ?stw skos:exactMatch ?gnd .
+        bind(strafter(str(?gnd), 'https://d-nb.info/gnd/') as ?gndIdentifier)
+      }
+      bind(if(bound(?gndIdentifier), ?prefLabelDe, '') as ?byGnd)
+
       bind(strafter(str(?stw), 'http://zbw.eu/stw/descriptor/') as ?id)
     }
-    group by ?id ?prefLabelDe ?prefLabelEn ?altLabelsDe ?altLabelsEn ?descrElem
-    having (strstarts(?firstSys, 'B.01.01'))
+    group by ?id ?byGnd ?prefLabelDe ?prefLabelEn ?altLabelsDe ?altLabelsEn ?notes
+    having (strstarts(?firstSys, 'B.01.01.01'))
   }
   #
   # exclude descriptors already mapped to Wikidata
@@ -79,5 +90,5 @@ where {
       }
     })
 }
-order by ?firstSys ?prefLabelDe
+order by ?firstSys ?labelsDe
 
