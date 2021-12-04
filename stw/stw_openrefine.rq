@@ -4,8 +4,9 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?id ?gndId ?byGnd ?labelsDe ?labelsEn
+select ?id ?byGnd ?labelsDe ?labelsEn
 (concat(if(bound(?notes), concat(?notes, ' '), ''), ?prefSys) as ?notesAndCategories)
+?gndId
 where {
   {
     select distinct ?id ?byGnd ?prefLabelDe
@@ -75,7 +76,7 @@ where {
         ?stw skos:exactMatch ?gnd .
         bind(strafter(str(?gnd), 'https://d-nb.info/gnd/') as ?gndIdentifier)
       }
-      bind(if(bound(?gndIdentifier), ?prefLabelDe, '') as ?byGnd)
+      bind(if(bound(?gndIdentifier), concat('gnd', ?gndIdentifier), '') as ?byGnd)
 
       bind(strafter(str(?stw), 'http://zbw.eu/stw/descriptor/') as ?id)
     }
