@@ -28,7 +28,7 @@ where {
   optional {
     ?wd wdt:P17 ?country .
   }
-  service wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,de,fr,it,es,pt". }
+  service wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,de,fr,es,pt,nl,pl,it,sv,cz". }
 }
 order by ?wdLabel
 

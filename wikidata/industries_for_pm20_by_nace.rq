@@ -1,4 +1,4 @@
-# Industries by NACE code for items with pm20 folders (incomplete!)
+# Industries by NACE code or industry for items with pm20 folders
 #
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
@@ -10,7 +10,7 @@ PREFIX ps: <http://www.wikidata.org/prop/statement/>
 PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-select  ?naceCode ?industry ?industryLabel ?cnt (str(count(distinct ?wd)) as ?cntLabel)
+select  ?nace ?industry ?industryLabel ?cnt (str(count(distinct ?wd)) as ?cntLabel)
 where {
   # only pm20 companies with documents,
   # direct matches
@@ -24,7 +24,10 @@ where {
   #
   # connections to industry with nace code
   ?wd wdt:P452 ?industry .
-  ?industry wdt:P4496 ?naceCode .
+  optional {
+    ?industry wdt:P4496 ?naceCode .
+  }
+  bind(coalesce(?naceCode, 'X-no-NACE') as ?nace)
   #
   # link for company list per industry
   bind(strafter(str(?industry), str(wd:)) as ?industryQid)
@@ -32,6 +35,6 @@ where {
   #
   service wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,de,fr,es,pt". }
 }
-group by ?industry ?industryLabel ?naceCode ?cnt
-order by ?naceCode
+group by ?industry ?industryLabel ?nace ?cnt
+order by ?nace ?industryLabel
 
