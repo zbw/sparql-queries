@@ -33,7 +33,9 @@ where {
   bind(strafter(str(?industry), str(wd:)) as ?industryQid)
   bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/companies_pm20_by_industry.rq&industryQid=', ?industryQid)) as ?cnt)
   #
-  service wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,de,fr,es,pt". }
+  ## temporarily prefer German
+  ##service wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,de,fr,es,pt". }
+  service wikibase:label { bd:serviceParam wikibase:language "de,en,fr,es,pt". }
 }
 group by ?industry ?industryLabel ?nace ?cnt
 order by ?nace ?industryLabel
