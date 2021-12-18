@@ -7,7 +7,6 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
 select ?geoNta ?subjectNta ?pm20 ?pm20Label (str(?docCount) as ?docs)
 where {
-  # TODO currently only dummy
   values ( ?language ) {
     ( 'de' )
   }
@@ -16,6 +15,7 @@ where {
         zbwext:country ?country ;
         zbwext:subject ?subject ;
         zbwext:freeDocCount ?docCount .
+  filter(lang(?pm20Label) = ?language)
   graph <http://zbw.eu/beta/je/ng> {
     ?subject skos:notation ?subjectNta ;
              zbwext:notationLong ?subjectNtaLong .
