@@ -10,8 +10,8 @@ select ?id ?byGnd ?labelsDe ?labelsEn
 where {
   {
     select distinct ?id ?byGnd ?prefLabelDe
-    (concat(?prefLabelDe, if(bound(?altLabelsDe), concat(' | ', ?altLabelsDe), '')) as ?labelsDe)
-    (concat(?prefLabelEn, if(bound(?altLabelsEn), concat(' | ', ?altLabelsEn), '')) as ?labelsEn)
+    (concat(?prefLabelDe, if(bound(?altLabelsDe), concat(' | ', ?altLabelsDe), '')) as ?byLabelsDe)
+    (concat(?prefLabelEn, if(bound(?altLabelsEn), concat(' | ', ?altLabelsEn), '')) as ?byLabelsEn)
     ?notes (max(?gndIdentifier) as ?gndId)
     (concat('[', group_concat(distinct str(?prefSysLang);
           separator = '; '), ']') as ?prefSys)
