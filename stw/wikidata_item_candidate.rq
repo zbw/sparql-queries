@@ -25,6 +25,9 @@ where {
 ##      (group_concat(distinct str(?thsysLabelEn);
 ##          separator = " / ") as ?thsys_en)
     where {
+      values ( ?notationStub ) {
+        ( 'B.01.01.01' )
+      }
       ?thsys a zbwext:Thsys ;
              skos:notation ?nta .
 
@@ -38,7 +41,7 @@ where {
            skos:broader ?thsys .
       #      
       # restrict to subthesaurus
-      filter(strstarts(?nta, 'P.1'))
+      filter(strstarts(?nta, ?notationStub))
     }
 ##    group by ?stw
   } minus {

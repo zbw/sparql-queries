@@ -7,6 +7,9 @@
 # Pseudo-sparql result set with clickable QS links is useless, because links do
 # not work with multiple statements - therefore use plain html.
 
+# The query file must include a filter string, submitted as argument, which is
+# replaced by another string submitted as argument
+
 use strict;
 use warnings;
 use open ":encoding(utf8)";
@@ -21,9 +24,22 @@ use REST::Client;
 my $ENDPOINT    = 'http://zbw.eu/beta/sparql/stw/query';
 my $QUERY       = path('/opt/sparql-queries/stw/wikidata_item_candidate.rq');
 my $OUTPUT_JSON = path('/var/www/html/beta/tmp/stw_qs_create.json');
-my $OUTPUT_HTML = path('/var/www/html/beta/tmp/stw_qs_create.html');
+my $OUTPUT_STUB = '/var/www/html/beta/tmp/stw_qs_create.';
 my $TODAY       = `date +%F | tr -d "\n"`;
 my $RETRIEVED   = "|S813|+${TODAY}T00:00:00Z/11";
+
+my ( $search, $replace );
+if ( scalar(@ARGV) < 2 ) {
+  print "usage: $0 {search-string} {replace-string}\n";
+  exit;
+} else {
+  $search  = $ARGV[0];
+  $replace = $ARGV[1];
+}
+
+# replace filter string in query
+my $query = $QUERY->slurp;
+$query =~ s/$search/$replace/;
 
 # initialize rest client
 my $client = REST::Client->new( timeout => 600 );
@@ -31,7 +47,7 @@ my $client = REST::Client->new( timeout => 600 );
 # execute the request (may also ask for 'text/csv') and write response to file
 $client->POST(
   $ENDPOINT,
-  $QUERY->slurp,
+  $query,
   {
     'Content-type' => 'application/sparql-query',
     'Accept'       => 'application/sparql-results+json'
@@ -47,8 +63,9 @@ if ($@) {
 }
 
 # html head, one click selection of text to insert
-my $html  = $OUTPUT_HTML->openw;
-my $title = "QS: Create item from STW";
+my $html_path = path( $OUTPUT_STUB . $replace . '.html' );
+my $html      = $html_path->openw;
+my $title     = "QS: Create item from STW $replace";
 print $html <<"EOF";
 <!DOCTYPE html>
 <html><head><title>$title</title><style>

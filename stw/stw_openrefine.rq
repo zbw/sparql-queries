@@ -4,12 +4,15 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?id ?byGnd ?labelsDe ?labelsEn
+select ?id ?byGnd ?byLabelsDe ?byLabelsEn
 (concat(if(bound(?notes), concat(?notes, ' '), ''), ?prefSys) as ?notesAndCategories)
 ?gndId
 where {
+  values ( ?notationStub ) {
+    ( 'B.01.01.01' )
+  }
   {
-    select distinct ?id ?byGnd ?prefLabelDe
+    select distinct ?id ?prefLabelDe
     (concat(?prefLabelDe, if(bound(?altLabelsDe), concat(' | ', ?altLabelsDe), '')) as ?byLabelsDe)
     (concat(?prefLabelEn, if(bound(?altLabelsEn), concat(' | ', ?altLabelsEn), '')) as ?byLabelsEn)
     ?notes (max(?gndIdentifier) as ?gndId)
@@ -74,15 +77,17 @@ where {
       # gnd
       optional {
         ?stw skos:exactMatch ?gnd .
+        filter(contains(str(?gnd), '/gnd/'))
         bind(strafter(str(?gnd), 'https://d-nb.info/gnd/') as ?gndIdentifier)
       }
-      bind(if(bound(?gndIdentifier), concat('gnd', ?gndIdentifier), '') as ?byGnd)
-
       bind(strafter(str(?stw), 'http://zbw.eu/stw/descriptor/') as ?id)
     }
-    group by ?id ?byGnd ?prefLabelDe ?prefLabelEn ?altLabelsDe ?altLabelsEn ?notes
-    having (strstarts(?firstSys, 'B.01.01.01'))
+    group by ?id ?prefLabelDe ?prefLabelEn ?altLabelsDe ?altLabelsEn ?notes
   }
+  bind(if(bound(?gndIdentifier), concat('gnd', ?gndIdentifier), '') as ?byGnd)
+  #
+  # filter condition according to notation
+  filter(strstarts(?firstSys, ?notationStub))
   #
   # exclude descriptors already mapped to Wikidata
   filter( not exists {
@@ -91,5 +96,5 @@ where {
       }
     })
 }
-order by ?firstSys ?labelsDe
+order by ?firstSys ?byLabelsDe
 
