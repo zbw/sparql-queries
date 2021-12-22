@@ -1,0 +1,24 @@
+# List link resources (source or target) that match a given subject term
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX cito: <http://purl.org/spar/cito/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+Select ?sourceTitle ?targetTitle
+Where {
+GRAPH ?graph {
+  ?s a  cito:Citation ;
+     cito:hasCitingEntity ?source ;
+     cito:hasCitedEntity ?target .
+
+  {
+     # Subject terms for both source and target
+      ?source dcterms:subject "economics" ;
+             dcterms:title ?sourceTitle .
+  }
+  UNION
+  {
+  	  ?target dcterms:subject "economics" ;
+	 		 dcterms:title ?targetTitle .
+  }
+  }
+}

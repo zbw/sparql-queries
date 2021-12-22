@@ -2,15 +2,17 @@
 # nbt, 15.11.2018
 
 # Transform a sparql result to QS create statements
+# mode 'html' creates a list of QS inserts as html file
 
 use strict;
 use warnings;
-use open ":encoding(utf8)";
 
 binmode STDOUT, ":utf8";
+use utf8;
 
 use Carp;
 use Data::Dumper;
+use DateTime;
 use JSON qw'decode_json encode_json';
 use Path::Tiny;
 use Readonly;
@@ -81,39 +83,48 @@ Readonly my %CONFIG => (
     source     => 'pm20',
     label_type => 'co',
     query => path('/opt/sparql-queries/pm20/companies_missing_in_wikidata.rq'),
+    html  => path('/var/www/html/beta/tmp/pm20_qs_create.html'),
     source_type  => 'zbwext:CompanyFolder',
     source_title => 'pm20Label',
     source_id    => 'pm20Id',
     label        => {
-      de => 'pm20Label',
-      en => 'pm20Label',
+      de => 'adjustedLabel',
+      en => 'adjustedLabel',
     },
     descr => {
       de => 'descrDe',
       en => 'descrEn',
     },
+    alias => {
+      de => 'altLabels',
+      en => 'altLabels',
+    },
     properties => {
       P31 => {
-        var_name   => 'classQid',
+        var_name   => 'classQids',
         value_type => 'item',
+        query      => path('/opt/sparql-queries/pm20/wd_p31.rq'),
       },
       P571 => {
-        var_name   => 'incepted',
-        value_type => 'date',
+        var_name        => 'incepted',
+        value_type      => 'date',
+        source_property => 'schema:foundingDate',
       },
       P576 => {
-        var_name   => 'abandoned',
-        value_type => 'date',
+        var_name        => 'abandoned',
+        value_type      => 'date',
+        source_property => 'schema:dissolutionDate',
       },
       P1448 => {
         pid        => 'P1448',
         var_name   => 'pm20Label',
         value_type => 'monolingual-text',
-        lang       => 'und',
+        lang       => 'de',
       },
       P227 => {
-        var_name   => 'gndId',
-        value_type => 'literal',
+        var_name        => 'gndId',
+        value_type      => 'literal',
+        source_property => 'gndo:gndIdentifier',
       },
       P112 => {
         endpoint => 'https://query.wikidata.org/sparql',
@@ -152,6 +163,41 @@ Readonly my %CONFIG => (
             value_type => 'date',
           },
         },
+      },
+      P155 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_predecessor.rq'),
+        var_name => 'predecessorQid',
+        value_type => 'item',
+        inverse    => 'P156',
+      },
+      P749 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_parent.rq'),
+        var_name => 'parentQid',
+        value_type => 'item',
+        inverse    => 'P355',
+      },
+      P159 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_location.rq'),
+        var_name => 'geoQid',
+        value_type => 'item',
+      },
+      P17 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_country.rq'),
+        var_name => 'geoQid',
+        value_type => 'item',
+      },
+      P452 => {
+        endpoint => 'https://query.wikidata.org/sparql',
+        ## derived from NACE code
+        ##query    => path('/opt/sparql-queries/wikidata/pm20_company_nace.rq'),
+        # from mapping SK-WD
+        query    => path('/opt/sparql-queries/wikidata/pm20_company_industry.rq'),
+        var_name => 'industryQid',
+        value_type => 'item',
       },
     },
   },
@@ -232,23 +278,9 @@ Readonly my %CONFIG => (
         var_name   => 'classQid',
         value_type => 'item',
       },
-      # partOf is not set in create mode query, because broader items not 
-      # necessarily exist, when the narrower item is to be created
-      P361 => {
-        query    => path('/opt/sparql-queries/pm20/wd_category_partof.rq'),
-        var_name   => 'partOf',
+      P => {
+        var_name   => 'classQid',
         value_type => 'item',
-      },
-      P8484 => {
-        query    => path('/opt/sparql-queries/pm20/wd_category_longnotation.rq'),
-        var_name   => 'subjectCode',
-        value_type => 'literal',
-        qualifiers => {
-          'P1545' => {
-            var_name   => 'notationLong',
-            value_type => 'literal',
-          },
-        },
       },
     },
   },
@@ -258,7 +290,8 @@ Readonly my %CONFIG => (
     label_type => 'category',
     properties => {
       P8483 => {
-        query    => path('/opt/sparql-queries/pm20/wd_geo_category_longnotation.rq'),
+        query =>
+          path('/opt/sparql-queries/pm20/wd_geo_category_longnotation.rq'),
         var_name   => 'geoCode',
         value_type => 'literal',
         qualifiers => {
@@ -322,6 +355,33 @@ Readonly my %CONFIG => (
       },
     },
   },
+
+  pm20_industry => {
+    source     => 'pm20',
+    label_type => 'category',
+    query => path('/opt/sparql-queries/pm20/industries_missing_in_wikidata.rq'),
+    html  => path('/var/www/html/beta/tmp/pm20_qs_create.html'),
+    source_title => 'pm20Label',
+    label        => {
+      de => 'labelDe',
+      en => 'labelEn',
+    },
+    descr => {
+      de => 'descrDe',
+      en => 'descrEn',
+    },
+    properties => {
+      P31 => {
+        var_name   => 'classQid',
+        value_type => 'item',
+      },
+      P1535 => {
+        var_name   => 'usedFor',
+        value_type => 'item',
+      }
+    },
+  },
+
 );
 
 # evaluate commandline arguments
@@ -329,11 +389,11 @@ my ( $config, $src_cfg );
 my $type     = $ARGV[0];
 my $mode     = $ARGV[1] || 'create';
 my $property = $ARGV[2];
-if ( $type and exists $CONFIG{$type} and $mode =~ m/^(create|enhance)$/ ) {
+if ( $type and exists $CONFIG{$type} and $mode =~ m/^(html|create|enhance)$/ ) {
   $config  = $CONFIG{$type};
   $src_cfg = $SOURCE_CONFIG{ $config->{source} };
 } else {
-  die "usage: $0 [", join( '|', keys %CONFIG ), "] {create|enhance pid}\n";
+  die "usage: $0 [", join( '|', keys %CONFIG ), "] {html|create|enhance pid}\n";
 }
 my @valid_properties = keys $config->{properties};
 if ( $mode eq 'enhance'
@@ -342,22 +402,22 @@ if ( $mode eq 'enhance'
   die "usage: $0 $type $mode [", join( '|', @valid_properties ), "]\n";
 }
 
-# output file derived from query file, plus date for repeated runs
+# output file name derived from query file, plus date for repeated runs
 my $prop_cfg;
 my ( $queryfile, $outfile, $query );
-if ( $mode eq 'create' ) {
+if ( $mode eq 'html' or $mode eq 'create' ) {
   $queryfile = $config->{query};
   $query     = $queryfile->slurp;
   $outfile   = $queryfile->parent->child('results')
     ->child( $queryfile->basename('.rq') . ".${TODAY}.qs.txt" );
-} else {
+} elsif ( $mode eq 'enhance' ) {
   $prop_cfg = $config->{properties}{$property};
   if ( $prop_cfg->{query} ) {
     $queryfile = $prop_cfg->{query};
-    $query     = $queryfile->slurp;
+    $query     = $queryfile->slurp_utf8;
   } else {
     $queryfile = $src_cfg->{default_property_query};
-    $query     = adapt_default_query( $queryfile->slurp, $property );
+    $query = adapt_default_query( $queryfile->slurp, $property );
   }
 
   $outfile =
@@ -365,8 +425,24 @@ if ( $mode eq 'create' ) {
     ->child(
     $property . '_' . $queryfile->basename('.rq') . ".${TODAY}.qs.txt" );
 }
-if ( -f $outfile ) {
-  die "Error: $outfile exists\n";
+
+# output files
+my ( $html, $fh );
+if ( $mode eq 'html' ) {
+  if ( $config->{html} ) {
+    $html = $config->{html}->openw_utf8;
+    html_add_header( $html, $type );
+  } else {
+    die "Error: no html output defined for $type\n";
+  }
+}
+if ( $mode ne 'html' ) {
+  if ( -f $outfile ) {
+    ## avoid accidental override
+    die "Error: $outfile exists\n";
+  } else {
+    $fh = $outfile->openw_utf8;
+  }
 }
 
 # initialize rest client
@@ -381,7 +457,7 @@ $client->POST(
   $endpoint,
   $query,
   {
-    'Content-type' => 'application/sparql-query',
+    'Content-type' => 'application/sparql-query; charset=utf-8',
     'Accept'       => 'application/sparql-results+json'
   }
 );
@@ -396,13 +472,14 @@ if ($@) {
 }
 
 my $count = 0;
-my $fh    = $outfile->openw_utf8;
 foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
+
+  my $id = $entry->{ $config->{source_id} }{value};
 
   # set record specific reference statement
   my $reference_statement = '';
   if ( $config->{source_id} ) {
-    my $entry_source_id = quote( $entry->{ $config->{source_id} }{value} );
+    my $entry_source_id = quote($id);
     my $entry_source_title =
       quote( $entry->{ $config->{source_title} }{value} );
     $reference_statement =
@@ -414,10 +491,10 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
       . $RETRIEVED;
   }
 
-  if ( $mode eq 'create' ) {
+  if ( $mode eq 'html' or $mode eq 'create' ) {
 
     # new item
-    print $fh "CREATE\n";
+    my $block = "CREATE\n";
 
     # output fields
     foreach my $field (qw/ label descr alias /) {
@@ -428,20 +505,29 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
         my $value = $entry->{ $config->{$field}{$lang} }{value};
         next unless $value;
 
-        # transform label according to Wikidata rules
-        if ( $field eq 'label' ) {
-          $value = adjust_label( $value, $config->{label_type} );
+        # multiple values should occur only for aliases
+        my @split_val = split( /\|/, $value );
+        foreach my $val (@split_val) {
+          ## transform label according to Wikidata rules
+          if ( $field eq 'label' ) {
+            $value = adjust_label( $val, $config->{label_type} );
+          }
+          $block .= "LAST|$abbrev$lang|" . quote($val) . "\n";
         }
-        print $fh "LAST|$abbrev$lang|" . quote($value) . "\n";
       }
     }
+
+    # TODO remove!!!
+    # q&d Hack for labels according to non-de/en languages
+    ##$block .= 'LAST|Lnl|' . quote( $entry->{adjustedLabel}{value} ) . "\n";
+    ##if ( $entry->{altLabels}{value} ) {
+    ##  $block .= 'LAST|Anl|' . quote( $entry->{altLabels}{value} ) . "\n";
+    ##}
 
     # output source property (without reference)
     # (if a source should be given)
     if ( $config->{source_id} ) {
-      print $fh 'LAST|'
-        . $src_cfg->{source_property} . '|'
-        . quote( $entry->{ $config->{source_id} }{value} ) . "\n";
+      $block .= 'LAST|' . $src_cfg->{source_property} . '|' . quote($id) . "\n";
     }
 
     # output properties
@@ -452,31 +538,61 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
       my $value      = $entry->{ $prop_cfg->{var_name} }{value};
       next unless $value;
 
-      print $fh 'LAST|'
-        . $property . '|'
-        . prepare_value( $value_type, $value )
-        . get_qualifier_statements( $prop_cfg, $entry )
-        . $reference_statement . "\n";
+      # in some cases, a value may consist of separate subfields
+      # TODO code duplicated!
+      my @prepared_values =
+        ( prepare_values( $value_type, $value, $property ) );
+      foreach my $prepared_value (@prepared_values) {
+        $block .= 'LAST|'
+          . $property . '|'
+          . $prepared_value
+          . get_qualifier_statements( $prop_cfg, $entry )
+          . $reference_statement . "\n";
+      }
+    }
+    my $label =
+      $entry->{adjustedLabel}{value} . ' {' . $entry->{docCount}{value} . '}';
+    if ( $mode eq 'html' ) {
+      my $url = "http://purl.org/pressemappe20/folder/$id";
+      ( my $name = $id ) =~ s/\//_/g;
+      ## TODO q&d - this works only for companies
+      print $html "\n<h3 id='$name'><a href='$url'># $label</a></h3>\n\n";
+      print $html "<pre class='force-select'>\n$block\n</pre>\n\n";
+    }
+    if ( $mode eq 'create' ) {
+      print $fh "\n# $label\n\n";
+      print $fh "$block\n";
     }
   } else {
 
     # only one property
-    my $qid        = $config->{properties}{$property}{qid} || 'qid';
+    my $qid = $config->{properties}{$property}{qid} || 'qid';
     my $value_type = $prop_cfg->{value_type};
-    my $value      = $entry->{ $prop_cfg->{var_name} }{value};
+    my $value =
+      $entry->{ $prop_cfg->{var_name} }{value} || $entry->{value}{value};
     next if not $value or $value eq '';
 
-    # add optional qualifier statements
-    my $qualifier_statements =
-      $prop_cfg->{qualifiers}
-      ? get_qualifier_statements( $prop_cfg->{qualifiers}, $entry )
-      : '';
+    # in some cases, a value may consist of separate subfields
+    # TODO code duplicated!
+    my @prepared_values = ( prepare_values( $value_type, $value, $property ) );
+    foreach my $prepared_value (@prepared_values) {
+      print $fh $entry->{$qid}{value} . '|'
+        . $property . '|'
+        . $prepared_value
+        . get_qualifier_statements( $prop_cfg, $entry )
+        . $reference_statement . "\n";
 
-    print $fh $entry->{$qid}{value} . '|'
-      . $property . '|'
-      . prepare_value( $value_type, $value )
-      . get_qualifier_statements( $prop_cfg, $entry )
-      . $reference_statement . "\n";
+      # special case: produce inverse statements
+      # - value must by of type item
+      # - currently no qualifiers
+      if ( $prop_cfg->{inverse} ) {
+        my $inverse_property = $prop_cfg->{inverse};
+        print $fh $prepared_value . '|'
+          . $inverse_property . '|'
+          . $entry->{$qid}{value}
+          . $reference_statement . "\n";
+      }
+    }
   }
 
   # Limit the numer of results
@@ -484,29 +600,42 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
   $count++;
   last if $count >= $LIMIT;
 }
-
-print "$count statements written to $outfile\n";
+print "$count statements written to output file:\n";
+if ( $mode eq 'html' ) {
+  print $html "\n</body></html>\n";
+  $html->close;
+  print "http://zbw.eu/beta/tmp/pm20_qs_create.html\n";
+} else {
+  print "$outfile\n";
+}
 
 #####################
 
-sub prepare_value {
+sub prepare_values {
   my $value_type = shift or confess "param missing";
   my $value      = shift or confess "param missing";
+  my $property   = shift;
 
+  # TODO allow multiple values for other item types than item
+
+  my @values;
   if ( $value_type eq 'item' ) {
-    ## use unquoted value
+    ## split possible multiple values from group_concat
+    ## use unquoted values
+    @values = split( /\|/, $value );
   } elsif ( $value_type eq 'literal' ) {
-    $value = quote($value);
+    @values = ( quote($value) );
   } elsif ( $value_type eq 'quantity' ) {
     ## no modification of value
+    @values = ($value);
   } elsif ( $value_type eq 'date' ) {
-    $value = format_date($value);
+    @values = ( format_date($value) );
   } elsif ( $value_type eq 'monolingual-text' ) {
-    $value = quote( $value, $config->{properties}{$property}{lang} );
+    @values = ( quote( $value, $config->{properties}{$property}{lang} ) );
   } else {
     die "Error: Unknown value_type [$value_type]\n";
   }
-  return $value;
+  return @values;
 }
 
 sub quote {
@@ -515,7 +644,13 @@ sub quote {
 
   my $q = '"';
 
-  my $quoted = "$q$text$q";
+  my $quoted = $text;
+
+  # there seems to be no way of encoding double-quotes in
+  # QS2 tab-separated input, so we transform them to single-quotes
+  $quoted =~ s/$q/'/g;
+
+  $quoted = "$q$quoted$q";
 
   if ($lang) {
     $quoted = "$lang:$quoted";
@@ -555,31 +690,8 @@ sub adjust_label {
     }
   }
 
-  # for companies
-  if ( $label_type eq 'co' ) {
-    ## cut off legal form
-    $label =~ s/(.*) Ltd\.$/$1/g;
-    $label =~ s/(.*) Ltd$/$1/g;
-    $label =~ s/(.*) Limited$/$1/g;
-    $label =~ s/(.*) A\.G\.$/$1/g;
-    $label =~ s/(.*) AG$/$1/g;
-    $label =~ s/(.*) Aktiengesellschaft$/$1/g;
-    $label =~ s/(.*) \& Co\.$/$1/ig;
-    $label =~ s/(.*) \& Co$/$1/ig;
-    $label =~ s/(.*) Co\.$/$1/ig;
-    $label =~ s/(.*) Co$/$1/ig;
-    $label =~ s/(.*) Corpi\.$/$1/ig;
-    $label =~ s/(.*) mbh$/$1/ig;
-    $label =~ s/(.*) Gmbh$/$1/ig;
-    $label =~ s/(.*) e.V.$/$1/ig;
-    $label =~ s/(.*) plc\.$/$1/g;
-    $label =~ s/(.*) plc$/$1/g;
-    $label =~ s/(.*) SA$/$1/g;
-    $label =~ s/(.*) S\.A\.$/$1/g;
-    $label =~ s/(.*) NV$/$1/g;
-    $label =~ s/(.*) N\.V\.$/$1/g;
-    $label =~ s/(.*) Co\.,$/$1/g;
-  }
+  # for companies, use already computed adjustedLabel
+
   return $label;
 }
 
@@ -610,9 +722,34 @@ sub get_qualifier_statements {
       my $value_type = $qual_cfg->{value_type};
       next unless $value;
       $statements .=
-        '|' . $qualifier . '|' . prepare_value( $value_type, $value );
+        '|' . $qualifier . '|' . ( prepare_values( $value_type, $value ) )[0];
     }
   }
   return $statements;
+}
+
+sub html_add_header {
+  my $html = shift or die "param missing";
+  my $type = shift or die "param missing";
+
+  my $now = DateTime->now( time_zone => 'Europe/Berlin' )->datetime(' ');
+  my $title = "QS: Create item from $type";
+  print $html <<"EOF";
+<!DOCTYPE html>
+<html><head><title>$title</title><style>
+.force-select {
+  -webkit-user-select: all;  /* Chrome 49+ */
+  -moz-user-select: all;     /* Firefox 43+ */
+  -ms-user-select: all;      /* No support yet */
+  user-select: all;          /* Likely future */
+}
+</style></head><body>
+<h1>$title</h1>
+<h2>(as of $now)</h2>
+<p>In sync with Mix-n-match catalog <a
+href="https://tools.wmflabs.org/mix-n-match/#/catalog/4542">PM20 companies (div)</a>
+</p>
+
+EOF
 }
 

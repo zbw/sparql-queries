@@ -1,55 +1,89 @@
 # Extract information for creating missing company items in Wikidata
 #
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX schema: <http://schema.org/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX frapo: <http://purl.org/cerif/frapo/>
 PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?pm20 ?pm20Label ?mnm (?mnmId as ?mnmLabel) ?wdLabel ?incepted ?abandoned ?gndId
-?pm20Id ?classQid (?orgType as ?descrDe) ?descrEn
+select ?pm20 ?pm20Label ?adjustedLabel ?incepted ?abandoned ?gndId
+?pm20Id ?docCount
+(group_concat(distinct ?classQid; separator='|') as ?classQids)
+(group_concat(distinct ?typeDe; separator='; ') as ?descrDe)
+(group_concat(distinct ?typeEn; separator='; ') as ?descrEn)
+(group_concat(distinct ?altLabel; separator='|') as ?altLabels)
 where {
+  # organization type mappings
+  values ( ?orgType ?classQid ?typeEn ) {
+    ( 'Unternehmen'@de 'Q4830453' 'business' )
+    ( 'Kolonialgesellschaft'@de 'Q1700154' 'colonial society' )
+    ( 'Verein'@de 'Q988108' 'association' )
+    ( 'Körperschaft des öffentlichen Rechts'@de 'Q15734684' 'Körperschaft des öffentlichen Rechts' )
+    ( 'Konzern'@de 'Q206361' 'concern' )
+    ( 'Dachgesellschaft'@de 'Q219577' 'holding company' )
+    ( 'Zentralbank'@de 'Q66344' 'central bank' )
+    ( 'Kammern, Verbände'@de 'Q15911314' 'chamber, association' )
+    ( 'Ausseruniversitäre Forschungseinrichtungen'@de 'Q31855' 'research institute' )
+    ( 'Fachgesellschaften und Berufsverbände'@de 'Q1391145' 'professional society' )
+    ( 'Internationale Organisationen'@de 'Q484652' 'international organization' )
+    ( 'Unternehmenskartell'@de 'Q179216' 'cartel' )
+    ( 'Hochschulen und deren Einrichtungen'@de 'Q38723' 'university, university institute' )
+    ( 'Regiebetrieb, Eigenbetrieb'@de 'Q40890107' 'municipal enterprise' )
+    ( 'Tochergesellschaft'@de 'Q658255' 'subsidiary' )
+    ( 'Weitere Institutionen'@de 'Q178706' 'institution' )
+    ( 'Gewerkschaft'@de 'Q178790' 'union' )
+    ( 'Institution'@de 'Q178706' 'institution' )
+    ( 'Bibliotheken und Archive'@de 'Q1030034' 'libraries and archives' )
+    ( 'Stiftung'@de 'Q18631232' 'foundation' )
+    ( 'Verlage und Datenbankanbieter'@de 'Q2085381' 'publisher ' )
+    ( 'Kongresse, Tagungen'@de 'Q625994' 'convention' )
+    ( 'Public Private Partnership'@de 'Q221096' 'public private partnership' )
+    ( 'Arbeitsgemeinschaft'@de 'Q15783838' 'working group' )
+  }
   #
   # determine for which entries we want to create items
   {
-    # already checked entries of M-n-m catalog
-    graph ?mnmGraph {
-      # catalog and state
-      # (late binding for ?mnmGraph!)
-      values ( ?catalogId ?maxCheckedId ) {
-        ( '623' '25376941' )
-      }
-      bind(uri(concat('http://zbw.eu/beta/mix-n-match-', ?catalogId, '/ng')) as ?mnmGraph)
-      #
-      ?pm20 dc:identifier ?mnmId .
-      filter(?mnmId < ?maxCheckedId)
-      bind(uri(concat('https://tools.wmflabs.org/mix-n-match/#/entry/', ?mnmId)) as ?mnm)
-      bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/') as ?pm20Id)
-    }
-  } minus {
-    # minus all entries which are linked to WD items
+    ?pm20 a zbwext:CompanyFolder ;
+        dc:type ?orgType ;
+        skos:prefLabel ?pm20Label ;
+        dct:identifier ?pm20Id ;
+        zbwext:adjustedLabel ?adjustedLabel ;
+        frapo:hasCountryCode ?country ;
+        zbwext:totalDocCount ?docCount .
+    #
+    # this is the filter for defining the separate mnm catalogs (parts) 
+    bind(
+      if(?country in ('NL', 'ID', 'AO'), 'nl',
+        if(?country in ('GB', 'US', 'CA', 'AU', 'ZA', 'IE', 'MY', 'ZW'), 'en',
+          if(?country in ('FR', 'VN', 'BE', 'CD', 'LU', 'DZ'), 'fr',
+            if(?country in ('DE', 'AT', 'CH', 'HU', 'TZ', 'PL', 'CZ', 'WS'), 'de',
+              'und')))) as ?wikiLang)
+    ##filter(?wikiLang = 'und')
+  }
+
+  # minus all entries which are linked to WD items
+  optional {
     service <https://query.wikidata.org/sparql> {
-      ?wd wdt:P4293 ?pm20Id .
+      ?wd p:P4293 ?statement .
+      ?statement ps:P4293 ?pm20Id .
+      optional {
+        ?statement pq:P4390 ?relType .
+      }
+      # let related matches pass
+      filter(!bound(?relType) || ?relType!=wd:Q39894604)
     }
   }
-  # organization type mappings
-  values ( ?orgType ?classQid ?descrEn ) {
-    ( 'Unternehmen' 'Q4830453' 'business' )
-    ( 'Kolonialgesellschaft' 'Q1700154' 'colonial society' )
-    ( 'Verein' 'Q48204' 'association' )
-  }
-  #
-  ?pm20 skos:prefLabel ?pm20Label ;
-        zbwext:freeDocCount ?docCount .
-  #
-  # apply further restrictions:
-  # only if folder has documents
-  filter(?docCount > 0)
-  # restrict to certain types of organization
-  ?pm20 dc:type ?orgType .
-  # remove entries with suspect labels including '()'
-  filter(!contains(?pm20Label, '('))
+  filter(!bound(?wd))
+
+  filter(lang(?orgType) = 'de')
+  bind(str(?orgType) as ?typeDe)
   #
   # now get further information to add to WD
   #
@@ -62,6 +96,10 @@ where {
   optional {
     ?pm20 gndo:gndIdentifier ?gndId .
   }
+  optional {
+    ?pm20 skos:altLabel ?altLabel .
+  }
 }
-order by ?mnmId
+group by ?docCount ?pm20 ?pm20Label ?adjustedLabel ?incepted ?abandoned ?gndId ?pm20Id
+order by desc(?docCount) ?pm20Label
 

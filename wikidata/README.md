@@ -20,17 +20,24 @@ Query | Description
 [mapping_relation_qualifier_qs](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/mapping_relation_qualifier_qs.rq) | Generate statements for QuickStatements2 for adding a default mapping relation qualifier to external identifiers
 [pm20_economists](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_economists.rq) | Show pm20 folders for persons of a certain occupation
 [all_subclasses](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/all_subclasses.rq) | Get all subclasses of a Wikidata class
+[nace](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/nace.rq) | List of items with NACE code
+
 
 #### Queries re. PM20
 
 Query | Description
 ------|------------
 [pm20_folder_mapping](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_folder_mapping.rq) | Wikidata items with linked PM20 folders
+[item_by_pm20_id](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/item_by_pm20_id.rq) | Items by pm20 folder id
 [pm20_references](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_references.rq) | Properties with reference from PM20
 [missing_pm20_id_via_gnd](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/missing_pm20_id_via_gnd.rq) | Get missing PM20 IDs for WD items with known GND ID
 [missing_class_via_pm20](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/missing_class_via_pm20.rq) | Get missing class for WD items from PM20 organizations
 [pm20_folder_doc_counts](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_folder_doc_counts.rq) | Get document counts (free and total) for folders connected to WD items
 [pm20_subject_category_by_code](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_subject_category_by_code.rq) | Get PM20 subject category by subject code
+[multiple_pm20_co](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/multiple_pm20_co.rq) | Items with multiple PM20 co entries (narrow match excluded)
+[industries_for_pm20](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/industries_for_pm20.rq) | Industries for items with pm20 company folder
+[industries_for_pm20_by_sk](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/industries_for_pm20_by_sk.rq) | Systematic overview by PM20 industry category system for items with pm20 company folder
+[industries_for_pm20_by_nace](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/industries_for_pm20_by_nace.rq) | Industries by NACE code for items with pm20 company folders (incomplete!)
 
 
 ### "Power queries"

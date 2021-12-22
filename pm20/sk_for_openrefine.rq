@@ -1,0 +1,42 @@
+# Create a table of sk entries for OpenRefine
+# (sk = Wirtschaftsklassifikation)
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX schema: <http://schema.org/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
+#
+select distinct (str(?count) as ?cnt) ?id ?notation ?labelDe ?desc
+where {
+  graph <http://zbw.eu/beta/sk/ng> {
+    ?s skos:prefLabel ?labelLangEn ;
+       dct:identifier ?id ;
+       skos:notation ?notation .
+    filter(lang(?labelLangEn) = 'en')
+    bind(str(?labelLangEn) as ?labelEn)
+    ?s skos:prefLabel ?labelLangDe .
+    filter(lang(?labelLangDe) = 'de')
+    bind(str(?labelLangDe) as ?labelDe)
+    #
+    ?broader skos:narrower ?s ;
+             skos:prefLabel ?broaderLangEn .
+    filter(lang(?broaderLangEn) = 'en')
+    bind(str(?broaderLangEn) as ?broaderEn)
+  }
+  {
+    select (count(distinct ?pm20) as ?count) ?labelLangEn
+    where {
+      ?pm20 a zbwext:CompanyFolder ;
+            schema:industry ?labelLangEn ;
+            zbwext:totalDocCount ?docCount .
+      filter(lang(?labelLangEn) = 'en')
+      #filter(?totalDocCount > 0)
+    }
+    group by ?labelLangEn
+  }
+  bind(concat(?labelEn, " (BT: ", ?broaderEn, ")") as ?desc)
+}
+order by ?notation ?broaderEn ?id
+

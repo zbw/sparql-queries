@@ -1,0 +1,46 @@
+# Items with multiple PM20 co entries (narrow match excluded)
+#
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+select ?count ?wd ?wdLabel 
+where {
+  {
+    select ?wd (count(?statement) as ?count)
+    where {
+      hint:Query hint:optimizer "None" .
+      #
+      # all WD items for this subset
+      ?wd p:P4293 ?statement .
+      ?statement ps:P4293 ?pm20Id .
+      filter(strstarts(?pm20Id, 'co/'))
+      #
+      # exclude narrow matches
+      filter(not exists {
+          ?statement pq:P4390 wd:Q39893967 .
+        }
+      )
+      # exclude related matches
+      filter(not exists {
+          ?statement pq:P4390 wd:Q39894604 ;
+        }
+      )
+    }
+    group by ?wd
+    having (?count > 1)
+  }
+  # get other fields for display and for the statement
+  bind(strafter(str(?wd), 'http://www.wikidata.org/entity/') as ?wdId)
+  optional {
+    ?wd rdfs:label ?wdLabelLang .
+    filter(lang(?wdLabelLang) = 'en')
+    bind(str(?wdLabelLang) as ?wdLabel)
+  }
+}
+order by ?wdId
+

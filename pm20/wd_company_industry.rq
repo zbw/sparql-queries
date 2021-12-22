@@ -1,0 +1,46 @@
+# Get the industry by mapping to SK classification
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX esco: <http://data.europa.eu/esco/model#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct ?pm20Id ?pm20 ?pm20Label ?qid ?industryQid
+##?industryWd ?industryItem 
+where {
+  service <https://query.wikidata.org/sparql> {
+    ?statement ps:P4293 ?pm20Id .
+    ?wd p:P4293 ?statement .
+    filter (not exists {
+        ?statement pq:P4390 [] .
+      })
+    optional {
+      ?wd wdt:P452 ?industryWd .
+    }
+    bind(strafter(str(?wd), str(wd:)) as ?qid)
+    bind(uri(concat("http://purl.org/pressemappe20/folder/", ?pm20Id)) as ?pm20)
+  }
+  #
+  ?pm20 a zbwext:CompanyFolder ;
+        skos:prefLabel ?pm20Label ;
+        dct:identifier ?pm20Id ;
+        schema:industry ?industryLabel .
+  filter(lang(?industryLabel) = 'en')
+  graph <http://zbw.eu/beta/sk/ng> {
+    ?industry skos:prefLabel ?industryLabel ;
+              skos:exactMatch ?industryItem .
+  }
+  filter(!bound(?industryWd) || ?industryWd != ?industryItem)
+  #
+  bind(strafter(str(?industryItem), str(wd:)) as ?industryQid)
+}
+order by ?pm20Id $industryQid
+

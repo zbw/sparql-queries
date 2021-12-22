@@ -1,15 +1,23 @@
-# Create input for Wikidata Mix'n'match for PM20 companies
+# Create list of search statements in parallel to Wikidata Mix'n'match catalog
+# for PM20 companies (excluding entries which are already exactly linked)
 #
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX frapo: <http://purl.org/cerif/frapo/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
 PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?id ?name ?description
+select ?id ?pm20 (?name as ?pm20Label) ?wdSearch ("wd" as ?wdSearchLabel)
+?wpSearch ("wp" as ?wpSearchLabel) ?qs ("qs" as ?qsLabel)
+?item ('id' as ?itemLabel) ?description
 where {
   {
-    select ?id ?name ?docCount ?prefLabel ?fromTo
+    select ?pm20 ?id ?name ?docCount ?prefLabel ?fromTo
     (group_concat(distinct ?location; separator = '; ') as ?locations)
     (group_concat(distinct ?industry; separator='; ') as ?industries)
     (group_concat(distinct ?note; separator='; ') as ?notes)
@@ -32,7 +40,7 @@ where {
             if(?country in ('FR', 'VN', 'BE', 'CD', 'LU', 'DZ'), 'fr',
               if(?country in ('DE', 'AT', 'CH', 'HU', 'TZ', 'PL', 'CZ', 'WS'), 'de',
                 'und')))) as ?wikiLang)
-      filter(?wikiLang = ?filterLang)
+      ##filter(?wikiLang = ?filterLang)
       #
       optional {
         ?pm20 zbwext:fromTo ?fromTo .
@@ -49,10 +57,37 @@ where {
         ?pm20 skos:note ?note .
       }
     }
-    group by ?id ?name ?docCount ?prefLabel ?fromTo
+    group by ?pm20 ?id ?name ?docCount ?prefLabel ?fromTo
   }
+
+  # exclude alreday exactly linked entries
+  optional {
+    service <https://query.wikidata.org/sparql> {
+      ?wd p:P4293 ?statement .
+      ?statement ps:P4293 ?id .
+      optional {
+        ?statement pq:P4390 ?relType .
+      }
+      # let related matches pass
+      filter(!bound(?relType) || ?relType!=wd:Q39894604)
+    }
+  }
+  filter(!bound(?wd))
+
+  # info
   bind(concat('{', str(?docCount), '} ', if(bound(?fromTo), concat(?fromTo, ', '), ''), if(bound(?locations), ?locations, ''),
       ' (', if(bound(?industries), ?industries, ''), '): ', $prefLabel, ' -. ', if(bound(?notes), ?notes, '')) as ?description)
+
+  # create search and qs links
+  bind(replace(replace(replace(?name, " ", "+"), "&", "%26"), "'", "%27") as ?name_enc)
+  bind(uri(concat("https://duckduckgo.com/?q=", ?name_enc, "+site:wikidata.org")) as ?wdSearch)
+  bind(uri(concat("https://startpage.com/search?q=", ?name_enc, "+site:wikipedia.org")) as ?wpSearch)
+  bind(uri(concat('https://zbw.eu/beta/tmp/pm20_qs_create.html#', replace(?id, "/", "_"))) as ?qs)
+  #
+  # link to existing items with this id
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql',
+        '&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/item_by_pm20_id.rq',
+        '&pm20Id="', ?id, '"')) as ?item)
 }
 order by desc(?docCount) ?name
 

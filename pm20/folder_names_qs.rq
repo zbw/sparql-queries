@@ -20,7 +20,7 @@ where {
     values ( ?type ) {
       ( 'wa' )
       ( 'pe' )
-#      ( 'co' )
+      ( 'co' )
     }
     # statments about pm20Id
     ?statement ps:P4293 ?pm20Id .

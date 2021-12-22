@@ -13,20 +13,21 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select ?pm20Id ?pm20Label ?qid ?founderQid ?boardQid ?advisoryQid ?fromTo ?from ?to
+select distinct ?pm20Id ?pm20Label ?qid ?founderQid ?boardQid ?advisoryQid ?fromTo ?from ?to
 where {
   hint:Query hint:optimizer "None" .
   #
   # org -> pers
   values ( ?roleName ?property ) {
-    ( "Gründer" wdt:P112 )
+#    ( "Gründer"@de wdt:P112 )
+    ( "Founder"@en wdt:P112 )
 #    ( "Leitung" wdt:P1037 ) # director/manager
-    ( "Leitung" wdt:P3320 ) # board member
-    ( "Aufsichtsrat" wdt:P5052 )
+    ( "Leitung"@de wdt:P3320 ) # board member
+    ( "Aufsichtsrat"@de wdt:P5052 )
   }
   # reverse direction (pers -> org>
 #  values ( ?roleName ?revProperty ) {
-#    ( "Mitarbeiter / Mitarbeiterin" wdt:P108 )
+#    ( "Mitarbeiter / Mitarbeiterin"@de wdt:P108 )
 #  }
   #
   # all companies with members from PM20
@@ -55,14 +56,15 @@ where {
       ?companyItem ?property ?personItem .
     }
   )
-  bind(if(?roleName = 'Gründer', strafter(str(?personItem), str(wd:)), '') as ?founderQid)
-  bind(if(?roleName = 'Leitung', strafter(str(?personItem), str(wd:)), '') as ?boardQid)
-  bind(if(?roleName = 'Aufsichtsrat', strafter(str(?personItem), str(wd:)), '') as ?advisoryQid)
+  bind(if(?roleName = 'Founder'@en, strafter(str(?personItem), str(wd:)), '') as ?founderQid)
+  bind(if(?roleName = 'Leitung'@de, strafter(str(?personItem), str(wd:)), '') as ?boardQid)
+  bind(if(?roleName = 'Aufsichtsrat'@de, strafter(str(?personItem), str(wd:)), '') as ?advisoryQid)
   #
   # for founders, meaning of fromTo is probably different
   # some fromTo entries concate multiple periods - skip these for now
-  bind(if(bound(?fromTo) && ?roleName != 'Gründer' && strbefore(?fromTo, '-') && regex(?fromTo, '^[0-9]{4}-[0-9]{4}$'), strbefore(?fromTo, '-'), '') as ?from)
-  bind(if(bound(?fromTo) && ?roleName != 'Gründer' && strafter(?fromTo, '-') && regex(?fromTo, '^[0-9]{4}-[0-9]{4}$'), strafter(?fromTo, '-'), '') as ?to)
+  bind(if(bound(?fromTo) && ?roleName != 'Founder'@en && strbefore(?fromTo, '-') && regex(?fromTo, '^[0-9]{4}-[0-9]{4}$'), strbefore(?fromTo, '-'), '') as ?from)
+  bind(if(bound(?fromTo) && ?roleName != 'Founder'@en && strafter(?fromTo, '-') && regex(?fromTo, '^[0-9]{4}-[0-9]{4}$'), strafter(?fromTo, '-'), '') as ?to)
   #
   bind(strafter(str(?companyItem), str(wd:)) as ?qid)
 }
+

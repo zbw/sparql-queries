@@ -4,20 +4,31 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?id ?name (?name as ?item) ?description
+select ?id ?byGnd ?labelsDe ?labelsEn
+(concat(if(bound(?notes), concat(?notes, ' '), ''), ?prefSys) as ?notesAndCategories)
+?gndId
 where {
   {
-    select distinct ?id ?name (concat(?descrElem, ' [', group_concat(str(?prefSysLang);
-          separator = '; '), '] ') as ?description) (min(str(?prefSysLang)) as ?firstSys)
+    select distinct ?id ?byGnd ?prefLabelDe
+    (concat(?prefLabelDe, if(bound(?altLabelsDe), concat(' | ', ?altLabelsDe), '')) as ?byLabelsDe)
+    (concat(?prefLabelEn, if(bound(?altLabelsEn), concat(' | ', ?altLabelsEn), '')) as ?byLabelsEn)
+    ?notes (max(?gndIdentifier) as ?gndId)
+    (concat('[', group_concat(distinct str(?prefSysLang);
+          separator = '; '), ']') as ?prefSys)
+    (min(str(?prefSysLang)) as ?firstSys)
     where {
       ?stw a zbwext:Descriptor ;
-          skos:broader ?thsys ;
-          skos:prefLabel ?prefLang .
+           skos:broader ?thsys ;
+           skos:prefLabel ?prefLangDe ;
+           skos:prefLabel ?prefLangEn .
       ?thsys a zbwext:Thsys ;
-            skos:notation ?nta ;
-            skos:prefLabel ?prefSysLang .
-      filter(lang(?prefLang) = 'en')
-      filter(lang(?prefSysLang) = 'en')
+             skos:notation ?nta ;
+             skos:prefLabel ?prefSysLang .
+      filter(lang(?prefLangDe) = 'de')
+      filter(lang(?prefLangEn) = 'en')
+      bind(str(?prefLangDe) as ?prefLabelDe)
+      bind(str(?prefLangEn) as ?prefLabelEn)
+      filter(lang(?prefSysLang) = 'de')
       #
       # selection by notation (G already covered by m-n-m #507)
       # (W already covered by m-n-m #1259)
@@ -25,40 +36,60 @@ where {
       # CAUTION: filter moved to "having" clause below!
       ##filter(strstarts(?nta, 'B.))
       #
-      # build descriptor part of the description
-      {
+      # build notes
+      optional {
         select ?stw ( group_concat(str(?label);
-            separator = ' | ') as ?descrElem)
+            separator = ' | ') as ?notes)
         where {
           {
-            ?stw skos:prefLabel ?label .
-            filter(lang(?label) = 'de')
-          } union {
-            ?stw skos:altLabel ?label .
-          } union {
             ?stw skos:scopeNote ?label
           } union {
             ?stw skos:historyNote ?label
           } union {
             ?stw skos:editorialNote ?label
           }
+          filter(lang(?label) = 'de')
         }
         group by ?stw
       }
-      bind(strafter(str(?stw), 'http://zbw.eu/stw/descriptor/') as ?id)
-      bind(str(?prefLang) as ?name)
-    }
-    group by ?id ?name ?descrElem
+      # build altLabels
+      optional {
+        select ?stw ( group_concat(str(?label);
+            separator = ' | ') as ?altLabelsDe)
+        where {
+          ?stw skos:altLabel ?label
+          filter(lang(?label) = 'de')
+        }
+        group by ?stw
+      }
+      optional {
+        select ?stw ( group_concat(str(?label);
+            separator = ' | ') as ?altLabelsEn)
+        where {
+          ?stw skos:altLabel ?label
+          filter(lang(?label) = 'en')
+        }
+        group by ?stw
+      }
+      # gnd
+      optional {
+        ?stw skos:exactMatch ?gnd .
+        bind(strafter(str(?gnd), 'https://d-nb.info/gnd/') as ?gndIdentifier)
+      }
+      bind(if(bound(?gndIdentifier), concat('gnd', ?gndIdentifier), '') as ?byGnd)
 
-    having (strstarts(?firstSys, 'P.0'))
+      bind(strafter(str(?stw), 'http://zbw.eu/stw/descriptor/') as ?id)
+    }
+    group by ?id ?byGnd ?prefLabelDe ?prefLabelEn ?altLabelsDe ?altLabelsEn ?notes
+    having (strstarts(?firstSys, 'B.01.01.01'))
   }
   #
   # exclude descriptors already mapped to Wikidata
   filter( not exists {
-    service <https://query.wikidata.org/sparql> {
-      ?wd wdt:P3911 ?id .
-    }
-  })
+      service <https://query.wikidata.org/sparql> {
+        ?wd wdt:P3911 ?id .
+      }
+    })
 }
-order by ?firstSys ?name
+order by ?firstSys ?labelsDe
 

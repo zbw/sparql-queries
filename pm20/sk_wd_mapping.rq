@@ -1,0 +1,54 @@
+# Mapping of the industry category system to WD
+#
+PREFIX pm20ag: <http://zbw.eu/beta/pm20voc/ag/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct ?notationLabel ?concept ?conceptLabel ?rel (?relChr as ?relLabel) ?wd ?wdLabel ?naceCode
+where {
+  values ( ?rel ?relChr ) {
+    (skos:exactMatch "=")
+    (skos:narrowMatch ">")
+    (skos:broadMatch "<")
+    (skos:closeMatch "*")
+    (skos:relatedMatch "^")
+  }
+  graph <http://zbw.eu/beta/sk/ng> {
+    ?concept a skos:Concept ;
+             ?rel ?wd ;
+             skos:notation ?notationLabel .
+    filter(strstarts(str(?wd), str(wd:)))
+    bind(uri(concat('http://zbw.eu/beta/pm20sig/geo/', ?notationLabel)) as ?notation)
+    #
+    optional {
+      ?concept skos:prefLabel ?conceptLabelDe .
+      filter(lang( ?conceptLabelDe) = 'de')
+    }
+    optional {
+      ?concept skos:prefLabel ?conceptLabelEn .
+      filter(lang( ?conceptLabelEn) = 'en')
+    }
+    bind(concat(if(bound(?conceptLabelDe), str(?conceptLabelDe), ''), ' | ', if(bound(?conceptLabelEn), str(?conceptLabelEn), '')) as ?conceptLabel)
+  }
+  graph <http://zbw.eu/beta/wikidata/ng> {
+    optional {
+      ?wd rdfs:label ?wdLabelDe .
+      filter(lang( ?wdLabelDe) = 'de')
+    }
+    optional {
+      ?wd rdfs:label ?wdLabelEn .
+      filter(lang( ?wdLabelEn) = 'en')
+    }
+    bind(concat(if(bound(?wdLabelDe), str(?wdLabelDe), ''), ' | ', if(bound(?wdLabelEn), str(?wdLabelEn), '')) as ?wdLabel)
+  }
+  optional {
+    service <https://query.wikidata.org/sparql> {
+      ?wd wdt:P4496 ?naceCode .
+    }
+  }
+}
+order by ?notationLabel
+

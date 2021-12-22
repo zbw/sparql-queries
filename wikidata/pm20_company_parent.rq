@@ -1,0 +1,70 @@
+# Get the of parent organizations of companies
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct ?pm20Id ?pm20 ?pm20Label ?fromTo ?parent ?parentLabel ?pFromTo
+?qid ?wd ('wd' as ?wdLabel) ?parentQid  ?wd2 ('wd2' as ?wd2Label)
+### Identify ?parentPm20Ids with multiple unqualified links to items
+### (remove after checking duplicate warning at sample)
+###select ?pm20 ?pm20Label ?parentPm20Id (count(distinct ?wd2) as ?count) (sample(?wd2) as ?sample)
+where {
+  hint:Query hint:optimizer "None" .
+  #
+  # all companies with parents from PM20
+  service <http://zbw.eu/beta/sparql/pm20/query> {
+    ?pm20 a zbwext:CompanyFolder ;
+          skos:prefLabel ?pm20Label ;
+          dct:identifier ?pm20Id ;
+          schema:parentOrganization/schema:url ?parentUrl .
+    optional {
+      ?pm20 zbwext:fromTo ?fromTo .
+    }
+    bind(strafter(?parentUrl, 'folder/') as ?parentPm20Id)
+    bind(uri(?parentUrl) as ?parent)
+    ?parent skos:prefLabel ?parentLabel .
+    optional {
+      ?parent zbwext:fromTo ?pFromTo .
+    }
+  }
+  # "main" items - exclude items linked with mapping relations
+  ?statement ps:P4293 ?pm20Id .
+  ?wd p:P4293 ?statement .
+  filter (not exists {
+      ?statement pq:P4390 [] .
+    })
+  #
+  # parent items - exclude items linked with mapping relations
+  ?statement2 ps:P4293 ?parentPm20Id .
+  ?wd2 p:P4293 ?statement2 .
+  filter (not exists {
+      ?statement2 pq:P4390 [] .
+    })
+  bind(strafter(str(?wd), str(wd:)) as ?qid)
+  bind(strafter(str(?wd2), str(wd:)) as ?parentQid)
+  #
+  # exclude items with already existing parent org | part of | owned by relation
+  filter(not exists {
+      ?wd wdt:P749 ?wd2 .
+    })
+  filter(not exists {
+      ?wd wdt:P361 ?wd2 .
+    })
+  filter(not exists {
+      ?wd wdt:P127 ?wd2 .
+    })
+}
+###group by ?pm20 ?pm20Label ?parentPm20Id
+###having (?count > 1)
+order by ?pm20Id ?parentPm20Id
+

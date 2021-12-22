@@ -1,0 +1,51 @@
+# Get the industry by NACE code
+# (for multiple industry items per NACE code, use that with the lowest item number)
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX esco: <http://data.europa.eu/esco/model#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?pm20Id ?pm20 ?pm20Label ?qid ?naceCode (concat('Q', str( min(?industryId) )) as ?industryQid)
+where {
+  hint:Query hint:optimizer "None" .
+  #
+  # all companies with nace codes from PM20
+  service <http://zbw.eu/beta/sparql/pm20/query> {
+    ?pm20 a zbwext:CompanyFolder ;
+          skos:prefLabel ?pm20Label ;
+          dct:identifier ?pm20Id ;
+          esco:hasNACECode ?naceCode .
+  }
+  # "main" items - exclude items linked with mapping relations
+  ?statement ps:P4293 ?pm20Id .
+  ?wd p:P4293 ?statement .
+  filter (not exists {
+      ?statement pq:P4390 [] .
+    })
+  bind(strafter(str(?wd), str(wd:)) as ?qid)
+  #
+  # exclude items already linked with the nace industry
+  filter(not exists {
+      ?wd wdt:P452/wdt:P4496 ?naceCode .
+    })
+  #
+  optional {
+    ?naceIndustry wdt:P4496 ?naceCode .
+    # restrict to economic activity
+    ?naceIndustry wdt:P31 wd:Q8187769 .
+    bind(xsd:integer(strafter(str(?naceIndustry), 'http://www.wikidata.org/entity/Q')) as ?industryId)
+  }
+  filter(bound(?industryId))
+}
+group by ?pm20Id ?pm20 ?pm20Label ?qid ?naceCode
+order by ?pm20Id $industryId
+

@@ -1,0 +1,50 @@
+# Get the location of the company seat
+# (for multiple geo items per geonames id, use that with the lowest item number)
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select ?pm20Id ?pm20 ?pm20Label ?qid ?gnId (concat('Q', str( min(?geoId) )) as ?geoQid)
+where {
+  hint:Query hint:optimizer "None" .
+  #
+  # all companies with geonames locations from PM20
+  service <http://zbw.eu/beta/sparql/pm20/query> {
+    ?pm20 a zbwext:CompanyFolder ;
+          skos:prefLabel ?pm20Label ;
+          dct:identifier ?pm20Id ;
+          gn:locatedIn/schema:url ?gnUrl .
+    bind(strafter(?gnUrl, 'geonames.org/') as ?gnId)
+  }
+  # "main" items - exclude items linked with mapping relations
+  ?statement ps:P4293 ?pm20Id .
+  ?wd p:P4293 ?statement .
+  filter (not exists {
+      ?statement pq:P4390 [] .
+    })
+  bind(strafter(str(?wd), str(wd:)) as ?qid)
+  #
+  # exclude items with already existing headquarters location
+  filter(not exists {
+      ?wd wdt:P159 [] .
+    })
+  #
+  optional {
+    ?geoWd wdt:P1566 ?gnId .
+    bind(xsd:integer(strafter(str(?geoWd), 'http://www.wikidata.org/entity/Q')) as ?geoId)
+  }
+  filter(bound(?geoId))
+}
+group by ?pm20Id ?pm20 ?pm20Label ?qid ?gnId
+order by ?pm20Id $geoId
+

@@ -1,0 +1,36 @@
+# Companies from PM20 in a certain industry
+#
+PREFIX wd: <http://www.wikidata.org/entity/> 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+#
+select ?wd ?wdLabel ?country ?countryLabel ?industry ?industryLabel
+where {
+  values ( ?industryQid ) {
+    ( "Q80962" )
+  }
+  bind(uri(concat(str(wd:), $industryQid)) as ?industry)
+  # only pm20 companies with documents,
+  # direct matches
+  ?wd wdt:P452 ?industry ;
+      wdt:P4293 [] .
+  ?wd p:P4293 ?statement.
+  ?statement ps:P4293 ?pm20Id ;
+             pq:P5592 ?docCount .
+  filter(strstarts(?pm20Id, 'co/'))
+  filter(not exists {
+      ?statement pq:P4390 [] .
+    })
+  optional {
+    ?wd wdt:P17 ?country .
+  }
+  ## temporarily prefer German
+  ##service wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,de,fr,es,pt,nl,pl,it,sv,cz". }
+  service wikibase:label { bd:serviceParam wikibase:language "de,en,fr,es,pt,nl,pl,it,sv,cz". }
+}
+order by ?wdLabel
+
