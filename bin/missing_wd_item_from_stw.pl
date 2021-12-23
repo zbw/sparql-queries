@@ -77,12 +77,6 @@ print $html <<"EOF";
 }
 </style></head><body>
 <h1>$title</h1>
-<p>In sync with Mix-n-match catalog <a
-href="https://tools.wmflabs.org/mix-n-match/#/catalog/1259">STW W (de)</a>
-(generated via <a
-href="http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/wikidata_item_candidate.rq">query</a>
-and <a
-href="https://github.com/zbw/sparql-queries/blob/master/bin/missing_wd_item_from_stw.pl">script</a>)</p>
 EOF
 
 foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
