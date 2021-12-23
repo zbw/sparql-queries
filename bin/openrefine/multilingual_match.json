@@ -1,0 +1,80 @@
+[
+  {
+    "op": "core/multivalued-cell-split",
+    "columnName": "?byLabelsDe",
+    "keyColumnName": "?descriptor",
+    "mode": "separator",
+    "separator": " | ",
+    "regex": false,
+    "description": "Split multi-valued cells in column ?byLabelsDe"
+  },
+  {
+    "op": "core/multivalued-cell-split",
+    "columnName": "?byLabelsEn",
+    "keyColumnName": "?descriptor",
+    "mode": "separator",
+    "separator": " | ",
+    "regex": false,
+    "description": "Split multi-valued cells in column ?byLabelsEn"
+  },
+  {
+    "op": "core/recon",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "?byGnd",
+    "config": {
+      "mode": "standard-service",
+      "service": "https://wdreconcile.toolforge.org/en/api",
+      "identifierSpace": "http://www.wikidata.org/entity/",
+      "schemaSpace": "http://www.wikidata.org/prop/direct/",
+      "autoMatch": false,
+      "columnDetails": [
+        {
+          "column": "?gndId",
+          "propertyName": "GND ID",
+          "propertyID": "P227"
+        }
+      ],
+      "limit": 0
+    },
+    "description": "Reconcile cells in column ?byGnd to type null"
+  },
+  {
+    "op": "core/recon",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "?byLabelsDe",
+    "config": {
+      "mode": "standard-service",
+      "service": "https://wikidata.reconci.link/de/api",
+      "identifierSpace": "http://www.wikidata.org/entity/",
+      "schemaSpace": "http://www.wikidata.org/prop/direct/",
+      "autoMatch": false,
+      "columnDetails": [],
+      "limit": 0
+    },
+    "description": "Reconcile cells in column ?byLabelsDe to type null"
+  },
+  {
+    "op": "core/recon",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "?byLabelsEn",
+    "config": {
+      "mode": "standard-service",
+      "service": "https://wdreconcile.toolforge.org/en/api",
+      "identifierSpace": "http://www.wikidata.org/entity/",
+      "schemaSpace": "http://www.wikidata.org/prop/direct/",
+      "autoMatch": false,
+      "columnDetails": [],
+      "limit": 0
+    },
+    "description": "Reconcile cells in column ?byLabelsEn to type null"
+  }
+]
