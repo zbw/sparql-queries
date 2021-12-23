@@ -4,9 +4,9 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?id ?byGnd ?byLabelsDe ?byLabelsEn
+select (str(?stw) as ?descriptor) ?byGnd ?byLabelsDe ?byLabelsEn ?rel
 (concat(if(bound(?notes), concat(?notes, ' '), ''), ?prefSys) as ?notesAndCategories)
-?gndId
+(concat('https://d-nb.info/gnd/', ?gndId) as ?gnd) ?gndId ?id
 where {
   values ( ?notationStub ) {
     ( 'B.01.01.01' )
@@ -19,6 +19,7 @@ where {
     (concat('[', group_concat(distinct str(?prefSysLang);
           separator = '; '), ']') as ?prefSys)
     (min(str(?prefSysLang)) as ?firstSys)
+    ?stw
     where {
       ?stw a zbwext:Descriptor ;
            skos:broader ?thsys ;
@@ -82,9 +83,9 @@ where {
       }
       bind(strafter(str(?stw), 'http://zbw.eu/stw/descriptor/') as ?id)
     }
-    group by ?id ?prefLabelDe ?prefLabelEn ?altLabelsDe ?altLabelsEn ?notes
+    group by ?id ?stw ?prefLabelDe ?prefLabelEn ?altLabelsDe ?altLabelsEn ?notes
   }
-  bind(if(bound(?gndIdentifier), concat('gnd', ?gndIdentifier), '') as ?byGnd)
+  bind(if(bound(?gndId), concat('gnd', ?gndId), '') as ?byGnd)
   #
   # filter condition according to notation
   filter(strstarts(?firstSys, ?notationStub))
