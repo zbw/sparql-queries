@@ -24,7 +24,7 @@ use REST::Client;
 my $ENDPOINT    = 'http://zbw.eu/beta/sparql/stw/query';
 my $QUERY       = path('/opt/sparql-queries/stw/wikidata_item_candidate.rq');
 my $OUTPUT_JSON = path('/var/www/html/beta/tmp/stw_qs_create.json');
-my $OUTPUT_STUB = '/var/www/html/beta/tmp/stw_qs_create.';
+my $OUTPUT_STUB = '/var/www/html/beta/tmp/stw_qs_create_';
 my $TODAY       = `date +%F | tr -d "\n"`;
 my $RETRIEVED   = "|S813|+${TODAY}T00:00:00Z/11";
 

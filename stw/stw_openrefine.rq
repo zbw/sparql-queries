@@ -1,17 +1,26 @@
-# Create input for OpenRefine for STW descriptors
+# Create OpenRefine input for STW descriptors
 #
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select ?id ?byGnd ?byLabelsDe ?byLabelsEn
+# The empty ?rel column is provided for manual editing in the OpenRefine
+# project in order to add a mapping relation type. For ids, plain values and
+# links are provided separately.
+select (str(?stw) as ?descriptor) ?byGnd ?byLabelsDe ?byLabelsEn ?rel
 (concat(if(bound(?notes), concat(?notes, ' '), ''), ?prefSys) as ?notesAndCategories)
-?gndId
+(concat('https://d-nb.info/gnd/', ?gndId) as ?gnd) ?gndId ?id
 where {
+  # root category, used as filter condition for the selection of descriptors in
+  # the OR input file
   values ( ?notationStub ) {
     ( 'B.01.01.01' )
   }
   {
+    # Only one (arbitrary) gnd id is used here, in order to not split up the
+    # record.  The restriction to the first category to which a descriptor is
+    # assigned (?firstSys) is convenient for division of labor (to produce
+    # disjunct batches of descriptors)
     select distinct ?id ?prefLabelDe
     (concat(?prefLabelDe, if(bound(?altLabelsDe), concat(' | ', ?altLabelsDe), '')) as ?byLabelsDe)
     (concat(?prefLabelEn, if(bound(?altLabelsEn), concat(' | ', ?altLabelsEn), '')) as ?byLabelsEn)
@@ -19,6 +28,7 @@ where {
     (concat('[', group_concat(distinct str(?prefSysLang);
           separator = '; '), ']') as ?prefSys)
     (min(str(?prefSysLang)) as ?firstSys)
+    ?stw
     where {
       ?stw a zbwext:Descriptor ;
            skos:broader ?thsys ;
@@ -32,12 +42,6 @@ where {
       bind(str(?prefLangDe) as ?prefLabelDe)
       bind(str(?prefLangEn) as ?prefLabelEn)
       filter(lang(?prefSysLang) = 'de')
-      #
-      # selection by notation (G already covered by m-n-m #507)
-      # (W already covered by m-n-m #1259)
-      # (B covered by m-n-m #2917 - update?)
-      # CAUTION: filter moved to "having" clause below!
-      ##filter(strstarts(?nta, 'B.))
       #
       # build notes
       optional {
@@ -82,9 +86,9 @@ where {
       }
       bind(strafter(str(?stw), 'http://zbw.eu/stw/descriptor/') as ?id)
     }
-    group by ?id ?prefLabelDe ?prefLabelEn ?altLabelsDe ?altLabelsEn ?notes
+    group by ?id ?stw ?prefLabelDe ?prefLabelEn ?altLabelsDe ?altLabelsEn ?notes
   }
-  bind(if(bound(?gndIdentifier), concat('gnd', ?gndIdentifier), '') as ?byGnd)
+  bind(if(bound(?gndId), concat('gnd', ?gndId), '') as ?byGnd)
   #
   # filter condition according to notation
   filter(strstarts(?firstSys, ?notationStub))
