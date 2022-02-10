@@ -70,7 +70,7 @@ see also [STW mapping to Wikidata](../stw#stw-mapping-to-wikidata)
 Query | Description
 ------|------------
 [search_concept_by_stw_labels](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_concept_by_stw_labels.rq) | Search a concept by all preferred and alternate labels from stw and other linked concepts (rank by calculated total score)
-[items_created_from_stw](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/items_created_from_stw.rq) | Wikidata items created from STW concepts, normally via Quickstatements
+[items_created_from_stw](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/items_created_from_stw.rq) | Wikidata items created from STW concepts, normally via Quickstatements
 
 
 #### re. PM20
