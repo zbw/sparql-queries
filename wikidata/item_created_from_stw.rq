@@ -1,0 +1,18 @@
+# Wikidata items created from STW concepts, normally via Quickstatements
+# (identified by the provenance of the P31 property value)
+#
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pr: <http://www.wikidata.org/prop/reference/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+#
+select distinct ?item ?itemLabel
+where {
+  ?provenance pr:P3911 [] .
+  ?object prov:wasDerivedFrom ?provenance .
+  ?item p:P31 ?object .
+  service wikibase:label { bd:serviceParam wikibase:language "de,en". }
+}
+
