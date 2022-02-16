@@ -8,12 +8,16 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 #
-select ?stw ?stwLabel (skos:exactMatch as ?rel) (?foreign as ?unesco) (?foreignLabel as ?unescoLabel)
+select ?stw ?stwLabel (skos:exactMatch as ?rel) ?foreign ?foreignLabel
 where {
+  # if no public foreign endpoint exists, use stw endpoint to make the query
+  # executable, gaining empty results
   # TODO: derive ?foreignUriStub and ?foreignEndpoint from property definition
   values ( ?foreignProp ?foreignUriStub ?foreignEndpoint ) {
-    # default for UNESCO thesaurus
-    ( wdt:P3916 "http://vocabularies.unesco.org/thesaurus/" <http://vocabularies.unesco.org/sparql> )
+    # default for UNESCO thesaurus (with endpoint for label lookup)
+    ##( wdt:P3916 "http://vocabularies.unesco.org/thesaurus/" <http://vocabularies.unesco.org/sparql> )
+    ##( wdt:P2163 "http://id.worldcat.org/fast/" <http://zbw.eu/beta/sparql/stw/query> )
+    ( wdt:P244 "https://id.loc.gov/authorities/" <http://zbw.eu/beta/sparql/stw/query> )
   }
   # get all wikidata linked to STW and the foreign vocabulary
   service <https://query.wikidata.org/sparql> {
@@ -31,10 +35,12 @@ where {
   bind(uri(concat(?foreignUriStub, $foreignId)) as ?foreign)
   #
   # labels for foreign concepts
-  service ?foreignEndpoint {
-    ?foreign skos:prefLabel ?foreignLabelLang .
-    filter(lang(?foreignLabelLang) = 'en')
-    bind(str(?foreignLabelLang) as ?foreignLabel)
+  optional {
+    service ?foreignEndpoint {
+      ?foreign skos:prefLabel ?foreignLabelLang .
+      filter(lang(?foreignLabelLang) = 'en')
+      bind(str(?foreignLabelLang) as ?foreignLabel)
+    }
   }
   # labels for STW concepts
   ?stw skos:prefLabel ?stwLabelLang .
@@ -42,3 +48,4 @@ where {
   bind(str(?stwLabelLang) as ?stwLabel)
 }
 order by asc(?stwLabel)
+
