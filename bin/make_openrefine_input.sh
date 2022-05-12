@@ -11,7 +11,7 @@ QUERY=$2
 SEARCH=$3
 REPLACE=$4
 
-DIR=../$DATASET
+DIR=/opt/sparql-queries/$DATASET
 
 # main mnm file
 query=$DIR/${QUERY}.rq

@@ -8,25 +8,27 @@ PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 #
-select distinct ?broaderDe ?id ?notation ?labelEn ?labelDe (str(count(distinct ?pm20)) as ?cnt) # (str(?note) as ?noteDe)
-?gndId ?s
+select distinct  (str(?s) as ?descriptor) (str(count(distinct ?pm20)) as ?cnt)
+(sample(?byGndX) as ?byGnd) ?byLabelsDe ?byLabelsEn
+('' as ?rel) ?broaderDe ?notation (str(?note) as ?noteDe) ?id (max(?gndIdentifier) as ?gndId) ?s
 where {
   graph <http://zbw.eu/beta/ip/ng> {
     ?s skos:prefLabel ?labelLangDe ;
        skos:notation ?notation ;
        dct:identifier ?id .
     filter(lang(?labelLangDe) = 'de')
-    bind(str(?labelLangDe) as ?labelDe)
+    bind(str(?labelLangDe) as ?byLabelsDe)
     optional {
       ?s skos:prefLabel ?labelLangEn .
       filter(lang(?labelLangEn) = 'en')
-      bind(str(?labelLangEn) as ?labelEn)
+      bind(str(?labelLangEn) as ?byLabelsEn)
     }
     #
     # gnd for indirect mapping
     optional {
-      ?s gndo:gndIdentifier ?gndId .
+      ?s gndo:gndIdentifier ?gndIdentifier .
     }
+    bind(if(bound(?gndIdentifier), 'some gnd', '') as ?byGndX)
     #
 #    filter(not exists {
 #        ?s skos:exactMatch ?wd .
@@ -40,12 +42,15 @@ where {
       bind(str(?broaderLangDe) as ?broaderDe)
     }
     optional {
-      ?s skos:note ?note .
+      ?s skos:scopeNote ?note .
       filter(!contains(?note, 'folderCount'))
     }
   }
-  ?pm20 zbwext:ware ?s .
+  optional {
+    ?pm20 zbwext:ware ?s .
+  }
 }
-group by ?s ?broaderDe ?id ?notation ?labelEn ?labelDe ?gndId
+group by ?s ?broaderDe ?id ?notation ?byLabelsEn ?byLabelsDe ?note
+having ( ?cnt != "0" )
 order by ?notation ?id
 
