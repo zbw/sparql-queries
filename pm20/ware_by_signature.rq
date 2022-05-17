@@ -14,7 +14,6 @@ where {
     }
     ?category dct:identifier ?categoryId ;
               skos:notation ?signature ;
-              zbwext:notationLong ?notationLong ;
               skos:prefLabel ?categoryLabelLang .
     # remove root entry of category system
     filter(?signature != 'IP')
@@ -32,6 +31,10 @@ where {
     }
     filter(lang(?categoryLabelLang) = ?language)
     bind(str(?categoryLabelLang) as ?categoryLabel)
+
+    # for wares, no historical correct notation exists,
+    # so use category label for sorting
+    bind(?categoryLabel as ?notationLong)
   }
   bind(if(?cnt > 0, uri(concat('http://webopac.hwwa.de/PresseMappe20/Digiview_MENU.cfm?T=W&W=', ?categoryId)), '-') as ?count)
 }
