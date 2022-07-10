@@ -5,7 +5,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select ?geoNta ?subjectNta (str(?pm20LabelLang) as ?pm20Label) (str(?docCount) as ?docs) ?geoNtaLong ?subjectNtaLong
+select ?geoNta ?subjectNta ?pm20 (str(?pm20LabelLang) as ?pm20Label) (str(?docCount) as ?docs) ?geoNtaLong ?subjectNtaLong
 where {
   values ( ?language ) {
     ( 'de' )
