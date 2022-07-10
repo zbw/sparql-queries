@@ -5,17 +5,17 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select ?geoNta ?subjectNta ?pm20 ?pm20Label (str(?docCount) as ?docs)
+select ?geoNta ?subjectNta (str(?pm20LabelLang) as ?pm20Label) (str(?docCount) as ?docs) ?geoNtaLong ?subjectNtaLong
 where {
   values ( ?language ) {
     ( 'de' )
   }
   ?pm20 a zbwext:SubjectFolder ;
-        skos:prefLabel ?pm20Label ;
+        skos:prefLabel ?pm20LabelLang ;
         zbwext:country ?country ;
         zbwext:subject ?subject ;
         zbwext:freeDocCount ?docCount .
-  filter(lang(?pm20Label) = ?language)
+  filter(lang(?pm20LabelLang) = ?language)
   graph <http://zbw.eu/beta/je/ng> {
     ?subject skos:notation ?subjectNta ;
              zbwext:notationLong ?subjectNtaLong .
