@@ -6,7 +6,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-select ?notationLong ?signature ?category ?categoryLabel ?note ?count ?countLabel
+select ?category ?categoryLabel (?signature as ?tmpSignature) ?note ?count ?countLabel
 where {
   graph  <http://zbw.eu/beta/ip/ng> {
     values ( ?language ) {
@@ -17,8 +17,8 @@ where {
               skos:prefLabel ?categoryLabelLang .
     # remove root entry of category system
     filter(?signature != 'IP')
-    # TODO temporarily remove entries starting with Y
-    ##filter(regex(?signature, '^[^Y]'))
+    # remove entries starting with Y (sub-classification)
+    filter(regex(?signature, '^[^Y]'))
     #
     optional {
       ?category zbwext:folderCount ?cnt .
@@ -32,11 +32,10 @@ where {
     filter(lang(?categoryLabelLang) = ?language)
     bind(str(?categoryLabelLang) as ?categoryLabel)
 
-    # for wares, no historical correct notation exists,
-    # so use category label for sorting
-    bind(?categoryLabel as ?notationLong)
   }
-  bind(if(?cnt > 0, uri(concat('http://webopac.hwwa.de/PresseMappe20/Digiview_MENU.cfm?T=W&W=', ?categoryId)), '-') as ?count)
+  bind(if(?cnt > 0, uri(concat('https://pm20.zbw.eu/category/ware/i/', ?categoryId)), '-') as ?count)
 }
-order by ?notationLong
+# for wares, no historical correct notation exists,
+# so use category label for sorting
+order by ?categoryLabel
 
