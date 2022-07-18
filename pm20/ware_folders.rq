@@ -1,29 +1,32 @@
-# Full list of subject folders
+# Full list of ware folders
 #
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select ?geoNta ?subjectNta ?pm20 (str(?pm20LabelLang) as ?pm20Label) (str(?docCount) as ?docs) ?geoNtaLong ?subjectNtaLong
+select ?geoNta ?wareNta ?wareLabel ?pm20 ?pm20Label (str(?docCount) as ?docs) ?geoNtaLong
 where {
   values ( ?language ) {
     ( 'de' )
   }
-  ?pm20 a zbwext:SubjectFolder ;
+  ?pm20 a zbwext:WareFolder ;
         skos:prefLabel ?pm20LabelLang ;
         zbwext:country ?country ;
-        zbwext:subject ?subject ;
+        zbwext:ware ?ware ;
         zbwext:freeDocCount ?docCount .
   filter(lang(?pm20LabelLang) = ?language)
-  graph <http://zbw.eu/beta/je/ng> {
-    ?subject skos:notation ?subjectNta ;
-             zbwext:notationLong ?subjectNtaLong .
+  bind(str(?pm20LabelLang) as ?pm20Label)
+  graph <http://zbw.eu/beta/ip/ng> {
+    ?ware skos:notation ?wareNta ;
+          skos:prefLabel ?wareLabelLang;
   }
   graph <http://zbw.eu/beta/ag/ng> {
     ?country skos:notation ?geoNta ;
              zbwext:notationLong ?geoNtaLong .
   }
+  filter(lang(?wareLabelLang) = ?language)
+  bind(str(?wareLabelLang) as ?wareLabel)
 }
-order by ?geoNtaLong ?subjectNtaLong
+order by ?geoNtaLong ?pm20Label
 
