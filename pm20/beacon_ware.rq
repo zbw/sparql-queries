@@ -5,14 +5,19 @@ PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-SELECT ?gndId (str(count(?pm20)) as ?count) (sample(?conceptId) as ?categoryId)
-WHERE {
-  graph <http://zbw.eu/beta/ip/ng> {
-    ?concept gndo:gndIdentifier ?gndId .
+select (concat(?gndId, ' | ', ?count, ' | ', ?categoryId) as ?beaconEntry)
+where {
+  {
+    select ?gndId (str(count(?pm20)) as ?count) (sample(?conceptId) as ?categoryId)
+    where {
+      graph <http://zbw.eu/beta/ip/ng> {
+        ?concept gndo:gndIdentifier ?gndId .
+      }
+      ?pm20 a zbwext:WareFolder ;
+            zbwext:ware ?concept .
+      bind(strafter(str(?concept), '/ip/') as ?conceptId)
+    }
+    group by ?gndId
   }
-  ?pm20 a zbwext:WareFolder ;
-        zbwext:ware ?concept .
-  bind(strafter(str(?concept), '/ip/') as ?conceptId)
 }
-group by ?gndId
 
