@@ -322,6 +322,10 @@ Readonly my %CONFIG => (
       en => 'aliasEn',
     },
     properties => {
+      P10890 => {
+        var_name => 'wareId',
+        value_type => 'literal',
+      },
       P31 => {
         var_name   => 'classQid',
         value_type => 'item',
