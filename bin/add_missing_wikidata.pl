@@ -304,6 +304,35 @@ Readonly my %CONFIG => (
     },
   },
 
+  pm20_ware_category => {
+    source     => 'pm20',
+    label_type => 'category',
+    query =>
+      path('/opt/sparql-queries/pm20/ware_categories_for_wikidata.rq'),
+    label => {
+      de => 'labelDe',
+      en => 'labelEn',
+    },
+    descr => {
+      de => 'descrDe',
+      en => 'descrEn',
+    },
+    alias => {
+      de => 'aliasDe',
+      en => 'aliasEn',
+    },
+    properties => {
+      P31 => {
+        var_name   => 'classQid',
+        value_type => 'item',
+      },
+      P361 => {
+        var_name   => 'partOf',
+        value_type => 'item',
+      },
+    },
+  },
+
   pm20_subject_folder => {
     source     => 'pm20',
     label_type => 'subject_folder',
@@ -473,12 +502,12 @@ if ($@) {
 
 my $count = 0;
 foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
-
-  my $id = $entry->{ $config->{source_id} }{value};
+  my $id;
 
   # set record specific reference statement
   my $reference_statement = '';
   if ( $config->{source_id} ) {
+    $id = $entry->{ $config->{source_id} }{value};
     my $entry_source_id = quote($id);
     my $entry_source_title =
       quote( $entry->{ $config->{source_title} }{value} );
@@ -550,8 +579,10 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
           . $reference_statement . "\n";
       }
     }
-    my $label =
-      $entry->{adjustedLabel}{value} . ' {' . $entry->{docCount}{value} . '}';
+    ##print Dumper $entry;exit;
+    ##my $label =
+    ##  $entry->{adjustedLabel}{value} . ' {' . $entry->{docCount}{value} . '}';
+    my $label = $entry->{labelDe}{value};
     if ( $mode eq 'html' ) {
       my $url = "http://purl.org/pressemappe20/folder/$id";
       ( my $name = $id ) =~ s/\//_/g;
