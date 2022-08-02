@@ -1,0 +1,77 @@
+# Extract information for creating ware folder items in Wikidata
+#
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct ?pm20Id ?labelDe ?labelEn
+('Mappe aus dem Pressearchiv 20. Jahrhundert' as ?descrDe)
+('folder of the 20th Century Press Archives' as ?descrEn)
+?countryCode ?wareId ('Q113376528' as ?classQid) ('Q36948990' as ?partOf)
+?countryQid ?wareQid
+where {
+  {
+    # main table
+    ?pm20 a zbwext:WareFolder ;
+          dct:identifier ?pm20Id ;
+          zbwext:country ?country ;
+          zbwext:ware ?ware .
+    #
+    # countries
+    graph <http://zbw.eu/beta/ag/ng> {
+      ?country a skos:Concept ;
+               zbwext:notationLong ?countryNtaLong ;
+               skos:notation ?countryCode .
+      ?country skos:prefLabel ?countryLabelLangDe .
+      filter(lang(?countryLabelLangDe) = 'de')
+      bind(str(?countryLabelLangDe) as ?countryLabelDe)
+      optional {
+        ?country skos:prefLabel ?countryLabelLangEn .
+        filter(lang(?countryLabelLangEn) = 'en')
+        bind(str(?countryLabelLangEn) as ?countryLabelEn)
+      }
+    }
+    # wares
+    graph <http://zbw.eu/beta/ip/ng> {
+      ?ware a skos:Concept ;
+               dct:identifier ?wareId .
+      ?ware skos:prefLabel ?wareLabelLangDe .
+      filter(lang(?wareLabelLangDe) = 'de')
+      bind(str(?wareLabelLangDe) as ?wareLabelDe)
+      optional {
+        ?ware skos:prefLabel ?wareLabelLangEn .
+        filter(lang(?wareLabelLangEn) = 'en')
+        bind(str(?wareLabelLangEn) as ?wareLabelEn)
+      }
+    }
+  } minus {
+    # filter out folders already existing in WD
+    # for wares, no common class exists
+    service <https://query.wikidata.org/sparql> {
+      ?wd wdt:P31 wd:Q113376528 ;
+          wdt:P4293 ?pm20Id .
+    }
+  }
+  # Look up linked Wikidata items
+  service <https://query.wikidata.org/sparql> {
+    ?wdWare wdt:P10890 ?wareId .
+
+    # only exact matching countries
+    ?wdCountry p:P8483 ?statement .
+    ?statement pq:P4390 wd:Q39893449 ;
+               ps:P8483 ?countryCode .
+  }
+  # concatenated fields
+  bind(concat(?wareLabelDe, ' : ', ?countryLabelDe) as ?labelDe)
+  bind(concat(?wareLabelEn, ' : ', ?countryLabelEn) as ?labelEn)
+  #
+  bind(strafter(str(?wdCountry), str(wd:)) as ?countryQid)
+  bind(strafter(str(?wdWare), str(wd:)) as ?wareQid)
+}
+order by ?labelDe
+

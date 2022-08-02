@@ -389,6 +389,58 @@ Readonly my %CONFIG => (
     },
   },
 
+  pm20_ware_folder => {
+    source     => 'pm20',
+    label_type => 'ware_folder',
+    query => path('/opt/sparql-queries/pm20/ware_folders_for_wikidata.rq'),
+    label => {
+      de => 'labelDe',
+      en => 'labelEn',
+    },
+    descr => {
+      de => 'descrDe',
+      en => 'descrEn',
+    },
+    alias => {
+      de => 'alias',
+      en => 'alias',
+    },
+    properties => {
+      P31 => {
+        var_name   => 'classQid',
+        value_type => 'item',
+      },
+      P4293 => {
+        var_name   => 'pm20Id',
+        value_type => 'literal',
+      },
+      P361 => {
+        var_name   => 'partOf',
+        value_type => 'item',
+      },
+      P1269 => {
+        var_name   => 'countryQid',
+        value_type => 'item',
+        qualifiers => {
+          'P8483' => {
+            var_name   => 'countryCode',
+            value_type => 'literal',
+          },
+        },
+      },
+      P921 => {
+        var_name   => 'wareQid',
+        value_type => 'item',
+        qualifiers => {
+          P10890 => {
+            var_name   => 'wareId',
+            value_type => 'literal',
+          },
+        },
+      },
+    },
+  },
+
   pm20_industry => {
     source     => 'pm20',
     label_type => 'category',
