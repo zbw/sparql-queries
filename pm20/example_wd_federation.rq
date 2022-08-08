@@ -1,0 +1,41 @@
+# Folders from 20th Century Press Archives, extended with Wikipedia pages
+#
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select *
+where {
+  # Persons of Irish nationality with publicly 
+  # accessible documents
+  ?person skos:prefLabel ?personLabel ;
+          dct:identifier ?personId ;
+          schema:nationality "Ireland"@en ;
+          zbwext:freeDocCount ?freeDocCount .
+  filter(?freeDocCount > 0)
+  #
+  # Include information from the Wikidata Query Service
+  service <https://query.wikidata.org/sparql> {
+    # Wikidata items for the persons
+    ?item wdt:P31 wd:Q5 ;
+          wdt:P214 ?viafId ;
+          wdt:P4293 ?personId .
+    #
+    # Add page links to the English Wikipedia
+    ?page schema:about ?item ;
+          schema:isPartOf <https://en.wikipedia.org/> .
+  }
+}
+order by desc(?freeDocCount)
+
+# Note: Queries with large datasets created before the service clause
+# (e.g., asking for German persons instead of Irish) take very long, because
+# intermediate the results are transmitted step by step to the external
+# endpoint.
+# It sometimes helps to reverse the inovocation order, i.e. to first
+# query the external endpoint, and then filter the results with additional
+# statements locally.
+
