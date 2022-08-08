@@ -1,0 +1,34 @@
+# Get mappings for all categories (geo/subject/ware)
+#
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+construct {
+  ?item skos:exactMatch ?pm20Category .
+}
+##select ?pm20Category ?item ?itemLabel
+where {
+  {
+    # for wares, a few special pm20 category items plus "normal" items are matched
+    ?item wdt:P10890 ?wareId .
+    bind (uri(concat('https://pm20.zbw.eu/category/ware/i/', ?wareId)) as ?pm20Category)
+  } union {
+    # for countries, only "normal" items (a few non-exact matches)
+    ## TODO only exact matches?
+    ?item wdt:P8483 ?geoCode .
+    bind (uri(concat('https://pm20.zbw.eu/category/geo/s/', ?geoCode)) as ?pm20Category)
+  } union {
+    # for subjects, only special pm20 category items are matched
+    ?item wdt:P8484 ?subjectCode .
+    bind (uri(concat('https://pm20.zbw.eu/category/subject/s/', ?subjectCode)) as ?pm20Category)
+  }
+  # only informational, for select query
+  service wikibase:label {
+    bd:serviceParam wikibase:language "de".
+  }
+}
+order by ?pm20Category
+
