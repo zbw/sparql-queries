@@ -1,4 +1,4 @@
-# Construct SKOS mapping from Wikidata
+# Construct SKOS folder mapping from Wikidata
 #
 PREFIX pm20: <http://purl.org/pressemappe20/folder/>
 PREFIX p: <http://www.wikidata.org/prop/>
