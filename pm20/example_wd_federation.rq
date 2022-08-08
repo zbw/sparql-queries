@@ -33,7 +33,7 @@ order by desc(?freeDocCount)
 
 # Note: Queries with large datasets created before the service clause
 # (e.g., asking for German persons instead of Irish) take very long, because
-# intermediate the results are transmitted step by step to the external
+# the intermediate results are transmitted step by step to the external
 # endpoint.
 # It sometimes helps to reverse the inovocation order, i.e. to first
 # query the external endpoint, and then filter the results with additional
