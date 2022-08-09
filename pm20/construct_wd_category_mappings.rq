@@ -9,7 +9,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 construct {
   ?item skos:exactMatch ?pm20Category .
 }
-##select ?pm20Category ?item ?itemLabel
+#select ?item ?pm20Category
 where {
   {
     # for wares, a few special pm20 category items plus "normal" items are matched
