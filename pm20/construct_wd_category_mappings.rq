@@ -13,21 +13,29 @@ construct {
 where {
   {
     # for wares, a few special pm20 category items plus "normal" items are matched
-    ?item wdt:P10890 ?wareId .
+    service <https://query.wikidata.org/sparql> {
+      ?item wdt:P10890 ?wareId .
+    }
     bind (uri(concat('https://pm20.zbw.eu/category/ware/i/', ?wareId)) as ?pm20Category)
   } union {
     # for countries, only "normal" items (a few non-exact matches)
-    ## TODO only exact matches?
-    ?item wdt:P8483 ?geoCode .
-    bind (uri(concat('https://pm20.zbw.eu/category/geo/s/', ?geoCode)) as ?pm20Category)
+    service <https://query.wikidata.org/sparql> {
+      ## TODO only exact matches?
+      ?item wdt:P8483 ?geoCode .
+    }
+    # look up code (= notation)
+    bind(replace(?geoCode, '_', ' ') as ?notation)
+    ?geo skos:notation ?notation .
+    bind(?geo as ?pm20Category)
   } union {
     # for subjects, only special pm20 category items are matched
-    ?item wdt:P8484 ?subjectCode .
-    bind (uri(concat('https://pm20.zbw.eu/category/subject/s/', ?subjectCode)) as ?pm20Category)
-  }
-  # only informational, for select query
-  service wikibase:label {
-    bd:serviceParam wikibase:language "de".
+    service <https://query.wikidata.org/sparql> {
+      ?item wdt:P8484 ?subjectCode .
+    }
+    # look up code (= notation)
+    bind(replace(?subjectCode, '_', ' ') as ?notation)
+    ?subject skos:notation ?notation .
+    bind(?subject as ?pm20Category)
   }
 }
 order by ?pm20Category
