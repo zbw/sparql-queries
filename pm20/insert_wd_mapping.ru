@@ -9,7 +9,9 @@ insert {
 }
 where {
   graph <http://zbw.eu/beta/wikidata/ng> {
-    ?wd skos:exactMatch ?pm20 .    
+    # ?pm20 may be folder or category
+    ?wd skos:exactMatch ?pm20 .
   }
-  ?pm20 a zbwext:Pm20Folder .
+  ?pm20 a ?class .
+  filter (?class in (zbwext:Pm20Folder, skos:Concept)) .
 }
