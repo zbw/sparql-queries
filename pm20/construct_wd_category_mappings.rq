@@ -9,7 +9,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 construct {
   ?item skos:exactMatch ?pm20Category .
 }
-#select ?item ?pm20Category
+##select ?item ?pm20Category
 where {
   {
     # for wares, a few special pm20 category items plus "normal" items are matched
@@ -18,25 +18,28 @@ where {
     }
     bind (uri(concat('https://pm20.zbw.eu/category/ware/i/', ?wareId)) as ?pm20Category)
   } union {
-    # for countries, only "normal" items (a few non-exact matches)
-    service <https://query.wikidata.org/sparql> {
-      ## TODO only exact matches?
-      ?item wdt:P8483 ?geoCode .
+    graph <http://zbw.eu/beta/geo/ng> {
+      service <https://query.wikidata.org/sparql> {
+        # for countries, only "normal" items (a few non-exact matches)
+        ## TODO only exact matches?
+        ?item wdt:P8483 ?geoCode .
+      }
+      # look up code (=> notation)
+      bind(replace(?geoCode, '_', ' ') as ?notation)
+      ?geo skos:notation ?notation .
+      bind(?geo as ?pm20Category)
     }
-    # look up code (= notation)
-    bind(replace(?geoCode, '_', ' ') as ?notation)
-    ?geo skos:notation ?notation .
-    bind(?geo as ?pm20Category)
   } union {
-    # for subjects, only special pm20 category items are matched
-    service <https://query.wikidata.org/sparql> {
-      ?item wdt:P8484 ?subjectCode .
+    graph <http://zbw.eu/beta/subject/ng> {
+      service <https://query.wikidata.org/sparql> {
+        # for subjects, only special pm20 category items are matched
+        ?item wdt:P8484 ?subjectCode .
+      }
+      # look up code (=> notation)
+      bind(replace(?subjectCode, '_', ' ') as ?notation)
+      ?subject skos:notation ?notation .
+      bind(?subject as ?pm20Category)
     }
-    # look up code (= notation)
-    bind(replace(?subjectCode, '_', ' ') as ?notation)
-    ?subject skos:notation ?notation .
-    bind(?subject as ?pm20Category)
   }
 }
 order by ?pm20Category
-
