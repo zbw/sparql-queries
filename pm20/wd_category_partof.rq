@@ -18,7 +18,7 @@ where {
       })
   }
   # get broader relations from pm20
-  graph <http://zbw.eu/beta/je/ng> {
+  graph <http://zbw.eu/beta/subject/ng> {
     ?cat a skos:Concept ;
          skos:notation ?notation ;
          skos:broader ?broader .

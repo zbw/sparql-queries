@@ -10,7 +10,7 @@ PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 #
 select distinct ?id ?notationLong ?notation ?labelDe ?labelEn (str(count(distinct ?pm20)) as ?cnt)
 where {
-  graph <http://zbw.eu/beta/je/ng> {
+  graph <http://zbw.eu/beta/subject/ng> {
     ?s skos:prefLabel ?labelLangDe ;
        skos:notation ?notation ;
        zbwext:notationLong ?notationLong ;

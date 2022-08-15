@@ -10,7 +10,7 @@ PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
 #
 select distinct ?broaderEn ?id ?labelEn ?labelDe (str(?note) as ?noteDe) ?gndId
 where {
-  graph <http://zbw.eu/beta/ag/ng> {
+  graph <http://zbw.eu/beta/geo/ng> {
     ?s skos:prefLabel ?labelLangEn ;
        dct:identifier ?id .
     filter(lang(?labelLangEn) = 'en')

@@ -17,11 +17,11 @@ where {
         zbwext:freeDocCount ?docCount .
   filter(lang(?pm20LabelLang) = ?language)
   bind(str(?pm20LabelLang) as ?pm20Label)
-  graph <http://zbw.eu/beta/ip/ng> {
+  graph <http://zbw.eu/beta/ware/ng> {
     ?ware skos:notation ?wareNta ;
           skos:prefLabel ?wareLabelLang;
   }
-  graph <http://zbw.eu/beta/ag/ng> {
+  graph <http://zbw.eu/beta/geo/ng> {
     ?country skos:notation ?geoNta ;
              zbwext:notationLong ?geoNtaLong .
   }

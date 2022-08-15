@@ -14,7 +14,7 @@ select ?notationLong ?labelDe ?labelEn
 ('Q92707903' as ?classQid)
 where {
   #
-  graph <http://zbw.eu/beta/je/ng> {
+  graph <http://zbw.eu/beta/subject/ng> {
     ?cat a skos:Concept ;
       zbwext:notationLong ?notationLong ;
       skos:notation ?notation .
