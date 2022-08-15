@@ -7,7 +7,6 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX ag: <http://zbw.eu/beta/pm20voc/ag/>
 #
 select ?wd ?wdLabel ?rel ?relProp ?signature ?category ?categoryLabel ?qsStatement
 where {
@@ -22,7 +21,7 @@ where {
   }
   # exclude existing signatures in WD
   {
-    graph <http://zbw.eu/beta/ag/ng> {
+    graph <http://zbw.eu/beta/geo/ng> {
       ?category a skos:Concept ;
                 ?rel ?wd ;
                 skos:prefLabel ?categoryLabelLang ;

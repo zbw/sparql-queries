@@ -14,7 +14,7 @@ where {
   {
     select ?signature ?country ?countryLabel (str(?folderCnt) as ?folderCount) ?complete (str(sum(?total)) as ?totalCnt) (str(sum(?free)) as ?accessibleOnline)
     where {
-      graph  <http://zbw.eu/beta/ag/ng>  {
+      graph  <http://zbw.eu/beta/geo/ng>  {
         values ( ?language ) {
           ( 'de' )
         }

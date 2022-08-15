@@ -1,6 +1,5 @@
 # Mapping of the countries category system to WD
 #
-PREFIX pm20ag: <http://zbw.eu/beta/pm20voc/ag/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX wd: <http://www.wikidata.org/entity/>
@@ -15,7 +14,7 @@ where {
     (skos:closeMatch "*")
     (skos:relatedMatch "^")
   }
-  graph <http://zbw.eu/beta/ag/ng> {
+  graph <http://zbw.eu/beta/geo/ng> {
     ?concept a skos:Concept ;
              ?rel ?wd ;
              skos:notation ?notationLabel ;
@@ -45,7 +44,7 @@ where {
     bind(concat(if(bound(?wdLabelDe), str(?wdLabelDe), ''), ' | ', if(bound(?wdLabelEn), str(?wdLabelEn), '')) as ?wdLabel)
   }
   # create a exception.remove statement
-  bind(strafter(str(?concept), str(pm20ag:)) as ?conceptId)
+  bind(strafter(str(?concept), 'https://pm20.zbw.eu/category/geo/i/') as ?conceptId)
   bind(strafter(str(?wd), str(wd:)) as ?wdId)
   bind(concat(?conceptId, ",", ?relChr, ",", ?wdId, ",,,") as ?statement)
 }

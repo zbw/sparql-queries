@@ -10,12 +10,12 @@ where {
   {
     select ?gndId (str(count(?pm20)) as ?count) (sample(?conceptId) as ?categoryId)
     where {
-      graph <http://zbw.eu/beta/je/ng> {
+      graph <http://zbw.eu/beta/subject/ng> {
         ?concept gndo:gndIdentifier ?gndId .
       }
       ?pm20 a zbwext:SubjectFolder ;
             zbwext:subject ?concept .
-      bind(strafter(str(?concept), '/je/') as ?conceptId)
+      bind(strafter(str(?concept), '/subject/i/') as ?conceptId)
     }
     group by ?gndId
   }

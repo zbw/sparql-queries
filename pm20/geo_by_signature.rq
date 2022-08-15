@@ -8,7 +8,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
 select ?notationLong ?signature ?country ?countryLabel ?note ?shCount ?shCountLabel ?waCount ?waCountLabel
 where {
-  graph  <http://zbw.eu/beta/ag/ng>  {
+  graph  <http://zbw.eu/beta/geo/ng>  {
     values ( ?language ) {
       ( 'de' )
     }
