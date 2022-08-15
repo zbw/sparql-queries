@@ -11,7 +11,6 @@ where {
   graph <http://zbw.eu/beta/wikidata/ng> {
     # ?pm20 may be folder or category
     ?wd skos:exactMatch ?pm20 .
+    filter(contains(str(?pm20), '/folder/') || contains(str(?pm20), '/category/'))
   }
-  ?pm20 a ?class .
-  filter (?class in (zbwext:Pm20Folder, skos:Concept)) .
 }
