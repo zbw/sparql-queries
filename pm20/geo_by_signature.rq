@@ -32,8 +32,8 @@ where {
     filter(lang(?countryLabelLang) = ?language)
     bind(str(?countryLabelLang) as ?countryLabel)
   }
-  bind(if(?shCnt > 0, uri(concat('http://webopac.hwwa.de/PresseMappe20/Digiview_MENU.cfm?T=S&G=', ?countryId)), '-') as ?shCount)
-  bind(if(?waCnt > 0, uri(concat('http://webopac.hwwa.de/PresseMappe20/Digiview_MENU.cfm?T=W&G=', ?countryId)), '-') as ?waCount)
+  bind(if(?shCnt > 0, uri(concat('https://pm20.zbw.eu/category/geo/i/', ?countryId, '/about.', ?language, '.html#sacharchiv')), '-') as ?shCount)
+  bind(if(?waCnt > 0, uri(concat('https://pm20.zbw.eu/category/geo/i/', ?countryId, '/about.', ?language, '.html#warenarchiv')), '-') as ?waCount)
 }
 order by ?notationLong
 
