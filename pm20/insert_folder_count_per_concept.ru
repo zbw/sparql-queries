@@ -16,10 +16,10 @@ where {
     select ?concept (count(distinct ?pm20) as ?folderCount ) ?countProperty ?g
     where {
       values ( ?g ?class ?property ?countProperty ) {
-        ( <http://zbw.eu/subject/ng> zbwext:SubjectFolder zbwext:subject zbwext:folderCount )
-        ( <http://zbw.eu/geo/ng> zbwext:SubjectFolder zbwext:country zbwext:shFolderCount )
-        ( <http://zbw.eu/ware/ng> zbwext:WareFolder zbwext:ware zbwext:folderCount )
-        ( <http://zbw.eu/geo/ng> zbwext:WareFolder zbwext:country zbwext:waFolderCount )
+        ( <http://zbw.eu/beta/subject/ng> zbwext:SubjectFolder zbwext:subject zbwext:folderCount )
+        ( <http://zbw.eu/beta/geo/ng> zbwext:SubjectFolder zbwext:country zbwext:shFolderCount )
+        ( <http://zbw.eu/beta/ware/ng> zbwext:WareFolder zbwext:ware zbwext:folderCount )
+        ( <http://zbw.eu/beta/geo/ng> zbwext:WareFolder zbwext:country zbwext:waFolderCount )
       }
       ?pm20 a ?class ;
             ?property ?concept .
