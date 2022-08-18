@@ -11,7 +11,7 @@ insert {
 }
 where {
   graph <http://zbw.eu/beta/wikidata/ng> {
-    values ( ?vocab ?graph ) {
+    values ( ?vocab ?g ) {
       ( 'geo' <http://zbw.eu/beta/geo/ng> )
       ( 'ware' <http://zbw.eu/beta/ware/ng> )
       ( 'subject' <http://zbw.eu/beta/subject/ng> )
