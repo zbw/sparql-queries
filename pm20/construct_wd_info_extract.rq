@@ -1,6 +1,7 @@
 # Create Wikidata extract for items relevant to PM20
 #
 PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <http://schema.org/>
 PREFIX wd: <http://www.wikidata.org/entity/>
@@ -26,9 +27,13 @@ where {
   # restrict to one item for testing
   ##bind(wd:Q33391 as ?wd)
   #
-  # get item data
+  # get item data (folder, geo, ware)
   {
-    ?wd wdt:P4293 ?pm20Id .
+    ?wd wdt:P4293 [] .
+  } union {
+    ?wd wdt:P8483 [] .
+  } union {
+    ?wd wdt:P10890 [] .
 #  } union {
 #    service <http://zbw.eu/beta/sparql/pm20/query> {
 #      ?s gndo:gndIdentifier ?gndId .
