@@ -1,12 +1,15 @@
 # Insert Wikidata mapping into the vocabulary graphs and into the default graph
 #
+PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 insert {
   ?category skos:exactMatch ?wd .
   graph ?g {
-    ?category skos:exactMatch ?wd .
+    ?category skos:exactMatch ?wd ;
+              gn:wikipediaArticle ?page .
   }
 }
 where {
@@ -17,6 +20,10 @@ where {
       ( 'subject' <http://zbw.eu/beta/subject/ng> )
     }
     ?wd skos:exactMatch ?category .
+    optional {
+      ?page schema:about ?wd .
+    }
     filter(contains(str(?category), concat('/category/', ?vocab)))
   }
 }
+
