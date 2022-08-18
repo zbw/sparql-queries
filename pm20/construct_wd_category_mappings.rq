@@ -16,7 +16,7 @@ where {
     service <https://query.wikidata.org/sparql> {
       ?item wdt:P10890 ?wareId .
     }
-    bind (uri(concat('https://pm20.zbw.eu/category/ware/i/', ?wareId)) as ?pm20Category)
+    bind (uri(concat('http://purl.org/pressemappe20/category/ware/i/', ?wareId)) as ?pm20Category)
   } union {
     graph <http://zbw.eu/beta/geo/ng> {
       service <https://query.wikidata.org/sparql> {
