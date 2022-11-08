@@ -9,7 +9,7 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 #
 select *
 where {
-  # Persons of Irish nationality with publicly 
+  # Persons of Irish nationality with publicly
   # accessible documents
   ?person skos:prefLabel ?personLabel ;
           dct:identifier ?personId ;
@@ -21,8 +21,8 @@ where {
   service <https://query.wikidata.org/sparql> {
     # Wikidata items for the persons
     ?item wdt:P31 wd:Q5 ;
-          wdt:P214 ?viafId ;
-          wdt:P4293 ?personId .
+          wdt:P4293 ?personId ;
+          wdt:P214 ?viafId .
     #
     # Add page links to the English Wikipedia
     ?page schema:about ?item ;
@@ -32,9 +32,9 @@ where {
 order by desc(?freeDocCount)
 
 # Note: Queries with large datasets created before the service clause
-# (e.g., asking for German persons instead of Irish) take very long, because
-# the intermediate results are transmitted step by step to the external
-# endpoint.
+# (e.g., asking for German persons instead of Irish) may take very long,
+# because the intermediate results may be transmitted step by step to the
+# external endpoint (implementation-dependent).
 # It sometimes helps to reverse the inovocation order, i.e. to first
 # query the external endpoint, and then filter the results with additional
 # statements locally.
