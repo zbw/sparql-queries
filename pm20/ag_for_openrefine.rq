@@ -1,6 +1,7 @@
 # Create a table of not-yet mapped ag entries for OpenRefine
 # (ag = Historische Länderklassifikation)
 #
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX schema: <http://schema.org/>
@@ -23,12 +24,19 @@ where {
     optional {
       ?s gndo:gndIdentifier ?gndId .
     }
-    #
-#    filter(not exists {
-#        ?s skos:exactMatch ?wd .
-#        filter(contains(str(?wd), 'wikidata'))
-#      }
-#    )
+    # only entries with folders!
+    filter(exists {
+        { ?s zbwext:shFolderCount [] }
+                union
+        { ?s zbwext:waFolderCount [] }
+      })
+
+    # filter out existing entries in WD
+    filter(not exists {
+        ?s skos:exactMatch ?wd .
+        filter(contains(str(?wd), 'wikidata'))
+      }
+    )
     ?broader skos:narrower ?s ;
              skos:prefLabel ?broaderLangEn .
     filter(lang(?broaderLangEn) = 'en')
