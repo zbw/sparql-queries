@@ -38,8 +38,6 @@ where {
         ?category zbwext:waFolderCount ?waCnt .
       }
       filter(bound(?shCnt) || bound(?waCnt))
-      # for now, restrict to sh
-      filter(bound(?shCnt))
       # remove root entry of category system
       filter(?signature != 'AG')
     }
@@ -51,9 +49,11 @@ where {
   #
   # add Wikidata labels (informative)
   graph <http://zbw.eu/beta/wikidata/ng> {
-    ?wd rdfs:label ?wdLabelLang .
-    filter(lang(?wdLabelLang) = 'en')
-    bind(str(?wdLabelLang) as ?wdLabel)
+    optional {
+      ?wd rdfs:label ?wdLabelLang .
+      filter(lang(?wdLabelLang) = 'en')
+      bind(str(?wdLabelLang) as ?wdLabel)
+    }
   }
   #
   # QS statement (QS does not work for unknown values!)
