@@ -1,0 +1,41 @@
+# Extract information for creating narrower category relations in Wikidata
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+select distinct ?subjectCode ?narrowerSubjectCode ?wd ?qid ?hasPart
+where {
+  # only apply to subject category items existing in Wikidata
+  service <https://query.wikidata.org/sparql> {
+    ?wd wdt:P31 wd:Q92707903 ;
+        wdt:P8484 ?subjectCode .
+    bind(replace(?subjectCode, '_', ' ') as ?notation)
+    # filter out items with hasPart statements
+    filter(not exists {
+        ?wd wdt:P527 [] .
+      })
+  }
+  # get narrower relations from pm20
+  graph <http://zbw.eu/beta/subject/ng> {
+    ?cat a skos:Concept ;
+         skos:notation ?notation ;
+         skos:narrower ?narrower .
+    ?narrower skos:notation ?narrowerNotation .
+    bind(replace(?narrowerNotation, ' ', '_') as ?narrowerSubjectCode)
+  }
+  # look up according WD category items
+  optional {
+    service <https://query.wikidata.org/sparql> {
+      ?wdNarrower wdt:P31 wd:Q92707903 ;
+                 wdt:P8484 ?narrowerSubjectCode .
+    }
+  }
+  bind(if(!bound(?wdNarrower) && strlen(?subjectCode) = 1, 'Q92732036', strafter(str(?wdNarrower), str(wd:))) as ?hasPart)
+  bind(strafter(str(?wd), str(wd:)) as ?qid)
+  #
+  # restrict to items with already existing narrower items
+  filter(bound(?wdNarrower))
+}
+

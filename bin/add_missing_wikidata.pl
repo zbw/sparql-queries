@@ -278,9 +278,11 @@ Readonly my %CONFIG => (
         var_name   => 'classQid',
         value_type => 'item',
       },
-      P => {
-        var_name   => 'classQid',
+      P527 => {
+        var_name   => 'hasPart',
         value_type => 'item',
+        query =>
+          path('/opt/sparql-queries/pm20/wd_category_haspart.rq'),
       },
     },
   },
