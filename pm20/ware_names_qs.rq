@@ -1,0 +1,45 @@
+# Ware names qs input for wares connected to WD items
+#
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dct: <http://purl.org/dc/terms/>
+#
+select ?qsStatement ?item ?ware (?prefLabel as ?wareLabel)
+where {
+  # get ids and labels from WD endpoint
+  service <https://query.wikidata.org/sparql> {
+    # statments about wareId
+    ?statement ps:P10890 ?wareId .
+    filter(isLiteral(?wareId))
+    #
+    # skip all statements where the folder name already exists
+    filter(not exists {
+        ?statement pq:P1810 [] .
+      })
+    # according items
+    ?item p:P10890 ?statement .
+  }
+  #
+  # get ware names
+  graph <http://zbw.eu/beta/ware/ng> {
+    ?ware dct:identifier ?wareId ;
+      skos:prefLabel ?prefLabelEn .
+    filter(lang(?prefLabelEn) = 'en')
+    bind(str(?prefLabelEn) as ?prefLabel)
+  }
+  #
+  # construct QS statement
+  bind(concat(strafter(str(?item), str(wd:)),'|P10890|"', ?wareId,
+      '"|P1810|"', ?prefLabel, '"') as ?qsStatement)
+}
+order by ?prefLabel
+
+
