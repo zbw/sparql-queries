@@ -1,0 +1,37 @@
+# Create statements for missing "main subject" entries in folders
+# (after having removed the wrong statements caused by merges of subject categories)
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+select distinct ?item ?itemLabel ?notation ?qs
+where {
+  service <https://query.wikidata.org/sparql> {
+    ?item wdt:P31 wd:Q91257459 ; 
+          wdt:P4293 ?pm20Id .
+    filter(not exists {
+      ?item wdt:P921 ?subject .
+    })
+    bind(strafter(str(?item), 'http://www.wikidata.org/entity/') as ?qid)
+  }
+  ?pm20 dct:identifier ?pm20Id ;
+        zbwext:subject ?subject .
+  
+  graph <http://zbw.eu/beta/subject/ng> {
+    ?subject skos:notation ?notation .
+  }
+  bind(replace(?notation, " ", "_") as ?subjectCode)
+  
+  service <https://query.wikidata.org/sparql> {
+    ?wdSubject wdt:P8484 ?subjectCode .
+  }
+  
+  bind(strafter(str(?wdSubject), 'http://www.wikidata.org/entity/') as ?subjectQid)
+  bind(concat(?qid, '|P921|', ?subjectQid, '|P8484|"', ?subjectCode, '"') as ?qs)
+  
+}
+order by ?subject
+

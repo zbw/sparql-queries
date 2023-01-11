@@ -1,0 +1,26 @@
+# Create remove statements for "main subject" statements
+# of folders (after wrong merges of subject categories)
+
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+select distinct ?item ?itemLabel ?qs
+where {
+  service <https://query.wikidata.org/sparql> {
+    ?item wdt:P31 wd:Q91257459 ; 
+          wdt:P4293 ?pm20Id ;
+          wdt:P921 ?subject .
+    filter(not exists {
+      ?subject wdt:P31 wd:Q92707903 .
+    })
+    bind(strafter(str(?item), 'http://www.wikidata.org/entity/') as ?qid)
+    bind(strafter(str(?subject), 'http://www.wikidata.org/entity/') as ?subjectQid)
+    bind(concat('-', ?qid, '|P921|', ?subjectQid) as ?qs)
+    
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+  }
+}
+order by ?subject
