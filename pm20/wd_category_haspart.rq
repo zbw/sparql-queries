@@ -21,6 +21,7 @@ where {
   graph <http://zbw.eu/beta/subject/ng> {
     ?cat a skos:Concept ;
          skos:notation ?notation ;
+         zbwext:notationLong ?notationLong ;
          skos:narrower ?narrower .
     ?narrower skos:notation ?narrowerNotation .
     bind(replace(?narrowerNotation, ' ', '_') as ?narrowerSubjectCode)
@@ -38,4 +39,5 @@ where {
   # restrict to items with already existing narrower items
   filter(bound(?wdNarrower))
 }
+order by ?notationLong
 

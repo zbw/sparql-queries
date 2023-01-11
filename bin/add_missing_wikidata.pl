@@ -278,11 +278,29 @@ Readonly my %CONFIG => (
         var_name   => 'classQid',
         value_type => 'item',
       },
+      P361 => {
+        var_name   => 'partOf',
+        value_type => 'item',
+        query =>
+          path('/opt/sparql-queries/pm20/wd_category_partof.rq'),
+        qualifiers => {
+          P8484 => {
+            var_name   => 'broaderSubjectCode',
+            value_type => 'literal',
+          },
+        },
+      },
       P527 => {
         var_name   => 'hasPart',
         value_type => 'item',
         query =>
           path('/opt/sparql-queries/pm20/wd_category_haspart.rq'),
+        qualifiers => {
+          P8484 => {
+            var_name   => 'narrowerSubjectCode',
+            value_type => 'literal',
+          },
+        },
       },
     },
   },

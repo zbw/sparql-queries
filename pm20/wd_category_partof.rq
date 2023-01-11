@@ -13,9 +13,9 @@ where {
         wdt:P8484 ?subjectCode .
     bind(replace(?subjectCode, '_', ' ') as ?notation)
     # filter out items with partOf statements
-    filter(not exists {
-        ?wd wdt:P361 [] .
-      })
+#    filter(not exists {
+#        ?wd wdt:P361 [] .
+#      })
   }
   # get broader relations from pm20
   graph <http://zbw.eu/beta/subject/ng> {
