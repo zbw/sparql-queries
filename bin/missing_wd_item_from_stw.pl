@@ -122,8 +122,12 @@ foreach my $entry ( @{ $result_data->{results}->{bindings} } ) {
   my $source_statement = "|S248|Q26903352|S3911|\"$entry->{stwId}{value}\""
     . "|S1476|en:\"$entry->{L_en}{value}\"$RETRIEVED";
 
-  # economical concept
-  print $html "LAST|P31|Q29028649$source_statement\n";
+  # (economical) concept
+  if (substr($replace, 0, 1) eq 'N') {
+    print $html "LAST|P31|Q151885$source_statement\n";
+  } else {
+    print $html "LAST|P31|Q29028649$source_statement\n";
+  }
 
   # external IDs
   if ( $entry->{gndId} ) {
