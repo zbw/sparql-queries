@@ -51,6 +51,7 @@ Query | Description
 [multi_exact_matches](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/multi_exact_matches.rq) | Mapped concepts with multiple exact matching STW concepts
 [mapping_cardinalities](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/mapping_cardinalities.rq) | Cardinalities of a mapping
 [mapping_cardinality_concepts](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/mapping_cardinality_concepts.rq) | Concepts with a certain number of mapping relations to another dataset (default 0)
+[wd_dbpedia_mapping](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/stw/wd_dbpedia_mapping.rq) | Create a STW - DBpedia mapping from Wikidata
 
 ### STW version differences
 

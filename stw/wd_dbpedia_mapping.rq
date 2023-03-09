@@ -1,0 +1,49 @@
+# Create a STW - DBpedia mapping from Wikidata
+#
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX schema: <http://schema.org/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+#
+select ?stw ?item ?dbpedia
+where {
+  # get STW - Wikidata mapping
+  # TODO extend with mapping relation
+  service <https://query.wikidata.org/sparql> {
+    select ?stw ?item ?stub
+    where {
+      ?item wdt:P3911 ?stwId .
+      bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw)
+      ?page schema:about ?item ;
+            schema:isPartOf <https://en.wikipedia.org/> .
+      bind(strafter(str(?page), 'https://en.wikipedia.org/wiki/') as ?stub)
+    }
+    # TODO remove limit
+    limit 100
+  }
+  
+  # compute dbpedia URI
+  bind(uri(concat(str(dbr:), ?stub)) as ?dbpedia)
+    
+  # TODO look up in DBpedia, remove optional
+  # has to deal with escaped URIs.
+  # for http://dbpedia.org/resource/Fama%E2%80%93French_three-factor_model
+  # or http://dbpedia.org/resource/Baden-W%C3%BCrttemberg
+  # of 1000 items, 12 do not match directly
+  # the following approach does not work!!!
+  # perhaps blindly unescape URI afterwards
+#  optional {
+#    service <http://dbpedia.org/sparql> {
+#      # look up arbitrary functional property
+#      { 
+#        ?dbpUri dbo:wikiPageLength ?length .
+#        bind(?dbpUri as ?dbpedia)
+#      } union {
+#        ?dbpUri dbo:wikiPageRedirects ?dbpedia .
+#        ?dbpedia dbo:wikiPageLength ?length .
+#      }
+#    }
+#  }
+}
+
