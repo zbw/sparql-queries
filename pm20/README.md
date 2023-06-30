@@ -18,6 +18,7 @@ Query | Description
 [companies_unmapped_to_gnd](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/companies_unmapped_to_gnd.rq) | Organizations which are not linked to GND, with search links
 [companies_unmapped_to_wd](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/companies_unmapped_to_wd.rq) | Organizations which are not linked to Wikidata, with search links
 [companies_missing_in_wikidata](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/companies_missing_in_wikidata.rq) | Extract information for creating missing company items in Wikidata
+[duplicate_company_signatures](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/duplicate_company_signatures.rq) | All duplicate company signatures
 **Subjects / wares** |
 [subject_folders](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/subject_folders.rq) | Full list of subject folders
 [count_by_country](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/count_by_country.rq) | Subject and ware folder count by country

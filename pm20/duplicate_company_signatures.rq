@@ -1,0 +1,23 @@
+# All duplicate company signatures
+#
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX dct: <http://purl.org/dc/terms/>
+#
+select ?signature (str(count(*)) as ?cnt) (group_concat(?label;
+    separator = '; ') as ?labels) (group_concat(?id;
+    separator = '; ')as ?ids)
+where {
+  select ?id ?signature ?label
+  where {
+    ?co a zbwext:CompanyFolder ;
+        dct:identifier ?id ;
+        skos:notation ?signature ;
+        skos:prefLabel ?label .
+  }
+  order by ?id
+}
+group by ?signature
+having (count(*) > 1)
+order by desc(count(*)) ?signature
+
