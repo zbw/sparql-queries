@@ -15,7 +15,7 @@ where {
   # TODO: derive ?foreignUriStub and ?foreignEndpoint from property definition
   values ( ?foreignProp ?foreignUriStub ?foreignEndpoint ) {
     # default for UNESCO thesaurus (with endpoint for label lookup)
-    ##( wdt:P3916 "http://vocabularies.unesco.org/thesaurus/" <http://vocabularies.unesco.org/sparql> )
+    ##( wdt:P3916 "http://vocabularies.unesco.org/thesaurus/" <https://vocabularies.unesco.org/sparql> )
     ##( wdt:P2163 "http://id.worldcat.org/fast/" <http://zbw.eu/beta/sparql/stw/query> )
     ( wdt:P244 "https://id.loc.gov/authorities/" <http://zbw.eu/beta/sparql/stw/query> )
   }
