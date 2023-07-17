@@ -1,0 +1,29 @@
+# all PM20 organizations (folder and microfilm)
+#
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+select ?wd ?wdLabel ?pm20 ?pm20Label ?hint
+where {
+  {
+    ?wd wdt:P4293 ?pm20Id .
+    filter(strstarts(?pm20Id, 'co'))
+  } union {
+    ?wd wdt:P11822 ?sectionId .
+    filter(contains(?sectionId, '/co/'))
+  }
+  ?wd rdfs:label ?label .
+  filter(lang(?label) = 'de')
+  bind(str(?label) as ?wdLabel)
+  #
+  bind(if(bound(?pm20Id), uri(concat('https://pm20.zbw.eu/folder/', ?pm20Id)), uri(concat('https://pm20.zbw.eu/film/', ?sectionId))) as ?pm20)
+  bind(if(bound(?pm20Id), 'PM20 folder', 'PM20 film section') as ?pm20Label)
+  bind(if(!bound(?pm20Id), '(on premises only)', '') as ?hint)
+}
