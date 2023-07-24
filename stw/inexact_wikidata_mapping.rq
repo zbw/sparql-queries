@@ -38,7 +38,7 @@ where {
   bind(str(?stwLabelLang) as ?stwLabel)
   #
   # create search link
-  bind (uri(concat('https://www.wikidata.org/w/index.php?title=Special:Search&fulltext=1&search=', ?stwLabel)) as ?searchLink)
+  bind (uri(concat('https://www.wikidata.org/w/index.php?title=Special:Search&fulltext=1&search=', replace(?stwLabel, ' ', '%20'))) as ?searchLink)
 }
 order by ?wdLabel desc(?relation)
 
