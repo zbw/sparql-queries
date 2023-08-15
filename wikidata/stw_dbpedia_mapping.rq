@@ -2,7 +2,7 @@
 # (use only English DBpedia)
 # TODO
 #   - add mapping relation type
-#   - add label for stw
+#   - add label for stw (and sort result)
 # 
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX wd: <http://www.wikidata.org/entity/>
@@ -11,7 +11,7 @@ PREFIX schema: <http://schema.org/>
 select distinct ?stw ?dbpedia ?dbpediaLabel
 where {
   ?wd wdt:P3911 ?stwId .
-  bind(uri(concat('http://zbw.eu/stw/', ?stwId)) as ?stw)
+  bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw)
   #
   optional {
     # sitelinks to English Wikipedia
