@@ -1,0 +1,27 @@
+# Links STW - DBpedia, derived from Wikidata
+# (use only English DBpedia)
+# TODO
+#   - add mapping relation type
+#   - add label for stw
+# 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX schema: <http://schema.org/>
+#
+select distinct ?stw ?dbpedia ?dbpediaLabel
+where {
+  ?wd wdt:P3911 ?stwId .
+  bind(uri(concat('http://zbw.eu/stw/', ?stwId)) as ?stw)
+  #
+  optional {
+    # sitelinks to English Wikipedia
+    ?page schema:about ?wd ;
+          schema:isPartOf <https://en.wikipedia.org/> .
+    # DBpedia link is directly derived from Wikipedia link
+    bind(uri(replace(str(?page), 'https://en.wikipedia.org/wiki', 'http://dbpedia.org/resource')) as ?dbpedia)
+    # page title
+    ?page schema:name ?name .
+    bind(str(?name) as ?dbpediaLabel)
+  }
+}
+
