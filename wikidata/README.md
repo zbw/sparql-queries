@@ -21,7 +21,7 @@ Query | Description
 [pm20_economists](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/pm20_economists.rq) | Show pm20 folders for persons of a certain occupation
 [all_subclasses](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/all_subclasses.rq) | Get all subclasses of a Wikidata class
 [nace](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/nace.rq) | List of items with NACE code
-[stw_dbpedia_mapping](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/nace.rq) | Links STW - DBpedia, derived from Wikidata
+[stw_dbpedia_mapping](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/stw_dbpedia_mapping.rq) | Links STW - DBpedia, derived from Wikidata
 
 
 #### Queries re. PM20
