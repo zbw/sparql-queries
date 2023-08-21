@@ -1,10 +1,44 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html><head>
-<title>502 Proxy Error</title>
-</head><body>
-<h1>Proxy Error</h1>
-<p>The proxy server received an invalid
-response from an upstream server.<br />
-The proxy server could not handle the request <em><a href="/beta/sparql/pm20/query">POST&nbsp;/beta/sparql/pm20/query</a></em>.<p>
-Reason: <strong>Error reading from remote server</strong></p></p>
-</body></html>
+{ "head": {
+    "vars": [ "type" , "totalCount" , "withDocs" , "withWd" , "withWdAndDocs" , "percentage" , "statsLine" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "type": { "type": "literal" , "value": "co" } ,
+        "totalCount": { "type": "literal" , "value": "38794" } ,
+        "withDocs": { "type": "literal" , "value": "8359" } ,
+        "withWd": { "type": "literal" , "value": "9100" } ,
+        "withWdAndDocs": { "type": "literal" , "value": "8356" } ,
+        "percentage": { "type": "literal" , "value": "100.0 %" } ,
+        "statsLine": { "type": "literal" , "value": "| 2023-08-21 || 38794 || 8359 || 9100 || 8356 || 100.0 %" }
+      } ,
+      { 
+        "type": { "type": "literal" , "value": "pe" } ,
+        "totalCount": { "type": "literal" , "value": "16661" } ,
+        "withDocs": { "type": "literal" , "value": "5310" } ,
+        "withWd": { "type": "literal" , "value": "10154" } ,
+        "withWdAndDocs": { "type": "literal" , "value": "5310" } ,
+        "percentage": { "type": "literal" , "value": "100.0 %" } ,
+        "statsLine": { "type": "literal" , "value": "| 2023-08-21 || 16661 || 5310 || 10154 || 5310 || 100.0 %" }
+      } ,
+      { 
+        "type": { "type": "literal" , "value": "sh" } ,
+        "totalCount": { "type": "literal" , "value": "9201" } ,
+        "withDocs": { "type": "literal" , "value": "9075" } ,
+        "withWd": { "type": "literal" , "value": "9201" } ,
+        "withWdAndDocs": { "type": "literal" , "value": "9075" } ,
+        "percentage": { "type": "literal" , "value": "100.0 %" } ,
+        "statsLine": { "type": "literal" , "value": "| 2023-08-21 || 9201 || 9075 || 9201 || 9075 || 100.0 %" }
+      } ,
+      { 
+        "type": { "type": "literal" , "value": "wa" } ,
+        "totalCount": { "type": "literal" , "value": "2891" } ,
+        "withDocs": { "type": "literal" , "value": "2890" } ,
+        "withWd": { "type": "literal" , "value": "2891" } ,
+        "withWdAndDocs": { "type": "literal" , "value": "2890" } ,
+        "percentage": { "type": "literal" , "value": "100.0 %" } ,
+        "statsLine": { "type": "literal" , "value": "| 2023-08-21 || 2891 || 2890 || 2891 || 2890 || 100.0 %" }
+      }
+    ]
+  }
+}
