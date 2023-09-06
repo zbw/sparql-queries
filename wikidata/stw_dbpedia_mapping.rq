@@ -1,17 +1,31 @@
 # Links STW - DBpedia, derived from Wikidata
 # (use only English DBpedia)
-# TODO
-#   - add mapping relation type
-#   - add label for stw (and sort result)
-# 
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 #
-select distinct ?stw ?dbpedia ?dbpediaLabel
+select distinct ?stw ?stwLabel ?skosRelation ?dbpedia ?dbpediaLabel
 where {
-  ?wd wdt:P3911 ?stwId .
+  #add label of stw-id
+  service <http://zbw.eu/beta/sparql/stw/query> {
+    ?stw skos:prefLabel ?prefLabel .
+    filter(lang(?prefLabel) = 'en')
+    bind(str(?prefLabel) as ?stwLabel)
+  }
+  #?wd wdt:P3911 ?stwId .
+  ?wd p:P3911 ?statement .
+  ?statement ps:P3911 ?stwId .
+  filter(isLiteral(?stwId))
   bind(uri(concat('http://zbw.eu/stw/descriptor/', ?stwId)) as ?stw)
+  # skosRelation output
+  optional {
+    ?statement pq:P4390 ?relation .
+    ?relation wdt:P2888 ?skosRelation .
+  }
   #
   optional {
     # sitelinks to English Wikipedia
@@ -23,5 +37,7 @@ where {
     ?page schema:name ?name .
     bind(str(?name) as ?dbpediaLabel)
   }
+  
 }
+
 
