@@ -25,7 +25,7 @@ where {
     optional {
       ?statement pq:P4390 ?relation .
       # URI of the equivalent skos property
-      ?relation wdt:P2699 ?skosRelation .
+      ?relation wdt:P2888 ?skosRelation .
     }
     # get label for the wd item, if exists
     optional {
