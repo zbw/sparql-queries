@@ -5,7 +5,7 @@ prefix dcterms:  <http://purl.org/dc/terms/>
 prefix skos:     <http://www.w3.org/2004/02/skos/core#>
 prefix zbwext:   <http://zbw.eu/namespaces/zbw-extensions/>
 #
-select distinct ?stw (str(?stwLabelLang) as ?stwLabel)
+select distinct ?stw (str(?stwLabelLang) as ?stwLabel) ?rel
 ?foreign (str(?foreignLabelLang) as ?foreignLabel)
 where
 {
@@ -22,7 +22,8 @@ where
        skos:prefLabel ?stwLabelLang .
   filter(lang(?stwLabelLang) = ?language)
   optional {
-    ?stw skos:exactMatch ?foreign .
+    ?stw (skos:exactMatch|skos:closeMatch|skos:narrowMatch|skos:broadMatch|skos:relatedMatch) ?foreign .
+    ?stw ?rel ?foreign
     ?foreign dcterms:isPartOf ?target ;
              skos:prefLabel ?foreignLabelLang .
     filter(lang(?foreignLabelLang) = ?language)
