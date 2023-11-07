@@ -23,7 +23,7 @@ where
   filter(lang(?stwLabelLang) = ?language)
   optional {
     ?stw (skos:exactMatch|skos:closeMatch|skos:narrowMatch|skos:broadMatch|skos:relatedMatch) ?foreign .
-    ?stw ?rel ?foreign
+    ?stw ?rel ?foreign .
     ?foreign dcterms:isPartOf ?target ;
              skos:prefLabel ?foreignLabelLang .
     filter(lang(?foreignLabelLang) = ?language)
