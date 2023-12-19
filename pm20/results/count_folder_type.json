@@ -1,44 +1,9 @@
-{ "head": {
-    "vars": [ "type" , "totalCount" , "withDocs" , "withWd" , "withWdAndDocs" , "percentage" , "statsLine" ]
-  } ,
-  "results": {
-    "bindings": [
-      { 
-        "type": { "type": "literal" , "value": "co" } ,
-        "totalCount": { "type": "literal" , "value": "38793" } ,
-        "withDocs": { "type": "literal" , "value": "8359" } ,
-        "withWd": { "type": "literal" , "value": "9094" } ,
-        "withWdAndDocs": { "type": "literal" , "value": "8356" } ,
-        "percentage": { "type": "literal" , "value": "100.0 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2023-11-19 || 38793 || 8359 || 9094 || 8356 || 100.0 %" }
-      } ,
-      { 
-        "type": { "type": "literal" , "value": "pe" } ,
-        "totalCount": { "type": "literal" , "value": "16661" } ,
-        "withDocs": { "type": "literal" , "value": "5310" } ,
-        "withWd": { "type": "literal" , "value": "10160" } ,
-        "withWdAndDocs": { "type": "literal" , "value": "5309" } ,
-        "percentage": { "type": "literal" , "value": "100.0 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2023-11-19 || 16661 || 5310 || 10160 || 5309 || 100.0 %" }
-      } ,
-      { 
-        "type": { "type": "literal" , "value": "sh" } ,
-        "totalCount": { "type": "literal" , "value": "9201" } ,
-        "withDocs": { "type": "literal" , "value": "9075" } ,
-        "withWd": { "type": "literal" , "value": "9201" } ,
-        "withWdAndDocs": { "type": "literal" , "value": "9075" } ,
-        "percentage": { "type": "literal" , "value": "100.0 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2023-11-19 || 9201 || 9075 || 9201 || 9075 || 100.0 %" }
-      } ,
-      { 
-        "type": { "type": "literal" , "value": "wa" } ,
-        "totalCount": { "type": "literal" , "value": "2891" } ,
-        "withDocs": { "type": "literal" , "value": "2890" } ,
-        "withWd": { "type": "literal" , "value": "2891" } ,
-        "withWdAndDocs": { "type": "literal" , "value": "2890" } ,
-        "percentage": { "type": "literal" , "value": "100.0 %" } ,
-        "statsLine": { "type": "literal" , "value": "| 2023-11-19 || 2891 || 2890 || 2891 || 2890 || 100.0 %" }
-      }
-    ]
-  }
-}
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>308 Permanent Redirect</title>
+</head><body>
+<h1>Permanent Redirect</h1>
+<p>The document has moved <a href="https://zbw.eu/beta/sparql/pm20/query">here</a>.</p>
+<hr>
+<address>Apache/2.4.58 (Ubuntu) OpenSSL/3.0.2 mod_fcgid/2.3.9 Server at zbw.eu Port 80</address>
+</body></html>
