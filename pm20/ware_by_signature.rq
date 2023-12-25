@@ -6,7 +6,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 #
-select ?category ?categoryLabel (?signature as ?tmpSignature) ?note ?count ?countLabel
+select (?categoryId as ?id) ?category ?categoryLabel (?signature as ?tmpSignature) ?note ?count ?countLabel
 where {
   graph  <http://zbw.eu/beta/ware/ng> {
     values ( ?language ) {
