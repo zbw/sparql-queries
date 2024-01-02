@@ -33,7 +33,7 @@ where {
     filter(lang(?categoryLabelLang) = ?language)
     bind(str(?categoryLabelLang) as ?categoryLabel)
   }
-  bind(if(?cnt > 0, uri(concat('http://webopac.hwwa.de/PresseMappe20/Digiview_MENU.cfm?T=S&S=', ?categoryId)), '-') as ?count)
+  bind(if(?cnt > 0, ?cnt, '-') as ?count)
 }
 order by ?notationLong
 

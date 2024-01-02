@@ -7,7 +7,7 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dct: <http://purl.org/dc/terms/>
 #
-select ?subject ?subjectLabel ?notation ?count (str(count(distinct ?pm20)) as ?countLabel) (str(sum(?docCount)) as ?docs)
+select ?subject ?subjectLabel ?notation (str(count(distinct ?pm20)) as ?countLabel) (str(sum(?docCount)) as ?docs)
 where {
   ?pm20 zbwext:subject ?subject ;
         zbwext:freeDocCount ?docCount .
@@ -19,7 +19,6 @@ where {
     filter(lang(?subjectLabelLang) = 'de')
     bind(str(?subjectLabelLang) as ?subjectLabel)
   }
-  bind(uri(concat('http://webopac.hwwa.de/PresseMappe20/Digiview_MENU.cfm?T=S&S=', ?subjectId)) as ?count)
 }
 group by ?subject ?subjectLabel ?notation ?count
 order by desc(count(?pm20))
