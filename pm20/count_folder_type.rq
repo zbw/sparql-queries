@@ -28,7 +28,7 @@ where {
       where {
         hint:Query hint:optimizer "None" .
         ?wd wdt:P4293 ?pm20Id .
-        bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
+        bind(uri(concat('https://pm20.zbw.eu/folder/', ?pm20Id)) as ?pm20)
       }
     }
     bind(1 as ?hasWd)

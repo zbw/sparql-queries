@@ -17,7 +17,7 @@ where {
   service <https://query.wikidata.org/sparql> {
     ?wdfamily wdt:P4293 ?pm20familyId .
   }
-  bind(strafter(str(?pm20person), 'http://purl.org/pressemappe20/folder/') as ?pm20personId)
+  bind(strafter(str(?pm20person), 'https://pm20.zbw.eu/folder/') as ?pm20personId)
   service <https://query.wikidata.org/sparql> {
     ?wdperson wdt:P31 wd:Q5 ;
               wdt:P4293 ?pm20personId .

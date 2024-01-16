@@ -20,7 +20,7 @@ where {
     }
   )
   # search link
-  bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/') as ?pm20Id)
+  bind(strafter(str(?pm20), 'https://pm20.zbw.eu/folder/') as ?pm20Id)
   bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/gnd/search_pm20_corp.rq&pm20=<', str(?pm20), '>')) as ?search)
 }
 order by desc(?freeDocCount) ?pm20Label

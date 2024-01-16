@@ -27,7 +27,7 @@ where {
     }
     bind(coalesce(str(?label), strafter(str(?wd),'/entity/')) as ?wdLabel)
   }
-  bind(uri(concat('http://purl.org/pressemappe20/folder/', $pm20Id)) as ?pm20)
+  bind(uri(concat('https://pm20.zbw.eu/folder/', $pm20Id)) as ?pm20)
   #
   # get the document counts if available, set if not
   optional {

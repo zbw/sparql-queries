@@ -1,6 +1,6 @@
 # Construct SKOS folder mapping from Wikidata
 #
-PREFIX pm20: <http://purl.org/pressemappe20/folder/>
+PREFIX pm20: <https://pm20.zbw.eu/folder/>
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -24,6 +24,6 @@ where {
     }
   }
   # bind as URIs
-  bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
+  bind(uri(concat('https://pm20.zbw.eu/folder/', ?pm20Id)) as ?pm20)
   bind(if(bound(?skosRelation1), ?skosRelation1, uri('http://www.w3.org/2004/02/skos/core#exactMatch')) as ?skosRelation)
 }

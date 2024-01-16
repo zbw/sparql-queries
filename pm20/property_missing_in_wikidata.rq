@@ -19,7 +19,7 @@ where {
           ?sourceProperty ?value ;
           skos:prefLabel ?pm20LabelLang .
     bind(str(?pm20LabelLang) as ?pm20Label)
-    bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/') as ?pm20Id)
+    bind(strafter(str(?pm20), 'https://pm20.zbw.eu/folder/') as ?pm20Id)
   } minus {
     # minus all WD items for which the property alerady exists
     service <https://query.wikidata.org/sparql> {

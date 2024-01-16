@@ -25,7 +25,7 @@ where {
     )
     bind(strafter(str(?wd), str(wd:)) as ?qid)
   }
-  bind(uri(concat('http://purl.org/pressemappe20/folder/', ?pm20Id)) as ?pm20)
+  bind(uri(concat('https://pm20.zbw.eu/folder/', ?pm20Id)) as ?pm20)
   ?pm20 a zbwext:PersonFolder ;
         skos:prefLabel ?pm20Label ;
         zbwext:activity/schema:about ?activity .

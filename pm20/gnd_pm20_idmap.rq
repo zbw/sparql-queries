@@ -8,7 +8,7 @@ PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
 select distinct ?gndId (max(?fid) as ?pm20Id)
 where {
   ?pm20 gndo:gndIdentifier ?gndId .
-  bind(strafter(str(?pm20), 'http://purl.org/pressemappe20/folder/') as ?fid)
+  bind(strafter(str(?pm20), 'https://pm20.zbw.eu/folder/') as ?fid)
   filter(strstarts($fid, 'co') || strstarts($fid, 'pe'))
 }
 group by ?gndId
