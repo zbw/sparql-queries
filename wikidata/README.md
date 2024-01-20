@@ -40,6 +40,7 @@ Query | Description
 [industries_for_pm20_by_sk](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/industries_for_pm20_by_sk.rq) | Systematic overview by PM20 industry category system for items with pm20 company folder
 [industries_for_pm20_by_nace](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/industries_for_pm20_by_nace.rq) | Industries by NACE code for items with pm20 company folders (incomplete!)
 [all_pm20_companies](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/all_pm20_companies.rq) | All PM20 organizations (folder and microfilm)
+[filmsections_without_ids](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/filmsections_without_ids.rq) | Items with film sections without PM20 id
 
 
 ### "Power queries"

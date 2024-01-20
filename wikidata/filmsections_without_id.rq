@@ -1,0 +1,30 @@
+# Get items connected to PM20 film section without pm20Id
+#
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX gndo: <https://d-nb.info/standards/elementset/gnd#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX zbwext: <http://zbw.eu/namespaces/zbw-extensions/>
+#
+select distinct ?wd ?wdLabel ?pages
+where {
+  ?wd wdt:P11822 ?sectionId .
+  filter( not exists {
+      ?wd wdt:P4293 ?pm20Id .
+    })
+  ?wd p:P11822 ?statement .
+  ?statement pq:P1104 ?pages .
+  
+  ?wd rdfs:label ?label .
+  filter(lang(?label) = 'de')
+  bind(str(?label) as ?wdLabel)
+}
+order by desc(?pages)
+
