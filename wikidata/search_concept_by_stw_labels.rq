@@ -22,7 +22,7 @@ select distinct ?wd ?wdLabel (group_concat(distinct ?classLabel ;
 #(str(sum(?score)) as ?totalScore)
 where {
   # get all name variants for search
-  service <http://zbw.eu/beta/sparql/stw/query> {
+  service <https://zbw.eu/beta/sparql/stw/query> {
     select ?stwId (group_concat(distinct ?label) as ?labels)
     where {
       values ( ?stwId ) {

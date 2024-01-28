@@ -20,7 +20,7 @@ select distinct ?pm20 (str(?prefLabel) as ?pm20Label) ?wd ?wdLabel
 # ?score ?literal ?labels
 where {
   # lookup additional information about pm20 folder
-  service <http://zbw.eu/beta/sparql/pm20/query> {
+  service <https://zbw.eu/beta/sparql/pm20/query> {
     select ?pm20 ?prefLabel (group_concat(?altLabel) as ?altLabels)
     where {
       values ( ?pm20 ) {

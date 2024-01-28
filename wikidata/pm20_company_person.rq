@@ -31,7 +31,7 @@ where {
 #  }
   #
   # all companies with members from PM20
-  service <http://zbw.eu/beta/sparql/pm20/query> {
+  service <https://zbw.eu/beta/sparql/pm20/query> {
     ?pm20 a zbwext:CompanyFolder ;
           skos:prefLabel ?pm20Label ;
           dct:identifier ?pm20Id ;

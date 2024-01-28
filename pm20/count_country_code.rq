@@ -34,7 +34,7 @@ where {
   }
   bind(str(?labelLang) as ?country)
   #
-  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query',
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=https://zbw.eu/beta/sparql/pm20/query',
         '&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/folder_by_country_code.rq',
         '&language=', ?language, '&code=', ?code , '&country=', encode_for_uri(?country))) as ?count)
 }

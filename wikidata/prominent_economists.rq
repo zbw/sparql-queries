@@ -53,7 +53,7 @@ where {
   bind(strafter(str(?wd), str(wd:)) as ?wdId)
   bind(if(bound(?gndId),
       uri(concat("https://d-nb.info/gnd/", $gndId)),
-      uri(concat("http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_n_link_person.rq&name=",
+      uri(concat("http://zbw.eu/beta/sparql-lab/?endpoint=https://zbw.eu/beta/sparql/gnd/query&queryRef=https://api.github.com/repos/jneubert/sparql-queries/contents/gnd/search_n_link_person.rq&name=",
           encode_for_uri(?wdLabel), "&wdId=", ?wdId))) as ?gnd)
   bind(if(bound(?gndId), ?gndId, "Look up in GND") as ?gndLabel)
 }

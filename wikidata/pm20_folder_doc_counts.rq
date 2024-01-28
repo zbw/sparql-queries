@@ -35,7 +35,7 @@ where {
   bind(str(coalesce(?itemLabelEn, ?itemLabelDe, strafter(str(?item), '/entity/'))) as ?itemLabel)
   #
   # get counts from PM20 endpoint
-  service <http://zbw.eu/beta/sparql/pm20/query> {
+  service <https://zbw.eu/beta/sparql/pm20/query> {
     #
     # get the document counts if available, set if not
     optional {

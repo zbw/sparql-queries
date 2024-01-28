@@ -29,7 +29,7 @@ where {
     ( 'und' '4542' )
   }
   # base set of entries from PM20
-  service <http://zbw.eu/beta/sparql/pm20/query> {
+  service <https://zbw.eu/beta/sparql/pm20/query> {
     # query restricts result to folders with documents
     ?pm20 a zbwext:CompanyFolder ;
           dct:identifier ?id ;

@@ -30,7 +30,7 @@ where {
     ?pm20 gndo:dateOfBirthAndDeath ?life .
   }
   #
-  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_person_by_pm20_names.rq&pm20=<', str(?pm20), '>')) as ?search)
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=https://zbw.eu/beta/sparql/wikidata/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/search_person_by_pm20_names.rq&pm20=<', str(?pm20), '>')) as ?search)
 }
 order by desc(?docCount)
 

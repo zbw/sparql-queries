@@ -24,7 +24,7 @@ select distinct ?wd ?wdLabel
 ('add gndId' as ?addGndLabel)
 where {
   # get all name variants for search
-  service <http://zbw.eu/beta/sparql/gnd/query> {
+  service <https://zbw.eu/beta/sparql/gnd/query> {
     values ( ?gndId ?language ) {
       # defaults to economist Dunning, John H.
       ( "119094665" "en" )

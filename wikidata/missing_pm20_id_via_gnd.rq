@@ -13,7 +13,7 @@ where {
   hint:Query hint:optimizer "None" .
   #
   # Reach out to PM20 endpoint
-  service <http://zbw.eu/beta/sparql/pm20/query> {
+  service <https://zbw.eu/beta/sparql/pm20/query> {
     ?pm20 gndo:gndIdentifier ?gndId ;
           dct:identifier ?pm20Id ;
           skos:prefLabel ?pm20Label .

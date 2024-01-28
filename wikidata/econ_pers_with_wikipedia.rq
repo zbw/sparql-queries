@@ -18,7 +18,7 @@ where {
     ( <https://en.wikipedia.org/> )
   }
   # get all GND IDs from econ_corp dataset
-  service <http://zbw.eu/beta/sparql/econ_pers/query> {
+  service <https://zbw.eu/beta/sparql/econ_pers/query> {
     select ?gndId ?cnt
     where {
       ?gnd zbwext:econbizCount ?cnt .

@@ -7,7 +7,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 select (count(distinct ?econPersWd) as ?count) ?occupation ?occupationLabel
 where {
   # get wikidata persons from econ_pers gnd subset
-  service <http://zbw.eu/beta/sparql/econ_pers/query> {
+  service <https://zbw.eu/beta/sparql/econ_pers/query> {
     select ?econPers ?ebPublicationCount
     where {
       ?econPers zbwext:econbizCount ?ebPublicationCount .

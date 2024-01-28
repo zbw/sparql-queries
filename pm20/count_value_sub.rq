@@ -13,7 +13,7 @@ where {
   filter(lang(?valueLang) = ?language)
   bind(str(?valueLang) as ?value)
   #
-  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/pm20/query',
+  bind(uri(concat('http://zbw.eu/beta/sparql-lab/?endpoint=https://zbw.eu/beta/sparql/pm20/query',
           '&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/pm20/folder_by_value_sub.rq',
           '&language=', ?language, '&sub=', str(?sub), '&property=', str(?property), '&value="', ?value, '"')) as ?count)
 }

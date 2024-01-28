@@ -35,12 +35,12 @@ where {
   } union {
     ?wd wdt:P10890 [] .
 #  } union {
-#    service <http://zbw.eu/beta/sparql/pm20/query> {
+#    service <https://zbw.eu/beta/sparql/pm20/query> {
 #      ?s gndo:gndIdentifier ?gndId .
 #    }
 #    ?wd wdt:P227 ?gndId .
 #  } union {
-#    service <http://zbw.eu/beta/sparql/pm20/query> {
+#    service <https://zbw.eu/beta/sparql/pm20/query> {
 #      ?s zbwext:geoIdentifier ?geoId .
 #    }
 #    ?wd wdt:P1566 ?geoId .

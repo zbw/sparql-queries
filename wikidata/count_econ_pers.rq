@@ -18,7 +18,7 @@ select
 (sum(?topEbPersWd) as ?topEbPersWdCount)      # of these, in Wikidata
 (concat(str(round((?topEbPersWdCount/?topEbPersCount)*1000)/10), ' %') as ?topEbPersWdPct)
 where {
-  service <http://zbw.eu/beta/sparql/econ_pers/query> {
+  service <https://zbw.eu/beta/sparql/econ_pers/query> {
     ?econPers zbwext:econbizCount ?ebPublicationCount .
     bind(if((?ebPublicationCount > 0), 1, 0) as ?ebPers) .
     bind(if((?ebPublicationCount > 10), 1, 0) as ?freqEbPers) .

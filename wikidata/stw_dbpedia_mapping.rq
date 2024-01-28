@@ -11,7 +11,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 select distinct ?stw ?stwLabel ?skosRelation ?dbpedia ?dbpediaLabel
 where {
   #add label of stw-id
-  service <http://zbw.eu/beta/sparql/stw/query> {
+  service <https://zbw.eu/beta/sparql/stw/query> {
     ?stw skos:prefLabel ?prefLabel .
     filter(lang(?prefLabel) = 'en')
     bind(str(?prefLabel) as ?stwLabel)
