@@ -18,16 +18,18 @@ where {
   # get item data
   {
     ?wd wdt:P4293 ?pm20Id .
-  } union {
-    service <https://zbw.eu/beta/sparql/pm20/query> {
-      ?s gndo:gndIdentifier ?gndId .
-    }
-    ?wd wdt:P227 ?gndId .
-  } union {
-    service <https://zbw.eu/beta/sparql/pm20/query> {
-      ?s zbwext:geoIdentifier ?geoId .
-    }
-    ?wd wdt:P1566 ?geoId .
+## TODO
+## does not work because endpoint (with https:) is not allowed
+#  } union {
+#    service <https://zbw.eu/beta/sparql/pm20/query> {
+#      ?s gndo:gndIdentifier ?gndId .
+#    }
+#    ?wd wdt:P227 ?gndId .
+#  } union {
+#    service <https://zbw.eu/beta/sparql/pm20/query> {
+#      ?s zbwext:geoIdentifier ?geoId .
+#    }
+#    ?wd wdt:P1566 ?geoId .
   }      
 }
 
