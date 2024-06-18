@@ -22,7 +22,7 @@ Query | Description
 [all_subclasses](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/all_subclasses.rq) | Get all subclasses of a Wikidata class
 [nace](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/nace.rq) | List of items with NACE code
 [stw_dbpedia_mapping](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/stw_dbpedia_mapping.rq) | Links STW - DBpedia, derived from Wikidata
-[stw_lcsh_mapping](http://zbw.eu/beta/sparql-lab/?endpoint=https://query.wikidata.org/bigdata/namespace/wdq/sparql&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/stw_lcsh_mapping.rq) | Links STW - Library of Congress, derived from Wikidata
+[stw_lcsh_mapping](http://zbw.eu/beta/sparql-lab/?endpoint=http://zbw.eu/beta/sparql/stw/query&queryRef=https://api.github.com/repos/zbw/sparql-queries/contents/wikidata/stw_lcsh_mapping.rq) | Links STW - Library of Congress, derived from Wikidata
 
 #### Queries re. PM20
 
