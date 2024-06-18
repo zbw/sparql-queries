@@ -1,0 +1,28 @@
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+SELECT DISTINCT ?stwId (str(?stwLabelLang) as ?stwLabel) ?wikidata (str(?wdLabelLang) as ?wdLabel) ?lcsh
+WHERE {
+  #including the Wikidata SPAQRL Endpoint to get the WD labels from the Q-objects 
+  service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
+      # wikidata object has an STW identifier  
+      ?wikidata wdt:P3911 ?stwId .
+      # wikidata object has an LoC identifier
+      ?wikidata wdt:P244 ?lcshId .
+      # optional, because English label may be missing
+      optional {
+        ?wikidata rdfs:label ?wdLabelLang .
+        filter(lang(?wdLabelLang) = 'en')
+      }
+  }
+  #creating the address to the STW and LoC object via adding the basic URI-path to the ID
+  bind(uri(concat("http://zbw.eu/stw/descriptor/", $stwId)) as ?stw)
+  bind(uri(concat("http://id.loc.gov/authorities/", $lcshId)) as ?lcsh)
+  # filtering the STW prefered label in englisch from the STW
+  ?stw skos:prefLabel ?stwLabelLang .
+  filter(lang(?stwLabelLang) = 'en')
+  }
+#sorting by STW prefered label
+order by asc(?stwLabel)
