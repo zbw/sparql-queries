@@ -1,0 +1,48 @@
+PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
+PREFIX gnd:     <https://d-nb.info/standards/elementset/gnd#>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX zbwext:  <http://zbw.eu/namespaces/zbw-extensions/>
+PREFIX text:    <http://jena.apache.org/text#>
+
+SELECT DISTINCT ?synonym 
+                (GROUP_CONCAT(DISTINCT ?prov; separator = ' | ') AS ?datasets)
+                (GROUP_CONCAT(DISTINCT ?concept; separator = ' | ') AS ?conceptIDs)
+WHERE {
+  VALUES ?textQuery {
+    'farmers'
+  }
+  # find all concepts matching the ?textQuery
+  (?foundConcept ?score ?term) text:query (?textQuery) .
+  FILTER(lcase(str(?term)) = lcase(?textQuery))
+
+  # get the related STW concept
+  # in UNION get the exactMatch concepts from other vocabularies 
+  {
+    ?foundConcept a zbwext:Descriptor .
+    BIND(?foundConcept as ?stwConcept)
+  } UNION {
+    ?foundConcept skos:exactMatch ?stwConcept .
+    ?stwConcept a zbwext:Descriptor .
+  }
+
+  # get for all concepts the provenance
+  # for stw it is fixed by the first part
+  # after UNION extraction of provenance information by ?target - main part to get the conceptID
+  {
+    ?stwConcept a zbwext:Descriptor .
+    BIND(?stwConcept as ?concept)
+    BIND('stw' as ?prov)
+  } UNION {
+    ?stwConcept skos:exactMatch ?matchingConcept .
+    ?matchingConcept dcterms:isPartOf ?target
+    BIND(?matchingConcept as ?concept)
+    BIND(STRBEFORE(STRAFTER(STR(?target), 'mapping/'), '/target') as ?prov)
+  }
+
+  # get all skos labels for all concepts in the cluster
+  ?concept skos:prefLabel|skos:altLabel|skos:hiddenLabel ?label
+  BIND(lcase(str(?label)) AS ?synonym)
+}
+GROUP BY ?synonym
